@@ -3,10 +3,9 @@
 //
 // Deploy:
 //   supabase functions deploy create-preference
-// Ou pelo Dashboard: Edge Functions → New Function → nome: create-preference
 //
 // Secrets necessários no Dashboard → Edge Functions → Secrets:
-//   MP_ACCESS_TOKEN = APP_USR-113524672456336-022408-c1b46c2cca7642793777982fb2e3ebd4-3223711791
+//   MP_ACCESS_TOKEN (obter no painel do Mercado Pago)
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 

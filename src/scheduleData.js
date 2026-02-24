@@ -1,8 +1,12 @@
+import { CM_BY_GROUP } from "./data/cm";
+import { GO_BY_GROUP } from "./data/go";
+import { PED_BY_GROUP } from "./data/ped";
+
 // ─── TYPE INFERENCE (runs once at import, not per-render) ────────────────────
 function inferType(a) {
   if (a.title === "Horário Verde") return "horario_verde";
   const t = a.title.toLowerCase();
-  if (t.includes("ambulatório") || t.includes("ambulatorio")) return "ambulatorio";
+  if (t.includes("ambulatório") || t.includes("ambulatorio") || t.includes("ambulat")) return "ambulatorio";
   if (t.includes("enfermaria"))                                return "enfermaria";
   if (t.includes("alojamento"))                                return "alojamento";
   if (t.includes("saúde mental") || t.includes("saude mental"))return "saude_mental";
@@ -17,7 +21,6 @@ function inferType(a) {
 
 function preProcess(weeks) {
   return weeks.map(w => {
-    // #12 — pré-computa dayMap para evitar recompilação a cada render
     const dayMap = {};
     ["2ª","3ª","4ª","5ª","6ª","Sáb"].forEach(d => { dayMap[d] = {Manhã:[], Tarde:[]}; });
     const activities = w.activities.map(a => ({ ...a, effectiveType: inferType(a) }));
@@ -26,8 +29,16 @@ function preProcess(weeks) {
   });
 }
 
-// ─── PEDIATRIA ───────────────────────────────────────────────────────────────
-const PED_RAW = [
+function buildWeeksByGroup(byGroupRaw) {
+  const result = {};
+  for (const [g, weeks] of Object.entries(byGroupRaw)) {
+    result[g] = preProcess(weeks);
+  }
+  return result;
+}
+
+// ─── PED GRUPO 6 (manual — sem PDF disponível) ──────────────────────────────
+const PED_G6_RAW = [
   {num:1,dates:"23/2 – 28/2",activities:[
     {id:"1-1",  day:"2ª",  turno:"Manhã",title:"Horário Verde",              sub:"",                     time:"",           type:"verde"},
     {id:"1-2",  day:"3ª",  turno:"Manhã",title:"C. de Simulações",           sub:"Dra. Thais",           time:"08:00–11:00",type:"normal"},
@@ -148,13 +159,21 @@ const PED_RAW = [
   ]},
 ];
 
-export const PED_WEEKS      = preProcess(PED_RAW);
-export const PED_KEY_EVENTS = [
+// ─── MERGE PED: parsed groups + manual G6 ────────────────────────────────────
+const PED_FULL = { ...PED_BY_GROUP, 6: PED_G6_RAW };
+
+const PED_WEEKS_BY_GROUP = buildWeeksByGroup(PED_FULL);
+const CM_WEEKS_BY_GROUP  = buildWeeksByGroup(CM_BY_GROUP);
+const GO_WEEKS_BY_GROUP  = buildWeeksByGroup(GO_BY_GROUP);
+
+// ─── KEY EVENTS & WEEK DATES (shared across all matérias) ────────────────────
+const KEY_EVENTS = [
   {date:new Date(2026,1,28), label:"Simulado Nacional MEDCOF", type:"simulado"},
   {date:new Date(2026,3,18), label:"Simulado Geral do Módulo", type:"simulado"},
   {date:new Date(2026,3,28), label:"Prova do Módulo",          type:"prova"},
 ];
-export const PED_WEEK_DATES = [
+
+const WEEK_DATES = [
   {num:1,  start:new Date(2026,1,23), end:new Date(2026,1,28)},
   {num:2,  start:new Date(2026,2,2),  end:new Date(2026,2,7)},
   {num:3,  start:new Date(2026,2,9),  end:new Date(2026,2,14)},
@@ -171,17 +190,19 @@ export const PED_WEEK_DATES = [
 export const MATERIAS = [
   {
     id:"ped",  label:"Pediatria",               icon:"👶", color:"#0EA5E9",
-    weeks: PED_WEEKS, keyEvents: PED_KEY_EVENTS, weekDates: PED_WEEK_DATES,
+    weeksByGroup: PED_WEEKS_BY_GROUP, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
   },
-  { id:"cm",  label:"Clínica Médica",           icon:"🩺", color:"#10B981", weeks:null, disponivelEm:"Maio 2026" },
-  { id:"cc",  label:"Clínica Cirúrgica",        icon:"🔪", color:"#F59E0B", weeks:null, disponivelEm:"Junho 2026" },
-  { id:"go",  label:"GO",                       icon:"🤰", color:"#EC4899", weeks:null, disponivelEm:"Julho 2026" },
-  { id:"ubs", label:"Atenção Básica UBS",       icon:"🏥", color:"#8B5CF6", weeks:null, disponivelEm:"Agosto 2026" },
-  { id:"sim", label:"Atenção Básica Simulação", icon:"🎯", color:"#EF4444", weeks:null, disponivelEm:"Agosto 2026" },
+  {
+    id:"cm",  label:"Clínica Médica",           icon:"🩺", color:"#10B981",
+    weeksByGroup: CM_WEEKS_BY_GROUP, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+  },
+  {
+    id:"go",  label:"GO",                       icon:"🤰", color:"#EC4899",
+    weeksByGroup: GO_WEEKS_BY_GROUP, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+  },
+  { id:"cc",  label:"Clínica Cirúrgica",        icon:"🔪", color:"#F59E0B", weeksByGroup:null, disponivelEm:"Junho 2026" },
+  { id:"ubs", label:"Atenção Básica UBS",       icon:"🏥", color:"#8B5CF6", weeksByGroup:null, disponivelEm:"Agosto 2026" },
+  { id:"sim", label:"Atenção Básica Simulação", icon:"🎯", color:"#EF4444", weeksByGroup:null, disponivelEm:"Agosto 2026" },
 ];
 
 export const GRUPOS = Array.from({length:10}, (_, i) => i + 1);
-
-// ─── SUPABASE CONFIG ─────────────────────────────────────────────────────────
-export const SUPABASE_URL      = "https://udtymgdotifxtimwwjmf.supabase.co";
-export const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVkdHltZ2RvdGlmeHRpbXd3am1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5MjYwMjMsImV4cCI6MjA4NzUwMjAyM30.LTcDjMaa4tL6esqRQsyLvkTdUtgVgnasiIH8219cT5k";
