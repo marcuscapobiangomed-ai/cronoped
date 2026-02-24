@@ -13,7 +13,6 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
   const [paying,          setPaying]          = useState(false);
   const [payErr,          setPayErr]          = useState("");
   const [cancelingId,     setCancelingId]     = useState(null);
-  const [savingGrupo,     setSavingGrupo]     = useState(false);
 
   useEffect(()=>{
     supabase.from("acessos").select("materia,grupo,status").eq("user_id",user.id)
@@ -52,25 +51,6 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
     }
   }
 
-  async function handleAbrirComGrupo() {
-    if (!selectedMateria || !selectedGrupo) return;
-    const acesso = acessos[selectedMateria.id];
-    if (selectedGrupo !== acesso?.grupo) {
-      setSavingGrupo(true);
-      const { error } = await supabase.from("acessos")
-        .update({ grupo: selectedGrupo })
-        .eq("user_id", user.id)
-        .eq("materia", selectedMateria.id);
-      setSavingGrupo(false);
-      if (error) { console.error("Erro ao atualizar grupo:", error.message); return; }
-      setAcessos(prev => ({
-        ...prev,
-        [selectedMateria.id]: { ...prev[selectedMateria.id], grupo: selectedGrupo }
-      }));
-    }
-    onSelect(selectedMateria, selectedGrupo);
-  }
-
   async function handleCancelarPendente(materiaId) {
     setCancelingId(materiaId);
     try {
@@ -88,9 +68,6 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
     }
     setCancelingId(null);
   }
-
-  const selAcesso    = selectedMateria ? acessos[selectedMateria.id] : null;
-  const selHasAccess = selAcesso?.status === "aprovado";
 
   return (
     <div style={{minHeight:"100vh",background:"#F8FAFC"}}>
@@ -136,11 +113,11 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
                   className={`materia-card${isSelected?" selected":""}${isLocked?" locked":""}`}
                   style={{"--mc":m.color}}
                   onClick={()=>{
-                    if (isPending) return;
-                    if (isLocked)  return;
-                    if (isSelected) { setSelectedMateria(null); setSelectedGrupo(null); return; }
-                    setSelectedMateria(m);
-                    setSelectedGrupo(hasAccess ? acesso.grupo : null);
+                    if (hasAccess)  { onSelect(m, acesso.grupo); return; }
+                    if (isPending)  return;
+                    if (isLocked)   return;
+                    setSelectedMateria(isSelected ? null : m);
+                    setSelectedGrupo(null);
                     setPayErr("");
                   }}
                 >
@@ -157,7 +134,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
                     )}
                   </div>
                   <div style={{fontSize:16,fontWeight:700,color:"#0F172A"}}>{m.label}</div>
-                  {hasAccess  && <div style={{fontSize:12,color:"#64748B",marginTop:4}}>Grupo {acesso.grupo} · Clique para selecionar</div>}
+                  {hasAccess  && <div style={{fontSize:12,color:"#64748B",marginTop:4}}>Grupo {acesso.grupo} · Clique para abrir</div>}
                   {!hasAccess && m.weeksByGroup && !isPending && <div style={{fontSize:12,color:"#64748B",marginTop:4}}>10 semanas · Grupos 1–10</div>}
                   {isLocked   && m.disponivelEm && <div style={{fontSize:12,color:"#94A3B8",marginTop:4}}>Previsão: {m.disponivelEm}</div>}
 
@@ -179,45 +156,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
           )}
         </div>
 
-        {/* Panel: Abrir / trocar grupo (acesso já ativo) */}
-        {selectedMateria && selHasAccess && (
-          <div style={{background:"#fff",borderRadius:16,padding:"24px 22px",border:"2px solid "+selectedMateria.color,boxShadow:"0 4px 20px rgba(0,0,0,0.06)"}}>
-            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
-              <span style={{fontSize:24}}>{selectedMateria.icon}</span>
-              <div>
-                <div style={{fontSize:16,fontWeight:800,color:"#0F172A"}}>{selectedMateria.label}</div>
-                <div style={{fontSize:13,color:"#64748B"}}>Confirme ou altere seu grupo</div>
-              </div>
-            </div>
-
-            <div style={{marginBottom:20}}>
-              <div style={{fontSize:13,fontWeight:600,color:"#475569",marginBottom:10}}>Meu grupo:</div>
-              <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-                {GRUPOS.map(g=>(
-                  <button key={g} onClick={()=>setSelectedGrupo(g)} style={{
-                    width:44,height:44,borderRadius:10,fontWeight:700,fontSize:15,cursor:"pointer",transition:"all 0.12s",
-                    border:`2px solid ${selectedGrupo===g?selectedMateria.color:"#E2E8F0"}`,
-                    background:selectedGrupo===g?selectedMateria.color:"#fff",
-                    color:selectedGrupo===g?"#fff":"#475569",
-                  }}>{g}</button>
-                ))}
-              </div>
-            </div>
-
-            <button className="btn btn-dark"
-              style={{width:"100%",background:selectedGrupo?selectedMateria.color:"#CBD5E1",fontSize:16,padding:"14px"}}
-              disabled={!selectedGrupo||savingGrupo} onClick={handleAbrirComGrupo}>
-              {savingGrupo
-                ? "Salvando…"
-                : selectedGrupo !== selAcesso?.grupo
-                  ? "Salvar grupo e abrir →"
-                  : "Abrir cronograma →"}
-            </button>
-          </div>
-        )}
-
-        {/* Panel: Comprar acesso (sem acesso ainda) */}
-        {selectedMateria && !selAcesso?.status && (
+        {selectedMateria && !acessos[selectedMateria.id]?.status && (
           <div style={{background:"#fff",borderRadius:16,padding:"24px 22px",border:"2px solid "+selectedMateria.color,boxShadow:"0 4px 20px rgba(0,0,0,0.06)"}}>
             <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:18}}>
               <span style={{fontSize:24}}>{selectedMateria.icon}</span>
