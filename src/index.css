@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Outfit', system-ui, sans-serif; background: #F8FAFC; }
+input, textarea, select { font-family: 'Outfit', system-ui, sans-serif; }
+
+/* ─── Progress bar ─── */
+.pfill { height: 100%; border-radius: 99px; transition: width 0.5s cubic-bezier(.34,1.56,.64,1); }
+
+/* ─── Buttons ─── */
+.btn { font-family: 'Outfit', system-ui, sans-serif; cursor: pointer; border: none; border-radius: 10px; font-weight: 700; transition: all 0.15s; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-dark { background: #0F172A; color: #fff; padding: 13px 24px; font-size: 15px; }
+.btn-dark:hover:not(:disabled) { background: #1E293B; }
+.btn-outline { background: transparent; border: 2px solid #E2E8F0; color: #475569; padding: 11px 20px; font-size: 14px; }
+.btn-outline:hover:not(:disabled) { border-color: #CBD5E1; background: #F8FAFC; }
+
+/* ─── Form fields ─── */
+.input-field { width: 100%; padding: 12px 16px; border-radius: 10px; font-size: 15px; border: 2px solid #E2E8F0; outline: none; transition: border 0.15s; color: #0F172A; background: #fff; }
+.input-field:focus { border-color: #0EA5E9; }
+.input-field.error { border-color: #EF4444; }
+
+/* ─── Tabs ─── */
+.tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: #94A3B8; transition: all 0.12s; }
+.tab.active { background: #0F172A; color: #fff; }
+
+/* ─── Matéria card ─── */
+.materia-card { border-radius: 14px; border: 2px solid #E2E8F0; padding: 18px; cursor: pointer; transition: all 0.15s; background: #fff; text-align: left; }
+.materia-card:hover:not(.locked) { border-color: #CBD5E1; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.materia-card.selected { border-color: var(--mc); box-shadow: 0 0 0 1px var(--mc); }
+.materia-card.locked { opacity: 0.55; cursor: default; }
+
+/* ─── Skeleton loader ─── */
+.skeleton { border-radius: 8px; background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ─── Week ─── */
+.week-head { display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer; user-select: none; background: #fff; transition: background 0.1s; }
+.week-head:hover { background: #FAFAF9; }
+.today-week { border: 2px solid #F59E0B !important; }
+
+/* ─── Activity card ─── */
+.activity-card { border-radius: 10px; border: 1.5px solid; padding: 10px 11px; transition: transform 0.12s, box-shadow 0.12s, opacity 0.15s; margin-bottom: 4px; cursor: pointer; }
+.activity-card:not(.feriado):hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.activity-card.done { opacity: 0.38; }
+.activity-card.done .card-title { text-decoration: line-through; }
+.activity-card.feriado { cursor: default; }
+.activity-card.today-card { box-shadow: 0 0 0 2px #F59E0B, 0 4px 14px rgba(245,158,11,0.25); }
+
+/* ─── Check dot ─── */
+.check-dot { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.18s; cursor: pointer; }
+
+/* ─── Time pill ─── */
+.time-pill { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+
+/* ─── Turno ─── */
+.turno-section { margin-bottom: 10px; }
+.turno-divider { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: #A8A29E; margin-bottom: 5px; padding-left: 2px; }
+
+/* ─── Scroll ─── */
+.scroll-x { overflow-x: auto; padding: 0 20px 16px; }
+.scroll-x::-webkit-scrollbar { height: 4px; }
+.scroll-x::-webkit-scrollbar-track { background: transparent; }
+.scroll-x::-webkit-scrollbar-thumb { background: #D6D3D1; border-radius: 99px; }
+
+/* ─── Header stats ─── */
+.hstats { display: flex; align-items: center; gap: 16px; }
+
+/* ─── Mobile ─── */
+@media (max-width: 640px) {
+  .day-pills-row { display: none !important; }
+  .day-grid { flex-direction: column !important; min-width: unset !important; }
+  .day-col { min-width: unset !important; }
+  .week-head { gap: 10px; padding: 12px 14px; }
+  .hstats { gap: 12px !important; }
+}
