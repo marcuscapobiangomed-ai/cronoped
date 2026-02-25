@@ -3,6 +3,7 @@ import { supabase } from "./supabase";
 import { MATERIAS } from "./scheduleData";
 import { heartbeat, endSession, getSessionToken, registerSession } from "./lib/sessionGuard";
 import { logEvent } from "./lib/logEvent";
+import SupportButton from "./components/SupportButton";
 
 const AuthScreen   = lazy(() => import("./components/AuthScreen"));
 const Dashboard    = lazy(() => import("./components/Dashboard"));
@@ -117,33 +118,38 @@ export default function App() {
   );
 
   return (
-    <Suspense fallback={<LoadingScreen/>}>
-      {view==="auth" && (
-        <AuthScreen onAuth={(fullSession, prof) => { setSession(fullSession); setProfile(prof); setView("dashboard"); }}/>
+    <>
+      <Suspense fallback={<LoadingScreen/>}>
+        {view==="auth" && (
+          <AuthScreen onAuth={(fullSession, prof) => { setSession(fullSession); setProfile(prof); setView("dashboard"); }}/>
+        )}
+        {view==="dashboard" && (
+          <Dashboard
+            user={session.user}
+            profile={profile}
+            session={session}
+            onSelect={(mat,grp) => { setSelMateria(mat); setSelGrupo(grp); setView("schedule"); }}
+            onLogout={handleLogout}
+            onAdmin={() => setView("admin")}
+          />
+        )}
+        {view==="admin" && (
+          <AdminPanel onBack={() => setView("dashboard")} />
+        )}
+        {view==="schedule" && selMateria && (
+          <ScheduleView
+            user={session.user}
+            profile={profile}
+            materia={selMateria}
+            grupo={selGrupo}
+            onBack={() => setView("dashboard")}
+            onChangeGrupo={(g) => setSelGrupo(g)}
+          />
+        )}
+      </Suspense>
+      {session && !kicked && view !== "auth" && (
+        <SupportButton user={session.user} profile={profile} />
       )}
-      {view==="dashboard" && (
-        <Dashboard
-          user={session.user}
-          profile={profile}
-          session={session}
-          onSelect={(mat,grp) => { setSelMateria(mat); setSelGrupo(grp); setView("schedule"); }}
-          onLogout={handleLogout}
-          onAdmin={() => setView("admin")}
-        />
-      )}
-      {view==="admin" && (
-        <AdminPanel onBack={() => setView("dashboard")} />
-      )}
-      {view==="schedule" && selMateria && (
-        <ScheduleView
-          user={session.user}
-          profile={profile}
-          materia={selMateria}
-          grupo={selGrupo}
-          onBack={() => setView("dashboard")}
-          onChangeGrupo={(g) => setSelGrupo(g)}
-        />
-      )}
-    </Suspense>
+    </>
   );
 }

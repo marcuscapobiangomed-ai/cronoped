@@ -1,0 +1,138 @@
+import { useState } from "react";
+import { supabase } from "../supabase";
+
+const ASSUNTOS = ["Bug / Erro", "Dúvida", "Sugestão", "Pagamento", "Outro"];
+
+export default function SupportButton({ user, profile }) {
+  const [open, setOpen] = useState(false);
+  const [assunto, setAssunto] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!assunto || !mensagem.trim()) return;
+    setSending(true);
+    try {
+      await supabase.from("suporte").insert({
+        user_id: user.id,
+        nome: profile?.nome || "",
+        email: profile?.email || "",
+        assunto,
+        mensagem: mensagem.trim(),
+      });
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+        setOpen(false);
+        setAssunto("");
+        setMensagem("");
+      }, 2000);
+    } catch {
+      // silent
+    }
+    setSending(false);
+  }
+
+  if (sent) return (
+    <div style={{position:"fixed",bottom:20,right:20,zIndex:999,background:"#22C55E",color:"#fff",borderRadius:14,padding:"16px 24px",boxShadow:"0 8px 32px rgba(0,0,0,0.18)",fontSize:14,fontWeight:700,display:"flex",alignItems:"center",gap:8}}>
+      <span style={{fontSize:20}}>&#10003;</span> Enviado! Obrigado.
+    </div>
+  );
+
+  if (!open) return (
+    <button
+      onClick={() => setOpen(true)}
+      style={{
+        position:"fixed",bottom:20,right:20,zIndex:999,
+        width:52,height:52,borderRadius:"50%",border:"none",
+        background:"#0F172A",color:"#fff",fontSize:24,
+        cursor:"pointer",boxShadow:"0 4px 20px rgba(0,0,0,0.25)",
+        display:"flex",alignItems:"center",justifyContent:"center",
+        transition:"transform 0.2s",
+      }}
+      onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
+      onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+      title="Suporte"
+    >
+      💬
+    </button>
+  );
+
+  return (
+    <div style={{
+      position:"fixed",bottom:20,right:20,zIndex:999,
+      width:320,maxWidth:"calc(100vw - 40px)",
+      background:"#fff",borderRadius:16,
+      boxShadow:"0 8px 40px rgba(0,0,0,0.18)",
+      overflow:"hidden",
+    }}>
+      {/* Header */}
+      <div style={{background:"#0F172A",padding:"14px 18px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+        <div style={{fontSize:14,fontWeight:700,color:"#fff",display:"flex",alignItems:"center",gap:8}}>
+          <span style={{fontSize:18}}>💬</span> Suporte
+        </div>
+        <button onClick={() => { setOpen(false); setAssunto(""); setMensagem(""); }}
+          style={{background:"none",border:"none",color:"#94A3B8",fontSize:18,cursor:"pointer",padding:0,lineHeight:1}}>
+          ✕
+        </button>
+      </div>
+
+      {/* Form */}
+      <form onSubmit={handleSubmit} style={{padding:18,display:"flex",flexDirection:"column",gap:14}}>
+        <div>
+          <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Assunto</label>
+          <select
+            value={assunto}
+            onChange={e => setAssunto(e.target.value)}
+            required
+            style={{
+              width:"100%",padding:"8px 12px",borderRadius:8,
+              border:"1px solid #E2E8F0",fontSize:13,color:"#475569",
+              backgroundColor:"#fff",cursor:"pointer",
+            }}
+          >
+            <option value="">— Selecione —</option>
+            {ASSUNTOS.map(a => <option key={a} value={a}>{a}</option>)}
+          </select>
+        </div>
+
+        <div>
+          <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Mensagem</label>
+          <textarea
+            value={mensagem}
+            onChange={e => setMensagem(e.target.value)}
+            required
+            rows={4}
+            placeholder="Descreva o problema ou sugestão..."
+            style={{
+              width:"100%",padding:"8px 12px",borderRadius:8,
+              border:"1px solid #E2E8F0",fontSize:13,color:"#0F172A",
+              resize:"vertical",fontFamily:"inherit",
+              boxSizing:"border-box",
+            }}
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={sending || !assunto || !mensagem.trim()}
+          style={{
+            width:"100%",padding:"10px",borderRadius:8,border:"none",
+            background:assunto && mensagem.trim() ? "#0F172A" : "#CBD5E1",
+            color:"#fff",fontSize:13,fontWeight:700,
+            cursor:assunto && mensagem.trim() ? "pointer" : "not-allowed",
+            transition:"all 0.2s",
+          }}
+        >
+          {sending ? "Enviando..." : "Enviar"}
+        </button>
+
+        <div style={{fontSize:11,color:"#94A3B8",textAlign:"center"}}>
+          {profile?.nome?.split(" ")[0]} · {profile?.email}
+        </div>
+      </form>
+    </div>
+  );
+}
