@@ -12,7 +12,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SERVICE_KEY  = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const MP_TOKEN     = Deno.env.get("MP_ACCESS_TOKEN")!;
-const APP_URL      = Deno.env.get("APP_URL") || "https://bespoke-cupcake-e79c07.netlify.app";
+const APP_URL      = Deno.env.get("APP_URL") || "https://internatop1.netlify.app";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin":  APP_URL,
