@@ -30,6 +30,10 @@ export const labelStyle = {fontSize:13, fontWeight:600, color:"#475569", display
 export const FREE_EMAILS = [
   "marcuscapobiangomed@gmail.com",
   "lucasgrmed@gmail.com",
+  "tifer134@gmail.com",
+  "jgmed107@gmail.com",
+  "luizgabrielcamposlobog@gmail.com",
+  "emanoelfernandes.f.s.f@gmail.com",
 ];
 
 export function badge(bg, color) {
