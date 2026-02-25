@@ -7,7 +7,7 @@ export const GO_BY_GROUP = {
         {id:"1-3",day:"3ª",turno:"Manhã",title:"Enfermaria",sub:"Profa. Ana Luiza",time:"08:00–12:00",type:"enfermaria"},
         {id:"1-4",day:"3ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"1-5",day:"4ª",turno:"Manhã",title:"Enfermaria",sub:"Profa. Kelly",time:"08:00–12:00",type:"enfermaria"},
-        {id:"1-6",day:"4ª",turno:"Tarde",title:"Escut a qualifi cada na saúde da mulher – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"14:00–17:00",type:"enfermaria"},
+        {id:"1-6",day:"4ª",turno:"Tarde",title:"Escuta qualificada na saúde da mulher – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"14:00–17:00",type:"enfermaria"},
         {id:"1-7",day:"5ª",turno:"Manhã",title:"Enfermaria",sub:"Precep. Gabriel",time:"08:00–12:00",type:"enfermaria"},
         {id:"1-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"1-9",day:"6ª",turno:"Manhã",title:"Enfermaria",sub:"Precep. Tatiane",time:"08:00–12:00",type:"enfermaria"},
@@ -371,13 +371,13 @@ export const GO_BY_GROUP = {
     ]},
     {num:2,dates:"02/3 – 07/3",activities:[
         {id:"2-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"2-2",day:"2ª",turno:"Tarde",title:"Perfor m ance EM CASA Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"14:33–16:30",type:"ambulatorio"},
+        {id:"2-2",day:"2ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"14:33–16:30",type:"ambulatorio"},
         {id:"2-3",day:"3ª",turno:"Manhã",title:"Precep. Júlia manhã",sub:"",time:"",type:"normal"},
-        {id:"2-4",day:"3ª",turno:"Tarde",title:"Prece p. Júlia m anhã Ambulatório - Clínica da Família",sub:"Precep. Lílian",time:"14:00–17:00",type:"ambulatorio"},
+        {id:"2-4",day:"3ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Lílian",time:"14:00–17:00",type:"ambulatorio"},
         {id:"2-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"2-6",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Gabriel",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"2-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"2-8",day:"5ª",turno:"Tarde",title:"Perfor m ance EM CASA Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"17:30–21:00",type:"ambulatorio"},
+        {id:"2-8",day:"5ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"17:30–21:00",type:"ambulatorio"},
         {id:"2-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:3,dates:"09/3 – 14/3",activities:[
@@ -527,7 +527,7 @@ export const GO_BY_GROUP = {
         {id:"5-4",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"5-5",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Sarah",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"5-6",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"5-7",day:"5ª",turno:"Tarde",title:"Perfor m ance EM CASA Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"14:00–16:30",type:"ambulatorio"},
+        {id:"5-7",day:"5ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"14:00–16:30",type:"ambulatorio"},
         {id:"5-8",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:6,dates:"30/3 – 04/4",activities:[
@@ -1004,13 +1004,13 @@ export const GO_BY_GROUP = {
     ]},
     {num:7,dates:"06/4 – 11/4",activities:[
         {id:"7-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"7-2",day:"2ª",turno:"Tarde",title:"Perfor m ance EM CASA Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"13:00–17:00",type:"ambulatorio"},
+        {id:"7-2",day:"2ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"13:00–17:00",type:"ambulatorio"},
         {id:"7-3",day:"3ª",turno:"Manhã",title:"Precep. Júlia manhã",sub:"",time:"",type:"normal"},
-        {id:"7-4",day:"3ª",turno:"Tarde",title:"Prece p. Júlia m anhã Ambulatório - Clínica da Família",sub:"Precep. Lílian",time:"14:00–17:00",type:"ambulatorio"},
+        {id:"7-4",day:"3ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Lílian",time:"14:00–17:00",type:"ambulatorio"},
         {id:"7-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"7-6",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Gabriel",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"7-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"7-8",day:"5ª",turno:"Tarde",title:"Perfor m ance EM CASA Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"17:30–21:00",type:"ambulatorio"},
+        {id:"7-8",day:"5ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"17:30–21:00",type:"ambulatorio"},
         {id:"7-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:8,dates:"13/4 – 18/4",activities:[
@@ -1109,13 +1109,13 @@ export const GO_BY_GROUP = {
         {id:"5-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:6,dates:"30/3 – 04/4",activities:[
-        {id:"6-1",day:"2ª",turno:"Manhã",title:"Perfor m ance EM CASA",sub:"",time:"",type:"normal"},
+        {id:"6-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"6-2",day:"2ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"14:00–16:30",type:"ambulatorio"},
-        {id:"6-3",day:"3ª",turno:"Manhã",title:"Prece p. Júlia m anhã",sub:"",time:"",type:"normal"},
+        {id:"6-3",day:"3ª",turno:"Manhã",title:"Ambulatorório - Clínica da Família",sub:"Precep. Júlia",time:"",type:"ambulatorio"},
         {id:"6-4",day:"3ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Lílian",time:"14:00–17:00",type:"ambulatorio"},
-        {id:"6-5",day:"4ª",turno:"Manhã",title:"Perfor m ance EM CASA",sub:"",time:"",type:"normal"},
+        {id:"6-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"6-6",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Gabriel",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
-        {id:"6-7",day:"5ª",turno:"Manhã",title:"Perfor m ance EM CASA",sub:"",time:"",type:"normal"},
+        {id:"6-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"6-8",day:"5ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"17:30–21:00",type:"ambulatorio"}
     ]},
     {num:7,dates:"06/4 – 11/4",activities:[
@@ -1157,11 +1157,11 @@ export const GO_BY_GROUP = {
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Tarde",title:"Prova do Módulo",sub:"Campus Universitário",time:"14:00–17:00",type:"prova",loc:"Campus Universitário"},
-        {id:"10-2",day:"3ª",turno:"Manhã",title:"Perfor m ance EM CASA",sub:"",time:"",type:"normal"},
+        {id:"10-2",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"10-3",day:"3ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Juliana",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
-        {id:"10-4",day:"4ª",turno:"Manhã",title:"Perfor m ance EM CASA",sub:"",time:"",type:"normal"},
+        {id:"10-4",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"10-5",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Sarah",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
-        {id:"10-6",day:"5ª",turno:"Manhã",title:"Perfor m ance EM CASA",sub:"",time:"",type:"normal"},
+        {id:"10-6",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"10-7",day:"5ª",turno:"Tarde",title:"Ambu la tório Clínica da Família",sub:"Precep. Luiza",time:"14:00–16:30",type:"ambulatorio"}
     ]},
   ],
