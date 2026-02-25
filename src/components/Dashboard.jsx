@@ -85,11 +85,31 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
   async function handleCancelarPendente(materiaId) {
     setCancelingId(materiaId);
     try {
-      await supabase.from("acessos")
-        .delete()
+      // Verificar se ainda tem trial válido (trial_expires_at foi preservado pelo upsert)
+      const { data: row } = await supabase.from("acessos")
+        .select("trial_expires_at")
         .eq("user_id", user.id)
         .eq("materia", materiaId)
-        .eq("status", "pending");
+        .single();
+
+      const trialAindaValido = row?.trial_expires_at && new Date(row.trial_expires_at) > new Date();
+
+      if (trialAindaValido) {
+        // Restaurar para trial em vez de deletar — usuario não perde o trial
+        await supabase.from("acessos")
+          .update({ status: "trial" })
+          .eq("user_id", user.id)
+          .eq("materia", materiaId)
+          .eq("status", "pending");
+      } else {
+        // Trial expirado ou inexistente: deletar o pending
+        await supabase.from("acessos")
+          .delete()
+          .eq("user_id", user.id)
+          .eq("materia", materiaId)
+          .eq("status", "pending");
+      }
+
       const {data} = await supabase.from("acessos").select("materia,grupo,status,trial_expires_at").eq("user_id",user.id);
       const map = {};
       (data||[]).forEach(a=>{ map[a.materia] = {grupo:a.grupo, status:a.status, trial_expires_at:a.trial_expires_at}; });

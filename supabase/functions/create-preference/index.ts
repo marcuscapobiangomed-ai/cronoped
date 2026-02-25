@@ -91,7 +91,11 @@ Deno.serve(async (req) => {
       return json({ error: "Erro ao criar preferência no Mercado Pago" }, 500);
     }
 
-    return json({ init_point: pref.init_point });
+    // Usa sandbox_init_point para tokens TEST-, init_point para produção
+    const checkoutUrl = pref.sandbox_init_point || pref.init_point;
+    const isSandbox   = !!pref.sandbox_init_point;
+
+    return json({ init_point: checkoutUrl, sandbox: isSandbox });
 
   } catch (err) {
     console.error(err);
