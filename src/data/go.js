@@ -50,6 +50,18 @@ export const GO_BY_GROUP = {
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
+    {num:5,dates:"23/3 – 28/3",activities:[
+        {id:"5-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
+        {id:"5-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"5-3",day:"3ª",turno:"Manhã",title:"Ambulatório HUV",sub:"",time:"",type:"ambulatorio",loc:"HUV"},
+        {id:"5-4",day:"3ª",turno:"Tarde",title:"Precep. Júlia manhã",sub:"Precep. Lílian",time:"08:30–12:00",type:"normal"},
+        {id:"5-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
+        {id:"5-6",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
+        {id:"5-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"5-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"5-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+    ]},
     {num:6,dates:"30/3 – 04/4",activities:[
         {id:"6-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"6-2",day:"2ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"17:30–21:00",type:"ambulatorio"},
@@ -87,15 +99,14 @@ export const GO_BY_GROUP = {
         {id:"8-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
-        {id:"9-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"9-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-3",day:"3ª",turno:"Manhã",title:"Precep. Lílian",sub:"",time:"08:00–12:00",type:"normal"},
-        {id:"9-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-5",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–17:00",type:"casa"},
-        {id:"9-6",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:30–12:30",type:"casa"},
-        {id:"9-7",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
-        {id:"9-8",day:"6ª",turno:"Manhã",title:"Ambulatório HUV",sub:"",time:"",type:"ambulatorio",loc:"HUV"},
-        {id:"9-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+        {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"9-2",day:"2ª",turno:"Tarde",title:"Centro Cirúrgico",sub:"",time:"",type:"normal"},
+        {id:"9-3",day:"3ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-4",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"9-5",day:"4ª",turno:"Tarde",title:"Discussão clínica com Prof. Orlando",sub:"",time:"14:00–18:00",type:"normal",loc:"Pavilhão Silva Melo sala 8"},
+        {id:"9-6",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-7",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana Obstetrícia",sub:"",time:"08:30–12:00",type:"normal",loc:"SALA 7203 - CAMPUS"},
+        {id:"9-8",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -145,8 +156,7 @@ export const GO_BY_GROUP = {
         {id:"3-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
+        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
@@ -159,6 +169,18 @@ export const GO_BY_GROUP = {
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+    ]},
+    {num:5,dates:"23/3 – 28/3",activities:[
+        {id:"5-1",day:"2ª",turno:"Manhã",title:"Enfermaria",sub:"Profa. Ana Luiza",time:"08:00–12:00",type:"enfermaria"},
+        {id:"5-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
+        {id:"5-3",day:"3ª",turno:"Manhã",title:"Enfermaria",sub:"Profa. Ana Luiza",time:"08:00–12:00",type:"enfermaria"},
+        {id:"5-4",day:"3ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"5-5",day:"4ª",turno:"Manhã",title:"Enfermaria",sub:"Profa. Kelly",time:"08:00–12:00",type:"enfermaria"},
+        {id:"5-6",day:"4ª",turno:"Tarde",title:"Escuta qualificada na saúde da mulher – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"14:00–17:00",type:"enfermaria"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Enfermaria",sub:"Precep. Gabriel",time:"08:00–12:00",type:"enfermaria"},
+        {id:"5-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
+        {id:"5-9",day:"6ª",turno:"Manhã",title:"Enfermaria",sub:"Precep. Tatiane",time:"08:00–12:00",type:"enfermaria"},
+        {id:"5-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:6,dates:"30/3 – 04/4",activities:[
         {id:"6-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -198,15 +220,13 @@ export const GO_BY_GROUP = {
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"9-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–17:00",type:"casa"},
-        {id:"9-3",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"9-4",day:"3ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"9-6",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"9-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-9",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana",sub:"",time:"",type:"normal"},
-        {id:"9-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+        {id:"9-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"9-3",day:"3ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-4",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"9-5",day:"4ª",turno:"Tarde",title:"Discussão clínica com Prof. Orlando",sub:"",time:"14:00–18:00",type:"normal"},
+        {id:"9-6",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-7",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana",sub:"",time:"",type:"normal"},
+        {id:"9-8",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:30–12:00",type:"casa"}
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -250,8 +270,7 @@ export const GO_BY_GROUP = {
         {id:"3-3",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"3-4",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Gabriel",time:"08:00–12:00",type:"ambulatorio",loc:"HUV"},
         {id:"3-5",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"3-6",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-7",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
+        {id:"3-6",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
@@ -264,6 +283,18 @@ export const GO_BY_GROUP = {
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+    ]},
+    {num:5,dates:"23/3 – 28/3",activities:[
+        {id:"5-1",day:"2ª",turno:"Manhã",title:"Ambulatório HUV",sub:"Profa. Kelly",time:"08:30–12:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"5-3",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"5-4",day:"3ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Júlia",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-5",day:"4ª",turno:"Manhã",title:"Ambulatório HUV",sub:"Precep. Júlia",time:"08:30–12:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-6",day:"4ª",turno:"Tarde",title:"Centro Cirúrgico",sub:"",time:"",type:"normal"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Ambulatório HUV",sub:"Precep. Luiza",time:"08:30–12:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
+        {id:"5-9",day:"6ª",turno:"Manhã",title:"Ambulatório HUV",sub:"Precep. Frederico",time:"08:30–12:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:6,dates:"30/3 – 04/4",activities:[
         {id:"6-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -302,12 +333,14 @@ export const GO_BY_GROUP = {
         {id:"8-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
-        {id:"9-1",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-2",day:"3ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-3",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Gabriel",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
-        {id:"9-4",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"17:30–21:00",type:"casa"},
-        {id:"9-5",day:"6ª",turno:"Manhã",title:"Manhã teórica",sub:"Profa. Juliana",time:"08:30–12:00",type:"normal",loc:"Sala 7203 Campus"},
-        {id:"9-6",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+        {id:"9-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"9-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
+        {id:"9-3",day:"3ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-4",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"9-5",day:"4ª",turno:"Tarde",title:"Discussão clínica com Prof. Orlando",sub:"",time:"14:00–18:00",type:"normal",loc:"Pavilhão Silva Melo sala 8"},
+        {id:"9-6",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-7",day:"6ª",turno:"Manhã",title:"Manhã teórica",sub:"Profa. Juliana",time:"08:30–12:00",type:"normal",loc:"Sala 7203 Campus"},
+        {id:"9-8",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -371,6 +404,13 @@ export const GO_BY_GROUP = {
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
+    {num:5,dates:"23/3 – 28/3",activities:[
+        {id:"5-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
+        {id:"5-2",day:"3ª",turno:"Manhã",title:"Família",sub:"Precep. Lílian",time:"08:00–12:00",type:"normal"},
+        {id:"5-3",day:"4ª",turno:"Manhã",title:"Precep. Ana Luiza",sub:"Precep. Lílian",time:"08:30–12:00",type:"normal"},
+        {id:"5-4",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:30–12:30",type:"casa"},
+        {id:"5-5",day:"6ª",turno:"Manhã",title:"Ambulatório HUV",sub:"Precep. Frederico",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"}
+    ]},
     {num:6,dates:"30/3 – 04/4",activities:[
         {id:"6-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"6-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
@@ -409,15 +449,14 @@ export const GO_BY_GROUP = {
         {id:"8-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
-        {id:"9-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-3",day:"3ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-4",day:"3ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-5",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Profa. Ana Cláudia",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
-        {id:"9-6",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-7",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
-        {id:"9-8",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+        {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"9-2",day:"2ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"17:30–21:00",type:"ambulatorio"},
+        {id:"9-3",day:"3ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-4",day:"4ª",turno:"Manhã",title:"Discussão clínica com Prof. Orlando",sub:"",time:"08:30–12:30",type:"normal",loc:"Pavilhão Silva Melo sala 8"},
+        {id:"9-5",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
+        {id:"9-6",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-7",day:"6ª",turno:"Manhã",title:"Manhã teórica",sub:"Profa. Juliana",time:"08:30–12:00",type:"normal",loc:"Sala 7203 Campus"},
+        {id:"9-8",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -481,6 +520,16 @@ export const GO_BY_GROUP = {
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
+    {num:5,dates:"23/3 – 28/3",activities:[
+        {id:"5-1",day:"2ª",turno:"Tarde",title:"Ambulatório HUV",sub:"",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-2",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
+        {id:"5-3",day:"3ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Juliana",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-4",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
+        {id:"5-5",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Sarah",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
+        {id:"5-6",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
+        {id:"5-7",day:"5ª",turno:"Tarde",title:"Perfor m ance EM CASA Ambulatório - Clínica da Família",sub:"Precep. Luiza",time:"14:00–16:30",type:"ambulatorio"},
+        {id:"5-8",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+    ]},
     {num:6,dates:"30/3 – 04/4",activities:[
         {id:"6-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"6-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -520,13 +569,12 @@ export const GO_BY_GROUP = {
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"9-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-3",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–17:00",type:"casa"},
-        {id:"9-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-5",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:30–12:00",type:"casa"},
-        {id:"9-6",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:30–12:00",type:"casa"},
-        {id:"9-7",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:30–12:30",type:"casa"},
-        {id:"9-8",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
+        {id:"9-3",day:"3ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-4",day:"4ª",turno:"Manhã",title:"Discussão clínica com Prof. Orlando",sub:"",time:"08:30–12:30",type:"normal",loc:"Pavilhão Silva Melo sala 8"},
+        {id:"9-5",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
+        {id:"9-6",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-7",day:"6ª",turno:"Manhã",title:"Manhã teórica",sub:"Profa. Juliana",time:"08:30–12:00",type:"normal",loc:"Sala 7203 Campus"},
+        {id:"9-8",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -576,8 +624,7 @@ export const GO_BY_GROUP = {
         {id:"3-7",day:"5ª",turno:"Manhã",title:"Centro de Simulação",sub:"Prof. Osvaldo Aranda",time:"08:00–12:00",type:"simulacao",loc:"Sala de GO"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana Obstetrícia",sub:"",time:"08:30–12:00",type:"normal",loc:"SALA 7203 - CAMPUS"},
-        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
+        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -697,8 +744,7 @@ export const GO_BY_GROUP = {
         {id:"3-7",day:"5ª",turno:"Manhã",title:"Centro de Simulação",sub:"Prof. Osvaldo Aranda",time:"08:00–12:00",type:"simulacao"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana Obstetrícia",sub:"",time:"08:30–12:00",type:"normal",loc:"SALA 7203 - CAMPUS"},
-        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
+        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
@@ -711,6 +757,13 @@ export const GO_BY_GROUP = {
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana Obstetrícia",sub:"",time:"08:30–12:00",type:"normal",loc:"SALA 7203 - CAMPUS"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
+    ]},
+    {num:5,dates:"23/3 – 28/3",activities:[
+        {id:"5-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"5-2",day:"3ª",turno:"Manhã",title:"Centro cirúrgico",sub:"",time:"",type:"normal"},
+        {id:"5-3",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"5-4",day:"5ª",turno:"Manhã",title:"Centro de Simulação",sub:"Prof. Osvaldo Aranda",time:"08:00–12:00",type:"simulacao"},
+        {id:"5-5",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana Obstetrícia",sub:"",time:"08:30–12:00",type:"normal",loc:"SALA 7203 - CAMPUS"}
     ]},
     {num:6,dates:"30/3 – 04/4",activities:[
         {id:"6-1",day:"2ª",turno:"Manhã",title:"Ambulatório HUV",sub:"Profa. Kelly",time:"08:30–12:00",type:"ambulatorio",loc:"HUV"},
@@ -748,16 +801,14 @@ export const GO_BY_GROUP = {
         {id:"8-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
-        {id:"9-1",day:"2ª",turno:"Manhã",title:"Centro Cirúrgico",sub:"",time:"",type:"normal"},
-        {id:"9-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-3",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-4",day:"3ª",turno:"Tarde",title:"Prof. Orlando",sub:"Profa. Manuela",time:"08:00–12:00",type:"normal",loc:"SALA 8305 CAMPUS"},
-        {id:"9-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
-        {id:"9-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"9-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"08:30–12:00",type:"casa"}
+        {id:"9-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"9-2",day:"2ª",turno:"Tarde",title:"Ambulatório - Clínica da Família",sub:"Precep. Frederico",time:"13:00–17:00",type:"ambulatorio"},
+        {id:"9-3",day:"3ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-4",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
+        {id:"9-5",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Gabriel",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
+        {id:"9-6",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
+        {id:"9-7",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
+        {id:"9-8",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Manhã",title:"Enfermaria",sub:"Profa. Ana Luiza",time:"08:00–12:00",type:"enfermaria"},
@@ -807,8 +858,7 @@ export const GO_BY_GROUP = {
         {id:"3-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Centro de Simulação",sub:"Prof. Osvaldo Aranda",time:"14:00–18:00",type:"simulacao",loc:"Sala de GO"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Manhã teórica",sub:"Profa. Juliana",time:"08:30–12:00",type:"normal",loc:"Sala 7203 Campus"},
-        {id:"3-10",day:"6ª",turno:"Tarde",title:"SHaolraá rio Ve Crdaem pus",sub:"",time:"",type:"normal"},
-        {id:"3-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
+        {id:"3-10",day:"6ª",turno:"Tarde",title:"SHaolraá rio Ve Crdaem pus",sub:"",time:"",type:"normal"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
@@ -922,8 +972,7 @@ export const GO_BY_GROUP = {
         {id:"3-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Centro de Simulação",sub:"Prof. Osvaldo Aranda",time:"14:00–18:00",type:"simulacao",loc:"Sala de GO"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Manhã teórica",sub:"Profa. Juliana",time:"08:30–12:00",type:"normal",loc:"Sala 7203 Campus"},
-        {id:"3-10",day:"6ª",turno:"Tarde",title:"SHaolraá rio Ve Crdaem pus",sub:"",time:"",type:"normal"},
-        {id:"3-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
+        {id:"3-10",day:"6ª",turno:"Tarde",title:"SHaolraá rio Ve Crdaem pus",sub:"",time:"",type:"normal"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -1033,8 +1082,7 @@ export const GO_BY_GROUP = {
         {id:"3-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Centro de Simulação",sub:"Prof. Osvaldo Aranda",time:"14:00–18:00",type:"simulacao",loc:"Sala de GO"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Manhã teórica",sub:"Profa. Juliana - Obstetrícia",time:"08:30–12:00",type:"normal",loc:"Sala 7203 Campus"},
-        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
+        {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},

@@ -476,13 +476,17 @@ def detect_week_number(wk_text, current_week):
     if not wk_text:
         return None
     # Try ordinal pattern first (e.g., "10ª", "1ª SEMANA")
-    wm = re.search(r'(\d{1,2})\s*[ªa]', wk_text)
+    # No \s* between digit and ordinal marker — "09 a 14/3" must NOT match as "9ª"
+    wm = re.search(r'(\d{1,2})[ªa]', wk_text)
     if not wm:
         wm = re.search(r'(\d+)', wk_text)
     if wm:
         wn = int(wm.group(1))
-        is_ordinal = bool(re.search(r'(\d{1,2})\s*[ªa](\s|$)', wk_text))
-        has_keywords = ('SEMANA' in wk_text.upper() or '/' in wk_text or 'a ' in wk_text)
+        is_ordinal = bool(re.search(r'(\d{1,2})[ªa](\s|$)', wk_text))
+        # Reject if the matched number is part of a date (e.g., "09/3", "02/5")
+        if not is_ordinal and wm.end() < len(wk_text) and wk_text[wm.end()] == '/':
+            return None
+        has_keywords = 'SEMANA' in wk_text.upper()
         if 1 <= wn <= 11 and (is_ordinal or has_keywords):
             return wn
     return None

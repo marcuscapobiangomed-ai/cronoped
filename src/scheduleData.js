@@ -169,6 +169,9 @@ export async function loadMateriaData(id) {
       raw = { ...parsed, 6: PED_G6_RAW };
       break;
     }
+    case "cc":  raw = (await import("./data/cc")).CC_BY_GROUP; break;
+    case "sim": raw = (await import("./data/sim")).SIM_BY_GROUP; break;
+    case "emg": raw = (await import("./data/emg")).EMG_BY_GROUP; break;
     default: return null;
   }
   dataCache[id] = buildWeeksByGroup(raw);
@@ -209,9 +212,21 @@ export const MATERIAS = [
     id:"go",  label:"GO",                       icon:"🤰", color:"#EC4899",
     hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
   },
-  { id:"cc",  label:"Clínica Cirúrgica",        icon:"🔪", color:"#F59E0B", hasData:false, disponivelEm:"Junho 2026" },
+  {
+    id:"cc",  label:"Clínica Cirúrgica",        icon:"🔪", color:"#F59E0B",
+    hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+  },
+  {
+    id:"emg", label:"Emergência",              icon:"🚑", color:"#DC2626",
+    hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+    grupos: [1,2,3,4,5,6],
+    grupoLabels: {1:"A1",2:"A2",3:"A3",4:"B1",5:"B2",6:"B3"},
+  },
   { id:"ubs", label:"Atenção Básica UBS",       icon:"🏥", color:"#8B5CF6", hasData:false, disponivelEm:"Agosto 2026" },
-  { id:"sim", label:"Atenção Básica Simulação", icon:"🎯", color:"#EF4444", hasData:false, disponivelEm:"Agosto 2026" },
+  {
+    id:"sim", label:"APS Simulação",            icon:"🎯", color:"#EF4444",
+    hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+  },
 ];
 
 export const GRUPOS = Array.from({length:10}, (_, i) => i + 1);
