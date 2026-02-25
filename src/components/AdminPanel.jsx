@@ -5,10 +5,12 @@ import MiniBarChart from "./admin/MiniBarChart";
 import EventFeed from "./admin/EventFeed";
 import ConversionTable from "./admin/ConversionTable";
 import TrialExpirations from "./admin/TrialExpirations";
+import SupportTickets from "./admin/SupportTickets";
 
 const TABS = [
   { key: "overview", label: "Overview" },
   { key: "eventos",  label: "Eventos" },
+  { key: "suporte",  label: "Suporte" },
   { key: "usuarios", label: "Usuários" },
 ];
 
@@ -91,6 +93,9 @@ export default function AdminPanel({ onBack }) {
           <StatCard icon="🟢" label="Online agora" value={sessions.active_now || 0} color="#16A34A" sub={`${sessions.active_1h || 0} na última hora`} />
           <StatCard icon="💰" label="Receita total" value={`R$ ${Number(data?.total_revenue || 0).toFixed(2)}`} color="#16A34A" />
           <StatCard icon="📈" label="Pagantes" value={data?.total_paid || 0} color="#2563EB" sub={data?.total_users ? `${Math.round((data.total_paid / data.total_users) * 100)}% conversão` : ""} />
+          {(data?.support_tickets || []).filter(t => t.status === "aberto").length > 0 && (
+            <StatCard icon="💬" label="Tickets abertos" value={(data?.support_tickets || []).filter(t => t.status === "aberto").length} color="#F59E0B" />
+          )}
         </div>
 
         {/* Tabs */}
@@ -161,6 +166,16 @@ export default function AdminPanel({ onBack }) {
               <div style={{ fontSize: 13, fontWeight: 700, color: "#0F172A" }}>📋 Eventos recentes (últimos 50)</div>
             </div>
             <EventFeed events={data?.recent_events} />
+          </div>
+        )}
+
+        {tab === "suporte" && (
+          <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #E2E8F0", overflow: "hidden" }}>
+            <div style={{ padding: "14px 18px", borderBottom: "1px solid #E2E8F0", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "#0F172A" }}>💬 Tickets de suporte</div>
+              <span style={{ fontSize: 11, color: "#64748B" }}>{(data?.support_tickets || []).filter(t => t.status === "aberto").length} abertos</span>
+            </div>
+            <SupportTickets tickets={data?.support_tickets} />
           </div>
         )}
 
