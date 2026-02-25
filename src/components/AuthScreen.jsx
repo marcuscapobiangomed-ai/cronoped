@@ -89,7 +89,7 @@ export default function AuthScreen({ onAuth }) {
           <p style={{fontSize:14,color:"#94A3B8",marginTop:4}}>Internato Médico · 2026</p>
         </div>
 
-        <div style={{background:"#fff",borderRadius:20,padding:"32px 28px",boxShadow:"0 25px 50px rgba(0,0,0,0.35)"}}>
+        <div className="auth-box" style={{background:"#fff",borderRadius:20,padding:"32px 28px",boxShadow:"0 25px 50px rgba(0,0,0,0.35)"}}>
           <div style={{display:"flex",background:"#F1F5F9",borderRadius:10,padding:4,marginBottom:28,gap:4}}>
             {["login","cadastro"].map(t=>(
               <button key={t} className={`tab${tab===t?" active":""}`} style={{flex:1}} onClick={()=>switchTab(t)}>

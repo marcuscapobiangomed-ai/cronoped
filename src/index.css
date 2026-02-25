@@ -64,11 +64,44 @@ input, textarea, select { font-family: 'Outfit', system-ui, sans-serif; }
 /* ─── Header stats ─── */
 .hstats { display: flex; align-items: center; gap: 16px; }
 
+/* ─── Touch & global mobile ─── */
+button, .activity-card, .materia-card, .week-head { -webkit-tap-highlight-color: transparent; }
+button { touch-action: manipulation; }
+
+/* ─── Grupo selector ─── */
+.grupo-selector { display: flex; align-items: center; gap: 6px; margin-top: 10px; }
+.grupo-selector::-webkit-scrollbar { display: none; }
+
 /* ─── Mobile ─── */
 @media (max-width: 640px) {
   .day-pills-row { display: none !important; }
   .day-grid { flex-direction: column !important; min-width: unset !important; }
   .day-col { min-width: unset !important; }
   .week-head { gap: 10px; padding: 12px 14px; }
-  .hstats { gap: 12px !important; }
+
+  /* Header compacto */
+  .schedule-header { padding: 10px 14px !important; }
+  .hstats { gap: 8px !important; }
+  .hstats > div > div:first-child { font-size: 14px !important; }
+  .hstats > div > div:last-child  { font-size: 9px !important; }
+
+  /* Grupo selector: scroll horizontal, sem quebra */
+  .grupo-selector { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap !important; padding-bottom: 4px; margin-top: 8px !important; scrollbar-width: none; }
+
+  /* Week head compacto */
+  .week-num { width: 30px !important; height: 30px !important; font-size: 12px !important; }
+  .week-title { font-size: 13px !important; }
+  .week-dates { font-size: 11px !important; }
+
+  /* Matéria cards */
+  .materia-card { padding: 14px !important; }
+
+  /* Dashboard header */
+  .dash-header { padding: 12px 16px !important; }
+
+  /* Auth screen box */
+  .auth-box { padding: 24px 18px !important; border-radius: 16px !important; }
+
+  /* Scroll area */
+  .scroll-x { padding: 0 14px 14px; }
 }

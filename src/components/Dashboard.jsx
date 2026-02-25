@@ -71,7 +71,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
 
   return (
     <div style={{minHeight:"100vh",background:"#F8FAFC"}}>
-      <div style={{background:"#0F172A",padding:"16px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <div className="dash-header" style={{background:"#0F172A",padding:"16px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           <span style={{fontSize:22}}>🩺</span>
           <div>

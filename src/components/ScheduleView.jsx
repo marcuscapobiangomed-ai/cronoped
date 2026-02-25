@@ -129,7 +129,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
     <div style={{minHeight:"100vh",background:"#F8FAFC",color:"#0F172A"}}>
       {!alertDismissed && <AlertBanner alerts={alerts} onDismiss={dismissAlert}/>}
 
-      <div style={{background:"#0F172A",borderBottom:"1px solid #1E293B",padding:"14px 20px",position:"sticky",top:0,zIndex:100}}>
+      <div className="schedule-header" style={{background:"#0F172A",borderBottom:"1px solid #1E293B",padding:"14px 20px",position:"sticky",top:0,zIndex:100}}>
         <div style={{maxWidth:1200,margin:"0 auto"}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
             <div style={{display:"flex",alignItems:"center",gap:12}}>
@@ -160,8 +160,8 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
           <div style={{height:5,background:"#1E293B",borderRadius:99,overflow:"hidden"}}>
             <div className="pfill" style={{width:`${pct}%`,background:pct===100?"#22C55E":materia.color}}/>
           </div>
-          <div style={{display:"flex",alignItems:"center",gap:6,marginTop:10,flexWrap:"wrap"}}>
-            <span style={{fontSize:11,color:"#64748B",fontWeight:600,marginRight:2}}>Grupo:</span>
+          <div className="grupo-selector">
+            <span style={{fontSize:11,color:"#64748B",fontWeight:600,marginRight:2,flexShrink:0}}>Grupo:</span>
             {GRUPOS.map(g=>(
               <button key={g} onClick={()=>{
                 if (g === grupo) return;
@@ -169,7 +169,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                 onChangeGrupo(g);
               }} style={{
                 width:30,height:28,borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",
-                border:"none",transition:"all 0.12s",
+                border:"none",transition:"all 0.12s",flexShrink:0,
                 background:g===grupo?materia.color:"#1E293B",
                 color:g===grupo?"#fff":"#64748B",
               }}>{g}</button>
@@ -193,15 +193,15 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
               style={{background:"#fff",border:"1px solid #E2E8F0",borderRadius:14,marginBottom:12,overflow:"hidden",boxShadow:"0 1px 4px rgba(0,0,0,0.04)"}}>
 
               <div className="week-head" onClick={()=>setOpen(o=>({...o,[week.num]:!o[week.num]}))}>
-                <div style={{width:36,height:36,borderRadius:9,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,fontWeight:800,
+                <div className="week-num" style={{width:36,height:36,borderRadius:9,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,fontWeight:800,
                   color:isCurrent&&!allDoneW?"#0F172A":"#fff",
                   background:allDoneW?"#22C55E":isCurrent?materia.color:"#0F172A"}}>
                   {week.num}
                 </div>
                 <div style={{flex:1}}>
                   <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
-                    <span style={{fontSize:14,fontWeight:700}}>Semana {week.num}</span>
-                    <span style={{fontSize:13,color:"#94A3B8",fontWeight:400}}>{week.dates}</span>
+                    <span className="week-title" style={{fontSize:14,fontWeight:700}}>Semana {week.num}</span>
+                    <span className="week-dates" style={{fontSize:13,color:"#94A3B8",fontWeight:400}}>{week.dates}</span>
                     {isCurrent&&!allDoneW && <span style={{fontSize:10,fontWeight:700,color:"#92400E",background:"#FEF3C7",padding:"2px 8px",borderRadius:99}}>📍 SEMANA ATUAL</span>}
                     {allDoneW            && <span style={{fontSize:10,fontWeight:700,color:"#16A34A",background:"#DCFCE7",padding:"2px 8px",borderRadius:99}}>✓ CONCLUÍDA</span>}
                   </div>
