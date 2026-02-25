@@ -15,12 +15,11 @@ export default function SupportButton({ user, profile }) {
     if (!assunto || !mensagem.trim()) return;
     setSending(true);
     try {
-      await supabase.from("suporte").insert({
-        user_id: user.id,
-        nome: profile?.nome || "",
-        email: profile?.email || "",
-        assunto,
-        mensagem: mensagem.trim(),
+      await supabase.rpc("submit_support_ticket", {
+        p_assunto:  assunto,
+        p_mensagem: mensagem.trim(),
+        p_nome:     profile?.nome  || "",
+        p_email:    profile?.email || "",
       });
       setSent(true);
       setTimeout(() => {
