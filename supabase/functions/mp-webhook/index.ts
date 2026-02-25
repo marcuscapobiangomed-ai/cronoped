@@ -1,6 +1,7 @@
 // Supabase Edge Function: mp-webhook
-// Deploy no Supabase Dashboard → Edge Functions → New Function → nome: mp-webhook
-// Cole este código lá
+// Recebe notificações do Mercado Pago (IPN v1 query params + IPN v2 body JSON)
+// Deploy: supabase functions deploy mp-webhook
+// Config: verify_jwt = false (chamada externa pelo MP)
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -9,26 +10,36 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
 );
 
-const MP_TOKEN = Deno.env.get("MP_ACCESS_TOKEN")!; // Obrigatório: configure em Settings → Edge Functions → Secrets
+const MP_TOKEN = Deno.env.get("MP_ACCESS_TOKEN")!;
 
 Deno.serve(async (req) => {
   try {
+    // Extrair topic + id — suporta AMBOS os formatos do MP
     const url = new URL(req.url);
-    const topic = url.searchParams.get("topic") || url.searchParams.get("type");
-    const id    = url.searchParams.get("id");
+    let topic = url.searchParams.get("topic") || url.searchParams.get("type");
+    let paymentId = url.searchParams.get("id") || url.searchParams.get("data.id");
 
-    if (topic !== "payment" || !id) {
+    // Fallback: IPN V2 body JSON ({"type":"payment","data":{"id":"123"}})
+    if (!paymentId && req.method === "POST") {
+      try {
+        const body = await req.json();
+        if (!topic) topic = body.type || body.topic;
+        if (!paymentId) paymentId = body.data?.id?.toString() || body.id?.toString();
+      } catch { /* body não é JSON, ignorar */ }
+    }
+
+    if (topic !== "payment" || !paymentId) {
       return new Response("ok", { status: 200 });
     }
 
-    // Validar que id é numérico (proteção contra injection)
-    if (!/^\d+$/.test(id)) {
-      console.warn(`webhook id invalido: ${id}`);
+    // Validar que id é numérico
+    if (!/^\d+$/.test(paymentId)) {
+      console.warn(`webhook id invalido: ${paymentId}`);
       return new Response("invalid id", { status: 400 });
     }
 
     // Busca detalhes do pagamento no MP (fonte de verdade)
-    const mpResp = await fetch(`https://api.mercadopago.com/v1/payments/${id}`, {
+    const mpResp = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
       headers: { "Authorization": `Bearer ${MP_TOKEN}` }
     });
 

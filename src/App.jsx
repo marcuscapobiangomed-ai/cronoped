@@ -42,7 +42,7 @@ export default function App() {
           await registerSession(session.user.id);
         }
 
-        // After payment return: navigate to schedule (webhook handles status update)
+        // After payment return: wait for webhook to process, then navigate
         const params = new URLSearchParams(window.location.search);
         const status = params.get("status");
         const extRef = params.get("external_reference");
@@ -51,7 +51,15 @@ export default function App() {
           if (uid===session.user.id) {
             window.history.replaceState({},document.title,window.location.pathname);
             const mat = MATERIAS.find(m=>m.id===matId);
-            if (mat) { setSelMateria(mat); setSelGrupo(parseInt(grp)); setView("schedule"); return; }
+            if (mat) {
+              // Poll até o webhook processar (max 15s)
+              for (let i = 0; i < 10; i++) {
+                const {data:ac} = await supabase.from("acessos").select("status").eq("user_id",uid).eq("materia",matId).single();
+                if (ac?.status === "aprovado") break;
+                await new Promise(r => setTimeout(r, 1500));
+              }
+              setSelMateria(mat); setSelGrupo(parseInt(grp)); setView("schedule"); return;
+            }
           }
         }
         setView("dashboard");
