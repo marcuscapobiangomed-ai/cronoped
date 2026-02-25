@@ -34,6 +34,9 @@ export const FREE_EMAILS = [
   "jgmed107@gmail.com",
   "luizgabrielcamposlobog@gmail.com",
   "emanoelfernandes.f.s.f@gmail.com",
+  "lauraoppelt23@gmail.com",
+  "anaisabella9x2limamartins@gmail.com",
+  "isabelamoraisg@hotmail.com",
 ];
 
 export function badge(bg, color) {
