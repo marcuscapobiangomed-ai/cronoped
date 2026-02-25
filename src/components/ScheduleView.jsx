@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { DAYS_ORDER, DAY_LABELS } from "../constants";
+import { GRUPOS } from "../scheduleData";
+import { supabase } from "../supabase";
 import { dbLoadProgress, dbSaveProgress, validateAcesso } from "../lib/db";
 import { getTodayInfo, getUpcomingAlerts, launchConfetti } from "../lib/helpers";
 import AlertBanner from "./AlertBanner";
 import ActivityCard from "./ActivityCard";
 
-export default function ScheduleView({ user, profile, materia, grupo, onBack }) {
+export default function ScheduleView({ user, profile, materia, grupo, onBack, onChangeGrupo }) {
   const WEEKS     = useMemo(() => (materia.weeksByGroup && materia.weeksByGroup[grupo]) || [], [materia.weeksByGroup, grupo]);
   const keyEvents = useMemo(() => materia.keyEvents || [], [materia.keyEvents]);
   const weekDates = useMemo(() => materia.weekDates || [], [materia.weekDates]);
@@ -157,6 +159,21 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack }) 
           </div>
           <div style={{height:5,background:"#1E293B",borderRadius:99,overflow:"hidden"}}>
             <div className="pfill" style={{width:`${pct}%`,background:pct===100?"#22C55E":materia.color}}/>
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:6,marginTop:10,flexWrap:"wrap"}}>
+            <span style={{fontSize:11,color:"#64748B",fontWeight:600,marginRight:2}}>Grupo:</span>
+            {GRUPOS.map(g=>(
+              <button key={g} onClick={()=>{
+                if (g === grupo) return;
+                supabase.from("acessos").update({grupo:g}).eq("user_id",user.id).eq("materia",materia.id);
+                onChangeGrupo(g);
+              }} style={{
+                width:30,height:28,borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",
+                border:"none",transition:"all 0.12s",
+                background:g===grupo?materia.color:"#1E293B",
+                color:g===grupo?"#fff":"#64748B",
+              }}>{g}</button>
+            ))}
           </div>
         </div>
       </div>

@@ -136,6 +136,7 @@ export default function App() {
           materia={selMateria}
           grupo={selGrupo}
           onBack={() => setView("dashboard")}
+          onChangeGrupo={(g) => setSelGrupo(g)}
         />
       )}
     </Suspense>
