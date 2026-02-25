@@ -72,6 +72,13 @@ Deno.serve(async (req) => {
         return new Response("db error", { status: 500 });
       }
 
+      // Log payment_success event
+      await supabase.from("eventos").insert({
+        user_id: userId,
+        type: "payment_success",
+        meta: { materia, grupo: parseInt(grupo), mp_payment_id: String(payment.id) },
+      });
+
       console.log(`Acesso liberado: user=${userId} materia=${materia} grupo=${grupo}`);
     }
 

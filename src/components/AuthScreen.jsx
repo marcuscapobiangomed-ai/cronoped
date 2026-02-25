@@ -4,6 +4,7 @@ import { labelStyle } from "../constants";
 import ErroBox from "./ErroBox";
 import { validaCPF, formatCPF, cleanCPF } from "../lib/helpers";
 import { registerSession } from "../lib/sessionGuard";
+import { logEvent } from "../lib/logEvent";
 
 export default function AuthScreen({ onAuth }) {
   const [tab,      setTab]      = useState("login");
@@ -30,6 +31,7 @@ export default function AuthScreen({ onAuth }) {
     if (error) { setErro("E-mail ou senha incorretos."); setLoading(false); return; }
     const {data:prof} = await supabase.from("profiles").select("nome,cpf,email").eq("id",data.user.id).single();
     await registerSession(data.user.id);
+    logEvent("login");
     onAuth(data.session, prof);
   }
 
@@ -64,6 +66,7 @@ export default function AuthScreen({ onAuth }) {
       setLoading(false); return;
     }
     await registerSession(data.user.id);
+    logEvent("signup");
     onAuth(data.session, {nome:nome.trim(), cpf:cleanCPF(cpf), email:email.trim().toLowerCase()});
   }
 

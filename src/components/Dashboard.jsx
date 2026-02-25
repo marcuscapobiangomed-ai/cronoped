@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from "../supabase";
 import { MATERIAS, GRUPOS } from "../scheduleData";
-import { badge } from "../constants";
+import { badge, FREE_EMAILS } from "../constants";
 import ErroBox from "./ErroBox";
 import { cleanCPF } from "../lib/helpers";
+import { logEvent } from "../lib/logEvent";
 
-export default function Dashboard({ user, profile, session, onSelect, onLogout }) {
+export default function Dashboard({ user, profile, session, onSelect, onLogout, onAdmin }) {
   const [acessos,         setAcessos]         = useState({});
   const [loadingAcessos,  setLoadingAcessos]  = useState(true);
   const [cardStates,      setCardStates]      = useState({}); // {[materiaId]: {expandido, grupoSelecionado}}
@@ -51,6 +52,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
     if (!grupo) return;
     setPayingCard(materia.id);
     setCardErrors(prev => ({ ...prev, [materia.id]: null }));
+    logEvent("payment_attempt", { materia: materia.id, grupo });
     try {
       const resp = await fetch(`${SUPABASE_URL}/functions/v1/create-preference`, {
         method:"POST",
@@ -67,12 +69,14 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
       });
       const data = await resp.json();
       if (data.error) {
+        logEvent("payment_failure", { materia: materia.id, grupo, error: data.error });
         setCardErrors(prev => ({ ...prev, [materia.id]: data.error }));
         setPayingCard(null);
         return;
       }
       window.location.href = data.init_point;
     } catch (err) {
+      logEvent("payment_failure", { materia: materia.id, grupo, error: err.message });
       setCardErrors(prev => ({ ...prev, [materia.id]: "Erro de conexão. Tente novamente." }));
       setPayingCard(null);
     }
@@ -113,6 +117,11 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
               {cleanCPF(profile?.cpf||"").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}
             </div>
           </div>
+          {profile?.email === "marcuscapobiangomed@gmail.com" && (
+            <button onClick={onAdmin} style={{background:"#7C3AED",border:"none",color:"#fff",fontSize:11,borderRadius:8,padding:"6px 10px",cursor:"pointer",fontWeight:700}}>
+              🔧 Admin
+            </button>
+          )}
           <button onClick={onLogout} style={{background:"#1E293B",border:"none",color:"#94A3B8",fontSize:12,borderRadius:8,padding:"6px 12px",cursor:"pointer"}}>
             Sair
           </button>
@@ -132,11 +141,15 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
             MATERIAS.map(m=>{
               const acesso    = acessos[m.id];
               const now = new Date();
+              const isVIP     = FREE_EMAILS.includes(profile?.email);
               const trialAtivo = acesso?.status === 'trial' && acesso?.trial_expires_at && new Date(acesso.trial_expires_at) > now;
               const diasRestantes = trialAtivo ? Math.ceil((new Date(acesso.trial_expires_at) - now) / (1000 * 60 * 60 * 24)) : 0;
-              const hasAccess = acesso?.status === "aprovado" || trialAtivo;
+              const isPaid    = acesso?.status === "aprovado";
+              const hasAccess = isPaid || trialAtivo || isVIP;
               const isPending = acesso?.status === "pending";
               const isLocked  = !m.hasData && !hasAccess;
+              // Paid non-VIP users are locked to their grupo — no selector
+              const isLockedGrupo = isPaid && !isVIP;
               const expandido = cardStates[m.id]?.expandido || false;
               const grupoSelecionado = cardStates[m.id]?.grupoSelecionado;
 
@@ -156,8 +169,10 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
                   <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:10}}>
                     <span style={{fontSize:28}}>{m.icon}</span>
                     {hasAccess ? (
-                      trialAtivo ? (
+                      trialAtivo && !isVIP ? (
                         <span style={badge("#FEF3C7","#92400E")}>🎁 Trial: {diasRestantes}d</span>
+                      ) : isVIP ? (
+                        <span style={badge("#DCFCE7","#16A34A")}>✓ Acesso livre</span>
                       ) : (
                         <span style={badge("#DCFCE7","#16A34A")}>✓ Acesso ativo</span>
                       )
@@ -173,15 +188,34 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
                   {/* Title */}
                   <div style={{fontSize:16,fontWeight:700,color:"#0F172A",marginBottom:12}}>{m.label}</div>
 
-                  {/* If already has access, quick info + expand button */}
-                  {hasAccess && !expandido && (
+                  {/* Paid non-VIP: locked grupo, direct open button */}
+                  {isLockedGrupo && (
+                    <>
+                      <div style={{fontSize:12,color:"#64748B",marginBottom:12}}>
+                        Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
+                      </div>
+                      <button
+                        onClick={() => handleAbrirCronograma(m, acesso.grupo)}
+                        style={{
+                          width:"100%", padding:"10px 14px", borderRadius:8, border:"none",
+                          background:m.color, color:"#fff", fontSize:13, fontWeight:700,
+                          cursor:"pointer", transition:"all 0.2s",
+                        }}
+                      >
+                        ▶ Abrir Cronograma
+                      </button>
+                    </>
+                  )}
+
+                  {/* VIP or trial: show grupo info + expand for selection */}
+                  {hasAccess && !isLockedGrupo && !expandido && acesso?.grupo && (
                     <div style={{fontSize:12,color:"#64748B",marginBottom:12}}>
                       Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
                     </div>
                   )}
 
-                  {/* Expandable section */}
-                  {!isLocked && !isPending && (
+                  {/* Expandable section for trial, VIP, and unpaid */}
+                  {!isLocked && !isPending && !isLockedGrupo && (
                     <>
                       {expandido && (
                         <div style={{marginBottom:14}}>

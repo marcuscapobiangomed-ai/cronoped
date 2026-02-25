@@ -26,6 +26,12 @@ export const TYPE_ICON = {
 
 export const labelStyle = {fontSize:13, fontWeight:600, color:"#475569", display:"block", marginBottom:6};
 
+// Emails com acesso total (admin + devs) — sem restrição de grupo/matéria
+export const FREE_EMAILS = [
+  "marcuscapobiangomed@gmail.com",
+  "lucasgrmed@gmail.com",
+];
+
 export function badge(bg, color) {
   return {fontSize:11, fontWeight:700, color, background:bg, padding:"3px 10px", borderRadius:99, display:"inline-block"};
 }

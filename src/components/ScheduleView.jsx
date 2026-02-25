@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { DAYS_ORDER, DAY_LABELS } from "../constants";
+import { DAYS_ORDER, DAY_LABELS, FREE_EMAILS } from "../constants";
 import { GRUPOS, loadMateriaData } from "../scheduleData";
 import { supabase } from "../supabase";
 import { dbLoadProgress, dbSaveProgress, validateAcesso } from "../lib/db";
@@ -36,6 +36,10 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
   const [loading,      setLoading]      = useState(true);
   const [accessDenied, setAccessDenied] = useState(false);
   const [syncStatus,   setSyncStatus]   = useState("idle");
+  const [accessStatus, setAccessStatus] = useState(null); // "aprovado", "trial", etc
+
+  const isVIP = FREE_EMAILS.includes(profile?.email);
+  const canSwitchGrupo = isVIP || accessStatus === "trial";
 
   const prevDoneWeeks = useRef(new Set());
   const saveTimer     = useRef(null);
@@ -44,14 +48,15 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
   useEffect(()=>{
     let cancelled = false;
     Promise.all([
-      validateAcesso(user.id, materia.id),
+      validateAcesso(user.id, materia.id, profile?.email),
       dbLoadProgress(user.id, materia.id),
       loadMateriaData(materia.id),
     ]).then(([acesso, {completed:c, notes:n}, wbg]) => {
       if (cancelled) return;
-      if (!acesso) {
+      if (!acesso && !isVIP) {
         setAccessDenied(true); setLoading(false); return;
       }
+      if (acesso) setAccessStatus(acesso.status);
       setWeeksByGroup(wbg);
       setCompleted(c); setNotes(n);
       latestData.current = {completed:c, notes:n};
@@ -163,21 +168,27 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
           <div style={{height:5,background:"#1E293B",borderRadius:99,overflow:"hidden"}}>
             <div className="pfill" style={{width:`${pct}%`,background:pct===100?"#22C55E":materia.color}}/>
           </div>
-          <div className="grupo-selector">
-            <span style={{fontSize:11,color:"#64748B",fontWeight:600,marginRight:2,flexShrink:0}}>Grupo:</span>
-            {(materia.grupos || GRUPOS).map(g=>(
-              <button key={g} onClick={()=>{
-                if (g === grupo) return;
-                supabase.rpc("update_grupo", {p_materia: materia.id, p_grupo: g});
-                onChangeGrupo(g);
-              }} style={{
-                minWidth:30,height:28,borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",
-                border:"none",transition:"all 0.12s",flexShrink:0,padding:"0 6px",
-                background:g===grupo?materia.color:"#1E293B",
-                color:g===grupo?"#fff":"#64748B",
-              }}>{materia.grupoLabels?.[g] ?? g}</button>
-            ))}
-          </div>
+          {canSwitchGrupo ? (
+            <div className="grupo-selector">
+              <span style={{fontSize:11,color:"#64748B",fontWeight:600,marginRight:2,flexShrink:0}}>Grupo:</span>
+              {(materia.grupos || GRUPOS).map(g=>(
+                <button key={g} onClick={()=>{
+                  if (g === grupo) return;
+                  supabase.rpc("update_grupo", {p_materia: materia.id, p_grupo: g});
+                  onChangeGrupo(g);
+                }} style={{
+                  minWidth:30,height:28,borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",
+                  border:"none",transition:"all 0.12s",flexShrink:0,padding:"0 6px",
+                  background:g===grupo?materia.color:"#1E293B",
+                  color:g===grupo?"#fff":"#64748B",
+                }}>{materia.grupoLabels?.[g] ?? g}</button>
+              ))}
+            </div>
+          ) : (
+            <div style={{fontSize:11,color:"#64748B",fontWeight:600,marginTop:6}}>
+              Grupo {materia.grupoLabels?.[grupo] ?? grupo} · 🔒
+            </div>
+          )}
         </div>
       </div>
 

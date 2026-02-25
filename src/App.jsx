@@ -2,10 +2,12 @@ import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { supabase } from "./supabase";
 import { MATERIAS } from "./scheduleData";
 import { heartbeat, endSession, getSessionToken, registerSession } from "./lib/sessionGuard";
+import { logEvent } from "./lib/logEvent";
 
 const AuthScreen   = lazy(() => import("./components/AuthScreen"));
 const Dashboard    = lazy(() => import("./components/Dashboard"));
 const ScheduleView = lazy(() => import("./components/ScheduleView"));
+const AdminPanel   = lazy(() => import("./components/AdminPanel"));
 
 function LoadingScreen() {
   return (
@@ -85,6 +87,7 @@ export default function App() {
 
   async function handleKicked() {
     clearInterval(heartbeatRef.current);
+    logEvent("session_kicked");
     setKicked(true);
     await supabase.auth.signOut();
   }
@@ -125,7 +128,11 @@ export default function App() {
           session={session}
           onSelect={(mat,grp) => { setSelMateria(mat); setSelGrupo(grp); setView("schedule"); }}
           onLogout={handleLogout}
+          onAdmin={() => setView("admin")}
         />
+      )}
+      {view==="admin" && (
+        <AdminPanel onBack={() => setView("dashboard")} />
       )}
       {view==="schedule" && selMateria && (
         <ScheduleView

@@ -95,6 +95,11 @@ Deno.serve(async (req) => {
 
   } catch (err) {
     console.error(err);
+    // Log error event
+    try {
+      const sb = createClient(SUPABASE_URL, SERVICE_KEY);
+      await sb.from("eventos").insert({ type: "edge_fn_error", meta: { fn: "create-preference", error: String(err) } });
+    } catch (_) { /* ignore logging failure */ }
     return json({ error: "Erro interno do servidor" }, 500);
   }
 });

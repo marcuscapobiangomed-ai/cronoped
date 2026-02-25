@@ -1,4 +1,5 @@
 import { supabase } from "../supabase";
+import { FREE_EMAILS } from "../constants";
 
 export async function dbLoadProgress(userId, materia) {
   const {data, error} = await supabase.from("progresso").select("completed,notes")
@@ -15,7 +16,14 @@ export async function dbSaveProgress(userId, materia, completed, notes) {
   if (error) throw error;
 }
 
-export async function validateAcesso(userId, materiaId) {
+export async function validateAcesso(userId, materiaId, userEmail) {
+  // VIP emails always have access
+  if (userEmail && FREE_EMAILS.includes(userEmail)) {
+    const {data} = await supabase.from("acessos").select("status,grupo,trial_expires_at")
+      .eq("user_id",userId).eq("materia",materiaId).single();
+    return {status: "vip", grupo: data?.grupo || 1, trial_expires_at: null};
+  }
+
   const {data, error} = await supabase.from("acessos").select("status,grupo,trial_expires_at")
     .eq("user_id",userId).eq("materia",materiaId).single();
   if (error && error.code !== "PGRST116") console.error("validateAcesso:", error.message);
