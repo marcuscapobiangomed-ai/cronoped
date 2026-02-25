@@ -1,7 +1,3 @@
-import { CM_BY_GROUP } from "./data/cm";
-import { GO_BY_GROUP } from "./data/go";
-import { PED_BY_GROUP } from "./data/ped";
-
 // ─── TYPE INFERENCE (runs once at import, not per-render) ────────────────────
 function inferType(a) {
   if (a.title === "Horário Verde") return "horario_verde";
@@ -159,12 +155,25 @@ const PED_G6_RAW = [
   ]},
 ];
 
-// ─── MERGE PED: parsed groups + manual G6 ────────────────────────────────────
-const PED_FULL = { ...PED_BY_GROUP, 6: PED_G6_RAW };
+// ─── LAZY DATA LOADING (code splitting) ────────────────────────────────────
+const dataCache = {};
 
-const PED_WEEKS_BY_GROUP = buildWeeksByGroup(PED_FULL);
-const CM_WEEKS_BY_GROUP  = buildWeeksByGroup(CM_BY_GROUP);
-const GO_WEEKS_BY_GROUP  = buildWeeksByGroup(GO_BY_GROUP);
+export async function loadMateriaData(id) {
+  if (dataCache[id]) return dataCache[id];
+  let raw;
+  switch (id) {
+    case "cm":  raw = (await import("./data/cm")).CM_BY_GROUP; break;
+    case "go":  raw = (await import("./data/go")).GO_BY_GROUP; break;
+    case "ped": {
+      const parsed = (await import("./data/ped")).PED_BY_GROUP;
+      raw = { ...parsed, 6: PED_G6_RAW };
+      break;
+    }
+    default: return null;
+  }
+  dataCache[id] = buildWeeksByGroup(raw);
+  return dataCache[id];
+}
 
 // ─── KEY EVENTS & WEEK DATES (shared across all matérias) ────────────────────
 const KEY_EVENTS = [
@@ -190,19 +199,19 @@ const WEEK_DATES = [
 export const MATERIAS = [
   {
     id:"ped",  label:"Pediatria",               icon:"👶", color:"#0EA5E9",
-    weeksByGroup: PED_WEEKS_BY_GROUP, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+    hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
   },
   {
     id:"cm",  label:"Clínica Médica",           icon:"🩺", color:"#10B981",
-    weeksByGroup: CM_WEEKS_BY_GROUP, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+    hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
   },
   {
     id:"go",  label:"GO",                       icon:"🤰", color:"#EC4899",
-    weeksByGroup: GO_WEEKS_BY_GROUP, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+    hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
   },
-  { id:"cc",  label:"Clínica Cirúrgica",        icon:"🔪", color:"#F59E0B", weeksByGroup:null, disponivelEm:"Junho 2026" },
-  { id:"ubs", label:"Atenção Básica UBS",       icon:"🏥", color:"#8B5CF6", weeksByGroup:null, disponivelEm:"Agosto 2026" },
-  { id:"sim", label:"Atenção Básica Simulação", icon:"🎯", color:"#EF4444", weeksByGroup:null, disponivelEm:"Agosto 2026" },
+  { id:"cc",  label:"Clínica Cirúrgica",        icon:"🔪", color:"#F59E0B", hasData:false, disponivelEm:"Junho 2026" },
+  { id:"ubs", label:"Atenção Básica UBS",       icon:"🏥", color:"#8B5CF6", hasData:false, disponivelEm:"Agosto 2026" },
+  { id:"sim", label:"Atenção Básica Simulação", icon:"🎯", color:"#EF4444", hasData:false, disponivelEm:"Agosto 2026" },
 ];
 
 export const GRUPOS = Array.from({length:10}, (_, i) => i + 1);

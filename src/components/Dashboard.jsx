@@ -107,7 +107,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout }
               const hasAccess = acesso?.status === "aprovado";
               const isPending = acesso?.status === "pending";
               const isSelected= selectedMateria?.id === m.id;
-              const isLocked  = !m.weeksByGroup && !hasAccess;
+              const isLocked  = !m.hasData && !hasAccess;
               return (
                 <div key={m.id}
                   className={`materia-card${isSelected?" selected":""}${isLocked?" locked":""}`}

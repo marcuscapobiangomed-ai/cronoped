@@ -14,7 +14,7 @@ input, textarea, select { font-family: 'Outfit', system-ui, sans-serif; }
 .btn-outline:hover:not(:disabled) { border-color: #CBD5E1; background: #F8FAFC; }
 
 /* ─── Form fields ─── */
-.input-field { width: 100%; padding: 12px 16px; border-radius: 10px; font-size: 15px; border: 2px solid #E2E8F0; outline: none; transition: border 0.15s; color: #0F172A; background: #fff; }
+.input-field { width: 100%; padding: 12px 16px; border-radius: 10px; font-size: 16px; border: 2px solid #E2E8F0; outline: none; transition: border 0.15s; color: #0F172A; background: #fff; }
 .input-field:focus { border-color: #0EA5E9; }
 .input-field.error { border-color: #EF4444; }
 
@@ -64,6 +64,10 @@ input, textarea, select { font-family: 'Outfit', system-ui, sans-serif; }
 /* ─── Header stats ─── */
 .hstats { display: flex; align-items: center; gap: 16px; }
 
+/* ─── Safe area (iPhone notch / home bar) ─── */
+body { padding-bottom: env(safe-area-inset-bottom); }
+.schedule-header, .dash-header { padding-top: max(14px, env(safe-area-inset-top)) !important; }
+
 /* ─── Touch & global mobile ─── */
 button, .activity-card, .materia-card, .week-head { -webkit-tap-highlight-color: transparent; }
 button { touch-action: manipulation; }
@@ -80,10 +84,11 @@ button { touch-action: manipulation; }
   .week-head { gap: 10px; padding: 12px 14px; }
 
   /* Header compacto */
-  .schedule-header { padding: 10px 14px !important; }
+  .schedule-header { padding: 10px 14px !important; padding-top: max(10px, env(safe-area-inset-top)) !important; }
   .hstats { gap: 8px !important; }
-  .hstats > div > div:first-child { font-size: 14px !important; }
-  .hstats > div > div:last-child  { font-size: 9px !important; }
+  .hstats > div:not(:last-child) { display: none; }
+  .hstats > div:last-child > div:first-child { font-size: 16px !important; }
+  .hstats > div:last-child > div:last-child  { font-size: 9px !important; }
 
   /* Grupo selector: scroll horizontal, sem quebra */
   .grupo-selector { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap !important; padding-bottom: 4px; margin-top: 8px !important; scrollbar-width: none; }

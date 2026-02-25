@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { DAYS_ORDER, DAY_LABELS } from "../constants";
-import { GRUPOS } from "../scheduleData";
+import { GRUPOS, loadMateriaData } from "../scheduleData";
 import { supabase } from "../supabase";
 import { dbLoadProgress, dbSaveProgress, validateAcesso } from "../lib/db";
 import { getTodayInfo, getUpcomingAlerts, launchConfetti } from "../lib/helpers";
@@ -8,7 +8,8 @@ import AlertBanner from "./AlertBanner";
 import ActivityCard from "./ActivityCard";
 
 export default function ScheduleView({ user, profile, materia, grupo, onBack, onChangeGrupo }) {
-  const WEEKS     = useMemo(() => (materia.weeksByGroup && materia.weeksByGroup[grupo]) || [], [materia.weeksByGroup, grupo]);
+  const [weeksByGroup, setWeeksByGroup] = useState(null);
+  const WEEKS     = useMemo(() => (weeksByGroup && weeksByGroup[grupo]) || [], [weeksByGroup, grupo]);
   const keyEvents = useMemo(() => materia.keyEvents || [], [materia.keyEvents]);
   const weekDates = useMemo(() => materia.weekDates || [], [materia.weekDates]);
 
@@ -45,11 +46,13 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
     Promise.all([
       validateAcesso(user.id, materia.id),
       dbLoadProgress(user.id, materia.id),
-    ]).then(([acesso, {completed:c, notes:n}]) => {
+      loadMateriaData(materia.id),
+    ]).then(([acesso, {completed:c, notes:n}, wbg]) => {
       if (cancelled) return;
       if (!acesso || acesso.status !== "aprovado") {
         setAccessDenied(true); setLoading(false); return;
       }
+      setWeeksByGroup(wbg);
       setCompleted(c); setNotes(n);
       latestData.current = {completed:c, notes:n};
       setLoading(false);
