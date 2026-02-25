@@ -49,7 +49,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
       loadMateriaData(materia.id),
     ]).then(([acesso, {completed:c, notes:n}, wbg]) => {
       if (cancelled) return;
-      if (!acesso || acesso.status !== "aprovado") {
+      if (!acesso) {
         setAccessDenied(true); setLoading(false); return;
       }
       setWeeksByGroup(wbg);
@@ -139,7 +139,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
               <button onClick={onBack} style={{background:"#1E293B",border:"none",color:"#94A3B8",width:32,height:32,borderRadius:8,cursor:"pointer",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
               <div>
                 <div style={{fontSize:15,fontWeight:700,color:"#fff"}}>{materia.icon} {materia.label}</div>
-                <div style={{fontSize:12,color:"#64748B"}}>Grupo {grupo} · {profile?.nome?.split(" ")[0]}</div>
+                <div style={{fontSize:12,color:"#64748B"}}>Grupo {materia.grupoLabels?.[grupo] ?? grupo} · {profile?.nome?.split(" ")[0]}</div>
               </div>
             </div>
             <div style={{display:"flex",alignItems:"center",gap:14}}>
@@ -165,17 +165,17 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
           </div>
           <div className="grupo-selector">
             <span style={{fontSize:11,color:"#64748B",fontWeight:600,marginRight:2,flexShrink:0}}>Grupo:</span>
-            {GRUPOS.map(g=>(
+            {(materia.grupos || GRUPOS).map(g=>(
               <button key={g} onClick={()=>{
                 if (g === grupo) return;
-                supabase.from("acessos").update({grupo:g}).eq("user_id",user.id).eq("materia",materia.id);
+                supabase.rpc("update_grupo", {p_materia: materia.id, p_grupo: g});
                 onChangeGrupo(g);
               }} style={{
-                width:30,height:28,borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",
-                border:"none",transition:"all 0.12s",flexShrink:0,
+                minWidth:30,height:28,borderRadius:7,fontSize:12,fontWeight:700,cursor:"pointer",
+                border:"none",transition:"all 0.12s",flexShrink:0,padding:"0 6px",
                 background:g===grupo?materia.color:"#1E293B",
                 color:g===grupo?"#fff":"#64748B",
-              }}>{g}</button>
+              }}>{materia.grupoLabels?.[g] ?? g}</button>
             ))}
           </div>
         </div>
@@ -264,7 +264,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
           );
         })}
         <div style={{padding:"14px 18px",borderRadius:10,background:"#fff",border:"1px solid #E2E8F0",marginTop:4,fontSize:11,color:"#94A3B8"}}>
-          {profile?.nome} · Grupo {grupo} · ☁️ Sincronizado em todos os dispositivos
+          {profile?.nome} · Grupo {materia.grupoLabels?.[grupo] ?? grupo} · ☁️ Sincronizado em todos os dispositivos
         </div>
       </div>
     </div>

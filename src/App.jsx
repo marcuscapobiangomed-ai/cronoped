@@ -39,15 +39,13 @@ export default function App() {
           await registerSession(session.user.id);
         }
 
+        // After payment return: navigate to schedule (webhook handles status update)
         const params = new URLSearchParams(window.location.search);
         const status = params.get("status");
         const extRef = params.get("external_reference");
         if (status==="approved" && extRef) {
           const [uid, matId, grp] = extRef.split("|");
           if (uid===session.user.id) {
-            await supabase.from("acessos")
-              .update({status:"aprovado"})
-              .eq("user_id",uid).eq("materia",matId).eq("status","pending");
             window.history.replaceState({},document.title,window.location.pathname);
             const mat = MATERIAS.find(m=>m.id===matId);
             if (mat) { setSelMateria(mat); setSelGrupo(parseInt(grp)); setView("schedule"); return; }

@@ -63,6 +63,7 @@ Deno.serve(async (req) => {
 
       const { error } = await supabase.from("acessos").update({
         status: "aprovado",
+        grupo: parseInt(grupo),
         mp_payment_id: String(payment.id)
       }).eq("user_id", userId).eq("materia", materia);
 

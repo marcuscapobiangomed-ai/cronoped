@@ -16,8 +16,24 @@ export async function dbSaveProgress(userId, materia, completed, notes) {
 }
 
 export async function validateAcesso(userId, materiaId) {
-  const {data, error} = await supabase.from("acessos").select("status,grupo")
+  const {data, error} = await supabase.from("acessos").select("status,grupo,trial_expires_at")
     .eq("user_id",userId).eq("materia",materiaId).single();
   if (error && error.code !== "PGRST116") console.error("validateAcesso:", error.message);
-  return data;
+
+  if (!data) return null;
+
+  // Check if trial is still active
+  const now = new Date();
+  const trialActive = data.status === 'trial' &&
+                      data.trial_expires_at &&
+                      new Date(data.trial_expires_at) > now;
+
+  // Access granted if: paid OR trial is active
+  const hasAccess = data.status === 'aprovado' || trialActive;
+
+  if (hasAccess) {
+    return {status: data.status, grupo: data.grupo, trial_expires_at: data.trial_expires_at};
+  }
+
+  return null;
 }

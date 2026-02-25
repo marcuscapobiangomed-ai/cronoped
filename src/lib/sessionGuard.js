@@ -55,10 +55,11 @@ export async function registerSession(userId) {
       .in("id", toDelete);
   }
 
-  // Limpeza: remover sessões inativas de QUALQUER usuário (> 10 min sem heartbeat)
+  // Limpeza: remover sessões inativas próprias (> 10 min sem heartbeat)
   await supabase
     .from("sessoes_ativas")
     .delete()
+    .eq("user_id", userId)
     .lt("last_seen", new Date(Date.now() - 10 * 60 * 1000).toISOString());
 }
 
