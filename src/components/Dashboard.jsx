@@ -161,10 +161,11 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
             MATERIAS.map(m=>{
               const acesso    = acessos[m.id];
               const now = new Date();
-              const isVIP     = FREE_EMAILS.includes(profile?.email);
+              const testPayment = new URLSearchParams(window.location.search).get("test_payment") === "true";
+              const isVIP     = !testPayment && FREE_EMAILS.includes(profile?.email);
               const trialAtivo = acesso?.status === 'trial' && acesso?.trial_expires_at && new Date(acesso.trial_expires_at) > now;
               const diasRestantes = trialAtivo ? Math.ceil((new Date(acesso.trial_expires_at) - now) / (1000 * 60 * 60 * 24)) : 0;
-              const isPaid    = acesso?.status === "aprovado";
+              const isPaid    = acesso?.status === "aprovado" && !testPayment;
               const hasAccess = isPaid || trialAtivo || isVIP;
               const isPending = acesso?.status === "pending";
               const isLocked  = !m.hasData && !hasAccess;

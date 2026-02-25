@@ -71,7 +71,7 @@ export const CM_BY_GROUP = {
         {id:"6-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"6-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"6-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"6-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"6-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"6-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"6-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
@@ -82,7 +82,7 @@ export const CM_BY_GROUP = {
         {id:"7-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"7-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"7-6",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
-        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"7-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"7-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"7-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -94,7 +94,7 @@ export const CM_BY_GROUP = {
         {id:"8-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"8-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"8-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal"},
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
@@ -117,7 +117,7 @@ export const CM_BY_GROUP = {
         {id:"10-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"10-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"10-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"10-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"10-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
@@ -193,7 +193,7 @@ export const CM_BY_GROUP = {
         {id:"6-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"6-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"6-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"6-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"6-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"6-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"6-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
@@ -204,7 +204,7 @@ export const CM_BY_GROUP = {
         {id:"7-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"7-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"7-6",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
-        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"7-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"7-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"7-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -213,7 +213,7 @@ export const CM_BY_GROUP = {
         {id:"8-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-2",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-3",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
-        {id:"8-4",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"8-4",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"8-5",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
@@ -233,7 +233,7 @@ export const CM_BY_GROUP = {
         {id:"10-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"10-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"10-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"10-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"10-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
@@ -310,7 +310,7 @@ export const CM_BY_GROUP = {
         {id:"6-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"6-6",day:"4ª",turno:"Tarde",title:"Enfermaria de CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
         {id:"6-7",day:"5ª",turno:"Manhã",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"09:00–12:00",type:"normal",loc:"Local – sala 2210"},
-        {id:"6-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"6-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"14:00–17:00",type:"normal",loc:"Sala 2208"},
         {id:"6-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
     {num:7,dates:"06/4 – 11/4",activities:[
@@ -320,7 +320,7 @@ export const CM_BY_GROUP = {
         {id:"7-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"7-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"7-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"7-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"7-9",day:"6ª",turno:"Manhã",title:"Ambulatório de urologia",sub:"Prof. Da disciplina",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
         {id:"7-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -332,7 +332,7 @@ export const CM_BY_GROUP = {
         {id:"8-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"8-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"8-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
@@ -352,7 +352,7 @@ export const CM_BY_GROUP = {
         {id:"10-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"10-2",day:"3ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"10-3",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"10-4",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"10-4",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"10-5",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
   ],
@@ -429,7 +429,7 @@ export const CM_BY_GROUP = {
         {id:"6-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"6-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
         {id:"6-7",day:"5ª",turno:"Manhã",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"09:00–12:00",type:"normal",loc:"Local – sala 2210"},
-        {id:"6-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"6-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"14:00–17:00",type:"normal",loc:"Sala 2208"},
         {id:"6-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
     {num:7,dates:"06/4 – 11/4",activities:[
@@ -439,7 +439,7 @@ export const CM_BY_GROUP = {
         {id:"7-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"7-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"7-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"7-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"7-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"7-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
@@ -451,7 +451,7 @@ export const CM_BY_GROUP = {
         {id:"8-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"8-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"",type:"enfermaria"},
-        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"8-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"",type:"normal"},
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Ambulatório de urologia",sub:"Prof. Da disciplina",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
@@ -474,7 +474,7 @@ export const CM_BY_GROUP = {
         {id:"10-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"10-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"10-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"10-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"10-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
@@ -552,7 +552,7 @@ export const CM_BY_GROUP = {
         {id:"6-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"6-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
         {id:"6-7",day:"5ª",turno:"Manhã",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"09:00–12:00",type:"normal",loc:"Local – sala 2210"},
-        {id:"6-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"6-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"14:00–17:00",type:"normal",loc:"Sala 2208"},
         {id:"6-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
     {num:7,dates:"06/4 – 11/4",activities:[
@@ -562,7 +562,7 @@ export const CM_BY_GROUP = {
         {id:"7-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"7-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"7-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"7-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"7-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"7-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"7-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
@@ -574,7 +574,7 @@ export const CM_BY_GROUP = {
         {id:"8-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"8-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"8-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"8-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
@@ -597,7 +597,7 @@ export const CM_BY_GROUP = {
         {id:"10-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"10-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"10-6",day:"4ª",turno:"Tarde",title:"Enfermaria de CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"10-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"10-8",day:"5ª",turno:"Tarde",title:"LTeoócraicl o sParláat ica D IP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"10-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"}
     ]},
@@ -610,7 +610,7 @@ export const CM_BY_GROUP = {
         {id:"1-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"1-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"1-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"1-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"1-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"1-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"1-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"1-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
@@ -623,7 +623,7 @@ export const CM_BY_GROUP = {
         {id:"2-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"2-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-6",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
-        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"2-8",day:"5ª",turno:"Tarde",title:"LTeoócraicl o sParláat ica D IP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"2-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -635,7 +635,7 @@ export const CM_BY_GROUP = {
         {id:"3-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"3-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"3-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -647,7 +647,7 @@ export const CM_BY_GROUP = {
         {id:"4-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"4-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"4-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -659,7 +659,7 @@ export const CM_BY_GROUP = {
         {id:"5-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"5-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"5-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"5-8",day:"5ª",turno:"Tarde",title:"LTeoócraicl o sParláat ica D IP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"5-9",day:"6ª",turno:"Manhã",title:"Ambulatório de urologia",sub:"Prof. Da Disciplina",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
         {id:"5-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -725,7 +725,7 @@ export const CM_BY_GROUP = {
         {id:"1-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"1-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"1-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"1-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"1-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"1-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"1-9",day:"6ª",turno:"Manhã",title:"Ambulatório de urologia",sub:"Prof. Da Disciplina",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
         {id:"1-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
@@ -738,7 +738,7 @@ export const CM_BY_GROUP = {
         {id:"2-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"2-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-6",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
-        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"2-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"2-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -750,7 +750,7 @@ export const CM_BY_GROUP = {
         {id:"3-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"3-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"3-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -762,7 +762,7 @@ export const CM_BY_GROUP = {
         {id:"4-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"4-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -774,7 +774,7 @@ export const CM_BY_GROUP = {
         {id:"5-4",day:"3ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Precep. Anderlúcia",time:"14:00–17:00",type:"enfermaria"},
         {id:"5-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"5-6",day:"4ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"5-8",day:"5ª",turno:"Tarde",title:"LTeoócraicl o sParláat ica D IP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"5-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"5-10",day:"6ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"}
@@ -838,7 +838,7 @@ export const CM_BY_GROUP = {
         {id:"1-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"1-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"1-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"1-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"1-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"1-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"1-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"1-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
@@ -851,7 +851,7 @@ export const CM_BY_GROUP = {
         {id:"2-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"2-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"2-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"2-9",day:"6ª",turno:"Manhã",title:"Ambulatório de urologia",sub:"Prof. Da disciplina",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
         {id:"2-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -863,7 +863,7 @@ export const CM_BY_GROUP = {
         {id:"3-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"3-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"3-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -875,7 +875,7 @@ export const CM_BY_GROUP = {
         {id:"4-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"4-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -887,7 +887,7 @@ export const CM_BY_GROUP = {
         {id:"5-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"5-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"5-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"5-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"5-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"5-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -954,7 +954,7 @@ export const CM_BY_GROUP = {
         {id:"1-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"1-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
         {id:"1-7",day:"5ª",turno:"Manhã",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"09:00–12:00",type:"normal",loc:"Local – sala 2210"},
-        {id:"1-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"1-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"14:00–17:00",type:"normal",loc:"Sala 2208"},
         {id:"1-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"1-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"1-11",day:"Sáb",turno:"Tarde",title:"Simulado Nacional MEDCOF",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
@@ -966,7 +966,7 @@ export const CM_BY_GROUP = {
         {id:"2-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"2-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"2-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"2-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"2-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
@@ -978,7 +978,7 @@ export const CM_BY_GROUP = {
         {id:"3-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"3-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"3-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Ambulatório de urologia",sub:"Prof. Da disciplina",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
         {id:"3-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -990,7 +990,7 @@ export const CM_BY_GROUP = {
         {id:"4-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"4-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -1002,7 +1002,7 @@ export const CM_BY_GROUP = {
         {id:"5-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"5-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"5-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"5-8",day:"5ª",turno:"Tarde",title:"LTeoócraicl o sParláat ica D IP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"5-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"5-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -1075,7 +1075,7 @@ export const CM_BY_GROUP = {
         {id:"1-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"1-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
         {id:"1-7",day:"5ª",turno:"Manhã",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"09:00–12:00",type:"normal",loc:"Local – sala 2210"},
-        {id:"1-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"1-8",day:"5ª",turno:"Tarde",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"14:00–17:00",type:"normal",loc:"Sala 2208"},
         {id:"1-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"1-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"1-11",day:"Sáb",turno:"Tarde",title:"Simulado Nacional MEDCOF",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
@@ -1087,7 +1087,7 @@ export const CM_BY_GROUP = {
         {id:"2-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"2-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"2-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"2-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"2-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"2-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
@@ -1099,7 +1099,7 @@ export const CM_BY_GROUP = {
         {id:"3-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"3-5",day:"4ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"3-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"3-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
@@ -1111,7 +1111,7 @@ export const CM_BY_GROUP = {
         {id:"4-4",day:"3ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-5",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-6",day:"4ª",turno:"Tarde",title:"ENFERMARIA DE CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"4-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"4-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"Ambulatório de urologia",sub:"Prof. Da disciplina",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
         {id:"4-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"}
@@ -1123,7 +1123,7 @@ export const CM_BY_GROUP = {
         {id:"5-4",day:"3ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"5-5",day:"4ª",turno:"Manhã",title:"Mecanismos de abordagem ao paciente clínico – Enfermaria HUV",sub:"Profa. Ana Cláudia",time:"09:00–12:00",type:"enfermaria"},
         {id:"5-6",day:"4ª",turno:"Tarde",title:"Enfermaria de CM",sub:"Prof. Jean",time:"14:00–17:00",type:"enfermaria"},
-        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"",time:"",type:"normal"},
+        {id:"5-7",day:"5ª",turno:"Manhã",title:"Prática de Diagnóstico por Imagem",sub:"Prof. Mateus",time:"9:00–12:00",type:"normal",loc:"Sala 2208"},
         {id:"5-8",day:"5ª",turno:"Tarde",title:"Teórico-Prática DIP",sub:"Prof. Vinícius",time:"14:00–17:00",type:"normal",loc:"Local – sala 2210"},
         {id:"5-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"5-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
