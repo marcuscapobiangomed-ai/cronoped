@@ -9,7 +9,7 @@
 const RESEND_KEY  = Deno.env.get("RESEND_API_KEY");
 const ADMIN_EMAIL = "marcuscapobiangomed@gmail.com";
 const FROM_EMAIL  = "CronoPed <onboarding@resend.dev>"; // Resend sandbox
-const APP_URL     = "https://plannerinternato.marcuscapobiangomed.workers.dev";
+const APP_URL     = "https://plannerinternato.modulo1.workers.dev";
 
 Deno.serve(async (req) => {
   try {
