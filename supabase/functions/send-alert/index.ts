@@ -9,7 +9,7 @@
 const RESEND_KEY  = Deno.env.get("RESEND_API_KEY");
 const ADMIN_EMAIL = "marcuscapobiangomed@gmail.com";
 const FROM_EMAIL  = "CronoPed <onboarding@resend.dev>"; // Resend sandbox
-const APP_URL     = "https://internatop1.netlify.app";
+const APP_URL     = "https://plannerinternato.marcuscapobiangomed.workers.dev";
 
 Deno.serve(async (req) => {
   try {
