@@ -109,4 +109,22 @@ button { touch-action: manipulation; }
 
   /* Scroll area */
   .scroll-x { padding: 0 14px 14px; }
+
+  /* Dashboard header: compact */
+  .user-cpf { display: none !important; }
+  .dash-title { font-size: 13px !important; }
+  .dash-subtitle { font-size: 10px !important; }
+
+  /* Schedule header: prevent overflow */
+  .header-right { flex-wrap: wrap !important; gap: 6px !important; justify-content: flex-end !important; }
+  .restore-btn { font-size: 9px !important; padding: 2px 7px !important; }
+
+  /* Touch targets: edit/delete buttons */
+  .edit-actions button { min-width: 30px !important; min-height: 30px !important; font-size: 13px !important; }
+
+  /* Modals: compact padding */
+  .modal-body { padding: 22px 18px !important; }
+
+  /* Activity modal: prevent vertical overflow */
+  .modal-form { max-height: calc(100vh - 32px) !important; max-height: calc(100dvh - 32px) !important; overflow-y: auto !important; }
 }

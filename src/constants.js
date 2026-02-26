@@ -1,3 +1,6 @@
+// Data de expiração do Módulo 1 — todos os acessos (exceto VIP) expiram nesta data
+export const MODULE_END_DATE = new Date("2026-05-08T23:59:59-03:00");
+
 export const DAYS_ORDER = ["2ª","3ª","4ª","5ª","6ª","Sáb"];
 export const DAY_LABELS = {"2ª":"Segunda","3ª":"Terça","4ª":"Quarta","5ª":"Quinta","6ª":"Sexta","Sáb":"Sábado"};
 export const DAY_JS     = {"2ª":1,"3ª":2,"4ª":3,"5ª":4,"6ª":5,"Sáb":6};
@@ -26,18 +29,6 @@ export const TYPE_ICON = {
 
 export const labelStyle = {fontSize:13, fontWeight:600, color:"#475569", display:"block", marginBottom:6};
 
-// Emails com acesso total (admin + devs) — sem restrição de grupo/matéria
-export const FREE_EMAILS = [
-  "marcuscapobiangomed@gmail.com",
-  "lucasgrmed@gmail.com",
-  "tifer134@gmail.com",
-  "jgmed107@gmail.com",
-  "luizgabrielcamposlobog@gmail.com",
-  "emanoelfernandes.f.s.f@gmail.com",
-  "lauraoppelt23@gmail.com",
-  "anaisabella9x2limamartins@gmail.com",
-  "isabelamoraisg@hotmail.com",
-];
 
 export function badge(bg, color) {
   return {fontSize:11, fontWeight:700, color, background:bg, padding:"3px 10px", borderRadius:99, display:"inline-block"};

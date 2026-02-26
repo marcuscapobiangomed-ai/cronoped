@@ -28,13 +28,37 @@ export default function App() {
   const [selMateria, setSelMateria] = useState(null);
   const [selGrupo,   setSelGrupo]   = useState(null);
   const [kicked,     setKicked]     = useState(false);
+  const [resetPw,    setResetPw]    = useState({pass:"",confirm:"",err:"",loading:false,success:false});
+  const [showNewPw,  setShowNewPw]  = useState(false);
   const heartbeatRef = useRef(null);
+
+  // Capturar código de afiliado da URL (?ref=CODE)
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get("ref");
+    if (refCode) {
+      localStorage.setItem("referral_code", refCode.toLowerCase().trim());
+      // Limpar ?ref= da URL sem afetar outros params
+      urlParams.delete("ref");
+      const newSearch = urlParams.toString();
+      const newUrl = window.location.pathname + (newSearch ? "?" + newSearch : "") + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  }, []);
 
   // Session restore + payment fallback
   useEffect(()=>{
     supabase.auth.getSession().then(async ({data:{session}}) => {
       if (session) {
-        const {data:prof} = await supabase.from("profiles").select("nome,cpf,email").eq("id",session.user.id).single();
+        // Check for password recovery flow (user clicked reset link in email)
+        const hash = window.location.hash;
+        if (hash && hash.includes('type=recovery')) {
+          setSession(session);
+          setView("reset-password");
+          window.history.replaceState({}, document.title, window.location.pathname);
+          return;
+        }
+        const {data:prof} = await supabase.from("profiles").select("nome,cpf,email,is_vip,is_admin,referred_by").eq("id",session.user.id).single();
         setSession(session); setProfile(prof);
 
         // Se não tem token de sessão no localStorage, registrar nova sessão
@@ -43,17 +67,19 @@ export default function App() {
         }
 
         // After payment return: wait for webhook to process, then navigate
+        // Suporta status=approved (cartão) e status=pending (PIX aguardando confirmação)
         const params = new URLSearchParams(window.location.search);
         const status = params.get("status");
         const extRef = params.get("external_reference");
-        if (status==="approved" && extRef) {
+        if ((status==="approved" || status==="pending") && extRef) {
           const [uid, matId, grp] = extRef.split("|");
           if (uid===session.user.id) {
             window.history.replaceState({},document.title,window.location.pathname);
             const mat = MATERIAS.find(m=>m.id===matId);
             if (mat) {
-              // Poll até o webhook processar (max 15s)
-              for (let i = 0; i < 10; i++) {
+              // Poll até o webhook processar (max 30s para PIX que pode demorar mais)
+              const maxPolls = status === "pending" ? 20 : 10;
+              for (let i = 0; i < maxPolls; i++) {
                 const {data:ac} = await supabase.from("acessos").select("status").eq("user_id",uid).eq("materia",matId).single();
                 if (ac?.status === "aprovado") break;
                 await new Promise(r => setTimeout(r, 1500));
@@ -68,8 +94,15 @@ export default function App() {
       }
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, sess) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, sess) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setSession(sess);
+        setView("reset-password");
+        window.history.replaceState({}, document.title, window.location.pathname);
+        return;
+      }
       if (!sess) { setSession(null); setProfile(null); setView("auth"); }
+      else if (event === "TOKEN_REFRESHED") { setSession(sess); }
     });
     return () => subscription.unsubscribe();
   },[]);
@@ -106,6 +139,16 @@ export default function App() {
     await supabase.auth.signOut();
   }
 
+  async function handleResetPassword(e) {
+    e.preventDefault();
+    if (resetPw.pass.length < 6) { setResetPw(p=>({...p,err:"A senha deve ter pelo menos 6 caracteres."})); return; }
+    if (resetPw.pass !== resetPw.confirm) { setResetPw(p=>({...p,err:"As senhas não conferem."})); return; }
+    setResetPw(p=>({...p,loading:true,err:""}));
+    const {error} = await supabase.auth.updateUser({password:resetPw.pass});
+    if (error) { setResetPw(p=>({...p,loading:false,err:error.message})); return; }
+    setResetPw(p=>({...p,loading:false,success:true}));
+  }
+
   if (view==="loading") return <LoadingScreen/>;
 
   // Tela de sessão expirada
@@ -121,6 +164,64 @@ export default function App() {
           onClick={() => { setKicked(false); setView("auth"); }}>
           Fazer login novamente
         </button>
+      </div>
+    </div>
+  );
+
+  if (view==="reset-password") return (
+    <div style={{minHeight:"100vh",background:"linear-gradient(135deg,#0F172A 0%,#1E3A5F 50%,#0F172A 100%)",display:"flex",alignItems:"center",justifyContent:"center",padding:24}}>
+      <div style={{width:"100%",maxWidth:440}}>
+        <div style={{textAlign:"center",marginBottom:32}}>
+          <div style={{fontSize:48,marginBottom:8}}>🔑</div>
+          <h1 style={{fontSize:22,fontWeight:800,color:"#fff"}}>Redefinir sua senha</h1>
+          <p style={{fontSize:14,color:"#94A3B8",marginTop:8}}>Digite sua nova senha abaixo.</p>
+        </div>
+        <div className="auth-box" style={{background:"#fff",borderRadius:20,padding:"32px 28px",boxShadow:"0 25px 50px rgba(0,0,0,0.35)"}}>
+          {resetPw.success ? (
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:48,marginBottom:12}}>✅</div>
+              <div style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:8}}>Senha redefinida!</div>
+              <p style={{fontSize:14,color:"#64748B",marginBottom:20}}>Sua senha foi alterada com sucesso. Faça login com a nova senha.</p>
+              <button className="btn btn-dark" style={{width:"100%"}} onClick={async()=>{
+                await supabase.auth.signOut();
+                setResetPw({pass:"",confirm:"",err:"",loading:false,success:false});
+                setShowNewPw(false);
+                setView("auth");
+              }}>
+                Fazer login →
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleResetPassword} style={{display:"flex",flexDirection:"column",gap:14}}>
+              <div>
+                <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Nova senha</label>
+                <div style={{position:"relative"}}>
+                  <input className="input-field" type={showNewPw?"text":"password"} value={resetPw.pass}
+                    onChange={e=>setResetPw(p=>({...p,pass:e.target.value,err:""}))}
+                    placeholder="Mínimo 6 caracteres" autoFocus autoCapitalize="none" autoCorrect="off"
+                    style={{paddingRight:44}}/>
+                  <button type="button" onClick={()=>setShowNewPw(s=>!s)}
+                    style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,color:"#94A3B8",padding:4}}>
+                    {showNewPw?"🙈":"👁️"}
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Confirmar nova senha</label>
+                <input className="input-field" type="password" value={resetPw.confirm}
+                  onChange={e=>setResetPw(p=>({...p,confirm:e.target.value,err:""}))}
+                  placeholder="Repita a nova senha" autoCapitalize="none" autoCorrect="off"/>
+              </div>
+              {resetPw.confirm && resetPw.confirm!==resetPw.pass && (
+                <div style={{fontSize:12,color:"#EF4444"}}>As senhas não conferem.</div>
+              )}
+              {resetPw.err && <div style={{color:"#EF4444",fontSize:13,background:"#FEF2F2",padding:"10px 14px",borderRadius:8}}>{resetPw.err}</div>}
+              <button className="btn btn-dark" style={{width:"100%",marginTop:4}} disabled={resetPw.loading}>
+                {resetPw.loading?"Salvando…":"Salvar nova senha →"}
+              </button>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

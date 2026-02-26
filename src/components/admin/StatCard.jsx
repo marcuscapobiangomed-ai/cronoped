@@ -1,6 +1,6 @@
-export default function StatCard({ icon, label, value, color = "#0F172A", sub }) {
+export default function StatCard({ icon, label, value, color = "#0F172A", sub, onClick }) {
   return (
-    <div style={{
+    <div onClick={onClick} style={{
       background: "#fff",
       borderRadius: 12,
       padding: "16px 18px",
@@ -8,6 +8,8 @@ export default function StatCard({ icon, label, value, color = "#0F172A", sub })
       boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
       flex: 1,
       minWidth: 140,
+      cursor: onClick ? "pointer" : "default",
+      transition: "all 0.15s",
     }}>
       <div style={{ fontSize: 22, marginBottom: 6 }}>{icon}</div>
       <div style={{ fontSize: 24, fontWeight: 800, color, lineHeight: 1 }}>{value}</div>

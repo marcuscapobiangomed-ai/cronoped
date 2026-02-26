@@ -83,7 +83,7 @@ export const GO_BY_GROUP = {
         {id:"7-7",day:"5ª",turno:"Manhã",title:"Centro de Simulação",sub:"Prof. Osvaldo Aranda",time:"08:00–12:00",type:"simulacao",loc:"Sala de GO"},
         {id:"7-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"7-9",day:"6ª",turno:"Manhã",title:"Teórica Profa. Juliana Obstetrícia",sub:"",time:"08:30–12:00",type:"normal",loc:"SALA 7203 - CAMPUS"},
-        {id:"7-10",day:"6ª",turno:"Tarde",title:"SHAOLRAA RIO V E CRADMEP US",sub:"",time:"",type:"normal"}
+        {id:"7-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
     ]},
     {num:8,dates:"13/4 – 18/4",activities:[
         {id:"8-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -1162,7 +1162,7 @@ export const GO_BY_GROUP = {
         {id:"10-4",day:"4ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"10-5",day:"4ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Precep. Sarah",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"10-6",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
-        {id:"10-7",day:"5ª",turno:"Tarde",title:"Ambu la tório Clínica da Família",sub:"Precep. Luiza",time:"14:00–16:30",type:"ambulatorio"}
+        {id:"10-7",day:"5ª",turno:"Tarde",title:"Ambulatório Clínica da Família",sub:"Precep. Luiza",time:"14:00–16:30",type:"ambulatorio"}
     ]},
   ],
 };

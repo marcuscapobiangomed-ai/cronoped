@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { DAYS_ORDER, DAY_LABELS, FREE_EMAILS } from "../constants";
+import { DAYS_ORDER, DAY_LABELS, MODULE_END_DATE } from "../constants";
 import { GRUPOS, loadMateriaData } from "../scheduleData";
 import { supabase } from "../supabase";
 import { dbLoadProgress, dbSaveProgress, validateAcesso } from "../lib/db";
 import { getTodayInfo, getUpcomingAlerts, launchConfetti } from "../lib/helpers";
+import { applyCustomizations, generateCustomId } from "../lib/customizations";
 import AlertBanner from "./AlertBanner";
 import ActivityCard from "./ActivityCard";
+import ActivityModal from "./ActivityModal";
 
 export default function ScheduleView({ user, profile, materia, grupo, onBack, onChangeGrupo }) {
   const [weeksByGroup, setWeeksByGroup] = useState(null);
@@ -25,41 +27,59 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
     setAlertDismissed(true);
   }
 
-  const [open, setOpen] = useState(() => {
-    const o = {};
-    WEEKS.forEach(w => { o[w.num] = w.num === (todayWeek ?? 1); });
-    return o;
-  });
+  const [open, setOpen] = useState({});
 
-  const [completed,    setCompleted]    = useState({});
-  const [notes,        setNotes]        = useState({});
-  const [loading,      setLoading]      = useState(true);
-  const [accessDenied, setAccessDenied] = useState(false);
-  const [syncStatus,   setSyncStatus]   = useState("idle");
-  const [accessStatus, setAccessStatus] = useState(null); // "aprovado", "trial", etc
+  // Auto-open current week when data loads
+  useEffect(() => {
+    if (WEEKS.length > 0) {
+      const o = {};
+      WEEKS.forEach(w => { o[w.num] = w.num === (todayWeek ?? 1); });
+      setOpen(o);
+    }
+  }, [WEEKS, todayWeek]);
 
-  const isVIP = FREE_EMAILS.includes(profile?.email);
+  const [completed,      setCompleted]      = useState({});
+  const [notes,          setNotes]          = useState({});
+  const [customizations, setCustomizations] = useState({});
+  const [loading,        setLoading]        = useState(true);
+  const [accessDenied,   setAccessDenied]   = useState(false);
+  const [syncStatus,     setSyncStatus]     = useState("idle");
+  const [accessStatus,   setAccessStatus]   = useState(null); // "aprovado", "trial", etc
+  const [trialExpiresAt, setTrialExpiresAt] = useState(null);
+  const [editModal,      setEditModal]      = useState(null); // null | {mode, activity?, weekNum?, day?, turno?}
+  const [deleteConfirm,  setDeleteConfirm]  = useState(null); // null | {id, label, isReset}
+
+
+  const isVIP = !!profile?.is_vip;
+  const moduleExpired = !isVIP && new Date() > MODULE_END_DATE;
   const canSwitchGrupo = isVIP || accessStatus === "trial";
+  const canEdit = isVIP || accessStatus === "aprovado";
+
+  const mergedWeeks = useMemo(() => applyCustomizations(WEEKS, customizations), [WEEKS, customizations]);
+  const hasCustomizations = !!(customizations.edits?.length || customizations.deletes?.length || customizations.adds?.length);
 
   const prevDoneWeeks = useRef(new Set());
   const saveTimer     = useRef(null);
-  const latestData    = useRef({completed:{}, notes:{}});
+  const latestData    = useRef({completed:{}, notes:{}, customizations:{}});
 
   useEffect(()=>{
     let cancelled = false;
     Promise.all([
-      validateAcesso(user.id, materia.id, profile?.email),
+      validateAcesso(user.id, materia.id, !!profile?.is_vip),
       dbLoadProgress(user.id, materia.id),
       loadMateriaData(materia.id),
-    ]).then(([acesso, {completed:c, notes:n}, wbg]) => {
+    ]).then(([acesso, {completed:c, notes:n, customizations:cust}, wbg]) => {
       if (cancelled) return;
       if (!acesso && !isVIP) {
         setAccessDenied(true); setLoading(false); return;
       }
-      if (acesso) setAccessStatus(acesso.status);
+      if (acesso) {
+        setAccessStatus(acesso.status);
+        if (acesso.trial_expires_at) setTrialExpiresAt(new Date(acesso.trial_expires_at));
+      }
       setWeeksByGroup(wbg);
-      setCompleted(c); setNotes(n);
-      latestData.current = {completed:c, notes:n};
+      setCompleted(c); setNotes(n); setCustomizations(cust || {});
+      latestData.current = {completed:c, notes:n, customizations:cust||{}};
       setLoading(false);
     }).catch(() => {
       if (!cancelled) { setAccessDenied(true); setLoading(false); }
@@ -70,14 +90,14 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
     };
   },[user.id, materia.id]);
 
-  const scheduleSave = useCallback((c, n) => {
-    latestData.current = {completed:c, notes:n};
+  const scheduleSave = useCallback((c, n, cust) => {
+    latestData.current = {completed:c, notes:n, customizations:cust ?? latestData.current.customizations};
     setSyncStatus("syncing");
     clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(async () => {
       try {
-        const {completed:lc, notes:ln} = latestData.current;
-        await dbSaveProgress(user.id, materia.id, lc, ln);
+        const {completed:lc, notes:ln, customizations:lcust} = latestData.current;
+        await dbSaveProgress(user.id, materia.id, lc, ln, lcust);
         setSyncStatus("saved");
         setTimeout(() => setSyncStatus("idle"), 2000);
       } catch {
@@ -104,23 +124,89 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
     });
   }, [scheduleSave]);
 
+  const handleEditActivity = useCallback((id, changes) => {
+    setCustomizations(prev => {
+      const next = {...prev, edits: [...(prev.edits || [])]};
+      const idx = next.edits.findIndex(e => e.id === id);
+      if (idx >= 0) next.edits[idx] = {...next.edits[idx], ...changes, id};
+      else next.edits.push({id, ...changes});
+      scheduleSave(latestData.current.completed, latestData.current.notes, next);
+      return next;
+    });
+  }, [scheduleSave]);
+
+  const handleDeleteActivity = useCallback((id) => {
+    // Find activity label for the confirm modal
+    const activity = mergedWeeks.flatMap(w => w.activities).find(a => a.id === id);
+    setDeleteConfirm({ id, label: activity?.title || "esta atividade", isReset: false });
+  }, [mergedWeeks]);
+
+  const confirmDelete = useCallback(() => {
+    if (!deleteConfirm || deleteConfirm.isReset) return;
+    const id = deleteConfirm.id;
+    setCustomizations(prev => {
+      const next = {...prev};
+      if (id.startsWith("custom_")) {
+        next.adds = (next.adds || []).filter(a => a.id !== id);
+      } else {
+        next.deletes = [...new Set([...(next.deletes || []), id])];
+      }
+      next.edits = (next.edits || []).filter(e => e.id !== id);
+      scheduleSave(latestData.current.completed, latestData.current.notes, next);
+      return next;
+    });
+    setCompleted(prev => { const n = {...prev}; delete n[id]; return n; });
+    setNotes(prev => { const n = {...prev}; delete n[id]; return n; });
+    setDeleteConfirm(null);
+  }, [deleteConfirm, scheduleSave]);
+
+  const handleAddActivity = useCallback((weekNum, day, turno, data) => {
+    setCustomizations(prev => {
+      const next = {...prev};
+      next.adds = [...(next.adds || []), {id:generateCustomId(), weekNum, day, turno, ...data}];
+      scheduleSave(latestData.current.completed, latestData.current.notes, next);
+      return next;
+    });
+  }, [scheduleSave]);
+
+  const handleResetCustomizations = useCallback(() => {
+    setDeleteConfirm({ id: null, label: "todas as edições", isReset: true });
+  }, []);
+
+  const confirmReset = useCallback(() => {
+    const empty = {};
+    setCustomizations(empty);
+    scheduleSave(latestData.current.completed, latestData.current.notes, empty);
+    setDeleteConfirm(null);
+  }, [scheduleSave]);
+
   useEffect(()=>{
-    WEEKS.forEach(week => {
+    mergedWeeks.forEach(week => {
       const competable = week.activities.filter(a => a.type !== "feriado");
       const allDone    = competable.length > 0 && competable.every(a => completed[a.id]);
       if (allDone && !prevDoneWeeks.current.has(week.num)) {
         prevDoneWeeks.current.add(week.num); launchConfetti();
       } else if (!allDone) prevDoneWeeks.current.delete(week.num);
     });
-  },[completed, WEEKS]);
+  },[completed, mergedWeeks]);
 
-  const allItems  = useMemo(() => WEEKS.flatMap(w => w.activities).filter(a => a.type !== "feriado"), [WEEKS]);
+  const allItems  = useMemo(() => mergedWeeks.flatMap(w => w.activities).filter(a => a.type !== "feriado"), [mergedWeeks]);
   const totalDone = useMemo(() => allItems.filter(a => completed[a.id]).length, [allItems, completed]);
   const pct       = allItems.length ? Math.round((totalDone / allItems.length) * 100) : 0;
 
   if (loading) return (
     <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",color:"#64748B",fontSize:15,gap:10}}>
       <span style={{fontSize:28}}>{materia.icon}</span> Carregando cronograma…
+    </div>
+  );
+
+  if (moduleExpired) return (
+    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"100vh",gap:16,color:"#64748B",textAlign:"center",padding:24}}>
+      <span style={{fontSize:48}}>📅</span>
+      <div style={{fontSize:18,fontWeight:700,color:"#DC2626"}}>Módulo 1 encerrado</div>
+      <div style={{fontSize:14}}>O acesso ao Módulo 1 expirou em 08/05/2026.</div>
+      <div style={{fontSize:13,color:"#94A3B8"}}>Aguarde informações sobre o próximo módulo.</div>
+      <button className="btn btn-dark" onClick={onBack}>← Voltar ao painel</button>
     </div>
   );
 
@@ -147,7 +233,12 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                 <div style={{fontSize:12,color:"#64748B"}}>Grupo {materia.grupoLabels?.[grupo] ?? grupo} · {profile?.nome?.split(" ")[0]}</div>
               </div>
             </div>
-            <div style={{display:"flex",alignItems:"center",gap:14}}>
+            <div className="header-right" style={{display:"flex",alignItems:"center",gap:14}}>
+              {canEdit && hasCustomizations && (
+                <button className="restore-btn" onClick={handleResetCustomizations} style={{fontSize:10,fontWeight:600,color:"#F59E0B",background:"rgba(245,158,11,0.15)",border:"1px solid rgba(245,158,11,0.3)",borderRadius:7,padding:"3px 10px",cursor:"pointer",whiteSpace:"nowrap"}}>
+                  Restaurar original
+                </button>
+              )}
               {syncStatus==="syncing" && <span style={{fontSize:11,color:"#F59E0B"}}>⟳ Salvando…</span>}
               {syncStatus==="saved"   && <span style={{fontSize:11,color:"#22C55E"}}>✓ Salvo</span>}
               {syncStatus==="offline" && <span style={{fontSize:11,color:"#EF4444"}}>⚠ Offline</span>}
@@ -193,14 +284,40 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
       </div>
 
       <div style={{maxWidth:1200,margin:"0 auto",padding:"20px 16px 40px"}}>
-        {WEEKS.map(week=>{
+        {/* Trial banner */}
+        {accessStatus === "trial" && trialExpiresAt && (() => {
+          const horasRestantes = Math.max(0, (trialExpiresAt - new Date()) / (1000 * 60 * 60));
+          const diasRestantes = Math.ceil(horasRestantes / 24);
+          const urgente = horasRestantes < 24;
+          return (
+            <div style={{
+              background: urgente ? "#FEF2F2" : "#FEF3C7",
+              border: `1px solid ${urgente ? "#FECACA" : "#FDE68A"}`,
+              borderRadius: 10, padding: "10px 16px", marginBottom: 16,
+              display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8,
+            }}>
+              <div>
+                <span style={{ fontSize: 13, fontWeight: 700, color: urgente ? "#DC2626" : "#92400E" }}>
+                  {urgente ? "⚠️ Último dia de trial!" : `🎁 Trial gratuito: ${diasRestantes} dia${diasRestantes !== 1 ? "s" : ""} restante${diasRestantes !== 1 ? "s" : ""}`}
+                </span>
+                <span style={{ fontSize: 12, color: urgente ? "#991B1B" : "#78350F", marginLeft: 8 }}>
+                  Expira em {trialExpiresAt.toLocaleDateString("pt-BR")} às {trialExpiresAt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
+                </span>
+              </div>
+              <div style={{ fontSize: 11, color: urgente ? "#DC2626" : "#92400E", fontWeight: 600 }}>
+                Após o trial: R$ 16,90 no PIX
+              </div>
+            </div>
+          );
+        })()}
+        {mergedWeeks.map(week=>{
           const competable = week.activities.filter(a => a.type !== "feriado");
           const wDone      = competable.filter(a => completed[a.id]).length;
           const wpct       = competable.length ? Math.round((wDone/competable.length)*100) : 100;
           const allDoneW   = wpct===100 && competable.length>0;
           const isOpen     = !!open[week.num];
           const isCurrent  = week.num === todayWeek;
-          const activeDays = DAYS_ORDER.filter(d => week.dayMap[d]["Manhã"].length>0 || week.dayMap[d].Tarde.length>0);
+          const activeDays = canEdit ? DAYS_ORDER : DAYS_ORDER.filter(d => week.dayMap[d]["Manhã"].length>0 || week.dayMap[d].Tarde.length>0);
 
           return (
             <div key={week.num} className={isCurrent?"today-week":""}
@@ -255,13 +372,21 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                             {mItems.length>0 && (
                               <div className="turno-section">
                                 <div className="turno-divider">🌅 Manhã</div>
-                                {mItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday}/>)}
+                                {mItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})} onDelete={()=>handleDeleteActivity(a.id)}/>)}
+                                {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Manhã"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
                               </div>
                             )}
                             {tItems.length>0 && (
                               <div className="turno-section">
                                 <div className="turno-divider">🌆 Tarde</div>
-                                {tItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday}/>)}
+                                {tItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})} onDelete={()=>handleDeleteActivity(a.id)}/>)}
+                                {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Tarde"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
+                              </div>
+                            )}
+                            {canEdit && mItems.length===0 && tItems.length===0 && (
+                              <div style={{display:"flex",flexDirection:"column",gap:4,padding:"4px 0"}}>
+                                <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Manhã"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer"}}>＋ Manhã</button>
+                                <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Tarde"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer"}}>＋ Tarde</button>
                               </div>
                             )}
                           </div>
@@ -278,6 +403,53 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
           {profile?.nome} · Grupo {materia.grupoLabels?.[grupo] ?? grupo} · ☁️ Sincronizado em todos os dispositivos
         </div>
       </div>
+
+      {/* === CONFIRM DELETE/RESET MODAL === */}
+      {deleteConfirm && (
+        <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.6)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:9999,padding:24}}
+          onClick={() => setDeleteConfirm(null)}>
+          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"#fff",borderRadius:20,padding:"28px 24px",maxWidth:360,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
+            <div style={{textAlign:"center",marginBottom:16}}>
+              <div style={{fontSize:40,marginBottom:8}}>{deleteConfirm.isReset ? "🔄" : "🗑️"}</div>
+              <h3 style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:6}}>
+                {deleteConfirm.isReset ? "Restaurar cronograma?" : "Excluir atividade?"}
+              </h3>
+              <p style={{fontSize:13,color:"#64748B",lineHeight:1.5}}>
+                {deleteConfirm.isReset
+                  ? "Todas as suas edições, exclusões e atividades adicionadas serão removidas."
+                  : <>Tem certeza que deseja excluir <strong>{deleteConfirm.label}</strong> do seu cronograma?</>
+                }
+              </p>
+            </div>
+            <div style={{display:"flex",gap:10}}>
+              <button onClick={() => setDeleteConfirm(null)}
+                style={{flex:1,padding:"10px",borderRadius:8,border:"1px solid #E2E8F0",background:"#fff",color:"#475569",fontSize:13,fontWeight:600,cursor:"pointer"}}>
+                Cancelar
+              </button>
+              <button onClick={deleteConfirm.isReset ? confirmReset : confirmDelete}
+                style={{flex:1,padding:"10px",borderRadius:8,border:"none",background:"#DC2626",color:"#fff",fontSize:13,fontWeight:700,cursor:"pointer"}}>
+                {deleteConfirm.isReset ? "Restaurar" : "Excluir"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editModal && (
+        <ActivityModal
+          mode={editModal.mode}
+          activity={editModal.activity}
+          weekNum={editModal.weekNum}
+          day={editModal.day}
+          turno={editModal.turno}
+          onSave={(data) => {
+            if (editModal.mode === "edit") handleEditActivity(editModal.activity.id, data);
+            else handleAddActivity(editModal.weekNum, editModal.day, editModal.turno, data);
+            setEditModal(null);
+          }}
+          onClose={() => setEditModal(null)}
+        />
+      )}
     </div>
   );
 }

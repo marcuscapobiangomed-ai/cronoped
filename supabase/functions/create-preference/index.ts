@@ -38,8 +38,9 @@ Deno.serve(async (req) => {
     if (authErr || !user) return json({ error: "Token inválido" }, 401);
 
     // 2. Ler body
-    const { materiaId, materiaLabel, grupo } = await req.json();
+    const { materiaId, materiaLabel, grupo, paymentMethod } = await req.json();
     if (!materiaId || !materiaLabel || !grupo) return json({ error: "Dados incompletos" }, 400);
+    const isPix = paymentMethod === "pix";
 
     // 3. Verificar se já tem acesso aprovado (não cobrar duas vezes)
     const { data: existing } = await supabase
@@ -59,8 +60,37 @@ Deno.serve(async (req) => {
       { onConflict: "user_id,materia" }
     );
 
-    // 5. Criar preferência no Mercado Pago
+    // 5. Verificar se usuário foi indicado por afiliado (desconto PIX)
+    const { data: profileData } = await supabase
+      .from("profiles")
+      .select("referred_by")
+      .eq("id", user.id)
+      .single();
+    const hasReferral = !!profileData?.referred_by;
+
+    // 6. Criar preferência no Mercado Pago
+    // PIX com afiliado: R$16,90 | PIX sem afiliado: R$19,90 | Cartão: R$20,90
+    const isSandbox = MP_TOKEN.startsWith("TEST-");
     const externalRef = `${user.id}|${materiaId}|${grupo}`;
+    const unitPrice = isPix ? (hasReferral ? 16.90 : 19.90) : 20.90;
+
+    // PIX em produção: excluir tudo exceto bank_transfer (PIX)
+    // PIX em sandbox: sandbox não suporta PIX, manter todos os métodos para teste
+    // Cartão: excluir ticket e bank_transfer (PIX) para não mostrar PIX a preço cheio
+    let excludedTypes: { id: string }[];
+    if (isPix && !isSandbox) {
+      excludedTypes = [
+        { id: "ticket" }, { id: "credit_card" }, { id: "debit_card" },
+        { id: "atm" }, { id: "prepaid_card" },
+      ];
+    } else if (isPix && isSandbox) {
+      // Sandbox: não excluir cartões (PIX não funciona em sandbox)
+      excludedTypes = [{ id: "ticket" }];
+    } else {
+      // Cartão: excluir boleto e PIX para não mostrar PIX a R$ 20,90
+      excludedTypes = [{ id: "ticket" }, { id: "bank_transfer" }];
+    }
+
     const mpRes = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
       headers: {
@@ -69,16 +99,17 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify({
         items: [{
-          title: `Cronograma – ${materiaLabel} Grupo ${grupo}`,
+          title: `Cronograma – ${materiaLabel} Grupo ${grupo}${isPix ? " (PIX)" : ""}`,
           quantity: 1,
           currency_id: "BRL",
-          unit_price: 9.90,
+          unit_price: unitPrice,
         }],
+        payment_methods: { excluded_payment_types: excludedTypes },
         external_reference: externalRef,
         back_urls: {
           success: `${APP_URL}?status=approved&external_reference=${encodeURIComponent(externalRef)}`,
           failure: `${APP_URL}?status=failure`,
-          pending: `${APP_URL}?status=pending`,
+          pending: `${APP_URL}?status=pending&external_reference=${encodeURIComponent(externalRef)}`,
         },
         auto_return: "approved",
         notification_url: `${SUPABASE_URL}/functions/v1/mp-webhook`,
@@ -91,9 +122,10 @@ Deno.serve(async (req) => {
       return json({ error: "Erro ao criar preferência no Mercado Pago" }, 500);
     }
 
-    // Usa sandbox_init_point para tokens TEST-, init_point para produção
-    const checkoutUrl = pref.sandbox_init_point || pref.init_point;
-    const isSandbox   = !!pref.sandbox_init_point;
+    // Sandbox: usar sandbox_init_point; Produção: usar init_point
+    const checkoutUrl = isSandbox
+      ? (pref.sandbox_init_point || pref.init_point)
+      : pref.init_point;
 
     return json({ init_point: checkoutUrl, sandbox: isSandbox });
 

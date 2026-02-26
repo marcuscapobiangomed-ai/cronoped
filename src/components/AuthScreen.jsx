@@ -18,8 +18,9 @@ export default function AuthScreen({ onAuth }) {
   const [loading,  setLoading]  = useState(false);
   const [erro,     setErro]     = useState("");
   const [sucesso,  setSucesso]  = useState("");
+  const [showSenha,setShowSenha]= useState(false);
 
-  function switchTab(t) { setTab(t); setSubTab("form"); setErro(""); setSucesso(""); }
+  function switchTab(t) { setTab(t); setSubTab("form"); setErro(""); setSucesso(""); setShowSenha(false); }
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -28,8 +29,15 @@ export default function AuthScreen({ onAuth }) {
     const {data, error} = await supabase.auth.signInWithPassword({
       email: email.trim().toLowerCase(), password: senha,
     });
-    if (error) { setErro("E-mail ou senha incorretos."); setLoading(false); return; }
-    const {data:prof} = await supabase.from("profiles").select("nome,cpf,email").eq("id",data.user.id).single();
+    if (error) {
+      if (error.message?.toLowerCase().includes("not confirmed")) {
+        setErro("E-mail não confirmado. Verifique sua caixa de entrada e a pasta de spam.");
+      } else {
+        setErro("E-mail ou senha incorretos. Verifique e tente novamente.");
+      }
+      setLoading(false); return;
+    }
+    const {data:prof} = await supabase.from("profiles").select("nome,cpf,email,is_vip,is_admin,referred_by").eq("id",data.user.id).single();
     await registerSession(data.user.id);
     logEvent("login");
     onAuth(data.session, prof);
@@ -66,7 +74,13 @@ export default function AuthScreen({ onAuth }) {
       setLoading(false); return;
     }
     await registerSession(data.user.id);
-    logEvent("signup");
+    // Aplicar código de afiliado se veio de um link de referral
+    const storedRef = localStorage.getItem("referral_code");
+    if (storedRef) {
+      await supabase.rpc("apply_referral", { p_code: storedRef }).catch(() => {});
+      localStorage.removeItem("referral_code");
+    }
+    logEvent("signup", { referred_by: storedRef || null });
     onAuth(data.session, {nome:nome.trim(), cpf:cleanCPF(cpf), email:email.trim().toLowerCase()});
   }
 
@@ -109,7 +123,10 @@ export default function AuthScreen({ onAuth }) {
               </div>
               <div>
                 <label style={labelStyle}>Senha</label>
-                <input className="input-field" type="password" value={senha} onChange={e=>setSenha(e.target.value)} placeholder="••••••••"/>
+                <div style={{position:"relative"}}>
+                  <input className="input-field" type={showSenha?"text":"password"} value={senha} onChange={e=>setSenha(e.target.value)} placeholder="••••••••" autoCapitalize="none" autoCorrect="off" style={{paddingRight:44}}/>
+                  <button type="button" onClick={()=>setShowSenha(s=>!s)} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,color:"#94A3B8",padding:4}}>{showSenha?"🙈":"👁️"}</button>
+                </div>
               </div>
               {erro && <ErroBox msg={erro}/>}
               <button className="btn btn-dark" style={{width:"100%",marginTop:4}} disabled={loading}>
@@ -162,11 +179,14 @@ export default function AuthScreen({ onAuth }) {
               </div>
               <div>
                 <label style={labelStyle}>Senha</label>
-                <input className="input-field" type="password" value={senha} onChange={e=>setSenha(e.target.value)} placeholder="Mínimo 6 caracteres"/>
+                <div style={{position:"relative"}}>
+                  <input className="input-field" type={showSenha?"text":"password"} value={senha} onChange={e=>setSenha(e.target.value)} placeholder="Mínimo 6 caracteres" autoCapitalize="none" autoCorrect="off" style={{paddingRight:44}}/>
+                  <button type="button" onClick={()=>setShowSenha(s=>!s)} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:16,color:"#94A3B8",padding:4}}>{showSenha?"🙈":"👁️"}</button>
+                </div>
               </div>
               <div>
                 <label style={labelStyle}>Confirmar senha</label>
-                <input className={`input-field${confirma&&confirma!==senha?" error":""}`} type="password" value={confirma} onChange={e=>setConfirma(e.target.value)} placeholder="Repita a senha"/>
+                <input className={`input-field${confirma&&confirma!==senha?" error":""}`} type="password" value={confirma} onChange={e=>setConfirma(e.target.value)} placeholder="Repita a senha" autoCapitalize="none" autoCorrect="off"/>
               </div>
               {erro && <ErroBox msg={erro}/>}
               <button className="btn btn-dark" style={{width:"100%",marginTop:4}} disabled={loading}>

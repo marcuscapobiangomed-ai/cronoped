@@ -54,9 +54,9 @@ export const PED_BY_GROUP = {
         {id:"5-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"5-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"5-3",day:"3ª",turno:"Manhã",title:"Plantão HUV",sub:"",time:"08:00–18:00",type:"plantao"},
-        {id:"5-4",day:"4ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
+        {id:"5-4",day:"4ª",turno:"Manhã",title:"C. de Simulações",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
         {id:"5-5",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–17:00",type:"casa"},
-        {id:"5-6",day:"5ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
+        {id:"5-6",day:"5ª",turno:"Manhã",title:"C. de Simulações",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
         {id:"5-7",day:"5ª",turno:"Tarde",title:"Ambulatório HUV",sub:"Dr. Gabriel",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"5-8",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"5-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"}
@@ -96,7 +96,7 @@ export const PED_BY_GROUP = {
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–11:00",type:"casa"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-11",day:"Sáb",turno:"Manhã",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"},
-        {id:"8-12",day:"Sáb",turno:"Tarde",title:"SIMUMLÓADDOUL GOE RAL",sub:"",time:"13:00–18:00",type:"normal"}
+        {id:"8-12",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -163,9 +163,9 @@ export const PED_BY_GROUP = {
         {id:"4-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-3",day:"3ª",turno:"Manhã",title:"Plantão HUV",sub:"",time:"08:00–18:00",type:"plantao"},
-        {id:"4-4",day:"4ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
-        {id:"4-5",day:"4ª",turno:"Tarde",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"",time:"14:00–17:00",type:"normal"},
-        {id:"4-6",day:"5ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
+        {id:"4-4",day:"4ª",turno:"Manhã",title:"C. de Simulações",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
+        {id:"4-5",day:"4ª",turno:"Tarde",title:"C. de Simulações",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"4-6",day:"5ª",turno:"Manhã",title:"C. de Simulações",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
         {id:"4-7",day:"5ª",turno:"Tarde",title:"Ambulatório HUV",sub:"",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"4-8",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"4-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -221,7 +221,7 @@ export const PED_BY_GROUP = {
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"8-11",day:"Sáb",turno:"Manhã",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"},
-        {id:"8-12",day:"Sáb",turno:"Tarde",title:"SIMUMLÓADDOUL GOE RAL",sub:"",time:"13:00–18:00",type:"normal",loc:"Campus Universitário"}
+        {id:"8-12",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
@@ -276,9 +276,9 @@ export const PED_BY_GROUP = {
         {id:"3-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"3-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"3-3",day:"3ª",turno:"Manhã",title:"Plantão HUV",sub:"",time:"08:00–18:00",type:"plantao"},
-        {id:"3-4",day:"4ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
-        {id:"3-5",day:"4ª",turno:"Tarde",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"",time:"14:00–17:00",type:"normal"},
-        {id:"3-6",day:"5ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
+        {id:"3-4",day:"4ª",turno:"Manhã",title:"C. de Simulações",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
+        {id:"3-5",day:"4ª",turno:"Tarde",title:"C. de Simulações",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"3-6",day:"5ª",turno:"Manhã",title:"C. de Simulações",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
         {id:"3-7",day:"5ª",turno:"Tarde",title:"Ambulatório HUV",sub:"",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"3-8",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"3-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -387,9 +387,9 @@ export const PED_BY_GROUP = {
         {id:"2-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-3",day:"3ª",turno:"Manhã",title:"Plantão HUV",sub:"",time:"08:00–18:00",type:"plantao"},
-        {id:"2-4",day:"4ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
-        {id:"2-5",day:"4ª",turno:"Tarde",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"",time:"14:00–17:00",type:"normal"},
-        {id:"2-6",day:"5ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
+        {id:"2-4",day:"4ª",turno:"Manhã",title:"C. de Simulações",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
+        {id:"2-5",day:"4ª",turno:"Tarde",title:"C. de Simulações",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"2-6",day:"5ª",turno:"Manhã",title:"C. de Simulações",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
         {id:"2-7",day:"5ª",turno:"Tarde",title:"Ambulatório HUV",sub:"",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"2-8",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"2-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -709,15 +709,15 @@ export const PED_BY_GROUP = {
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"",type:"casa"},
         {id:"8-11",day:"Sáb",turno:"Manhã",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"},
-        {id:"8-12",day:"Sáb",turno:"Tarde",title:"SIMUMLÓADDOUL GOE RAL",sub:"",time:"13:00–18:00",type:"normal",loc:"Campus Universitário"}
+        {id:"8-12",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"9-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"9-3",day:"3ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
         {id:"9-4",day:"3ª",turno:"Tarde",title:"Enfermaria",sub:"",time:"",type:"enfermaria"},
-        {id:"9-5",day:"4ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
-        {id:"9-6",day:"4ª",turno:"Tarde",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"9-5",day:"4ª",turno:"Manhã",title:"C. de Simulações",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
+        {id:"9-6",day:"4ª",turno:"Tarde",title:"C. de Simulações",sub:"",time:"14:00–17:00",type:"normal"},
         {id:"9-7",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
         {id:"9-8",day:"5ª",turno:"Tarde",title:"Enfermaria",sub:"",time:"",type:"enfermaria"},
         {id:"9-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
@@ -823,14 +823,14 @@ export const PED_BY_GROUP = {
         {id:"8-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-2",day:"2ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"8-3",day:"3ª",turno:"Manhã",title:"Plantão HUV",sub:"",time:"08:00–18:00",type:"plantao"},
-        {id:"8-4",day:"4ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
-        {id:"8-5",day:"4ª",turno:"Tarde",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"",time:"14:00–17:00",type:"normal"},
-        {id:"8-6",day:"5ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
+        {id:"8-4",day:"4ª",turno:"Manhã",title:"C. de Simulações",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
+        {id:"8-5",day:"4ª",turno:"Tarde",title:"C. de Simulações",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"8-6",day:"5ª",turno:"Manhã",title:"C. de Simulações",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
         {id:"8-7",day:"5ª",turno:"Tarde",title:"Ambulatório HUV",sub:"",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"8-8",day:"6ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-9",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-10",day:"Sáb",turno:"Manhã",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"},
-        {id:"8-11",day:"Sáb",turno:"Tarde",title:"SIMUMLÓADDOUL GOE RAL",sub:"",time:"13:00–18:00",type:"normal",loc:"Campus Universitário"}
+        {id:"8-11",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -952,7 +952,7 @@ export const PED_BY_GROUP = {
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"11:00–12:00",type:"casa"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"8-11",day:"Sáb",turno:"Manhã",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"},
-        {id:"8-12",day:"Sáb",turno:"Tarde",title:"SIMUMLÓADDOUL GOE RAL",sub:"",time:"13:00–18:00",type:"normal",loc:"Campus Universitário"}
+        {id:"8-12",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
@@ -1040,9 +1040,9 @@ export const PED_BY_GROUP = {
         {id:"6-2",day:"2ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"6-3",day:"3ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},
         {id:"6-4",day:"3ª",turno:"Tarde",title:"Horário Verde",sub:"",time:"",type:"verde"},
-        {id:"6-5",day:"4ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
-        {id:"6-6",day:"4ª",turno:"Tarde",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"",time:"14:00–17:00",type:"normal"},
-        {id:"6-7",day:"5ª",turno:"Manhã",title:"C.P droef S. Pimeduilaatçrõiae s",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
+        {id:"6-5",day:"4ª",turno:"Manhã",title:"C. de Simulações",sub:"Prof. Pediatria",time:"08:00–12:00",type:"normal"},
+        {id:"6-6",day:"4ª",turno:"Tarde",title:"C. de Simulações",sub:"",time:"14:00–17:00",type:"normal"},
+        {id:"6-7",day:"5ª",turno:"Manhã",title:"C. de Simulações",sub:"Dra. Natália",time:"08:00–12:00",type:"normal"},
         {id:"6-8",day:"5ª",turno:"Tarde",title:"Ambulatório HUV",sub:"",time:"14:00–17:00",type:"ambulatorio",loc:"HUV"},
         {id:"6-9",day:"6ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
         {id:"6-10",day:"6ª",turno:"Tarde",title:"Enfermaria",sub:"",time:"08:00–11:00",type:"enfermaria"},
@@ -1072,7 +1072,7 @@ export const PED_BY_GROUP = {
         {id:"8-9",day:"6ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"8-10",day:"6ª",turno:"Tarde",title:"Alojamento Conjunto",sub:"",time:"",type:"alojamento"},
         {id:"8-11",day:"Sáb",turno:"Manhã",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"},
-        {id:"8-12",day:"Sáb",turno:"Tarde",title:"SIMUMLÓADDOUL GOE RAL",sub:"",time:"13:00–18:00",type:"normal",loc:"Campus Universitário"}
+        {id:"8-12",day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:9,dates:"20/4 – 25/4",activities:[
         {id:"9-1",day:"2ª",turno:"Manhã",title:"Horário Verde",sub:"",time:"",type:"verde"},

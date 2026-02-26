@@ -50,7 +50,7 @@ export const CM_BY_GROUP = {
         {id:"4-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"4-8",day:"5ª",turno:"Tarde",title:"AMBULAT. DE CM",sub:"Profa. Camila",time:"14:00–17:00",type:"ambulatorio"},
         {id:"4-9",day:"6ª",turno:"Manhã",title:"AMBULAT. DE PNEUMO",sub:"Prof. Célio",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
-        {id:"4-10",day:"6ª",turno:"Tarde",title:"AMBU L AT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
+        {id:"4-10",day:"6ª",turno:"Tarde",title:"AMBULAT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
     ]},
     {num:5,dates:"23/3 – 28/3",activities:[
         {id:"5-1",day:"2ª",turno:"Manhã",title:"AMBULAT. DE REUMATO",sub:"",time:"",type:"ambulatorio"},
@@ -159,7 +159,7 @@ export const CM_BY_GROUP = {
         {id:"3-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"3-8",day:"5ª",turno:"Tarde",title:"AMBULAT. DE CM",sub:"Profa. Camila",time:"14:00–17:00",type:"ambulatorio"},
         {id:"3-9",day:"6ª",turno:"Manhã",title:"AMBULAT. DE PNEUMO",sub:"Prof. Célio",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
-        {id:"3-10",day:"6ª",turno:"Tarde",title:"AMBU L AT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
+        {id:"3-10",day:"6ª",turno:"Tarde",title:"AMBULAT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
     ]},
     {num:4,dates:"16/3 – 21/3",activities:[
         {id:"4-1",day:"2ª",turno:"Manhã",title:"AMBULAT. DE REUMATO",sub:"",time:"",type:"ambulatorio"},
@@ -367,7 +367,7 @@ export const CM_BY_GROUP = {
         {id:"1-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"1-8",day:"5ª",turno:"Tarde",title:"AMBULAT. DE CM",sub:"Profa. Camila",time:"14:00–17:00",type:"ambulatorio"},
         {id:"1-9",day:"6ª",turno:"Manhã",title:"AMBULAT. DE PNEUMO",sub:"Prof. Célio",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
-        {id:"1-10",day:"6ª",turno:"Tarde",title:"AMBU L AT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"},
+        {id:"1-10",day:"6ª",turno:"Tarde",title:"AMBULAT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"},
         {id:"1-11",day:"Sáb",turno:"Tarde",title:"Simulado Nacional MEDCOF",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque",loc:"Campus Universitário"}
     ]},
     {num:2,dates:"02/3 – 07/3",activities:[
@@ -542,7 +542,7 @@ export const CM_BY_GROUP = {
         {id:"5-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"5-8",day:"5ª",turno:"Tarde",title:"AMBULAT. DE CM",sub:"Profa. Camila",time:"14:00–17:00",type:"ambulatorio"},
         {id:"5-9",day:"6ª",turno:"Manhã",title:"AMBULAT. DE PNEUMO",sub:"Prof. Célio",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
-        {id:"5-10",day:"6ª",turno:"Tarde",title:"AMBU L AT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
+        {id:"5-10",day:"6ª",turno:"Tarde",title:"AMBULAT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
     ]},
     {num:6,dates:"30/3 – 04/4",activities:[
         {id:"6-1",day:"2ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
@@ -703,7 +703,7 @@ export const CM_BY_GROUP = {
         {id:"9-5",day:"4ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–18:00",type:"casa"},
         {id:"9-6",day:"5ª",turno:"Manhã",title:"Feriado",sub:"",time:"",type:"feriado"},
         {id:"9-7",day:"6ª",turno:"Manhã",title:"AMBULAT. DE PNEUMO",sub:"Prof. Célio",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
-        {id:"9-8",day:"6ª",turno:"Tarde",title:"AMBU L AT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
+        {id:"9-8",day:"6ª",turno:"Tarde",title:"AMBULAT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
     ]},
     {num:10,dates:"27/4 – 02/5",activities:[
         {id:"10-1",day:"2ª",turno:"Manhã",title:"AMBULAT. DE REUMATO",sub:"",time:"",type:"ambulatorio"},
@@ -909,7 +909,7 @@ export const CM_BY_GROUP = {
         {id:"7-7",day:"5ª",turno:"Manhã",title:"Consolidação e Performance",sub:"Em Casa",time:"08:00–12:00",type:"casa"},
         {id:"7-8",day:"5ª",turno:"Tarde",title:"Consolidação e Performance",sub:"Em Casa",time:"14:00–17:00",type:"casa"},
         {id:"7-9",day:"6ª",turno:"Manhã",title:"AMBULAT. DE PNEUMO",sub:"Prof. Célio",time:"08:00–12:00",type:"ambulatorio",loc:"Pavilhão Silva Melo"},
-        {id:"7-10",day:"6ª",turno:"Tarde",title:"AMBU L AT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
+        {id:"7-10",day:"6ª",turno:"Tarde",title:"AMBULAT. DE NEURO",sub:"Profa. Priscila",time:"14:00–17:00",type:"ambulatorio"}
     ]},
     {num:8,dates:"13/4 – 18/4",activities:[
         {id:"8-1",day:"2ª",turno:"Manhã",title:"AMBULAT. DE REUMATO",sub:"Prof. Da Disciplina",time:"",type:"ambulatorio"},
