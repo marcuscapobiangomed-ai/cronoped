@@ -76,6 +76,17 @@ button { touch-action: manipulation; }
 .grupo-selector { display: flex; align-items: center; gap: 6px; margin-top: 10px; }
 .grupo-selector::-webkit-scrollbar { display: none; }
 
+/* Tutorial glow no grupo selector */
+.grupo-tutorial-glow {
+  position: relative; z-index: 102;
+  border-radius: 10px; padding: 6px 8px; margin: 4px -8px 0;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 3px #22C55E, 0 0 16px rgba(34,197,94,0.4); }
+  50%      { box-shadow: 0 0 0 5px #22C55E, 0 0 28px rgba(34,197,94,0.6); }
+}
+
 /* ─── Mobile ─── */
 @media (max-width: 640px) {
   .day-pills-row { display: none !important; }

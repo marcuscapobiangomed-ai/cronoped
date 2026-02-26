@@ -48,12 +48,26 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
   const [trialExpiresAt, setTrialExpiresAt] = useState(null);
   const [editModal,      setEditModal]      = useState(null); // null | {mode, activity?, weekNum?, day?, turno?}
   const [deleteConfirm,  setDeleteConfirm]  = useState(null); // null | {id, label, isReset}
+  const [showScheduleTutorial, setShowScheduleTutorial] = useState(false);
 
 
   const isVIP = !!profile?.is_vip;
   const moduleExpired = !isVIP && new Date() > MODULE_END_DATE;
   const canSwitchGrupo = isVIP || accessStatus === "trial";
   const canEdit = isVIP || accessStatus === "aprovado";
+
+  // Tutorial: mostrar na 1ª visita se pode trocar grupo
+  useEffect(() => {
+    if (!loading && canSwitchGrupo && !localStorage.getItem("schedule_tutorial_seen")) {
+      const t = setTimeout(() => setShowScheduleTutorial(true), 800);
+      return () => clearTimeout(t);
+    }
+  }, [loading, canSwitchGrupo]);
+
+  function closeScheduleTutorial() {
+    setShowScheduleTutorial(false);
+    localStorage.setItem("schedule_tutorial_seen", "1");
+  }
 
   const mergedWeeks = useMemo(() => applyCustomizations(WEEKS, customizations), [WEEKS, customizations]);
   const hasCustomizations = !!(customizations.edits?.length || customizations.deletes?.length || customizations.adds?.length);
@@ -260,7 +274,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
             <div className="pfill" style={{width:`${pct}%`,background:pct===100?"#22C55E":materia.color}}/>
           </div>
           {canSwitchGrupo ? (
-            <div className="grupo-selector">
+            <div className={`grupo-selector${showScheduleTutorial ? " grupo-tutorial-glow" : ""}`}>
               <span style={{fontSize:11,color:"#64748B",fontWeight:600,marginRight:2,flexShrink:0}}>Grupo:</span>
               {(materia.grupos || GRUPOS).map(g=>(
                 <button key={g} onClick={()=>{
@@ -403,6 +417,33 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
           {profile?.nome} · Grupo {materia.grupoLabels?.[grupo] ?? grupo} · ☁️ Sincronizado em todos os dispositivos
         </div>
       </div>
+
+      {/* === TUTORIAL: TROCA DE GRUPO === */}
+      {showScheduleTutorial && canSwitchGrupo && (
+        <>
+          <div onClick={closeScheduleTutorial} style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.65)",zIndex:99}}/>
+          <div style={{position:"fixed",top:0,left:0,right:0,zIndex:101,display:"flex",justifyContent:"center",pointerEvents:"none"}}>
+            <div style={{width:"100%",maxWidth:380,padding:"0 16px",marginTop:148,pointerEvents:"auto"}}>
+              <div style={{width:0,height:0,borderLeft:"12px solid transparent",borderRight:"12px solid transparent",borderBottom:"12px solid #fff",margin:"0 auto"}}/>
+              <div style={{background:"#fff",borderRadius:16,padding:"24px 20px",boxShadow:"0 20px 40px rgba(0,0,0,0.3)",textAlign:"center"}}>
+                <div style={{fontSize:40,marginBottom:10}}>👥</div>
+                <h3 style={{fontSize:18,fontWeight:800,color:"#0F172A",margin:"0 0 8px"}}>Troque de grupo aqui!</h3>
+                <p style={{fontSize:14,color:"#475569",lineHeight:1.6,margin:"0 0 16px"}}>
+                  Use os <strong>botões numéricos</strong> destacados acima para visualizar o cronograma de outros grupos.
+                </p>
+                <div style={{background:"#F0FDF4",border:"1px solid #BBF7D0",borderRadius:10,padding:"10px 14px",marginBottom:20}}>
+                  <div style={{fontSize:12,fontWeight:700,color:"#059669"}}>
+                    Toque no número do grupo desejado para trocar instantaneamente!
+                  </div>
+                </div>
+                <button onClick={closeScheduleTutorial} style={{width:"100%",padding:"12px",borderRadius:10,border:"none",background:"#0F172A",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer"}}>
+                  Entendi!
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* === CONFIRM DELETE/RESET MODAL === */}
       {deleteConfirm && (
