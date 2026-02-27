@@ -16,12 +16,9 @@ const ActivityCard = memo(function ActivityCard({a, isDone, onToggle, note, onNo
       {a.time  && <div className="time-pill" style={{background:s.pill,color:s.pillText,marginBottom:7}}>🕐 {a.time}</div>}
       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:6}} onClick={()=>!isFeriado&&onToggle(a.id)}>
         <span className="card-title" style={{fontSize:12,fontWeight:600,color:s.accent,lineHeight:1.35,flex:1}}>{TYPE_ICON[et]||"📋"} {a.title}</span>
-        <div className="edit-actions" style={{display:"flex",alignItems:"center",gap:3,flexShrink:0}}>
+        <div className="edit-actions" style={{display:"flex",alignItems:"center",gap:8,flexShrink:0}}>
           {canEdit && !isFeriado && (
-            <>
-              <button onClick={e=>{e.stopPropagation();onEdit();}} style={{...editBtn,background:s.dark?"rgba(255,255,255,0.15)":"rgba(0,0,0,0.06)"}} title="Editar">✏️</button>
-              <button onClick={e=>{e.stopPropagation();onDelete();}} style={{...editBtn,background:s.dark?"rgba(255,255,255,0.15)":"rgba(0,0,0,0.06)"}} title="Excluir">🗑️</button>
-            </>
+            <button onClick={e=>{e.stopPropagation();onEdit();}} style={{...editBtn,background:s.dark?"rgba(255,255,255,0.15)":"rgba(0,0,0,0.06)"}} title="Editar">✏️</button>
           )}
           {!isFeriado && (
             <div className="check-dot" style={{borderColor:isDone?"#22C55E":s.dark?"rgba(255,255,255,0.4)":"#D6D3D1",background:isDone?"#22C55E":"transparent"}}>

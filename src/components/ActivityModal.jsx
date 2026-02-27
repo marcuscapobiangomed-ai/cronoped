@@ -21,7 +21,7 @@ const lbl     = {fontSize:12,fontWeight:600,color:"#475569",display:"block",marg
 const inp     = {width:"100%",padding:"10px 12px",borderRadius:10,border:"1px solid #E2E8F0",fontSize:14,outline:"none",boxSizing:"border-box",transition:"border 0.15s"};
 const btnBase = {flex:1,padding:"10px 0",borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",border:"none",transition:"all 0.12s"};
 
-export default function ActivityModal({mode, activity, weekNum, day, turno, onSave, onClose}) {
+export default function ActivityModal({mode, activity, weekNum, day, turno, onSave, onClose, onDelete}) {
   const [title, setTitle] = useState(activity?.title || "");
   const [time,  setTime]  = useState(activity?.time  || "");
   const [loc,   setLoc]   = useState(activity?.loc   || "");
@@ -90,6 +90,16 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
             {isAdd ? "Adicionar" : "Salvar"}
           </button>
         </div>
+
+        {!isAdd && onDelete && (
+          <button type="button" onClick={onDelete}
+            style={{width:"100%",marginTop:10,padding:"9px 0",borderRadius:10,
+              fontSize:13,fontWeight:700,cursor:"pointer",
+              border:"1px solid #FECACA",background:"#FFF1F2",color:"#DC2626",
+              transition:"all 0.12s"}}>
+            🗑️ Excluir atividade
+          </button>
+        )}
       </form>
     </div>
   );

@@ -398,14 +398,14 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                             {mItems.length>0 && (
                               <div className="turno-section">
                                 <div className="turno-divider">🌅 Manhã</div>
-                                {mItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})} onDelete={()=>handleDeleteActivity(a.id)}/>)}
+                                {mItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})}/>)}
                                 {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Manhã"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
                               </div>
                             )}
                             {tItems.length>0 && (
                               <div className="turno-section">
                                 <div className="turno-divider">🌆 Tarde</div>
-                                {tItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})} onDelete={()=>handleDeleteActivity(a.id)}/>)}
+                                {tItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})}/>)}
                                 {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Tarde"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
                               </div>
                             )}
@@ -500,6 +500,11 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
             else handleAddActivity(editModal.weekNum, editModal.day, editModal.turno, data);
             setEditModal(null);
           }}
+          onDelete={editModal.mode === "edit" ? () => {
+            const id = editModal.activity.id;
+            setEditModal(null);
+            handleDeleteActivity(id);
+          } : null}
           onClose={() => setEditModal(null)}
         />
       )}
