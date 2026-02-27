@@ -522,9 +522,9 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
         </div>
       </div>
 
-      <div style={{maxWidth:900,margin:"0 auto",padding:"32px 20px"}}>
+      <div style={{maxWidth:1100,margin:"0 auto",padding:"16px 20px"}}>
         {/* Banner Promoção PIX */}
-        <div style={{background:"linear-gradient(135deg,#059669 0%,#10B981 100%)",borderRadius:14,padding:"18px 22px",marginBottom:24,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
+        <div style={{background:"linear-gradient(135deg,#059669 0%,#10B981 100%)",borderRadius:14,padding:"12px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
           <div>
             <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
               Promoção PIX: R$ 16,90 <span style={{fontSize:12,fontWeight:600,opacity:0.9}}>(economia de R$ 4,00!)</span>
@@ -554,15 +554,15 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
           </div>
         )}
 
-        <h2 style={{fontSize:22,fontWeight:800,color:"#0F172A",marginBottom:6}}>Escolha sua matéria</h2>
-        <p style={{fontSize:14,color:"#64748B",marginBottom:28}}>
+        <h2 style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:4}}>Escolha sua matéria</h2>
+        <p style={{fontSize:13,color:"#64748B",marginBottom:12}}>
           {!hasActiveTrial && !hasUsedTrial && !isVIP
             ? "3 dias grátis para 1 matéria · Depois, a partir de R$ 16,90 no PIX · Válido até 08/05/2026"
             : "A partir de R$ 16,90 no PIX · Acesso por módulo · Válido até 08/05/2026"
           }
         </p>
 
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:14,marginBottom:28}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",gap:12,marginBottom:16}}>
           {loadingAcessos ? (
             Array.from({length:6}).map((_,i) => (
               <div key={i} className="skeleton" style={{height:110,borderRadius:14}}/>
@@ -593,14 +593,14 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     borderRadius:14,
                     border:`2px solid ${m.color}20`,
                     boxShadow:"0 2px 8px rgba(0,0,0,0.06)",
-                    padding:"20px",
+                    padding:"14px",
                     cursor: !isLocked && !isPending ? "pointer" : "default",
                     transition:"all 0.2s",
                   }}
                 >
                   {/* Header: icon + badge */}
-                  <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:10}}>
-                    <span style={{fontSize:28}}>{m.icon}</span>
+                  <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:8}}>
+                    <span style={{fontSize:22}}>{m.icon}</span>
                     {hasAccess ? (
                       trialAtivo && !effectiveVIP ? (
                         <span style={badge("#FEF3C7","#92400E")}>🎁 Trial: {diasRestantes}d</span>
@@ -621,12 +621,12 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   </div>
 
                   {/* Title */}
-                  <div style={{fontSize:16,fontWeight:700,color:"#0F172A",marginBottom:12}}>{m.label}</div>
+                  <div style={{fontSize:14,fontWeight:700,color:"#0F172A",marginBottom:8}}>{m.label}</div>
 
                   {/* Paid non-VIP: locked grupo, direct open button */}
                   {isLockedGrupo && (
                     <>
-                      <div style={{fontSize:12,color:"#64748B",marginBottom:12}}>
+                      <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
                         Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
                       </div>
                       <button
@@ -645,7 +645,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   {/* Trial active: show grupo + open button */}
                   {trialAtivo && !effectiveVIP && (
                     <>
-                      <div style={{fontSize:12,color:"#64748B",marginBottom:12}}>
+                      <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
                         Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
                       </div>
                       <button
@@ -663,7 +663,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
 
                   {/* VIP: show grupo info + expand for selection */}
                   {effectiveVIP && !expandido && acesso?.grupo && (
-                    <div style={{fontSize:12,color:"#64748B",marginBottom:12}}>
+                    <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
                       Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
                     </div>
                   )}
@@ -726,7 +726,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                               <button
                                 onClick={() => setTrialConfirm({ materia: m, grupo: grupoSelecionado })}
                                 style={{
-                                  width:"100%",padding:"10px 14px",borderRadius:8,border:"none",
+                                  width:"100%",padding:"8px 12px",borderRadius:8,border:"none",
                                   background:"#059669",color:"#fff",fontSize:13,fontWeight:700,
                                   cursor:"pointer",transition:"all 0.2s",marginBottom:10,
                                 }}
@@ -851,7 +851,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                               <button
                                 onClick={() => handleAbrirCronograma(m, grupoSelecionado)}
                                 style={{
-                                  width:"100%",padding:"10px 14px",borderRadius:8,border:"none",
+                                  width:"100%",padding:"8px 12px",borderRadius:8,border:"none",
                                   background:m.color,color:"#fff",fontSize:13,fontWeight:700,
                                   cursor:"pointer",transition:"all 0.2s",
                                 }}
@@ -891,7 +891,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     <button
                       onClick={() => handleAbrirCronograma(m, acesso.grupo)}
                       style={{
-                        width:"100%",padding:"10px 14px",borderRadius:8,border:"none",
+                        width:"100%",padding:"8px 12px",borderRadius:8,border:"none",
                         background:m.color,color:"#fff",fontSize:13,fontWeight:700,
                         cursor:"pointer",transition:"all 0.2s",marginBottom:8,
                       }}
@@ -904,7 +904,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     <button
                       onClick={() => toggleCardExpand(m.id)}
                       style={{
-                        width:"100%",padding:"10px 14px",borderRadius:8,
+                        width:"100%",padding:"8px 12px",borderRadius:8,
                         border:`1px solid ${m.color}40`,
                         background:expandido ? `${m.color}10` : "#F8FAFC",
                         color:m.color,fontSize:13,fontWeight:600,cursor:"pointer",
