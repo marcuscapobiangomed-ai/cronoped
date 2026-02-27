@@ -64,8 +64,8 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
 
   const isVIP = !!profile?.is_vip;
   const moduleExpired = !isVIP && new Date() > MODULE_END_DATE;
-  const canSwitchGrupo = isVIP || accessStatus === "trial";
-  const canEdit = isVIP || accessStatus === "aprovado";
+  const canSwitchGrupo = isVIP || accessStatus === "trial" || accessStatus === "aprovado";
+  const canEdit = isVIP || accessStatus === "trial" || accessStatus === "aprovado";
 
   // Tutorial: mostrar na 1ª visita se pode trocar grupo
   useEffect(() => {

@@ -578,7 +578,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               const hasAccess = m.hasData && (isPaid || trialAtivo || effectiveVIP) && !moduleExpired;
               const isPending = acesso?.status === "pending";
               const isLocked  = !m.hasData;
-              const isLockedGrupo = isPaid && !effectiveVIP;
+              const isLockedGrupo = false; // paid users can now switch groups inside ScheduleView
               const expandido = cardStates[m.id]?.expandido || false;
               const grupoSelecionado = cardStates[m.id]?.grupoSelecionado;
 
@@ -623,27 +623,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   {/* Title */}
                   <div style={{fontSize:14,fontWeight:700,color:"#0F172A",marginBottom:8}}>{m.label}</div>
 
-                  {/* Paid non-VIP: locked grupo, direct open button */}
-                  {isLockedGrupo && (
-                    <>
-                      <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
-                        Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
-                      </div>
-                      <button
-                        onClick={() => handleAbrirCronograma(m, acesso.grupo)}
-                        style={{
-                          width:"100%", padding:"10px 14px", borderRadius:8, border:"none",
-                          background:m.color, color:"#fff", fontSize:13, fontWeight:700,
-                          cursor:"pointer", transition:"all 0.2s",
-                        }}
-                      >
-                        ▶ Abrir Cronograma
-                      </button>
-                    </>
-                  )}
-
-                  {/* Trial active: show grupo + open button */}
-                  {trialAtivo && !effectiveVIP && (
+                  {/* Paid or trial active: show grupo + open button */}
+                  {(isPaid || trialAtivo) && !effectiveVIP && (
                     <>
                       <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
                         Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
@@ -669,7 +650,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   )}
 
                   {/* Expandable section: VIP, trial activation, and payment */}
-                  {!isLocked && !isPending && !isLockedGrupo && !trialAtivo && (
+                  {!isLocked && !isPending && !isPaid && !trialAtivo && (
                     <>
                       {expandido && (
                         <div style={{marginBottom:14}}>
