@@ -13,7 +13,46 @@ const ACTIVITY_TYPES = [
   {value:"horario_verde",label:"Horário Verde",   icon:TYPE_ICON.horario_verde},
 ];
 
-const TIME_RE = /^\d{2}:\d{2}[–\-]\d{2}:\d{2}$/;
+// Aceita vários formatos e normaliza para HH:MM–HH:MM
+// Exemplos aceitos: 0800-1200, 8-12, 8:00-12:00, 08:00–12:00, 8h-12h
+function parseTimeRange(raw) {
+  if (!raw || !raw.trim()) return { ok: true, value: "" };
+
+  const str = raw.trim()
+    .replace(/\s+/g, "")
+    .replace(/[–—]/g, "-"); // normaliza traços para hífen simples
+
+  const parts = str.split("-");
+  if (parts.length !== 2) return { ok: false };
+
+  function parseHHMM(s) {
+    s = s.replace(/h$/i, ""); // remove 'h' final (ex: 8h → 8)
+    if (/^\d{3,4}$/.test(s)) {
+      // 800 → 08:00 | 1200 → 12:00
+      const padded = s.padStart(4, "0");
+      return padded.slice(0, 2) + ":" + padded.slice(2);
+    }
+    if (/^\d{1,2}:\d{2}$/.test(s)) {
+      const [h, m] = s.split(":");
+      return h.padStart(2, "0") + ":" + m;
+    }
+    if (/^\d{1,2}$/.test(s)) {
+      // 8 → 08:00
+      return s.padStart(2, "0") + ":00";
+    }
+    return null;
+  }
+
+  const start = parseHHMM(parts[0]);
+  const end   = parseHHMM(parts[1]);
+  if (!start || !end) return { ok: false };
+
+  const [sh, sm] = start.split(":").map(Number);
+  const [eh, em] = end.split(":").map(Number);
+  if (sh > 23 || sm > 59 || eh > 23 || em > 59) return { ok: false };
+
+  return { ok: true, value: `${start}–${end}` };
+}
 
 const overlay = {position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:16};
 const card    = {background:"#fff",borderRadius:16,padding:24,width:"100%",maxWidth:400,boxShadow:"0 20px 60px rgba(0,0,0,0.3)"};
@@ -29,16 +68,25 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
   const [type,  setType]  = useState(activity?.type  || "normal");
   const [timeErr, setTimeErr] = useState("");
 
+  // Auto-normaliza ao sair do campo
+  function handleTimeBlur() {
+    const parsed = parseTimeRange(time);
+    if (parsed.ok && parsed.value) {
+      setTime(parsed.value);
+      setTimeErr("");
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     if (!title.trim()) return;
-    const t = time.trim();
-    if (t && !TIME_RE.test(t)) {
-      setTimeErr("Formato: HH:MM–HH:MM (ex: 08:00–12:00)");
+    const parsed = parseTimeRange(time);
+    if (!parsed.ok) {
+      setTimeErr("Ex: 0800-1200, 8-12, 08:00-12:00");
       return;
     }
     setTimeErr("");
-    onSave({title:title.trim(), time:t, loc:loc.trim(), sub:sub.trim(), type});
+    onSave({title:title.trim(), time:parsed.value, loc:loc.trim(), sub:sub.trim(), type});
   }
 
   const isAdd = mode === "add";
@@ -55,10 +103,19 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
         <input value={title} onChange={e=>setTitle(e.target.value)} required
           style={inp} placeholder="Ex: Enfermaria de CM" autoFocus />
 
-        <label style={lbl}>Horário *</label>
-        <input value={time} onChange={e=>{setTime(e.target.value);setTimeErr("");}}
-          style={{...inp,borderColor:timeErr?"#EF4444":undefined}} placeholder="08:00–12:00" />
-        {timeErr && <div style={{fontSize:11,color:"#EF4444",marginTop:3}}>{timeErr}</div>}
+        <label style={lbl}>Horário (opcional)</label>
+        <input
+          value={time}
+          onChange={e=>{setTime(e.target.value);setTimeErr("");}}
+          onBlur={handleTimeBlur}
+          style={{...inp,borderColor:timeErr?"#EF4444":undefined}}
+          placeholder="0800-1200 ou 8-12"
+          inputMode="numeric"
+        />
+        {timeErr
+          ? <div style={{fontSize:11,color:"#EF4444",marginTop:3}}>{timeErr}</div>
+          : <div style={{fontSize:10,color:"#94A3B8",marginTop:3}}>Aceita: 0800-1200 · 8-12 · 08:00-12:00 · 8h-12h</div>
+        }
 
         <label style={lbl}>Local (opcional)</label>
         <input value={loc} onChange={e=>setLoc(e.target.value)}
