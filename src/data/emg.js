@@ -5,6 +5,7 @@
 const WD = {
   1:"23/2 – 28/2", 2:"02/3 – 07/3", 3:"09/3 – 14/3", 4:"16/3 – 21/3", 5:"23/3 – 28/3",
   6:"30/3 – 04/4", 7:"06/4 – 11/4", 8:"13/4 – 18/4", 9:"20/4 – 25/4", 10:"27/4 – 02/5",
+  11:"04/5",
 };
 
 function buildEmg() {
@@ -54,9 +55,16 @@ function buildEmg() {
     const g = Number(gStr);
     const weeks = [];
 
-    for (let w = 1; w <= 10; w++) {
+    for (let w = 1; w <= 11; w++) {
       const acts = [];
       let n = 1;
+
+      // ── Week 11: only PROVA ──
+      if (w === 11) {
+        acts.push({id:"11-1",day:"2ª",turno:"Tarde",title:"Prova do Módulo",sub:"",time:"14:00–18:00",type:"prova",loc:"Campus"});
+        weeks.push({ num: 11, dates: WD[11], activities: acts });
+        continue;
+      }
 
       // ── Hospital shifts ──
       for (const day of cfg.shiftDays) {
@@ -99,17 +107,17 @@ function buildEmg() {
       if (isGefsonRegular && gefsonWeeks.has(w)) {
         if (g === 5) {
           // B2: 10:00-12:00 + 15:30-17:30
-          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Manhã",title:"Simulação Emergência",sub:"Prof. Gefson",time:"10:00–12:00",type:"simulacao",loc:"Centro de Simulação"});
-          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"15:30–17:30",type:"simulacao",loc:"Centro de Simulação"});
+          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Manhã",title:"Simulação Emergência",sub:"Prof. Gefson",time:"10:00–12:00",type:"simulacao",loc:"Centro de Simulação – Sala Multi uso 1"});
+          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"15:30–17:30",type:"simulacao",loc:"Centro de Simulação – Sala Multi uso 1"});
         } else if (g === 2) {
           // A2: 13:00-15:00 + 15:30-17:30
-          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"13:00–15:00",type:"simulacao",loc:"Centro de Simulação"});
-          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"15:30–17:30",type:"simulacao",loc:"Centro de Simulação"});
+          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"13:00–15:00",type:"simulacao",loc:"Centro de Simulação – Sala Multi uso 1"});
+          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"15:30–17:30",type:"simulacao",loc:"Centro de Simulação – Sala Multi uso 1"});
         } else {
           // A3: all three slots (10:00 partial + 13:00 partial + 15:30 combined)
-          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Manhã",title:"Simulação Emergência",sub:"Prof. Gefson",time:"10:00–12:00",type:"simulacao",loc:"Centro de Simulação"});
-          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"13:00–15:00",type:"simulacao",loc:"Centro de Simulação"});
-          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"15:30–17:30",type:"simulacao",loc:"Centro de Simulação"});
+          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Manhã",title:"Simulação Emergência",sub:"Prof. Gefson",time:"10:00–12:00",type:"simulacao",loc:"Centro de Simulação – Sala Multi uso 1"});
+          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"13:00–15:00",type:"simulacao",loc:"Centro de Simulação – Sala Multi uso 1"});
+          acts.push({id:`${w}-${n++}`,day:"2ª",turno:"Tarde",title:"Simulação Emergência",sub:"Prof. Gefson",time:"15:30–17:30",type:"simulacao",loc:"Centro de Simulação – Sala Multi uso 1"});
         }
       }
 
@@ -136,7 +144,7 @@ function buildEmg() {
         acts.push({id:`${w}-${n++}`,day:"Sáb",turno:"Tarde",title:"Simulado Nacional MEDCOF",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque"});
       }
       if (w === 8) {
-        acts.push({id:`${w}-${n++}`,day:"Sáb",turno:"Tarde",title:"Simulado Geral do Módulo",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque"});
+        acts.push({id:`${w}-${n++}`,day:"Sáb",turno:"Tarde",title:"Simulado Geral",sub:"Campus Universitário",time:"13:00–18:00",type:"destaque"});
       }
 
       // Sort: day order then turno
