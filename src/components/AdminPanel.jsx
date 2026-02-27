@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "../supabase";
 import { fetchAdminData } from "../lib/adminApi";
 import StatCard from "./admin/StatCard";
@@ -30,6 +30,8 @@ export default function AdminPanel({ onBack }) {
   const [commissions, setCommissions] = useState([]);
   const [commLoading, setCommLoading] = useState(false);
   const [markingPaid, setMarkingPaid] = useState(null);
+  const [realtimeStatus, setRealtimeStatus] = useState("connecting"); // "connecting" | "live" | "error"
+  const debounceRef = useRef(null);
 
   const loadData = useCallback(async () => {
     try {
@@ -37,7 +39,6 @@ export default function AdminPanel({ onBack }) {
       setData(d);
       setError(null);
       setLastRefresh(new Date());
-      // Load users for the Usuários tab
       const { data: usersData } = await supabase.rpc("admin_list_users");
       if (usersData) setUsers(usersData);
     } catch (err) {
@@ -47,11 +48,36 @@ export default function AdminPanel({ onBack }) {
     }
   }, []);
 
+  // Debounced reload — agrupa rajadas de eventos em 1 chamada
+  const debouncedLoad = useCallback(() => {
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => loadData(), 1500);
+  }, [loadData]);
+
   useEffect(() => {
     loadData();
-    const interval = setInterval(loadData, 60000);
-    return () => clearInterval(interval);
-  }, [loadData]);
+    // Fallback polling a cada 30s caso realtime caia
+    const interval = setInterval(loadData, 30000);
+
+    // Realtime: escuta mudanças em acessos, profiles e eventos
+    const channel = supabase
+      .channel("admin-realtime")
+      .on("postgres_changes", { event: "*", schema: "public", table: "acessos" },   debouncedLoad)
+      .on("postgres_changes", { event: "*", schema: "public", table: "profiles" },  debouncedLoad)
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "eventos" }, debouncedLoad)
+      .on("postgres_changes", { event: "*", schema: "public", table: "affiliate_commissions" }, debouncedLoad)
+      .subscribe((status) => {
+        if (status === "SUBSCRIBED")   setRealtimeStatus("live");
+        else if (status === "CLOSED" || status === "CHANNEL_ERROR") setRealtimeStatus("error");
+        else setRealtimeStatus("connecting");
+      });
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(debounceRef.current);
+      supabase.removeChannel(channel);
+    };
+  }, [loadData, debouncedLoad]);
 
   function timeSinceRefresh() {
     if (!lastRefresh) return "";
@@ -122,8 +148,20 @@ export default function AdminPanel({ onBack }) {
             <button onClick={onBack} style={{ background: "#1E293B", border: "none", color: "#94A3B8", width: 32, height: 32, borderRadius: 8, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>←</button>
             <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>🔧 Painel Admin</div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ fontSize: 11, color: "#64748B" }}>⟳ {timeSinceRefresh()}</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {/* Realtime indicator */}
+            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <div style={{
+                width: 7, height: 7, borderRadius: "50%",
+                background: realtimeStatus === "live" ? "#22C55E" : realtimeStatus === "error" ? "#EF4444" : "#F59E0B",
+                boxShadow: realtimeStatus === "live" ? "0 0 0 2px rgba(34,197,94,0.3)" : "none",
+                animation: realtimeStatus === "live" ? "pulse 2s infinite" : "none",
+              }} />
+              <span style={{ fontSize: 10, color: realtimeStatus === "live" ? "#22C55E" : realtimeStatus === "error" ? "#EF4444" : "#F59E0B", fontWeight: 700 }}>
+                {realtimeStatus === "live" ? "Live" : realtimeStatus === "error" ? "Offline" : "..."}
+              </span>
+            </div>
+            <span style={{ fontSize: 11, color: "#475569" }}>⟳ {timeSinceRefresh()}</span>
             <button onClick={loadData} style={{ background: "#1E293B", border: "none", color: "#94A3B8", padding: "6px 12px", borderRadius: 6, cursor: "pointer", fontSize: 11, fontWeight: 600 }}>Atualizar</button>
           </div>
         </div>

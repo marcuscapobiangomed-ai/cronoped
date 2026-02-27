@@ -139,3 +139,8 @@ button { touch-action: manipulation; }
   /* Activity modal: prevent vertical overflow */
   .modal-form { max-height: calc(100vh - 32px) !important; max-height: calc(100dvh - 32px) !important; overflow-y: auto !important; }
 }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
