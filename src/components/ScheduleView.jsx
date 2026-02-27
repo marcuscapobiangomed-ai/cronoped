@@ -9,6 +9,17 @@ import AlertBanner from "./AlertBanner";
 import ActivityCard from "./ActivityCard";
 import ActivityModal from "./ActivityModal";
 
+const DAY_OFFSET = {"2ª":0,"3ª":1,"4ª":2,"5ª":3,"6ª":4,"Sáb":5};
+function getWeekDayDate(datesStr, dayKey) {
+  const startStr = (datesStr || "").split("–")[0].trim(); // "23/2"
+  const parts = startStr.split("/");
+  if (parts.length < 2) return "";
+  const d = parseInt(parts[0], 10), m = parseInt(parts[1], 10);
+  const base = new Date(2026, m - 1, d);
+  base.setDate(base.getDate() + (DAY_OFFSET[dayKey] ?? 0));
+  return `${base.getDate()}/${base.getMonth()+1}`;
+}
+
 export default function ScheduleView({ user, profile, materia, grupo, onBack, onChangeGrupo }) {
   const [weeksByGroup, setWeeksByGroup] = useState(null);
   const WEEKS     = useMemo(() => (weeksByGroup && weeksByGroup[grupo]) || [], [weeksByGroup, grupo]);
@@ -382,6 +393,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                             <div style={{textAlign:"center",padding:"8px 10px 7px",background:isToday?materia.color:"#0F172A",borderRadius:8,marginBottom:2}}>
                               <div style={{fontSize:18,fontWeight:800,color:"#fff",lineHeight:1}}>{dayKey}</div>
                               <div style={{fontSize:10,color:isToday?"rgba(255,255,255,0.8)":"#64748B",marginTop:2,fontWeight:500}}>{DAY_LABELS[dayKey]}</div>
+                              <div style={{fontSize:9,color:isToday?"rgba(255,255,255,0.6)":"#475569",marginTop:1,fontWeight:500}}>{getWeekDayDate(week.dates, dayKey)}</div>
                             </div>
                             {mItems.length>0 && (
                               <div className="turno-section">
