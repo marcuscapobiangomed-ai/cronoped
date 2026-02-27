@@ -129,9 +129,9 @@ export default function AdminPanel({ onBack }) {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "20px 16px 40px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "10px 16px 8px" }}>
         {/* Stats row */}
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 20 }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
           <StatCard icon="👥" label="Total Usuários" value={data?.total_users || 0} color="#0F172A" />
           <StatCard icon="🟢" label="Online agora" value={sessions.active_now || 0} color="#16A34A" sub={`${sessions.active_1h || 0} na última hora`} onClick={() => setShowOnline(true)} />
           <StatCard icon="💰" label="Receita total" value={`R$ ${Number(data?.total_revenue || 0).toFixed(2)}`} color="#16A34A" />
@@ -142,7 +142,7 @@ export default function AdminPanel({ onBack }) {
         </div>
 
         {/* Tabs */}
-        <div style={{ display: "flex", gap: 4, marginBottom: 16, background: "#E2E8F0", borderRadius: 8, padding: 3 }}>
+        <div style={{ display: "flex", gap: 4, marginBottom: 8, background: "#E2E8F0", borderRadius: 8, padding: 3 }}>
           {TABS.map(t => (
             <button key={t.key} onClick={() => setTab(t.key)} style={{
               flex: 1, padding: "8px 14px", borderRadius: 6, border: "none", cursor: "pointer",
@@ -156,48 +156,48 @@ export default function AdminPanel({ onBack }) {
 
         {/* Tab content */}
         {tab === "overview" && (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))", gap: 14 }}>
-            {/* Signups chart */}
-            <div style={{ background: "#fff", borderRadius: 12, padding: 18, border: "1px solid #E2E8F0" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1.4fr", gap: 8 }}>
+            {/* Signups chart — col 1, row 1 */}
+            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
               <MiniBarChart rawGrowth={data?.user_growth} color="#3B82F6" label="📊 Novos cadastros (desde 24/02)" />
             </div>
 
-            {/* Devices */}
-            <div style={{ background: "#fff", borderRadius: 12, padding: 18, border: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 10 }}>📱 Dispositivos</div>
+            {/* Devices — col 2, row 1 */}
+            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>📱 Dispositivos</div>
               {devices.map(d => (
-                <div key={d.device} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                  <div style={{ width: 70, fontSize: 11, fontWeight: 600, color: "#475569" }}>{d.device}</div>
-                  <div style={{ flex: 1, height: 8, background: "#F1F5F9", borderRadius: 99, overflow: "hidden" }}>
+                <div key={d.device} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                  <div style={{ width: 60, fontSize: 11, fontWeight: 600, color: "#475569" }}>{d.device}</div>
+                  <div style={{ flex: 1, height: 6, background: "#F1F5F9", borderRadius: 99, overflow: "hidden" }}>
                     <div style={{ width: `${Math.round((d.sessions / totalDeviceSessions) * 100)}%`, height: "100%", background: "#3B82F6", borderRadius: 99 }} />
                   </div>
-                  <div style={{ fontSize: 10, color: "#94A3B8", width: 35, textAlign: "right" }}>{Math.round((d.sessions / totalDeviceSessions) * 100)}%</div>
+                  <div style={{ fontSize: 10, color: "#94A3B8", width: 32, textAlign: "right" }}>{Math.round((d.sessions / totalDeviceSessions) * 100)}%</div>
                 </div>
               ))}
-              {devices.length === 0 && <div style={{ fontSize: 12, color: "#94A3B8" }}>Sem sessões ativas</div>}
+              {devices.length === 0 && <div style={{ fontSize: 11, color: "#94A3B8" }}>Sem sessões ativas</div>}
             </div>
 
-            {/* Conversion */}
-            <div style={{ background: "#fff", borderRadius: 12, padding: 18, border: "1px solid #E2E8F0", gridColumn: "1 / -1" }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 10 }}>📊 Conversão por matéria</div>
+            {/* Conversion — col 3, spans both rows */}
+            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0", gridRow: "1 / 3" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>📊 Conversão por matéria</div>
               <ConversionTable funnel={data?.conversion_funnel} revenue={data?.revenue} />
             </div>
 
-            {/* Engagement */}
-            <div style={{ background: "#fff", borderRadius: 12, padding: 18, border: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 10 }}>📚 Engajamento</div>
+            {/* Engagement — col 1, row 2 */}
+            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>📚 Engajamento</div>
               {(data?.engagement || []).map(e => (
-                <div key={e.materia} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: "1px solid #F1F5F9", fontSize: 12 }}>
+                <div key={e.materia} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", borderBottom: "1px solid #F1F5F9", fontSize: 11 }}>
                   <span style={{ fontWeight: 600, color: "#0F172A" }}>{e.materia}</span>
-                  <span style={{ color: "#64748B" }}>{e.users_with_progress} users · {e.avg_completed} atividades avg</span>
+                  <span style={{ color: "#64748B" }}>{e.users_with_progress} users · {e.avg_completed} avg</span>
                 </div>
               ))}
-              {(!data?.engagement || data.engagement.length === 0) && <div style={{ fontSize: 12, color: "#94A3B8" }}>Sem dados de progresso</div>}
+              {(!data?.engagement || data.engagement.length === 0) && <div style={{ fontSize: 11, color: "#94A3B8" }}>Sem dados</div>}
             </div>
 
-            {/* Expiring trials */}
-            <div style={{ background: "#fff", borderRadius: 12, padding: 18, border: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 10 }}>⏳ Trials expirando (3 dias)</div>
+            {/* Expiring trials — col 2, row 2 */}
+            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>⏳ Trials expirando (3 dias)</div>
               <TrialExpirations trials={data?.expiring_trials} />
             </div>
           </div>
