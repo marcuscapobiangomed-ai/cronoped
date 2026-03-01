@@ -1,0 +1,9 @@
+2 PERIODO: 2814 eventos | 12 grupos ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6'] | 01/04/2026 → 31/03/2026
+3 PERIODO: 3363 eventos | 12 grupos ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6'] | 01/04/2026 → 31/03/2026
+4 PERIODO: 1595 eventos | 8 grupos ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4'] | 01/04/2026 → 31/03/2026
+5 PERIODO: 2887 eventos | 12 grupos ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4'] | 01/04/2026 → 31/03/2026
+6 PERIODO: 3508 eventos | 12 grupos ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6'] | 01/04/2026 → 31/03/2026
+7 PERIODO: 2969 eventos | 12 grupos ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6'] | 01/04/2026 → 31/03/2026
+8 PERIODO: 2052 eventos | 8 grupos ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4'] | 01/04/2026 → 31/03/2026
+
+TOTAL GERAL: 19188 eventos em 7 períodos

@@ -174,6 +174,7 @@ export default function AdminPanel({ onBack }) {
           <StatCard icon="🟢" label="Online agora" value={sessions.active_now || 0} color="#16A34A" sub={`${sessions.active_1h || 0} na última hora`} onClick={() => setShowOnline(true)} />
           <StatCard icon="💰" label="Receita total" value={`R$ ${Number(data?.total_revenue || 0).toFixed(2)}`} color="#16A34A" />
           <StatCard icon="📈" label="Pagantes" value={data?.total_paid || 0} color="#2563EB" sub={data?.total_users ? `${Math.round((data.total_paid / data.total_users) * 100)}% conversão` : ""} />
+          <StatCard icon="🔄" label="Assinantes" value={data?.total_subscribers || 0} color="#6366F1" sub={`MRR R$ ${Number(data?.subscription_mrr || 0).toFixed(2)}`} />
           {(data?.support_tickets || []).filter(t => t.status === "aberto").length > 0 && (
             <StatCard icon="💬" label="Tickets abertos" value={(data?.support_tickets || []).filter(t => t.status === "aberto").length} color="#F59E0B" />
           )}
@@ -235,7 +236,7 @@ export default function AdminPanel({ onBack }) {
 
             {/* Expiring trials — col 2, row 2 */}
             <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>⏳ Trials expirando (3 dias)</div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>⏳ Trials ativos & expirados</div>
               <TrialExpirations trials={data?.expiring_trials} />
             </div>
           </div>

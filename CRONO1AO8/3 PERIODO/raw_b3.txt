@@ -1,0 +1,252 @@
+24-02-26, IC1 - B3 - 09:00 às 10:45 - Apresentação da disciplina e Introdução ao Método Científico - Tipos de Pesquisa(quanto a finalidade, natureza e abordagem) - [ Maria Aparecida de Almeida Souza Rodrigues ] , Iniciação Científica I
+24-02-26, IC1 - B3 - 11:15 às 13:00 - Tipos de Pesquisa (quanto ao objetivo, procedimentos técnicos e desenvolvimento no tempo) - [ Barbara da Silva Soares Telles ] , Iniciação Científica I
+24-02-26, MicroMEd - B3 - 14:00 às 17:00 - Introdução à Microbiologia: Classificação dos microrganismos; Comparativo célula eucariótica e procariótica; Introdução a Bacteriologia: Estrutura Bacteriana - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+25-02-26, Parasito - B3 - 09:00 às 12:00 - Introdução à Parasitologia Médica - Cryptosporidium e Giardia - [ Mariana Guedes Camargo ] , Parasitologia Médica
+25-02-26, MedLegal - B3 - 14:00 às 16:00 -   INTRODUÇÃO AO ESTUDO DA MEDICINA LEGAL/Conceito e interrelação com demais ciências/  Dados históricos/  Definição - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+26-02-26, PAPM3 - B3 - 14:00 às 18:00 - Apresentação da disciplina - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+26-02-26, PAPM3 - B3 - 14:00 às 18:00 - Sinais e sintomas do ap. respiratório - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+27-02-26, Imuno - B3 - 09:00 às 11:00 - Introdução à Imunologia / imunidade inata - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+27-02-26, Patologia - B3 - 14:00 às 16:00 - Métodos de laboratório aplicados à patologia - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+27-02-26, Patologia - B3 - 16:00 às 17:00 - Métodos de laboratório aplicados à patologia - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+27-02-26, Patologia - B3 - 17:00 às 18:00 - Métodos de laboratório aplicados à patologia - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+27-02-26, Patologia - B3 - 17:00 às 18:00 - Métodos de laboratório aplicados à patologia - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+02-03-26, SF3 - B3 - 09:00 às 13:00 - FERRAMENTAS DE ABORDAGEM FAMILIAR . GENOGRAMA E ECOMAPA - [ Maria Cristina Almeida de Souza ] , Saúde da Família III
+03-03-26, MicroMEd - B3 - 09:00 às 12:00 - Bacteriologia: Nutrição, Cultivo Laboratorial e Metabolismo: Fisiologia, nutrição e crescimento bacteriano - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+03-03-26, PratExt3 - B3 - 13:30 às 16:30 - Normas de funcionamento. Apresentação dos professores. Turma B - [ Joseane Reis de Faria ] , Prática Extensionista III
+03-03-26, PratExt3 - B3 - 13:30 às 16:30 - Normas de funcionamento. Apresentação dos professores. Turma B - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+03-03-26, PratExt3 - B3 - 13:30 às 16:30 - Normas de funcionamento. Apresentação dos professores. Turma B - [ Ramon Fraga de Souza Lima ] , Prática Extensionista III
+04-03-26, Parasito - B3 - 14:00 às 17:00 - Entamoeba/Trichomonas - [ Júlio Vianna Barbosa ] , Parasitologia Médica
+04-03-26, MedLegal - B3 - 09:00 às 11:00 - Determinação Médico - Legal da idade/ Didática em Medicina Legal/ Identidade; Identificação / Processo de identificação no vivo e no cadáver - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+05-03-26, PAPM3 - B3 - 08:00 às 10:00 - O Exame Físico do Ap. Respiratório - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+05-03-26, PAPM3 - B3 - 10:00 às 12:00 - Anamnese Simulada - Dispneia - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+05-03-26, PAPM3 - B3 - 10:00 às 12:00 - Anamnese Simulada - Dispneia - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+05-03-26, PAPM3 - B3 - 10:00 às 12:00 - Anamnese Simulada - Dispneia - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+05-03-26, PAPM3 - B3 - 10:00 às 12:00 - Anamnese Simulada - Dispneia - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+06-03-26, Imuno - B3 - 14:00 às 16:00 - Inflamação Aguda - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+06-03-26, Patologia - B3 - 08:30 às 10:30 - Lesão e morte celular - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+06-03-26, Patologia - B3 - 10:30 às 11:30 - Lesão e morte celular - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+06-03-26, Patologia - B3 - 10:30 às 11:30 - Lesão e morte celular - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+06-03-26, Patologia - B3 - 11:30 às 12:30 - Lesão e morte celular - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+10-03-26, IC1 - B3 - 09:00 às 10:45 - Tipos de delineamento da pesquisa (Experimental) + Atividade - [ Maria Aparecida de Almeida Souza Rodrigues ] , Iniciação Científica I
+10-03-26, IC1 - B3 - 11:15 às 13:00 - Tipos de delineamento da pesquisa (observacional) + Atividade - [ Barbara da Silva Soares Telles ] , Iniciação Científica I
+10-03-26, MicroMEd - B3 - 14:00 às 17:00 - Bacteriologia: Genética Bacteriana- Material genético, expressão gênica, regulação gênica e mecanismos de variabilidade genética - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+11-03-26, Parasito - B3 - 09:00 às 12:00 - Plasmodium sp. – Malária - [ Mariana Guedes Camargo ] , Parasitologia Médica
+11-03-26, MedLegal - B3 - 14:00 às 16:00 -   DOCUMENTOS MÉDICOS - LEGAIS / Declaração de Óbito – causa morte natural e jurídica/  Perícias e Peritos/ - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+12-03-26, PAPM3 - B3 - 14:00 às 16:00 - Dispneia - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+12-03-26, PAPM3 - B3 - 16:00 às 18:00 - Inspeção e palpação do tórax - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+12-03-26, PAPM3 - B3 - 16:00 às 18:00 - Inspeção e palpação do tórax - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+12-03-26, PAPM3 - B3 - 16:00 às 18:00 - Inspeção e palpação do tórax - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+12-03-26, PAPM3 - B3 - 16:00 às 18:00 - Inspeção e palpação do tórax - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+25-03-26, MedLegal - B3 - 14:00 às 16:00 - Lesões produzidas por Pressão/  Lesões produzidas por Radiação/Perfuro - contundentes; Corto-contundentes/ Perfuro - cortantes; contundentes/ - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+26-03-26, PAPM3 - B3 - 14:00 às 16:00 - Semiologia do Pulso Venoso - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+26-03-26, PAPM3 - B3 - 16:00 às 18:00 - Simulação Casos e Ausculta Pulmonar - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+26-03-26, PAPM3 - B3 - 16:00 às 18:00 - Simulação Casos e Ausculta Pulmonar - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+26-03-26, PAPM3 - B3 - 16:00 às 18:00 - Simulação Casos e Ausculta Pulmonar - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+26-03-26, PAPM3 - B3 - 16:00 às 18:00 - Simulação Casos e Ausculta Pulmonar - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+26-03-26, PAPM3 - B3 - 16:00 às 18:00 - Simulação Casos e Ausculta Pulmonar - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+27-03-26, Imuno - B3 - 09:00 às 11:00 - Anatomia dos órgãos linfoides / MHC / Ontogenia dos linfócitos T e linfócitos B - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+27-03-26, Patologia - B3 - 14:00 às 16:00 - Inflamação e reparo - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+27-03-26, Patologia - B3 - 16:00 às 17:00 - Inflamação e reparo - [ Juliano Leão de Souza ] , Patologia e Anatomia Patológica
+27-03-26, Patologia - B3 - 17:00 às 18:00 - Inflamação e reparo - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+27-03-26, Patologia - B3 - 17:00 às 18:00 - Inflamação e reparo - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+30-03-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem. Turma B (B1 a B3) - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+30-03-26, SF3 - B3 - 09:00 às 13:00 - TIPOLOGIA FAMILIAR. ATENÇÃO DOMICILIAR - [ Maria Cristina Almeida de Souza ] , Saúde da Família III
+31-03-26, MicroMEd - B3 - 09:00 às 10:25 - Interação entre o Homem e os Microrganismos – Composição, variação e importância da microbiota residente. - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+31-03-26, MicroMEd - B3 - 10:30 às 11:55 - Patogenicidade Bacteriana – Estratégias e etapas do processo patogênico - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+31-03-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 2 na comunidade. Turma B - [ Joseane Reis de Faria ] , Prática Extensionista III
+31-03-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 2 na comunidade. Turma B - [ Ramon Fraga de Souza Lima ] , Prática Extensionista III
+01-04-26, Parasito - B3 - 14:00 às 17:00 - Toxoplasma gondii – Toxoplasmose - [ Júlio Vianna Barbosa ] , Parasitologia Médica
+01-04-26, MedLegal - B3 - 09:00 às 11:00 -    TANATOLOGIA MÉDICO – LEGAL /  Determinação da causa mortis/  Exumação – finalidade/  Identificação dos elementos para o esclarecimento da Causa mortis / - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+02-04-26, PAPM3 - B3 - 08:00 às 10:00 - Síndromes do Sistema Vascular Periférico - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+02-04-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Casos e Ausculta Pulmonar - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+02-04-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Casos e Ausculta Pulmonar - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+02-04-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Casos e Ausculta Pulmonar - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+02-04-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Casos e Ausculta Pulmonar - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+02-04-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Casos e Ausculta Pulmonar - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+03-04-26, FERIADO - B3 - - - [ ] , FERIADO
+04-04-26, FERIADO - B3 - - - [ ] , FERIADO
+06-04-26, SF3 - B3 - 14:00 às 15:30 - - [ ] , Saúde da Família III
+07-04-26, IC1 - B3 - 09:00 às 10:45 - Como escrever projeto de pesquisa? Apresentação do modelo + Inttrodução, hipotese e Objetivo - [ Maria Aparecida de Almeida Souza Rodrigues ] , Iniciação Científica I
+07-04-26, IC1 - B3 - 11:15 às 13:00 - Como escrever projeto de pesquisa? Justificativa, formulação do problema, metodologia - [ Barbara da Silva Soares Telles ] , Iniciação Científica I
+07-04-26, MicroMEd - B3 - 14:00 às 15:25 - Bactérias de importância em saúde única - ESKAPE - Gram-positivos - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+07-04-26, MicroMEd - B3 - 15:30 às 16:55 - Bactérias de importância em saúde única - ESKAPE - Gram-negativos - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+08-04-26, Parasito - B3 - 09:00 às 10:30 - Aula Prática - Protozoários - [ Mariana Guedes Camargo ] , Parasitologia Médica
+08-04-26, Parasito - B3 - 10:30 às 12:00 - Revisão para a prova - [ Mariana Guedes Camargo ] , Parasitologia Médica
+08-04-26, MedLegal - B3 - 14:00 às 15:30 - - [ ] , Patologia Forense, Medicina Legal e Bioética
+09-04-26, PAPM3 - B3 - 14:00 às 16:00 - Semiologia do Pulso Arterial - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+09-04-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina ap. Respiratório- Troncos e SAM - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+09-04-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina ap. Respiratório- Troncos e SAM - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+09-04-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina ap. Respiratório- Troncos e SAM - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+09-04-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina ap. Respiratório- Troncos e SAM - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+09-04-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina ap. Respiratório- Troncos e SAM - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+10-04-26, Patologia - B3 - 08:30 às 10:30 - Atividade extra - [ Juliano Leão de Souza ] , Patologia e Anatomia Patológica
+10-04-26, Patologia - B3 - 08:30 às 10:30 - Atividade extra - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+10-04-26, Patologia - B3 - 14:00 às 15:30 - - [ ] , Patologia e Anatomia Patológica
+13-04-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem. Turma B. (B1 a B3) - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+13-04-26, SF3 - B3 - 09:00 às 13:00 - PROCESSO DE TRABALHO NA APS - [ Maria Cristina Almeida de Souza ] , Saúde da Família III
+14-04-26, MicroMEd - B3 - 09:00 às 10:25 - Técnicas Fenotípicas para detecção dos agentes do Grupo ESKAPE. Gram-positivos - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+14-04-26, MicroMEd - B3 - 10:30 às 11:55 - Técnicas Fenotípicas para detecção dos agentes do Grupo ESKAPE. Gram-negativos - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+14-04-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 3 na comunidade. Turma B - [ Joseane Reis de Faria ] , Prática Extensionista III
+14-04-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 3 na comunidade. Turma B - [ Ramon Fraga de Souza Lima ] , Prática Extensionista III
+15-04-26, Parasito - B3 - 14:00 às 15:30 - - [ ] , Parasitologia Médica
+15-04-26, MedLegal - B3 - 09:00 às 11:00 -    ASFIXIAS EM GERAL EM MEDICINA LEGAL /Afogamento/  Confinamento e por monóxido de carbono/  Enforcamento/ - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+16-04-26, PAPM3 - B3 - 08:00 às 12:00 - PROVA PRÁTICA - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+16-04-26, PAPM3 - B3 - 08:00 às 12:00 - PROVA PRÁTICA - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+16-04-26, PAPM3 - B3 - 08:00 às 12:00 - PROVA PRÁTICA - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+16-04-26, PAPM3 - B3 - 08:00 às 12:00 - PROVA PRÁTICA - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+16-04-26, PAPM3 - B3 - 08:00 às 12:00 - PROVA PRÁTICA - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+16-04-26, PAPM3 - B3 - 08:00 às 12:00 - PROVA PRÁTICA - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+17-04-26, Imuno - B3 - 09:00 às 11:00 - Ativação das células T / Biologia funcional das células T / Células Linfoides Inatas e Linfócitos T primitivos - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+17-04-26, Patologia - B3 - 14:00 às 16:00 - Distúrbios da proliferação e da diferenciação celulares II - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+17-04-26, Patologia - B3 - 16:00 às 17:00 - Distúrbios da proliferação e da diferenciação celulares II - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+17-04-26, Patologia - B3 - 16:00 às 17:00 - Distúrbios da proliferação e da diferenciação celulares II - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+17-04-26, Patologia - B3 - 17:00 às 18:00 - Distúrbios da proliferação e da diferenciação celulares II - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+21-04-26, FERIADO - B3 - - - [ ] , FERIADO
+22-04-26, Parasito - B3 - 09:00 às 12:00 - Ascaris lumbricoides/ Trichuris trichiura / Enterobius vermicularis - [ Mariana Guedes Camargo ] , Parasitologia Médica
+22-04-26, MedLegal - B3 - 14:00 às 16:00 - Esganadura /Estrangulamento/  Soterramento/  Sufocação/ - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+23-04-26, FERIADO - B3 - - - [ ] , FERIADO
+24-04-26, Imuno - B3 - 14:00 às 16:00 - Imunologia de mucosas / Regulação da resposta imune - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+24-04-26, Patologia - B3 - 08:30 às 10:30 - Patologia do sistema cardiovascular I - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+24-04-26, Patologia - B3 - 10:30 às 11:30 - Patologia do sistema cardiovascular I - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+24-04-26, Patologia - B3 - 11:30 às 12:30 - Patologia do sistema cardiovascular I - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+27-04-26, MicroMEd - B3 - 08:30 às 10:00 - - [ ] , Microbiologia Médica
+27-04-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem. Turma B. (B1 a B3) - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+28-04-26, IC1 - B3 - 09:00 às 10:45 - Correção do resumo Científico - [ Maria Aparecida de Almeida Souza Rodrigues ] , Iniciação Científica I
+28-04-26, IC1 - B3 - 11:15 às 13:00 - Correção do Projeto de pesquisa - [ Barbara da Silva Soares Telles ] , Iniciação Científica I
+28-04-26, MicroMEd - B3 - 14:00 às 15:25 - Introdução à Micologia: Propriedades Gerais dos Fungos, Reprodução Fúngica e Patogênese das Micoses - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+28-04-26, MicroMEd - B3 - 15:30 às 16:55 - Classificação das Micoses: Micoses superficiais e cutâneas - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+29-04-26, Parasito - B3 - 14:00 às 17:00 - Ancylostoma duodenale / Larva migrans cutanea e visceral - [ Júlio Vianna Barbosa ] , Parasitologia Médica
+29-04-26, MedLegal - B3 - 09:00 às 11:00 -   SEXOLOGIA CRIMINAL /Aborto Legal e Aborto Criminoso/ Atentado Violento ao Pudor/ Estupro/  Infanticídio/  Posse sexual mediante fraude/transtorno da sexualidade - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+30-04-26, Imuno - B3 - 08:30 às 10:00 - - [ ] , Imunologia Básica
+30-04-26, PAPM3 - B3 - 14:00 às 18:00 - Dor Torácica - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+01-05-26, FERIADO - B3 - - - [ ] , FERIADO
+05-05-26, MicroMEd - B3 - 09:00 às 10:25 - Debate sobre o Vídeo: A aventura do antibiótico - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+05-05-26, MicroMEd - B3 - 09:00 às 10:25 - Debate sobre o Vídeo: A aventura do antibiótico - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+05-05-26, PAPM3 - B3 - 14:00 às 15:30 - - [ ] , Programa de Aproximação à Prática Médica III
+06-05-26, Parasito - B3 - 09:00 às 12:00 - Angiostrongylus cantonensis – Meningite eosinofílica / Schistosoma mansoni – Esquistossomose - [ Mariana Guedes Camargo ] , Parasitologia Médica
+06-05-26, MedLegal - B3 - 14:00 às 16:00 - TOXICOLOGIA GERAL /  Cáusticos/  Energias de Ordem Química/  Toxicologia Ocupacional/  Venenos e Envenenamentos/ - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+07-05-26, PAPM3 - B3 - 08:00 às 10:00 - Ausculta Cardíaca Fisiológica - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+07-05-26, PAPM3 - B3 - 10:00 às 12:00 - Semiologia do Pulso Arterial - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+07-05-26, PAPM3 - B3 - 10:00 às 12:00 - Semiologia do Pulso Arterial - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+07-05-26, PAPM3 - B3 - 10:00 às 12:00 - Semiologia do Pulso Arterial - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+07-05-26, PAPM3 - B3 - 10:00 às 12:00 - Semiologia do Pulso Arterial - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+07-05-26, PAPM3 - B3 - 10:00 às 12:00 - Semiologia do Pulso Arterial - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+08-05-26, Imuno - B3 - 09:00 às 11:00 - Imunologia de mucosas / Regulação da resposta imune - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+08-05-26, Patologia - B3 - 14:00 às 16:00 - Patologia do sistema respiratório I - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+08-05-26, Patologia - B3 - 16:00 às 17:00 - Patologia do sistema respiratório I - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+08-05-26, Patologia - B3 - 16:00 às 17:00 - Patologia do sistema respiratório I - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+08-05-26, Patologia - B3 - 17:00 às 18:00 - Patologia do sistema respiratório I - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+11-05-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem. Turma B. (B1 a B3) - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+12-05-26, IC1 - B3 - 09:00 às 10:45 - Apresentação Resumo Científico - [ Maria Aparecida de Almeida Souza Rodrigues ] , Iniciação Científica I
+12-05-26, IC1 - B3 - 11:15 às 13:00 - Apresentação Projeto de pesquisa - [ Barbara da Silva Soares Telles ] , Iniciação Científica I
+12-05-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 4 na comunidade. Turma B - [ Joseane Reis de Faria ] , Prática Extensionista III
+12-05-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 4 na comunidade. Turma B - [ Ramon Fraga de Souza Lima ] , Prática Extensionista III
+13-05-26, TP - B3 - - - [ ] , TESTE DE PROGRESSO
+14-05-26, PAPM3 - B3 - 14:00 às 16:00 - Semiologia do Precórdio e Focos de Ausculta - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+14-05-26, PAPM3 - B3 - 14:00 às 16:00 - Semiologia do Precórdio e Focos de Ausculta - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+14-05-26, PAPM3 - B3 - 14:00 às 16:00 - Semiologia do Precórdio e Focos de Ausculta - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+14-05-26, PAPM3 - B3 - 14:00 às 16:00 - Semiologia do Precórdio e Focos de Ausculta - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+14-05-26, PAPM3 - B3 - 16:00 às 18:00 - Semiologia do Precórdio e Focos de Ausculta - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+14-05-26, PAPM3 - B3 - 16:00 às 18:00 - Vertigem, Síncope e Palpitações - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+15-05-26, Imuno - B3 - 14:00 às 16:00 - Imunidade às bactérias intracelulares / Imunidade aos protozoários / Imunidade às bactérias extracelulares / Imunidade aos helmintos / Imunoprofilaxia - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+15-05-26, Patologia - B3 - 08:30 às 10:30 - Patologia do sistema cardiovascular II - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+15-05-26, Patologia - B3 - 10:30 às 11:30 - Patologia do sistema cardiovascular II - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+15-05-26, Patologia - B3 - 11:30 às 12:30 - Patologia do sistema cardiovascular II - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+15-05-26, Patologia - B3 - 11:30 às 12:30 - Patologia do sistema cardiovascular II - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+19-05-26, MicroMEd - B3 - 09:00 às 10:25 - Microscopia dos Fungos de importância em Medicina Humana - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+19-05-26, MicroMEd - B3 - 10:30 às 11:55 - Técnicas de Isolamento e Cultivo, Confecção de Esfregaços, Coloração e Microscopia fúngica - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+19-05-26, MicroMEd - B3 - 14:00 às 15:25 - Microscopia dos Fungos de importância em Medicina Humana - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+19-05-26, MicroMEd - B3 - 15:30 às 16:55 - Técnicas de Isolamento e Cultivo, Confecção de Esfregaços, Coloração e Microscopia fúngica - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+20-05-26, Parasito - B3 - 09:00 às 12:00 - Taenia - Teníase e cisticercose - [ Júlio Vianna Barbosa ] , Parasitologia Médica
+20-05-26, MedLegal - B3 - 14:00 às 16:00 - DEONTOLOGIA MÉDICA / DICEOLOGIA MÉDICA /  Causalidade/  Concausalidade/  Dano/  Erro médico / - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+21-05-26, PAPM3 - B3 - 08:00 às 10:00 - Bulhas Acessórias e Sopros - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+21-05-26, PAPM3 - B3 - 10:00 às 12:00 - Ausculta Cardíaca SAM - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+21-05-26, PAPM3 - B3 - 10:00 às 12:00 - Ausculta Cardíaca SAM - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+21-05-26, PAPM3 - B3 - 10:00 às 12:00 - Ausculta Cardíaca SAM - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+21-05-26, PAPM3 - B3 - 10:00 às 12:00 - Ausculta Cardíaca SAM - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+21-05-26, PAPM3 - B3 - 10:00 às 12:00 - Ausculta Cardíaca SAM - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+22-05-26, Imuno - B3 - 09:00 às 11:00 - Imunidade às bactérias intracelulares / Imunidade aos protozoários / Imunidade às bactérias extracelulares / Imunidade aos helmintos / Imunoprofilaxia - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+22-05-26, Patologia - B3 - 14:00 às 16:00 - Patologia do sistema respiratório II - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+22-05-26, Patologia - B3 - 16:00 às 17:00 - Patologia do sistema respiratório II - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+22-05-26, Patologia - B3 - 16:00 às 17:00 - Patologia do sistema respiratório II - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+22-05-26, Patologia - B3 - 17:00 às 18:00 - Patologia do sistema respiratório II - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+25-05-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem. Turma B. (B1 a B3) - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+25-05-26, SF3 - B3 - 09:00 às 13:00 - EDUCAÇÃO POPULAR EM SAÚDE - PNEPS - [ Maria Cristina Almeida de Souza ] , Saúde da Família III
+26-05-26, IC1 - B3 - 09:00 às 10:45 - Introdução a Bioestatistica (medidas de centralidade e dispersão) +Atividade - [ Maria Aparecida de Almeida Souza Rodrigues ] , Iniciação Científica I
+26-05-26, IC1 - B3 - 11:15 às 13:00 - Teste T, qui-quadrado e Correlação + Atividade - [ Barbara da Silva Soares Telles ] , Iniciação Científica I
+26-05-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 5 na comunidade. Turma B - [ Joseane Reis de Faria ] , Prática Extensionista III
+26-05-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 5 na comunidade. Turma B - [ Ramon Fraga de Souza Lima ] , Prática Extensionista III
+27-05-26, Parasito - B3 - 14:00 às 17:00 - Ácaros e Carrapatos - [ Mariana Guedes Camargo ] , Parasitologia Médica
+27-05-26, MedLegal - B3 - 09:00 às 11:00 -   Imputabilidade e Inimputabilidade/  Infortunística/ Notificações compulsórias/  Responsabilidade Médica // - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+28-05-26, PAPM3 - B3 - 14:00 às 16:00 - Insuficiência Cardíaca - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+28-05-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina de exame físico do ap. cardiovascular - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+28-05-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina de exame físico do ap. cardiovascular - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+28-05-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina de exame físico do ap. cardiovascular - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+28-05-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina de exame físico do ap. cardiovascular - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+28-05-26, PAPM3 - B3 - 16:00 às 18:00 - Oficina de exame físico do ap. cardiovascular - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+29-05-26, Imuno - B3 - 14:00 às 16:00 - Imunodeficiências adquiridas / Imunologia Tumoral - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+29-05-26, Patologia - B3 - 08:30 às 10:30 - Patologia do sistema digestório I - [ Juliano Leão de Souza ] , Patologia e Anatomia Patológica
+29-05-26, Patologia - B3 - 10:30 às 11:30 - Patologia do sistema digestório I - [ Juliano Leão de Souza ] , Patologia e Anatomia Patológica
+29-05-26, Patologia - B3 - 11:30 às 12:30 - Patologia do sistema digestório I - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+29-05-26, Patologia - B3 - 11:30 às 12:30 - Patologia do sistema digestório I - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+02-06-26, MicroMEd - B3 - 14:00 às 15:25 - Debate sobre o Vídeo: A aventura do antibiótico - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+02-06-26, MicroMEd - B3 - 14:00 às 15:25 - Debate sobre o Vídeo: A aventura do antibiótico - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+02-06-26, SF3 - B3 - 08:30 às 10:00 - - [ ] , Saúde da Família III
+03-06-26, Parasito - B3 - 09:00 às 12:00 - Moscas e Mosquitos - [ Júlio Vianna Barbosa ] , Parasitologia Médica
+03-06-26, MedLegal - B3 - 14:00 às 16:00 -    PSIQUIATRIA MÉDICO LEGAL /  Alcoolismo/  Códigos Recomendações Resoluções de Princípios/// - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+04-06-26, FERIADO - B3 - - - [ ] , FERIADO
+05-06-26, Imuno - B3 - 09:00 às 11:00 - Imunodeficiências adquiridas / Imunologia Tumoral - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+05-06-26, Patologia - B3 - 14:00 às 16:00 - Patologia do sistema digestório II - [ Juliano Leão de Souza ] , Patologia e Anatomia Patológica
+05-06-26, Patologia - B3 - 16:00 às 17:00 - Patologia do sistema digestório II - [ Juliano Leão de Souza ] , Patologia e Anatomia Patológica
+05-06-26, Patologia - B3 - 17:00 às 18:00 - Patologia do sistema digestório II - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+05-06-26, Patologia - B3 - 17:00 às 18:00 - Patologia do sistema digestório II - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+08-06-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem. Turma B. (B1 a B3) - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+08-06-26, SF3 - B3 - 09:00 às 13:00 - CHOOSING WISELY. - [ Maria Cristina Almeida de Souza ] , Saúde da Família III
+09-06-26, Imuno - B3 - 08:30 às 10:00 - - [ ] , Imunologia Básica
+09-06-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 6 na comunidade. Turma B - [ Joseane Reis de Faria ] , Prática Extensionista III
+09-06-26, PratExt3 - B3 - 13:30 às 16:30 - Prática 6 na comunidade. Turma B - [ Ramon Fraga de Souza Lima ] , Prática Extensionista III
+10-06-26, Parasito - B3 - 14:00 às 17:00 - Pulgas e Piolhos - [ Mariana Guedes Camargo ] , Parasitologia Médica
+10-06-26, MedLegal - B3 - 09:00 às 11:00 -   Embriaguez/  Intoxicações exógenas agudas por drogas tóxicas, e intoxicação etílica aguda/Intoxicações exógenas por organofosforados e organoclorados/ Legislação // - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+11-06-26, PAPM3 - B3 - 08:00 às 10:00 - Semiologia das Doenças Valvares - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+11-06-26, PAPM3 - B3 - 08:00 às 12:00 - Simulação Síndromes Cardiovasculares - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+11-06-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Síndromes Cardiovasculares - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+11-06-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Síndromes Cardiovasculares - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+11-06-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Síndromes Cardiovasculares - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+11-06-26, PAPM3 - B3 - 10:00 às 12:00 - Simulação Síndromes Cardiovasculares - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+12-06-26, Imuno - B3 - 14:00 às 16:00 - Revisão para P2 - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+12-06-26, Patologia - B3 - 08:30 às 10:30 - Patologia do sistema genital masculino - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+12-06-26, Patologia - B3 - 10:30 às 11:30 - Patologia do sistema genital masculino - [ Juliano Leão de Souza ] , Patologia e Anatomia Patológica
+12-06-26, Patologia - B3 - 11:30 às 12:30 - Patologia do sistema genital masculino - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+12-06-26, Patologia - B3 - 11:30 às 12:30 - Patologia do sistema genital masculino - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+15-06-26, Parasito - B3 - 14:00 às 15:30 - - [ ] , Parasitologia Médica
+16-06-26, MicroMEd - B3 - 09:00 às 10:25 - Testes rápidos de Diagnóstico de viroses de importância em Microbiologia Médica - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+16-06-26, MicroMEd - B3 - 09:00 às 10:25 - Testes rápidos de Diagnóstico de viroses de importância em Microbiologia Médica - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+16-06-26, MicroMEd - B3 - 14:00 às 15:25 - Testes rápidos de Diagnóstico de viroses de importância em Microbiologia Médica - [ Dayanne Araújo de Melo ] , Microbiologia Médica
+16-06-26, MicroMEd - B3 - 14:00 às 15:25 - Testes rápidos de Diagnóstico de viroses de importância em Microbiologia Médica - [ Raphael Paiva Paschoal da Silva ] , Microbiologia Médica
+17-06-26, Parasito - B3 - 09:00 às 10:30 - Aula Prática - Helmintos e Artrópodes - [ Júlio Vianna Barbosa ] , Parasitologia Médica
+17-06-26, Parasito - B3 - 10:30 às 12:00 - Cobras, Aranhas e Escorpiões - [ Júlio Vianna Barbosa ] , Parasitologia Médica
+17-06-26, MedLegal - B3 - 14:00 às 16:00 - Lesões produzidas por armas de fogo /  Temas Conexos Interdisciplinares Doação de órgãos e tecidos/ Toxicofilias/Vitimologia // - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+18-06-26, PAPM3 - B3 - 08:00 às 12:00 - Semiologia das Pericardiopatias - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+18-06-26, PAPM3 - B3 - 14:00 às 15:30 - - [ ] , Programa de Aproximação à Prática Médica III
+19-06-26, Imuno - B3 - 09:00 às 11:00 - Revisão para P2 - [ Lana Márcia Ferreira Lopes ] , Imunologia Básica
+19-06-26, Patologia - B3 - 14:00 às 16:00 - Patologia do sistema genital feminino - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+19-06-26, Patologia - B3 - 16:00 às 17:00 - Patologia do sistema genital feminino - [ Lenita Saldanha Marques Lopes da Costa ] , Patologia e Anatomia Patológica
+19-06-26, Patologia - B3 - 16:00 às 17:00 - Patologia do sistema genital feminino - [ Pedro Machado Falcão ] , Patologia e Anatomia Patológica
+19-06-26, Patologia - B3 - 17:00 às 18:00 - Patologia do sistema genital feminino - [ Carlos Henrique de Souza Lima ] , Patologia e Anatomia Patológica
+22-06-26, MicroMEd - B3 - 14:00 às 15:30 - - [ ] , Microbiologia Médica
+22-06-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem. Turma B (B1 a B6) - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+22-06-26, SF3 - B3 - 09:00 às 13:00 - P4. POLIFARMÁRCIA - [ Maria Cristina Almeida de Souza ] , Saúde da Família III
+23-06-26, IC1 - B3 - 09:00 às 10:45 - Curriculo Lattes - [ Maria Aparecida de Almeida Souza Rodrigues ] , Iniciação Científica I
+23-06-26, IC1 - B3 - 11:15 às 13:00 - Plataforma Brasil - [ Barbara da Silva Soares Telles ] , Iniciação Científica I
+23-06-26, PratExt3 - B3 - 13:30 às 16:30 - Evento - Mostra de Produtos. Turma B (B1 A B6) . Campus - [ Ramon Fraga de Souza Lima ] , Prática Extensionista III
+23-06-26, PratExt3 - B3 - 13:30 às 16:30 - Evento - Mostra de Produtos. Turma B. Campus - [ Joseane Reis de Faria ] , Prática Extensionista III
+23-06-26, PratExt3 - B3 - 18:00 às 21:00 - Trilha Virtual de Aprendizagem.Turma A e B - [ Maria Cristina Almeida de Souza ] , Prática Extensionista III
+24-06-26, MedLegal - B3 - 09:00 às 11:00 - Revisão - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+24-06-26, MedLegal - B3 - 14:00 às 15:30 - - [ Cristiane Lopes Uchôa ] , Patologia Forense, Medicina Legal e Bioética
+25-06-26, PAPM3 - B3 - 14:00 às 18:00 - P2 PRÁTICA - [ Filipe de Oliveira Lopes Rêgo ] , Programa de Aproximação à Prática Médica III
+25-06-26, PAPM3 - B3 - 14:00 às 18:00 - P2 PRÁTICA - [ Girley Cordeiro de Sousa ] , Programa de Aproximação à Prática Médica III
+25-06-26, PAPM3 - B3 - 14:00 às 18:00 - P2 PRÁTICA - [ Gustavo Alves Coelho ] , Programa de Aproximação à Prática Médica III
+25-06-26, PAPM3 - B3 - 14:00 às 18:00 - P2 PRÁTICA - [ Lahís Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+25-06-26, PAPM3 - B3 - 14:00 às 18:00 - P2 PRÁTICA - [ Marlon Mohamud Vilagra ] , Programa de Aproximação à Prática Médica III
+25-06-26, PAPM3 - B3 - 14:00 às 18:00 - P2 PRÁTICA - [ Sandra Maria Barroso Werneck Vilagra ] , Programa de Aproximação à Prática Médica III
+26-06-26, Patologia - B3 - 08:30 às 10:00 - - [ ] , Patologia e Anatomia Patológica

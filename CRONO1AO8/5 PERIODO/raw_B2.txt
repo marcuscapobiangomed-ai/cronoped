@@ -1,0 +1,249 @@
+23-02-26, PAPM5 - B2 - 08:30 às 10:00 - Anamnese Pediatrica - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - B2 - 10:00 às 12:00 - Anamnese Pediatrica (enfermaria) - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - B2 - 10:00 às 12:00 - Anamnese Pediatrica (enfermaria) - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - B2 - 10:00 às 12:00 - Anamnese Pediatrica (enfermaria) - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - B2 - 10:00 às 12:00 - Anamnese Pediatrica (enfermaria) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+23-02-26, S.Mental - B2 - 13:30 às 15:00 - Anamnese e Exame do Estado Mental - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+23-02-26, S.Mental - B2 - 15:00 às 16:30 - Psicopatologia Geral - [ Marcos Antônio Mendonça ] , Saude mental
+24-02-26, FarmacoAplic - B2 - 14:00 às 15:30 - Penicilinas Parte 1 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+24-02-26, FarmacoAplic - B2 - 15:30 às 17:00 - Penicilinas Parte 2 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+24-02-26, Neuro - B2 - 09:00 às 10:30 - SÍNDROMES DEMENCIAIS/DEMÊNCIAS - [ Chan Tiel Yuen ] , Neurologia
+24-02-26, Neuro - B2 - 10:45 às 12:15 - EPILEPSIA / CRISES EPILÉPTICAS - [ Ivana Rocha Raslan ] , Neurologia
+24-02-26, PercInov2 - B2 - 18:00 às 19:00 - Orientações da Disciplina no AVA (Ambiente Virtual de Aprendizagem)
+26-02-26, Diag.Imag. - B2 - 09:00 às 12:00 - Aula introdutória; Meios de contraste - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+26-02-26, PercInte2 - B2 - 13:30 às 15:30 - Apresentação da disciplina - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+27-02-26, FDM - B2 - 14:00 às 18:00 - Apresentação da disciplina + ectoscopia , Sinais vitais e pulsos arteriais - [ Ruy da Costa Nogueira Alves Junior ] , Fundamentos do Diagnóstico Médico
+02-03-26, PAPM5 - B2 - 13:30 às 15:00 - Exame Fisico do RN parte 1 - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+02-03-26, PAPM5 - B2 - 15:00 às 17:00 - Testes de triagem neonatal (paciente 360º) - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+02-03-26, S.Mental - B2 - 08:30 às 10:00 - Anamnese e Exame do Estado Mental - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+02-03-26, S.Mental - B2 - 10:00 às 11:30 - Psicopatologia Geral - [ Marcos Antônio Mendonça ] , Saude mental
+03-03-26, FarmacoAplic - B2 - 09:00 às 10:30 - Cefalosporinas Parte 1 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+03-03-26, FarmacoAplic - B2 - 10:30 às 12:00 - Cefalosporinas Parte 2 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+03-03-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+03-03-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+03-03-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+03-03-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 1 – Conceitos de Metaverso e Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+04-03-26, PratExt5 - B2 - 08:00 às 12:00 - SOAP - [ Marcos Antônio Mendonça ] , Prática Extensionista V
+04-03-26, SF5 - B2 - 14:00 às 15:45 - Exame do estado mental - [ Natália Barreto e Sousa ] , Saúde da Família V
+04-03-26, SF5 - B2 - 16:15 às 18:00 - Exame do estado mental - [ Natália Barreto e Sousa ] , Saúde da Família V
+05-03-26, Diag.Imag. - B2 - 14:00 às 17:00 - Técnicas Radiológicas do tórax; Análise radiográfica do tórax - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+05-03-26, PercInte2 - B2 - 08:30 às 10:30 - World Café: Humanização - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+06-03-26, FDM - B2 - 09:00 às 13:00 - TAC Ectoscopia, Sinais Vitais e Pulsos arteriais - [ Ruy da Costa Nogueira Alves Junior ] , Fundamentos do Diagnóstico Médico
+09-03-26, PAPM5 - B2 - 08:30 às 10:00 - Exame Fisico do RN parte 2 - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+09-03-26, PAPM5 - B2 - 10:00 às 12:00 - exame fisico do RN (enfermaria) - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+09-03-26, PAPM5 - B2 - 10:00 às 12:00 - exame fisico do RN (enfermaria) - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+09-03-26, PAPM5 - B2 - 10:00 às 12:00 - exame fisico do RN (enfermaria) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+09-03-26, S.Mental - B2 - 13:30 às 15:00 - Psicofarmacologia 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+09-03-26, S.Mental - B2 - 15:00 às 16:30 - Psicofarmacologia 2 - [ Marcos Antônio Mendonça ] , Saude mental
+10-03-26, FarmacoAplic - B2 - 14:00 às 15:30 - Carbapenêmicos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+10-03-26, FarmacoAplic - B2 - 15:30 às 17:00 - Monobactâmicos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+10-03-26, Neuro - B2 - 09:00 às 10:30 - CEFLEIAS PRIMÁRIAS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+10-03-26, Neuro - B2 - 10:45 às 12:15 - CEFALEIAS SECUNDÁRIAS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+10-03-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 1 – Conceitos de Metaverso e Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+12-03-26, Diag.Imag. - B2 - 09:00 às 12:00 - Lesões Hipotransparentes - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+12-03-26, PercInte2 - B2 - 13:30 às 15:30 - Simulação: Cefaleias - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+13-03-26, FDM - B2 - 14:00 às 18:00 - Exame Físico Cabeça e Pescoço - [ Maria Aparecida de Almeida Souza Rodrigues ] , Fundamentos do Diagnóstico Médico
+16-03-26, PAPM5 - B2 - 13:30 às 15:00 - Cabeça e pescoço - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+16-03-26, PAPM5 - B2 - 15:00 às 17:00 - Desenvolvimento (paciente 360º) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+16-03-26, S.Mental - B2 - 08:30 às 10:00 - Psicofarmacologia 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+16-03-26, S.Mental - B2 - 10:00 às 11:30 - Psicofarmacologia 2 - [ Marcos Antônio Mendonça ] , Saude mental
+17-03-26, FarmacoAplic - B2 - 09:00 às 10:30 - Sulfas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+17-03-26, FarmacoAplic - B2 - 10:30 às 12:00 - Quinolonas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+17-03-26, Neuro - B2 - 15:00 às 16:00 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+17-03-26, PercInov2 - B2 - 18:00 às 19:00 - 1º Encontro - Palestra no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+18-03-26, PratExt5 - B2 - 08:00 às 12:00 - RAPS - [ Marcos Antônio Mendonça ] , Prática Extensionista V
+18-03-26, SF5 - B2 - 14:00 às 15:45 - Transtorno depressivo - [ Natália Barreto e Sousa ] , Saúde da Família V
+18-03-26, SF5 - B2 - 16:15 às 18:00 - Transtorno depressivo - [ Natália Barreto e Sousa ] , Saúde da Família V
+19-03-26, Diag.Imag. - B2 - 14:00 às 17:00 - Lesões Hipotransparentes - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+19-03-26, PercInte2 - B2 - 08:30 às 10:30 - TBL Meios de Contraste - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+20-03-26, FDM - B2 - 09:00 às 13:00 - TAC Cabeça e Pescoço - [ Maria Aparecida de Almeida Souza Rodrigues ] , Fundamentos do Diagnóstico Médico
+23-03-26, PAPM5 - B2 - 08:30 às 10:00 - Semiologia genética - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+23-03-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+23-03-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+23-03-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+23-03-26, S.Mental - B2 - 13:30 às 15:00 - Transtornos de Ansiedade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+23-03-26, S.Mental - B2 - 15:00 às 16:30 - Transtornos de humor - [ Marcos Antônio Mendonça ] , Saude mental
+24-03-26, FarmacoAplic - B2 - 14:00 às 15:30 - Aminoglicosídeos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+24-03-26, FarmacoAplic - B2 - 15:30 às 17:00 - Macrolídeos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+24-03-26, Neuro - B2 - 09:00 às 10:30 - DISTÚRBIOS DE MOVIMENTO HIPOCINÉTICOS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+24-03-26, Neuro - B2 - 10:45 às 12:15 - DISTÚRBIOS DE MOVIMENTO HIPERCINÉTICOS - [ Ivana Rocha Raslan ] , Neurologia
+24-03-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Aplicações do Metaverso na Saúde - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+26-03-26, Diag.Imag. - B2 - 09:00 às 12:00 - Técnica Tomográfica do tórax; Avaliação tomográfica do tórax - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+26-03-26, PercInte2 - B2 - 13:30 às 15:30 - World Café: Saúde Mental - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+27-03-26, FDM - B2 - 14:00 às 18:00 - Exame Fisico neurológico e pares cranianos - [ Mônica Martinez Segura Teixeira Coelho ] , Fundamentos do Diagnóstico Médico
+30-03-26, PAPM5 - B2 - 13:30 às 15:00 - Crescimento - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+30-03-26, PAPM5 - B2 - 15:00 às 17:00 - Sinais vitais/ectoscopia (Enfermaria) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+30-03-26, S.Mental - B2 - 08:30 às 10:00 - Transtornos de Ansiedade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+30-03-26, S.Mental - B2 - 10:00 às 11:30 - Transtornos de humor - [ Marcos Antônio Mendonça ] , Saude mental
+31-03-26, FarmacoAplic - B2 - 09:00 às 10:30 - Tetraciclinas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+31-03-26, FarmacoAplic - B2 - 10:30 às 12:00 - Lincosamidas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+31-03-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+31-03-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+31-03-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+31-03-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Aplicações do Metaverso na Saúde - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+01-04-26, PratExt5 - B2 - 08:00 às 12:00 - COMUNICAÇÃO DE MÁS NOTICIAS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista V
+01-04-26, SF5 - B2 - 14:00 às 15:45 - Transtornos de ansiedade e pânico - [ Natália Barreto e Sousa ] , Saúde da Família V
+01-04-26, SF5 - B2 - 16:15 às 18:00 - Transtornos de ansiedade e pânico - [ Natália Barreto e Sousa ] , Saúde da Família V
+02-04-26, Diag.Imag. - B2 - 14:00 às 17:00 - Avaliação radiológica do mediastino; Avaliação cardiovascular - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+02-04-26, PercInte2 - B2 - 08:30 às 10:30 - QUIZ IMAGENS - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+03-04-26, FERIADO - B2 - - - [ ] , FERIADO
+04-04-26, FERIADO - B2 - - - [ ] , FERIADO
+06-04-26, PAPM5 - B2 - 08:30 às 10:00 - Aferição de Pressão arterial - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+06-04-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+06-04-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+06-04-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+06-04-26, S.Mental - B2 - 13:30 às 15:00 - Sessão clínica - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+06-04-26, S.Mental - B2 - 15:00 às 16:30 - Sessão clínica - [ Marcos Antônio Mendonça ] , Saude mental
+07-04-26, FarmacoAplic - B2 - 14:00 às 15:30 - Glicopeptídeos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+07-04-26, FarmacoAplic - B2 - 15:30 às 17:00 - Polimixinas - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+07-04-26, Neuro - B2 - 09:00 às 10:30 - ACIDENTE VASCULAR CEREBRAL ISQUÊMICO - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+07-04-26, Neuro - B2 - 10:45 às 12:15 - ACIDENTE VASCULAR CEREBRAL HEMORRÁGICO - [ Chan Tiel Yuen ] , Neurologia
+07-04-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Aplicações do Metaverso na Saúde - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+09-04-26, Diag.Imag. - B2 - 09:00 às 12:00 - Avaliação Radiológica da mama; Técnica radiológica do abdome - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+09-04-26, PercInte2 - B2 - 13:30 às 15:30 - Simulação: Saúde Mental - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+10-04-26, FDM - B2 - 09:00 às 13:00 - TAC Neurológico e pares cranianos - [ Mônica Martinez Segura Teixeira Coelho ] , Fundamentos do Diagnóstico Médico
+13-04-26, S.Mental - B2 - 08:30 às 10:00 - Sessão clínica - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+13-04-26, S.Mental - B2 - 10:00 às 11:30 - Sessão clínica - [ Marcos Antônio Mendonça ] , Saude mental
+13-04-26, S.Mental - B2 - 14:00 às 15:30 - - [ ] , Saude mental
+14-04-26, FarmacoAplic - B2 - 09:00 às 10:30 - Antivirais Parte 1 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+14-04-26, FarmacoAplic - B2 - 10:30 às 12:00 - Antivirais Parte 2 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+14-04-26, Neuro - B2 - 15:00 às 16:00 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+14-04-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 3 – Experiência Imersiva na Ferramenta Spatial - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+15-04-26, PratExt5 - B2 - 08:00 às 12:00 - SINDROME DEPRESSIVA - [ Marcos Antônio Mendonça ] , Prática Extensionista V
+15-04-26, SF5 - B2 - 14:00 às 15:30 - - [ ] , Saúde da Família V
+16-04-26, Diag.Imag. - B2 - 14:00 às 17:00 - Avaliação radiográfica do abdome; Exercícios para prova - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+16-04-26, PercInte2 - B2 - 08:30 às 10:30 - World Café: Saúde da Criança - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+17-04-26, Diag.Imag. - B2 - 08:30 às 10:00 - - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+17-04-26, FDM - B2 - 14:00 às 18:00 - Segunda chamada - [ Mônica Martinez Segura Teixeira Coelho ] , Fundamentos do Diagnóstico Médico
+20-04-26, PAPM5 - B2 - 08:30 às 10:00 - Semiologia do Cardiovascular 1 - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+20-04-26, PAPM5 - B2 - 10:00 às 12:00 - Crescimento paciente 360º - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+20-04-26, S.Mental - B2 - 13:30 às 15:00 - Transtorno bipolar - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+20-04-26, S.Mental - B2 - 15:00 às 16:30 - Transtorno por uso de álcool e outras drogas - [ Marcos Antônio Mendonça ] , Saude mental
+21-04-26, FERIADO - B2 - - - [ ] , FERIADO
+21-04-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 3 – Experiência Imersiva na Ferramenta Spatial - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+23-04-26, FERIADO - B2 - - - [ ] , FERIADO
+24-04-26, FDM - B2 - 14:00 às 18:00 - OSCE P1 - [ Ruy da Costa Nogueira Alves Junior ] , Fundamentos do Diagnóstico Médico
+27-04-26, PAPM5 - B2 - 13:30 às 15:00 - Semiologia do Cardiovascular 2 - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+27-04-26, PAPM5 - B2 - 15:00 às 17:00 - Ausculta (enfermaria) - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+27-04-26, S.Mental - B2 - 08:30 às 10:00 - Transtorno bipolar - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+27-04-26, S.Mental - B2 - 10:00 às 11:30 - Transtorno por uso de álcool e outras drogas - [ Marcos Antônio Mendonça ] , Saude mental
+28-04-26, FarmacoAplic - B2 - 08:30 às 10:00 - - [ ] , Farmacologia Aplicada
+28-04-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+28-04-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+28-04-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+28-04-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 3 – Experiência Imersiva na Ferramenta Spatial - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+29-04-26, PratExt5 - B2 - 08:00 às 12:00 - SINDROME ANSIOSA - [ Ramon Fraga de Souza Lima ] , Prática Extensionista V
+29-04-26, SF5 - B2 - 14:00 às 15:45 - tabahismo - [ Natália Barreto e Sousa ] , Saúde da Família V
+29-04-26, SF5 - B2 - 16:15 às 18:00 - tabahismo - [ Natália Barreto e Sousa ] , Saúde da Família V
+30-04-26, Diag.Imag. - B2 - 09:00 às 12:00 - Abdome agudo I - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+30-04-26, PercInte2 - B2 - 13:30 às 15:30 - Caso Clínico: AVC - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+01-05-26, FERIADO - B2 - - - [ ] , FERIADO
+04-05-26, PAPM5 - B2 - 08:30 às 10:00 - - [ ] , Programa de Aproximação à Prática Médica V
+04-05-26, PAPM5 - B2 - 13:30 às 15:00 - Semiologia Abdome - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+04-05-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+05-05-26, FarmacoAplic - B2 - 14:00 às 15:30 - Antiparasitários Parte 1 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+05-05-26, FarmacoAplic - B2 - 15:30 às 17:00 - Antiparasitários Parte 2 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+05-05-26, Neuro - B2 - 09:00 às 10:30 - NEUROPATIAS PERIFÉRICAS - CRANIANAS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+05-05-26, Neuro - B2 - 10:45 às 12:15 - NEUROPATIAS PERIFÉRICAS ESPINHAIS - [ Ivana Rocha Raslan ] , Neurologia
+05-05-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 4 – Limitações e Desafios da Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+07-05-26, Neuro - B2 - 14:00 às 15:30 - - [ ] , Neurologia
+07-05-26, PercInte2 - B2 - 09:00 às 11:00 - ENTREGA DE ATIVIDADE - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+08-05-26, FDM - B2 - 09:00 às 13:00 - exame fisico abdome - [ Ruy da Costa Nogueira Alves Junior ] , Fundamentos do Diagnóstico Médico
+11-05-26, PAPM5 - B2 - 08:30 às 10:00 - Semiologia Respiratória - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+11-05-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+11-05-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+11-05-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+11-05-26, S.Mental - B2 - 13:30 às 15:00 - Transtornos alimentares - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+11-05-26, S.Mental - B2 - 15:00 às 16:30 - Transtornos neurocognitivos - [ Marcos Antônio Mendonça ] , Saude mental
+12-05-26, FarmacoAplic - B2 - 09:00 às 10:30 - Antifúngicos Parte 1 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+12-05-26, FarmacoAplic - B2 - 10:30 às 12:00 - Antifúngicos Parte 2 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+12-05-26, Neuro - B2 - 15:00 às 16:00 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+12-05-26, PercInov2 - B2 - 18:00 às 19:00 - 2º Encontro - Prática - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+13-05-26, TP - B2 - - - [ ] , TESTE DE PROGRESSO
+14-05-26, Diag.Imag. - B2 - 09:00 às 12:00 - Abdome agudo II - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+14-05-26, PercInte2 - B2 - 13:30 às 15:30 - SIMULAÇÃO ANAMNESE - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+15-05-26, FDM - B2 - 14:00 às 18:00 - tac abdome - [ Ruy da Costa Nogueira Alves Junior ] , Fundamentos do Diagnóstico Médico
+18-05-26, PAPM5 - B2 - 13:30 às 15:00 - Consulta Adolescente - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+18-05-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+18-05-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+18-05-26, S.Mental - B2 - 08:30 às 10:00 - Transtornos alimentares - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+18-05-26, S.Mental - B2 - 10:00 às 11:30 - Transtornos neurocognitivos - [ Marcos Antônio Mendonça ] , Saude mental
+19-05-26, FarmacoAplic - B2 - 14:00 às 15:30 - Bloqueadores de Canais de Cálcio - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+19-05-26, FarmacoAplic - B2 - 15:30 às 17:00 - Digitálicos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+19-05-26, Neuro - B2 - 09:00 às 10:30 - COMA /TCE/ MORTE ENCEFÁLICA - [ Chan Tiel Yuen ] , Neurologia
+19-05-26, Neuro - B2 - 10:45 às 12:15 - DOENÇAS NEUROMUSCULARES - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+19-05-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 4 – Limitações e Desafios da Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+20-05-26, PratExt5 - B2 - 08:00 às 12:00 - PROVA PRATICA - [ Marcos Antônio Mendonça ] , Prática Extensionista V
+20-05-26, SF5 - B2 - 14:00 às 15:45 - transtorno pelo uso de álcool - [ Natália Barreto e Sousa ] , Saúde da Família V
+20-05-26, SF5 - B2 - 16:15 às 18:00 - transtorno pelo uso de álcool - [ Natália Barreto e Sousa ] , Saúde da Família V
+21-05-26, Diag.Imag. - B2 - 14:00 às 17:00 - Avaliação radiológica do fígado e vias biliares; Avaliação radiológica dos rins e vias urinárias; Avaliação do aparelho reprodutor feminino; Avaliação do aparelho reprodutor masculino - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+21-05-26, PercInte2 - B2 - 10:30 às 12:00 - OSCE - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+22-05-26, FDM - B2 - 09:00 às 13:00 - exame fisico respiratorio - [ Maria Aparecida de Almeida Souza Rodrigues ] , Fundamentos do Diagnóstico Médico
+25-05-26, PAPM5 - B2 - 08:30 às 10:00 - Geniturinário - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+25-05-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+25-05-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+25-05-26, S.Mental - B2 - 13:30 às 15:00 - Transtornos da personalidade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+25-05-26, S.Mental - B2 - 15:00 às 16:30 - Suicídio - [ Marcos Antônio Mendonça ] , Saude mental
+26-05-26, FarmacoAplic - B2 - 09:00 às 10:30 - Anticoagulantes parenterais - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+26-05-26, FarmacoAplic - B2 - 10:30 às 12:00 - Anticoagulantes orais - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+26-05-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+26-05-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+26-05-26, Neuro - B2 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+26-05-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 5 – Ética e Humanização no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+28-05-26, Diag.Imag. - B2 - 09:00 às 12:00 - Anatomia neurorradiológica; Imagem no AVE - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+29-05-26, FDM - B2 - 14:00 às 18:00 - tac aparelho respiratóro - [ Maria Aparecida de Almeida Souza Rodrigues ] , Fundamentos do Diagnóstico Médico
+01-06-26, PAPM5 - B2 - 13:30 às 15:00 - Semiologia Locomotor - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+01-06-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+01-06-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+01-06-26, S.Mental - B2 - 08:30 às 10:00 - Transtornos da personalidade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+01-06-26, S.Mental - B2 - 10:00 às 11:30 - Suicídio - [ Marcos Antônio Mendonça ] , Saude mental
+02-06-26, FarmacoAplic - B2 - 14:00 às 15:30 - Antiarritmicos Parte 1 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+02-06-26, FarmacoAplic - B2 - 15:30 às 17:00 - Antiarritmicos Parte 2 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+02-06-26, Neuro - B2 - 09:00 às 10:30 - SESSÃO DE RACIOCÍNIO DIAGNÓSTICO - [ Chan Tiel Yuen ] , Neurologia
+02-06-26, Neuro - B2 - 10:45 às 12:15 - SESSÃO DE RACIOCÍNIO DIAGNÓSTICO - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+02-06-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 5 – Ética e Humanização no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+03-06-26, PratExt5 - B2 - 08:00 às 12:00 - DEPENDENCIA QUIMICA - [ Ramon Fraga de Souza Lima ] , Prática Extensionista V
+03-06-26, SF5 - B2 - 14:00 às 15:45 - Uso de maconha e cocaína - [ Natália Barreto e Sousa ] , Saúde da Família V
+03-06-26, SF5 - B2 - 16:15 às 18:00 - Uso de maconha e cocaína - [ Natália Barreto e Sousa ] , Saúde da Família V
+04-06-26, FERIADO - B2 - - - [ ] , FERIADO
+05-06-26, FDM - B2 - 09:00 às 13:00 - exame fisico cardiovascular e pulso venoso - [ Mônica Martinez Segura Teixeira Coelho ] , Fundamentos do Diagnóstico Médico
+08-06-26, PAPM5 - B2 - 08:30 às 10:00 - Semiologia Neurologica - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+08-06-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+08-06-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+08-06-26, S.Mental - B2 - 13:30 às 15:00 - Espectro da esquizofrenia e outros transtornos psicóticos 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+08-06-26, S.Mental - B2 - 15:00 às 16:30 - Espectro da esquizofrenia e outros transtornos psicóticos 2 - [ Marcos Antônio Mendonça ] , Saude mental
+09-06-26, FarmacoAplic - B2 - 08:30 às 10:00 - - [ ] , Farmacologia Aplicada
+09-06-26, Neuro - B2 - 15:00 às 16:00 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+09-06-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 5 – Ética e Humanização no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+11-06-26, Diag.Imag. - B2 - 14:00 às 17:00 - Imagem no TCE - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+11-06-26, PercInte2 - B2 - 08:30 às 10:30 - QUIZ IMAGENS - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+12-06-26, FDM - B2 - 14:00 às 18:00 - TAC aparelho cardiovascular e Pulso venoso - [ Mônica Martinez Segura Teixeira Coelho ] , Fundamentos do Diagnóstico Médico
+15-06-26, PAPM5 - B2 - 13:30 às 15:00 - TBL - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+15-06-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+15-06-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+15-06-26, PAPM5 - B2 - 15:00 às 17:00 - Ambulatório - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+15-06-26, S.Mental - B2 - 08:30 às 10:00 - Espectro da esquizofrenia e outros transtornos psicóticos 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+15-06-26, S.Mental - B2 - 10:00 às 11:30 - Espectro da esquizofrenia e outros transtornos psicóticos 2 - [ Marcos Antônio Mendonça ] , Saude mental
+16-06-26, FarmacoAplic - B2 - 14:00 às 15:30 - Benzodiazepinicos - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+16-06-26, FarmacoAplic - B2 - 15:30 às 17:00 - Barbitúricos - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+16-06-26, PercInov2 - B2 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 5 – Ética e Humanização no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+16-06-26, S.Mental - B2 - 08:30 às 10:00 - - [ ] , Saude mental
+17-06-26, PratExt5 - B2 - 08:00 às 12:00 - PROVA PRÁTICA - [ Marcos Antônio Mendonça ] , Prática Extensionista V
+17-06-26, SF5 - B2 - 14:00 às 15:45 - Suicídio - [ Natália Barreto e Sousa ] , Saúde da Família V
+17-06-26, SF5 - B2 - 16:15 às 18:00 - Suicídio - [ Natália Barreto e Sousa ] , Saúde da Família V
+18-06-26, Diag.Imag. - B2 - 08:30 às 10:00 - - [ ] , Diagnóstico por imagem
+18-06-26, PercInte2 - B2 - 14:00 às 16:00 - ENTREGA DE ATIVIDADE - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+19-06-26, FDM - B2 - 14:00 às 18:00 - OSCE P2 - [ Ruy da Costa Nogueira Alves Junior ] , Fundamentos do Diagnóstico Médico
+22-06-26, PAPM5 - B2 - 08:30 às 10:00 - Ambulatório - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+22-06-26, PAPM5 - B2 - 10:00 às 12:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+22-06-26, PAPM5 - B2 - 14:00 às 15:30 - - [ ] , Programa de Aproximação à Prática Médica V
+23-06-26, FarmacoAplic - B2 - 09:00 às 10:30 - Opioides Parte 1 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+23-06-26, FarmacoAplic - B2 - 10:30 às 12:00 - Opioides Parte 2 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+23-06-26, Neuro - B2 - 14:00 às 15:00 - PROVA PRÁTICA - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+23-06-26, PercInov2 - B2 - 18:00 às 19:00 - Atividade Final de Encerramento / Checklist de Conclusão - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+24-06-26, PratExt5 - B2 - 08:00 às 12:00 - REVISÃO DE NOTAS E AVALIAÇÕES - [ Ramon Fraga de Souza Lima ] , Prática Extensionista V
+24-06-26, SF5 - B2 - 14:00 às 15:30 - - [ ] , Saúde da Família V
+25-06-26, Diag.Imag. - B2 - 14:00 às 17:00 - Avaliação radiológica dos seios da face e Mastoides ; Revisão de prova - [ Camila Santos Guimarães ] , Diagnóstico por imagem
+25-06-26, PercInte2 - B2 - 09:00 às 11:00 - REVISÃO DOS OSCES - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+26-06-26, FDM - B2 - 14:00 às 18:00 - Segunda chamada - [ Ruy da Costa Nogueira Alves Junior ] , Fundamentos do Diagnóstico Médico
+26-06-26, Neuro - B2 - 08:30 às 10:00 - - [ ] , Neurologia

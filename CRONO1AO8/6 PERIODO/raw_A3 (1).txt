@@ -1,0 +1,290 @@
+23-02-26, Cardio - A3 - 08:30 às 10:30 - Eletrocardiograma Normal - [ Gabriel Porto Soares ] , Cardiologia
+23-02-26, Cardio - A3 - 10:30 às 12:00 - Realização de ECG - [ Pedro Henrique Gonçalves Neves ] , Cardiologia
+23-02-26, Emerg.1 - A3 - 14:00 às 17:30 - Introdução / Taquicardia Suoraventricular - [ Diego Fonseca Mendes Leal ] , Emergência I
+23-02-26, Emerg.1 - A3 - 14:00 às 17:30 - Introdução / Taquicardia Suoraventricular - [ Girley Cordeiro de Sousa ] , Emergência I
+23-02-26, Emerg.1 - A3 - 14:00 às 17:30 - Introdução / Taquicardia Suoraventricular - [ Marlon Mohamud Vilagra ] , Emergência I
+23-02-26, Emerg.1 - A3 - 14:00 às 17:30 - Introdução / Taquicardia Suoraventricular - [ Thiago Pontes de Oliveira César ] , Emergência I
+24-02-26, Endocrino - A3 - 09:00 às 10:30 - INTRODUÇÃO A ENDOCRINOLOGIA - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+24-02-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+24-02-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+25-02-26, DIP - A3 - 09:00 às 10:30 - Sepse/ uso racional dos antibióticos - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+25-02-26, Imuno - A3 - 14:00 às 15:30 - Fisiopatologia geral das reações hipersensibilidade do tipo I - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+26-02-26, Gastro - A3 - 08:30 às 10:00 - SEMIOLOGIA DO ABDOME - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+26-02-26, Gastro - A3 - 10:30 às 12:00 - LABORATÓRIO HABILIDADES - SEMIOLOGIA DO ABDOME - [ Karine Vieira da Rocha ] , Gastroenterologia
+26-02-26, PercInov3 - A3 - 18:00 às 19:00 - Orientações da Disciplina no AVA (Ambiente Virtual de Aprendizagem)
+26-02-26, Pneumo - A3 - 14:00 às 15:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+26-02-26, Pneumo - A3 - 14:00 às 15:30 - Radiograma Torácico - Alterações Básicas - [ Célio de Barros Barbosa ] , Pneumologia
+27-02-26, PratExt6 - A3 - 08:00 às 12:00 - APRESENTAÇÃO E SUBDIVISÃO DE GRUPOS PARA APS - [ Anna Carolina Ferreira de Carvalho Kling ] , Prática Extensionista VI
+27-02-26, PratExt6 - A3 - 08:00 às 12:00 - APRESENTAÇÃO E SUBDIVISÃO DE GRUPOS PARA APS - [ Bruna Tedde Lopes Pedroso ] , Prática Extensionista VI
+27-02-26, PratExt6 - A3 - 08:00 às 12:00 - APRESENTAÇÃO E SUBDIVISÃO DE GRUPOS PARA APS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista VI
+27-02-26, PratExt6 - A3 - 08:00 às 12:00 - APRESENTAÇÃO E SUBDIVISÃO DE GRUPOS PARA APS - [ Renato Franco Borges ] , Prática Extensionista VI
+02-03-26, Cardio - A3 - 13:30 às 15:30 - Realização de ECG - [ Gabriel Porto Soares ] , Cardiologia
+02-03-26, Cardio - A3 - 15:30 às 17:00 - Insuficiência Cardíaca 1 - [ Pedro Henrique Gonçalves Neves ] , Cardiologia
+02-03-26, Emerg.1 - A3 - 09:00 às 10:30 - Edema Agudo de Pulmão/fFasthug-Teórica - [ Henrik Werneck Vilagra ] , Emergência I
+02-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Profissionlismo+Sinais Vitais+Segurança de Cena -Simulação - [ Diego Fonseca Mendes Leal ] , Emergência I
+02-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Profissionlismo+Sinais Vitais+Segurança de Cena -Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+02-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Profissionlismo+Sinais Vitais+Segurança de Cena -Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+02-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Profissionlismo+Sinais Vitais+Segurança de Cena -Simulação - [ Thiago Pontes de Oliveira César ] , Emergência I
+03-03-26, Endocrino - A3 - 09:00 às 10:30 - HIPÓFISE / HIPOTALAMO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+03-03-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+04-03-26, DIP - A3 - 14:00 às 15:30 - Meningite bacteriana aguda - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+04-03-26, Imuno - A3 - 09:00 às 10:30 - Fisiopatologia geral das reações de hipersensibilidade do tipo I - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+05-03-26, Gastro - A3 - 14:00 às 15:30 - DOENÇA DO REFLUXO GASTRO ESOFÁGICO - [ Adriana Rodrigues Ferraz ] , Gastroenterologia
+05-03-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+05-03-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 1 – Potencialidades e Desafios da Incorporação de Tecnologias Digitais na Saúde - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+05-03-26, Pneumo - A3 - 09:00 às 10:30 - ASMAI - [ Célio de Barros Barbosa ] , Pneumologia
+05-03-26, Pneumo - A3 - 11:00 às 12:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+06-03-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI
+09-03-26, Cardio - A3 - 08:30 às 10:30 - AMBULATÓRIO DOCENTE - [ Gabriel Porto Soares ] , Cardiologia
+09-03-26, Cardio - A3 - 08:30 às 10:30 - AMBULATÓRIO DOCENTE - [ Pedro Henrique Gonçalves Neves ] , Cardiologia
+09-03-26, Cardio - A3 - 10:30 às 12:00 - Insuficiência Cardíaca 2 - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+09-03-26, Emerg.1 - A3 - 14:00 às 15:30 - Asma - [ Diego Fonseca Mendes Leal ] , Emergência I
+09-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Taquicardia supraventricular / Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+09-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Taquicardia supraventricular / Simulação - [ Henrik Werneck Vilagra ] , Emergência I
+09-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Taquicardia supraventricular / Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+09-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Taquicardia supraventricular / Simulação - [ Thiago Pontes de Oliveira César ] , Emergência I
+10-03-26, Endocrino - A3 - 09:00 às 10:30 - TIREOIDE - 1 - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+10-03-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+11-03-26, DIP - A3 - 09:00 às 10:30 - Antibioticoterapia: infecções de vias aéreas e vias urinárias - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+11-03-26, Imuno - A3 - 14:00 às 15:30 - Fisiopatologia geral das reações de hipersensibilidade do tipo II - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+12-03-26, Gastro - A3 - 10:30 às 12:00 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+12-03-26, Gastro - A3 - 10:30 às 12:00 - NEOPLASIA DE ESÔFAGO E ESTÔMAGO - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+12-03-26, PercInov3 - A3 - 18:00 às 19:00 - 1º Encontro - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+12-03-26, Pneumo - A3 - 14:00 às 15:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+13-03-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Anna Carolina Ferreira de Carvalho Kling ] , Prática Extensionista VI
+13-03-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Bruna Tedde Lopes Pedroso ] , Prática Extensionista VI
+13-03-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista VI
+13-03-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Renato Franco Borges ] , Prática Extensionista VI
+16-03-26, Cardio - A3 - 13:30 às 15:30 - Doença Arterial Coronariana Crônica - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+16-03-26, Cardio - A3 - 15:30 às 17:00 - Paciente 360 - [ Gabriel Porto Soares ] , Cardiologia
+16-03-26, Emerg.1 - A3 - 09:00 às 10:30 - Fibrilação Atrial (teórica) - [ Henrik Werneck Vilagra ] , Emergência I
+16-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Edema Agudo de Pulmão-Simulação - [ Diego Fonseca Mendes Leal ] , Emergência I
+16-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Edema Agudo de Pulmão-Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+16-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Edema Agudo de Pulmão-Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+16-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Edema Agudo de Pulmão-Simulação - [ Thiago Pontes de Oliveira César ] , Emergência I
+17-03-26, Endocrino - A3 - 09:00 às 10:30 - TIREOIDE - 2 - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+17-03-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+17-03-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+18-03-26, DIP - A3 - 14:00 às 15:30 - Infecções de pele e partes moles/ endocardite infecciosa/ Diarreais infecciosas - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+18-03-26, Imuno - A3 - 09:00 às 10:30 - Fisiopatologia geral das reações de hipersensibilidade do tipo II - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+19-03-26, Gastro - A3 - 14:00 às 15:30 - DOENÇA ULCEROSA PÉPTICA - [ Adriana Rodrigues Ferraz ] , Gastroenterologia
+19-03-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+19-03-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 1 – Potencialidades e Desafios da Incorporação de Tecnologias Digitais na Saúde - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+19-03-26, Pneumo - A3 - 09:00 às 10:30 - DPOC I - [ Vangie Dias da Silva ] , Pneumologia
+19-03-26, Pneumo - A3 - 11:00 às 12:30 - Ambulatório/Simulação - [ Célio de Barros Barbosa ] , Pneumologia
+20-03-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI
+23-03-26, Cardio - A3 - 08:30 às 10:30 - Doença coronariana aguda com supra de ST - [ Gabriel Porto Soares ] , Cardiologia
+23-03-26, Cardio - A3 - 10:30 às 12:00 - Paciente 360 - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+23-03-26, Emerg.1 - A3 - 14:00 às 15:30 - Acidente Vascular Cerebral isquêmico (AVCI) (teórica) - [ Thiago Pontes de Oliveira César ] , Emergência I
+23-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Asma-Simulação - [ Diego Fonseca Mendes Leal ] , Emergência I
+23-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Asma-Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+23-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Asma-Simulação - [ Henrik Werneck Vilagra ] , Emergência I
+23-03-26, Emerg.1 - A3 - 16:00 às 17:30 - Asma-Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+24-03-26, Endocrino - A3 - 09:00 às 10:30 - ADRENAL e GÔNADAS - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+24-03-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+25-03-26, DIP - A3 - 09:00 às 10:30 - Arboviroses - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+25-03-26, Imuno - A3 - 14:00 às 15:30 - Fisiopatologia geral das reações de hipersensibilidade do tipo III - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+26-03-26, Gastro - A3 - 08:30 às 10:00 - NEOPLASIA DE CÓLON - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+26-03-26, Gastro - A3 - 10:30 às 12:00 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+26-03-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 1 – Potencialidades e Desafios da Incorporação de Tecnologias Digitais na Saúde - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+26-03-26, Pneumo - A3 - 14:00 às 15:30 - Ambulatório/Simulação - [ Célio de Barros Barbosa ] , Pneumologia
+26-03-26, Pneumo - A3 - 14:00 às 15:30 - DPOCII - [ Vangie Dias da Silva ] , Pneumologia
+27-03-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Anna Carolina Ferreira de Carvalho Kling ] , Prática Extensionista VI
+27-03-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Bruna Tedde Lopes Pedroso ] , Prática Extensionista VI
+27-03-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista VI
+27-03-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Renato Franco Borges ] , Prática Extensionista VI
+30-03-26, Cardio - A3 - 13:30 às 15:30 - AMBULATÓRIO DOCENTE - [ Gabriel Porto Soares ] , Cardiologia
+30-03-26, Cardio - A3 - 13:30 às 15:30 - AMBULATÓRIO DOCENTE - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+30-03-26, Cardio - A3 - 15:30 às 17:00 - Doença coronariana aguda sem supra de ST - [ Diego Peña Desterro e Silva ] , Cardiologia
+30-03-26, Emerg.1 - A3 - 09:00 às 10:30 - Emergência Hipertensiva-AVCH-teórica - [ Diego Fonseca Mendes Leal ] , Emergência I
+30-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Fibrilação Atrial-Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+30-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Fibrilação Atrial-Simulação - [ Henrik Werneck Vilagra ] , Emergência I
+30-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Fibrilação Atrial-Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+30-03-26, Emerg.1 - A3 - 11:00 às 12:30 - Fibrilação Atrial-Simulação - [ Thiago Pontes de Oliveira César ] , Emergência I
+31-03-26, Endocrino - A3 - 09:00 às 10:30 - SINDROME METABÓLICA - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+31-03-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+01-04-26, DIP - A3 - 14:00 às 15:30 - Malária/ Leptospirose - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+01-04-26, Imuno - A3 - 09:00 às 10:30 - Fisiopatologia geral das reações de hipersensibilidade do tipo IV - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+02-04-26, Gastro - A3 - 14:00 às 15:30 - DOENÇA DIVERTICULAR DOS CÓLONS E CONSTIPAÇÃO INTESTINAL - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+02-04-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+02-04-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Componentes e Ferramentas Digitais Úteis à Gestão da Saúde - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+02-04-26, Pneumo - A3 - 09:00 às 10:30 - CANCER DE PULMÃO - [ Pedro Cezar Fagundes Junior ] , Pneumologia
+02-04-26, Pneumo - A3 - 11:00 às 12:30 - Ambulatório/Simulação - [ Célio de Barros Barbosa ] , Pneumologia
+03-04-26, FERIADO - A3 - - - [ ] , FERIADO
+04-04-26, FERIADO - A3 - - - [ ] , FERIADO
+06-04-26, Cardio - A3 - 08:30 às 10:30 - Paciente 360 - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+06-04-26, Cardio - A3 - 10:30 às 12:00 - Fibrilação Atrial - [ Diego Peña Desterro e Silva ] , Cardiologia
+06-04-26, Emerg.1 - A3 - 14:00 às 15:30 - Síndrome Coronariana Aguda Sem Supra de ST (SCASSST) - Teórica - [ Henrik Werneck Vilagra ] , Emergência I
+07-04-26, Endocrino - A3 - 09:00 às 10:30 - OBESIDADE - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+07-04-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Altair Cabral da Ponte Júnior ] , Endocrinologia e Metabologia
+07-04-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+08-04-26, DIP - A3 - 09:00 às 10:30 - Revisão - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+08-04-26, DIP - A3 - 14:00 às 15:30 - - [ ] , Doenças infecciosas e Parasitárias - DIP
+09-04-26, Gastro - A3 - 08:30 às 10:00 - DIARREIA E DOENÇA INFLAMATÓRIA INTESTINAL - [ Adriana Rodrigues Ferraz ] , Gastroenterologia
+09-04-26, Gastro - A3 - 10:30 às 12:00 - Ambulatório - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+09-04-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Componentes e Ferramentas Digitais Úteis à Gestão da Saúde - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+09-04-26, Pneumo - A3 - 14:00 às 15:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+09-04-26, Pneumo - A3 - 14:00 às 15:30 - DERRAME PLEURAL - [ Pedro Cezar Fagundes Junior ] , Pneumologia
+10-04-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI
+13-04-26, Cardio - A3 - 13:30 às 15:30 - Bloqueios Atrioventriculares e Intraventriculares - [ Gabriel Porto Soares ] , Cardiologia
+13-04-26, Cardio - A3 - 15:30 às 17:00 - Paciente 360 - [ Diego Peña Desterro e Silva ] , Cardiologia
+13-04-26, Emerg.1 - A3 - 09:00 às 10:30 - OSCE-P1 / FUSTHUG - [ ] , Emergência I
+13-04-26, Emerg.1 - A3 - 10:30 às 12:00 - AVALIAÇÃO DE PRESCRIÇÃO - [ ] , Emergência I
+14-04-26, Endocrino - A3 - 08:30 às 10:00 - - [ ] , Endocrinologia e Metabologia
+14-04-26, Endocrino - A3 - 14:00 às 16:00 - DISCUSSÃO E CORREÇÃO DA - PROVA P1 - [ Altair Cabral da Ponte Júnior ] , Endocrinologia e Metabologia
+15-04-26, DIP - A3 - 14:00 às 15:30 - Leishmanioses/ Doença de chagas - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+15-04-26, Imuno - A3 - 09:00 às 10:30 - Fisiopatologia geral das reações de hipersensibilidade às drogas - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+16-04-26, Gastro - A3 - 14:00 às 15:30 - HEPATITES VIRAIS - [ Adriana Rodrigues Ferraz ] , Gastroenterologia
+16-04-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+16-04-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Componentes e Ferramentas Digitais Úteis à Gestão da Saúde - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+16-04-26, Pneumo - A3 - 09:00 às 10:30 - Estudo Dirigido - [ Pedro Cezar Fagundes Junior ] , Pneumologia
+16-04-26, Pneumo - A3 - 11:00 às 12:30 - Ambulatório/Simulação - [ Célio de Barros Barbosa ] , Pneumologia
+17-04-26, Pneumo - A3 - 08:30 às 10:00 - - [ ] , Pneumologia
+17-04-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Anna Carolina Ferreira de Carvalho Kling ] , Prática Extensionista VI
+17-04-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Bruna Tedde Lopes Pedroso ] , Prática Extensionista VI
+17-04-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista VI
+17-04-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Renato Franco Borges ] , Prática Extensionista VI
+20-04-26, Cardio - A3 - 08:30 às 10:30 - Valvopatias Mitrais - [ Gabriel Porto Soares ] , Cardiologia
+20-04-26, Cardio - A3 - 10:30 às 12:00 - AMBULATÓRIO DOCENTE - [ Diego Peña Desterro e Silva ] , Cardiologia
+20-04-26, Cardio - A3 - 10:30 às 12:00 - AMBULATÓRIO DOCENTE - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+20-04-26, Emerg.1 - A3 - 14:00 às 15:30 - ACLS-Ritmos chocáveis - [ Thiago Pontes de Oliveira César ] , Emergência I
+20-04-26, Emerg.1 - A3 - 16:00 às 17:30 - Emergência Hipertensiva-AVCh-Simulação - [ Diego Fonseca Mendes Leal ] , Emergência I
+20-04-26, Emerg.1 - A3 - 16:00 às 17:30 - Emergência Hipertensiva-AVCh-Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+20-04-26, Emerg.1 - A3 - 16:00 às 17:30 - Emergência Hipertensiva-AVCh-Simulação - [ Henrik Werneck Vilagra ] , Emergência I
+20-04-26, Emerg.1 - A3 - 16:00 às 17:30 - Emergência Hipertensiva-AVCh-Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+21-04-26, FERIADO - A3 - - - [ ] , FERIADO
+22-04-26, Imuno - A3 - 14:00 às 15:30 - Revisão para P1 - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+23-04-26, FERIADO - A3 - - - [ ] , FERIADO
+24-04-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI
+27-04-26, SF6 - A3 - 08:30 às 10:00 - - [ ] , Saúde da Família VI
+28-04-26, Endocrino - A3 - 09:00 às 10:30 - DIABETES – FISIOPATOLOGIA, DIAGNÓSTICO, CLASSIFICAÇÃO - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+28-04-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+29-04-26, DIP - A3 - 14:00 às 15:30 - Revisão - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+29-04-26, Imuno - A3 - 08:30 às 10:00 - - [ ] , Imunologia - IMUNO
+30-04-26, Gastro - A3 - 08:30 às 10:00 - CIRROSE HEPÁTICA E HIPERTENSÃO PORTAL - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+30-04-26, Gastro - A3 - 10:30 às 12:00 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+30-04-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Componentes e Ferramentas Digitais Úteis à Gestão da Saúde - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+30-04-26, Pneumo - A3 - 14:00 às 15:30 - Ambulatório/Simulação - [ Pedro Cezar Fagundes Junior ] , Pneumologia
+30-04-26, Pneumo - A3 - 14:00 às 15:30 - Pneumonias I - [ Vangie Dias da Silva ] , Pneumologia
+01-05-26, FERIADO - A3 - - - [ ] , FERIADO
+04-05-26, Cardio - A3 - 14:00 às 15:30 - - [ ] , Cardiologia
+04-05-26, Emerg.1 - A3 - 09:00 às 12:30 - Poccus e Ultra Som na emergência-teórica / FASTHUG - [ Diego Fonseca Mendes Leal ] , Emergência I
+04-05-26, Emerg.1 - A3 - 09:00 às 12:30 - Poccus e Ultra Som na emergência-teórica / FASTHUG - [ Girley Cordeiro de Sousa ] , Emergência I
+04-05-26, Emerg.1 - A3 - 09:00 às 12:30 - Poccus e Ultra Som na emergência-teórica / FASTHUG - [ Henrik Werneck Vilagra ] , Emergência I
+04-05-26, Emerg.1 - A3 - 09:00 às 12:30 - Poccus e Ultra Som na emergência-teórica / FASTHUG - [ Marlon Mohamud Vilagra ] , Emergência I
+04-05-26, Emerg.1 - A3 - 09:00 às 12:30 - Poccus e Ultra Som na emergência-teórica / FASTHUG - [ Thiago Pontes de Oliveira César ] , Emergência I
+05-05-26, Endocrino - A3 - 09:00 às 10:30 - DIABETES - TRATAMENTO - [ Igor Silva Mançano ] , Endocrinologia e Metabologia
+05-05-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+06-05-26, DIP - A3 - 09:00 às 10:30 - Esquistossomose/ Acidentes por animais peçonhentos - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+06-05-26, Imuno - A3 - 14:00 às 15:30 - Fisiopatologia geral das Imunodeficiências - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+07-05-26, Gastro - A3 - 14:00 às 15:30 - COMPLICAÇÕES DA CIRROSE HEPÁTICA - [ Adriana Rodrigues Ferraz ] , Gastroenterologia
+07-05-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+07-05-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 3 – Segurança e Privacidade de Dados na Saúde Digital - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+07-05-26, Pneumo - A3 - 09:00 às 10:30 - Pneumonias II - [ Vangie Dias da Silva ] , Pneumologia
+07-05-26, Pneumo - A3 - 11:00 às 12:30 - Ambulatório/Simulação - [ Pedro Cezar Fagundes Junior ] , Pneumologia
+08-05-26, Gastro - A3 - 08:30 às 10:00 - - [ ] , Gastroenterologia
+11-05-26, Cardio - A3 - 13:30 às 15:30 - Paciente 360 - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+11-05-26, Cardio - A3 - 15:30 às 17:00 - Valvopatias Aórticas - [ Diego Peña Desterro e Silva ] , Cardiologia
+11-05-26, Emerg.1 - A3 - 09:00 às 10:30 - Síndrome Coronariana Aguda Com Supra de ST (SCACSST) - Teórica - [ Henrik Werneck Vilagra ] , Emergência I
+11-05-26, Emerg.1 - A3 - 11:00 às 12:30 - Síndrome Coronariana Aguda Sem Supra de ST (SCASSST) - Simulação - [ Diego Fonseca Mendes Leal ] , Emergência I
+11-05-26, Emerg.1 - A3 - 11:00 às 12:30 - Síndrome Coronariana Aguda Sem Supra de ST (SCASSST) - Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+11-05-26, Emerg.1 - A3 - 11:00 às 12:30 - Síndrome Coronariana Aguda Sem Supra de ST (SCASSST) - Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+11-05-26, Emerg.1 - A3 - 11:00 às 12:30 - Síndrome Coronariana Aguda Sem Supra de ST (SCASSST) - Simulação - [ Thiago Pontes de Oliveira César ] , Emergência I
+12-05-26, Endocrino - A3 - 09:00 às 10:30 - DIABETES – COMPLICAÇÕES + EMERGÊNCIAS - [ Altair Cabral da Ponte Júnior ] , Endocrinologia e Metabologia
+12-05-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+12-05-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - AMBULATÓRIO - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+13-05-26, TP - A3 - - - [ ] , TESTE DE PROGRESSO
+14-05-26, Gastro - A3 - 08:30 às 10:00 - LABORATÓRIO HABILIDADES - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+14-05-26, Gastro - A3 - 10:30 às 12:00 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+14-05-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 3 – Segurança e Privacidade de Dados na Saúde Digital - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+14-05-26, Pneumo - A3 - 14:00 às 15:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+14-05-26, Pneumo - A3 - 14:00 às 15:30 - Pneumonias II - [ Vangie Dias da Silva ] , Pneumologia
+14-05-26, Pneumo - A3 - 14:00 às 15:30 - Tuberculose I - [ Pedro Cezar Fagundes Junior ] , Pneumologia
+15-05-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI
+18-05-26, Cardio - A3 - 08:30 às 10:30 - Paciente 360 - [ Gabriel Porto Soares ] , Cardiologia
+18-05-26, Cardio - A3 - 10:30 às 12:00 - Hipertensão Arterial 1 - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+18-05-26, Emerg.1 - A3 - 14:00 às 15:30 - ACLS ritos não chocáveis - [ Thiago Pontes de Oliveira César ] , Emergência I
+18-05-26, Emerg.1 - A3 - 16:00 às 17:30 - Síndrome Coronariana Aguda Com Supra de ST (SCACSST) - Simulação - [ Diego Fonseca Mendes Leal ] , Emergência I
+18-05-26, Emerg.1 - A3 - 16:00 às 17:30 - Síndrome Coronariana Aguda Com Supra de ST (SCACSST) - Simulação - [ Girley Cordeiro de Sousa ] , Emergência I
+18-05-26, Emerg.1 - A3 - 16:00 às 17:30 - Síndrome Coronariana Aguda Com Supra de ST (SCACSST) - Simulação - [ Henrik Werneck Vilagra ] , Emergência I
+18-05-26, Emerg.1 - A3 - 16:00 às 17:30 - Síndrome Coronariana Aguda Com Supra de ST (SCACSST) - Simulação - [ Marlon Mohamud Vilagra ] , Emergência I
+19-05-26, Endocrino - A3 - 09:00 às 10:30 - DISLIPIDEMIA 1 - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+19-05-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Altair Cabral da Ponte Júnior ] , Endocrinologia e Metabologia
+20-05-26, DIP - A3 - 14:00 às 15:30 - Infecção pelo HIV/ AIDS - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+20-05-26, Imuno - A3 - 09:00 às 10:30 - Fisiopatologia geral das Imunodeficiências - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+21-05-26, Gastro - A3 - 14:00 às 15:30 - DOENÇA LITIÁSICA BILIAR - [ Adriana Rodrigues Ferraz ] , Gastroenterologia
+21-05-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+21-05-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos Orientados - AVA (Ambiente Virtual de Aprendizagem) - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+21-05-26, Pneumo - A3 - 09:00 às 10:30 - Tuberculose II - [ Pedro Cezar Fagundes Junior ] , Pneumologia
+21-05-26, Pneumo - A3 - 11:00 às 12:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+22-05-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Anna Carolina Ferreira de Carvalho Kling ] , Prática Extensionista VI
+22-05-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Bruna Tedde Lopes Pedroso ] , Prática Extensionista VI
+22-05-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista VI
+22-05-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Renato Franco Borges ] , Prática Extensionista VI
+25-05-26, Cardio - A3 - 13:30 às 15:30 - Hipertensão Arterial 2 (Tratamento) - [ Gabriel Porto Soares ] , Cardiologia
+25-05-26, Cardio - A3 - 15:30 às 17:00 - AMBULATÓRIO DOCENTE - [ Diego Peña Desterro e Silva ] , Cardiologia
+25-05-26, Cardio - A3 - 15:30 às 17:00 - AMBULATÓRIO DOCENTE - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+25-05-26, Emerg.1 - A3 - 09:00 às 10:30 - Bradicardias e Marcapasso - [ Diego Fonseca Mendes Leal ] , Emergência I
+25-05-26, Emerg.1 - A3 - 11:00 às 12:30 - ACLS-Ritmos chocáveis - [ Girley Cordeiro de Sousa ] , Emergência I
+25-05-26, Emerg.1 - A3 - 11:00 às 12:30 - ACLS-Ritmos chocáveis - [ Henrik Werneck Vilagra ] , Emergência I
+25-05-26, Emerg.1 - A3 - 11:00 às 12:30 - ACLS-Ritmos chocáveis - [ Marlon Mohamud Vilagra ] , Emergência I
+25-05-26, Emerg.1 - A3 - 11:00 às 12:30 - ACLS-Ritmos chocáveis - [ Thiago Pontes de Oliveira César ] , Emergência I
+26-05-26, Endocrino - A3 - 09:00 às 10:30 - DISLIPIDEMIA 2 - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+26-05-26, Endocrino - A3 - 11:00 às 12:30 - PRÁTICA - CENTRO DE SIMULAÇÃO - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+27-05-26, DIP - A3 - 09:00 às 10:30 - Viroses respiratórias/ Síndrome de mononucleose - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+27-05-26, Imuno - A3 - 14:00 às 15:30 - Diagnóstico por anticorpos em Imunologia clínica - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+28-05-26, Gastro - A3 - 08:30 às 10:00 - PANCREATITE AGUDA - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+28-05-26, Gastro - A3 - 10:30 às 12:00 - LABORATÓRIO HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+28-05-26, PercInov3 - A3 - 18:00 às 19:00 - 2º Encontro - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+28-05-26, Pneumo - A3 - 14:00 às 15:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+28-05-26, Pneumo - A3 - 14:00 às 15:30 - Tromboembolismo Pulmonar I - [ Célio de Barros Barbosa ] , Pneumologia
+29-05-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI
+01-06-26, Cardio - A3 - 08:30 às 10:30 - Hipertensão Arterial 3 (Urgência e Emergência) - [ Pedro Henrique Gonçalves Neves ] , Cardiologia
+01-06-26, Cardio - A3 - 10:30 às 12:00 - Paciente 360 - [ Diego Peña Desterro e Silva ] , Cardiologia
+01-06-26, Emerg.1 - A3 - 14:00 às 15:30 - Dispneia Abordagem diagnóstica na Emergência-Teórica - [ Thiago Pontes de Oliveira César ] , Emergência I
+01-06-26, Emerg.1 - A3 - 16:00 às 17:30 - ACLS-Ritmos chocáveis e não chocáveis - [ Diego Fonseca Mendes Leal ] , Emergência I
+01-06-26, Emerg.1 - A3 - 16:00 às 17:30 - ACLS-Ritmos chocáveis e não chocáveis - [ Girley Cordeiro de Sousa ] , Emergência I
+01-06-26, Emerg.1 - A3 - 16:00 às 17:30 - ACLS-Ritmos chocáveis e não chocáveis - [ Henrik Werneck Vilagra ] , Emergência I
+01-06-26, Emerg.1 - A3 - 16:00 às 17:30 - ACLS-Ritmos chocáveis e não chocáveis - [ Marlon Mohamud Vilagra ] , Emergência I
+02-06-26, DIP - A3 - 14:00 às 15:30 - - [ ] , Doenças infecciosas e Parasitárias - DIP
+03-06-26, DIP - A3 - 14:00 às 15:30 - Sífilis - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+03-06-26, Imuno - A3 - 09:00 às 10:30 - Vacinas e Imunoterapia - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+04-06-26, FERIADO - A3 - - - [ ] , FERIADO
+05-06-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Anna Carolina Ferreira de Carvalho Kling ] , Prática Extensionista VI
+05-06-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Bruna Tedde Lopes Pedroso ] , Prática Extensionista VI
+05-06-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista VI
+05-06-26, PratExt6 - A3 - 08:00 às 12:00 - Atendimentos na UBS - [ Renato Franco Borges ] , Prática Extensionista VI
+08-06-26, SF6 - A3 - 08:30 às 10:00 - - [ ] , Saúde da Família VI
+10-06-26, DIP - A3 - 09:00 às 10:30 - Discussão de casos - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+10-06-26, Imuno - A3 - 14:00 às 15:30 - - [ ] , Imunologia - IMUNO
+11-06-26, Gastro - A3 - 14:00 às 15:30 - HEMORRAGIA DIGESTIVA - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+11-06-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO DE HABILIDADES - [ Karine Vieira da Rocha ] , Gastroenterologia
+11-06-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 4 – Impacto das Tecnologias Digitais no Trabalho dos Gestores - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+11-06-26, Pneumo - A3 - 09:00 às 10:30 - Tromboembolismo Pulmonar II - [ Célio de Barros Barbosa ] , Pneumologia
+11-06-26, Pneumo - A3 - 11:00 às 12:30 - Ambulatório/Simulação - [ Vangie Dias da Silva ] , Pneumologia
+12-06-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI
+15-06-26, Cardio - A3 - 08:30 às 10:30 - Paciente 360 - [ Paulo Sérgio Lopes Soares ] , Cardiologia
+15-06-26, Cardio - A3 - 10:30 às 12:00 - Pericardiopatias - [ Pedro Henrique Gonçalves Neves ] , Cardiologia
+15-06-26, Emerg.1 - A3 - 14:00 às 15:30 - AVALIAÇÃO DE PRESCRIÇÃO - [ ] , Emergência I
+15-06-26, Emerg.1 - A3 - 14:00 às 15:30 - OSCE-P1 - [ ] , Emergência I
+16-06-26, Endocrino - A3 - 08:30 às 10:00 - - [ ] , Endocrinologia e Metabologia
+16-06-26, Endocrino - A3 - 14:00 às 15:30 - Revisão OSCE - [ Fábio Furtado dos Santos ] , Endocrinologia e Metabologia
+16-06-26, Endocrino - A3 - 16:00 às 17:30 - PRÁTICA - AMBULATÓRIO - [ Altair Cabral da Ponte Júnior ] , Endocrinologia e Metabologia
+16-06-26, Endocrino - A3 - 16:00 às 17:30 - PRÁTICA - AMBULATÓRIO - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+17-06-26, DIP - A3 - 14:00 às 15:30 - Febre de origem obscura - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+17-06-26, Imuno - A3 - 09:00 às 10:30 - Vacinas - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+18-06-26, PercInov3 - A3 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 4 – Impacto das Tecnologias Digitais no Trabalho dos Gestores - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+18-06-26, Pneumo - A3 - 08:30 às 10:00 - - [ ] , Pneumologia
+19-06-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Anna Carolina Ferreira de Carvalho Kling ] , Prática Extensionista VI
+19-06-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Bruna Tedde Lopes Pedroso ] , Prática Extensionista VI
+19-06-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Ramon Fraga de Souza Lima ] , Prática Extensionista VI
+19-06-26, PratExt6 - A3 - 13:00 às 17:00 - Atendimentos na UBS - [ Renato Franco Borges ] , Prática Extensionista VI
+22-06-26, Cardio - A3 - 08:30 às 10:00 - - [ ] , Cardiologia
+23-06-26, Endocrino - A3 - 11:00 às 12:00 - OSCE - TURMA A - [ Nardo da Silva Ouriques ] , Endocrinologia e Metabologia
+24-06-26, DIP - A3 - 14:00 às 15:30 - Revisão - [ Vinicius Martins de Menezes ] , Doenças infecciosas e Parasitárias - DIP
+24-06-26, Imuno - A3 - 09:00 às 10:30 - SEPSE e interpretaão do Hemograma - [ Ulisses Cerqueira Linhares ] , Imunologia - IMUNO
+25-06-26, Gastro - A3 - 08:30 às 10:00 - - [ ] , Gastroenterologia
+25-06-26, Gastro - A3 - 14:00 às 15:30 - LABORATÓRIO DE HABILIDADES - [ Cristina Maria Monteiro Dantas ] , Gastroenterologia
+25-06-26, Gastro - A3 - 16:00 às 17:30 - LABORATÓRIO DE HABILIDADES - [ Adriana Rodrigues Ferraz ] , Gastroenterologia
+25-06-26, PercInov3 - A3 - 18:00 às 19:00 - Atividade Final de Encerramento / Checklist de Conclusão - [ Anrafel Fernandes Pereira ] , Percurso inovador III
+26-06-26, SF6 - A3 - 08:00 às 12:00 - - [ Hellen Loubet Barbosa ] , Saúde da Família VI

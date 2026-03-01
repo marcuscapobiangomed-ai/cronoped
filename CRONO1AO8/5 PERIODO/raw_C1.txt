@@ -1,0 +1,236 @@
+23-02-26, PAPM5 - C1 - 14:00 às 15:30 - Anamnese Pediatrica (enfermaria) - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - C1 - 14:00 às 15:30 - Anamnese Pediatrica (enfermaria) - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - C1 - 14:00 às 15:30 - Anamnese Pediatrica (enfermaria) - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - C1 - 14:00 às 15:30 - Anamnese Pediatrica (enfermaria) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+23-02-26, PAPM5 - C1 - 16:00 às 17:30 - Anamnese Pediatrica - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+23-02-26, S.Mental - C1 - 08:30 às 10:00 - Psicopatologia Geral - [ Marcos Antônio Mendonça ] , Saude mental
+23-02-26, S.Mental - C1 - 10:00 às 11:30 - Anamnese e Exame do Estado Mental - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+24-02-26, FarmacoAplic - C1 - 09:00 às 10:30 - Cefalosporinas Parte 1 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+24-02-26, FarmacoAplic - C1 - 10:30 às 12:00 - Cefalosporinas Parte 2 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+24-02-26, Neuro - C1 - 15:00 às 16:00 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+24-02-26, PercInov2 - C1 - 18:00 às 19:00 - Orientações da Disciplina no AVA (Ambiente Virtual de Aprendizagem)
+25-02-26, PratExt5 - C1 - 14:00 às 17:00 - ENTREVISTA CLÍNICA - [ Alice Rangel Pradel ] , Prática Extensionista V
+26-02-26, SF5 - C1 - 14:00 às 15:45 - Exame do estado mental - [ Natália Barreto e Sousa ] , Saúde da Família V
+26-02-26, SF5 - C1 - 16:15 às 18:00 - Exame do estado mental - [ Natália Barreto e Sousa ] , Saúde da Família V
+27-02-26, Diag.Imag. - C1 - 14:00 às 17:00 - Aula introdutória; Meios de contraste - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+27-02-26, FDM - C1 - 09:00 às 13:00 - Apresentação da disciplina + ectoscopia , Sinais vitais e pulsos arteriais - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+02-03-26, PAPM5 - C1 - 08:30 às 10:00 - Testes de triagem neonatal (paciente 360º) - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+02-03-26, PAPM5 - C1 - 10:30 às 12:00 - Exame Fisico do RN parte 1 - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+02-03-26, S.Mental - C1 - 13:30 às 15:00 - Psicopatologia Geral - [ Marcos Antônio Mendonça ] , Saude mental
+02-03-26, S.Mental - C1 - 15:00 às 16:30 - Anamnese e Exame do Estado Mental - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+03-03-26, FarmacoAplic - C1 - 14:00 às 15:30 - Penicilinas Parte 1 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+03-03-26, FarmacoAplic - C1 - 15:30 às 17:00 - Penicilinas Parte 2 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+03-03-26, Neuro - C1 - 09:00 às 10:30 - CEFLEIAS PRIMÁRIAS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+03-03-26, Neuro - C1 - 10:45 às 12:15 - CEFALEIAS SECUNDÁRIAS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+03-03-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 1 – Conceitos de Metaverso e Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+04-03-26, PercInte2 - C1 - 14:00 às 16:00 - Apresentação da disciplina - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+04-03-26, PercInte2 - C1 - 16:00 às 18:00 - World Café: Humanização - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+06-03-26, Diag.Imag. - C1 - 09:00 às 12:00 - Técnica Radiográfica do Tórax; Análise Radiográfica do Tórax - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+06-03-26, FDM - C1 - 14:00 às 18:00 - TAC Ectoscopia, Sinais Vitais e Pulsos arteriais - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+09-03-26, PAPM5 - C1 - 14:00 às 15:30 - exame fisico do RN (enfermaria) - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+09-03-26, PAPM5 - C1 - 14:00 às 15:30 - exame fisico do RN (enfermaria) - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+09-03-26, PAPM5 - C1 - 14:00 às 15:30 - exame fisico do RN (enfermaria) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+09-03-26, PAPM5 - C1 - 16:00 às 17:30 - Exame Fisico do RN parte 2 - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+09-03-26, S.Mental - C1 - 08:30 às 10:00 - Psicofarmacologia 2 - [ Marcos Antônio Mendonça ] , Saude mental
+09-03-26, S.Mental - C1 - 10:00 às 11:30 - Psicofarmacologia 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+10-03-26, FarmacoAplic - C1 - 09:00 às 10:30 - Sulfas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+10-03-26, FarmacoAplic - C1 - 10:30 às 12:00 - Quinolonas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+10-03-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+10-03-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+10-03-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+10-03-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 1 – Conceitos de Metaverso e Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+11-03-26, PratExt5 - C1 - 14:00 às 17:00 - REDE DE ATENÇÃO PISCOSSOCIAL RAPS - [ Alice Rangel Pradel ] , Prática Extensionista V
+12-03-26, SF5 - C1 - 14:00 às 15:45 - Transtorno depressivo - [ Natália Barreto e Sousa ] , Saúde da Família V
+12-03-26, SF5 - C1 - 16:15 às 18:00 - Transtorno depressivo - [ Natália Barreto e Sousa ] , Saúde da Família V
+13-03-26, Diag.Imag. - C1 - 14:00 às 17:00 - Lesões Hipotransparentes; Lesões Hipertransparentes - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+13-03-26, FDM - C1 - 09:00 às 13:00 - Exame Físico Cabeça e Pescoço - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+16-03-26, PAPM5 - C1 - 08:30 às 10:00 - Desenvolvimento (paciente 360º) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+16-03-26, PAPM5 - C1 - 10:30 às 12:00 - Cabeça e pescoço - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+16-03-26, S.Mental - C1 - 13:30 às 15:00 - Psicofarmacologia 2 - [ Marcos Antônio Mendonça ] , Saude mental
+16-03-26, S.Mental - C1 - 15:00 às 16:30 - Psicofarmacologia 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+17-03-26, FarmacoAplic - C1 - 14:00 às 15:30 - Carbapenêmicos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+17-03-26, FarmacoAplic - C1 - 15:30 às 17:00 - Monobactâmicos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+17-03-26, Neuro - C1 - 09:00 às 10:30 - SÍNDROMES DEMENCIAIS/DEMÊNCIAS - [ Chan Tiel Yuen ] , Neurologia
+17-03-26, Neuro - C1 - 10:45 às 12:15 - EPILEPSIA / CRISES EPILÉPTICAS - [ Ivana Rocha Raslan ] , Neurologia
+17-03-26, PercInov2 - C1 - 18:00 às 19:00 - 1º Encontro - Palestra no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+18-03-26, PercInte2 - C1 - 14:00 às 16:00 - Simulação: Cefaleias - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+18-03-26, PercInte2 - C1 - 16:00 às 18:00 - TBL Meios de Contraste - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+20-03-26, Diag.Imag. - C1 - 09:00 às 12:00 - Técnica Tomográfica do Tórax; Análise Tomográfica do Tórax - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+20-03-26, FDM - C1 - 14:00 às 18:00 - TAC Cabeça e Pescoço - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+23-03-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+23-03-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+23-03-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+23-03-26, PAPM5 - C1 - 16:00 às 17:30 - Semiologia genética - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+23-03-26, S.Mental - C1 - 08:30 às 10:00 - Transtornos de humor - [ Marcos Antônio Mendonça ] , Saude mental
+23-03-26, S.Mental - C1 - 10:00 às 11:30 - Transtornos de Ansiedade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+24-03-26, FarmacoAplic - C1 - 09:00 às 10:30 - Tetraciclinas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+24-03-26, FarmacoAplic - C1 - 10:30 às 12:00 - Lincosamidas - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+24-03-26, Neuro - C1 - 15:00 às 16:00 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+24-03-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Aplicações do Metaverso na Saúde - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+25-03-26, PratExt5 - C1 - 14:00 às 17:00 - COMUNICAÇÃO DE MÁS NOTÍCIAS - [ Dayanne De Carvalho Fontes ] , Prática Extensionista V
+26-03-26, SF5 - C1 - 14:00 às 15:45 - Transtornos de ansiedade e pânico - [ Natália Barreto e Sousa ] , Saúde da Família V
+26-03-26, SF5 - C1 - 16:15 às 18:00 - Transtornos de ansiedade e pânico - [ Natália Barreto e Sousa ] , Saúde da Família V
+27-03-26, Diag.Imag. - C1 - 14:00 às 17:00 - Avaliação Radiológica do Mediastino; Avaliação Radiográfica Cardiovascular - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+27-03-26, FDM - C1 - 09:00 às 13:00 - Exame Fisico neurológico e pares cranianos - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+30-03-26, PAPM5 - C1 - 08:30 às 10:00 - Sinais vitais/ectoscopia (Enfermaria) - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+30-03-26, PAPM5 - C1 - 10:30 às 12:00 - Crescimento - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+30-03-26, S.Mental - C1 - 13:30 às 15:00 - Transtornos de humor - [ Marcos Antônio Mendonça ] , Saude mental
+30-03-26, S.Mental - C1 - 15:00 às 16:30 - Transtornos de Ansiedade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+31-03-26, FarmacoAplic - C1 - 14:00 às 15:30 - Aminoglicosídeos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+31-03-26, FarmacoAplic - C1 - 15:30 às 17:00 - Macrolídeos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+31-03-26, Neuro - C1 - 09:00 às 10:30 - ACIDENTE VASCULAR CEREBRAL ISQUÊMICO - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+31-03-26, Neuro - C1 - 10:45 às 12:15 - ACIDENTE VASCULAR CEREBRAL HEMORRÁGICO - [ Chan Tiel Yuen ] , Neurologia
+31-03-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Aplicações do Metaverso na Saúde - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+01-04-26, PercInte2 - C1 - 14:00 às 16:00 - World Café: Saúde Mental - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+01-04-26, PercInte2 - C1 - 16:00 às 18:00 - Simulação: anamnese - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+06-04-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+06-04-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+06-04-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+06-04-26, PAPM5 - C1 - 16:00 às 17:30 - Aferição de Pressão arterial - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+06-04-26, S.Mental - C1 - 08:30 às 10:00 - Sessão clínica - [ Marcos Antônio Mendonça ] , Saude mental
+06-04-26, S.Mental - C1 - 10:00 às 11:30 - Sessão clínica - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+07-04-26, FarmacoAplic - C1 - 09:00 às 10:30 - Antivirais Parte 1 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+07-04-26, FarmacoAplic - C1 - 10:30 às 12:00 - Antivirais Parte 2 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+07-04-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+07-04-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+07-04-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+07-04-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 2 – Aplicações do Metaverso na Saúde - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+08-04-26, PratExt5 - C1 - 14:00 às 15:30 - P1 PRÁTICA EXTENSIONISTA V - [ Alice Rangel Pradel ] , Prática Extensionista V
+09-04-26, SF5 - C1 - 14:00 às 15:45 - Tabagismo - [ Natália Barreto e Sousa ] , Saúde da Família V
+09-04-26, SF5 - C1 - 16:15 às 18:00 - Tabagismo - [ Natália Barreto e Sousa ] , Saúde da Família V
+10-04-26, Diag.Imag. - C1 - 14:00 às 17:00 - Avaliação Radiológica das Mamas; Exercícios de Revisão para a Prova Prática - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+10-04-26, FDM - C1 - 09:00 às 13:00 - TAC Neurológico e pares cranianos - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+13-04-26, PAPM5 - C1 - 08:30 às 10:00 - Crescimento paciente 360º - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+13-04-26, PAPM5 - C1 - 10:30 às 12:00 - Semiologia do Cardiovascular 1 - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+13-04-26, S.Mental - C1 - 14:00 às 15:30 - - [ ] , Saude mental
+14-04-26, FarmacoAplic - C1 - 14:00 às 15:30 - Glicopeptídeos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+14-04-26, FarmacoAplic - C1 - 15:30 às 17:00 - Polimixinas - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+14-04-26, Neuro - C1 - 09:00 às 10:30 - DISTÚRBIOS DO MOVIMENTO HIPOCINÉTICOS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+14-04-26, Neuro - C1 - 10:45 às 12:15 - DISTÚRBIOS DO MOVIMENTO HIPERCINÉTICOS - [ Ivana Rocha Raslan ] , Neurologia
+14-04-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 3 – Experiência Imersiva na Ferramenta Spatial - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+15-04-26, SF5 - C1 - 14:00 às 15:30 - - [ ] , Saúde da Família V
+17-04-26, Diag.Imag. - C1 - 08:30 às 10:00 - - [ ] , Diagnóstico por imagem
+17-04-26, FDM - C1 - 14:00 às 18:00 - Segunda chamada - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+20-04-26, PAPM5 - C1 - 14:00 às 15:30 - Ausculta (enfermaria) - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+20-04-26, PAPM5 - C1 - 16:00 às 17:30 - Semiologia do Cardiovascular 2 - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+20-04-26, S.Mental - C1 - 08:30 às 10:00 - Transtorno por uso de álcool e outras drogas - [ Marcos Antônio Mendonça ] , Saude mental
+20-04-26, S.Mental - C1 - 10:00 às 11:30 - Transtorno bipolar - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+22-04-26, PratExt5 - C1 - 14:00 às 17:00 - SÍNDROME ANSIOSA - [ Dayanne De Carvalho Fontes ] , Prática Extensionista V
+24-04-26, Diag.Imag. - C1 - 14:00 às 17:00 - Técnicas Radiológicas do Abdome; Avaliação Radiográfica do Abdome - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+24-04-26, FDM - C1 - 09:00 às 13:00 - OSCE P1 - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+27-04-26, PAPM5 - C1 - 08:30 às 10:00 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+27-04-26, PAPM5 - C1 - 10:30 às 12:00 - Semiologia Abdome - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+27-04-26, S.Mental - C1 - 13:30 às 15:00 - Transtorno por uso de álcool e outras drogas - [ Marcos Antônio Mendonça ] , Saude mental
+27-04-26, S.Mental - C1 - 15:00 às 16:30 - Transtorno bipolar - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+28-04-26, FarmacoAplic - C1 - 08:30 às 10:00 - - [ ] , Farmacologia Aplicada
+28-04-26, FarmacoAplic - C1 - 14:00 às 15:30 - Exercícios sobre antibóticos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+28-04-26, FarmacoAplic - C1 - 15:30 às 17:00 - Exercícios sobre antibóticos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+28-04-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 3 – Experiência Imersiva na Ferramenta Spatial - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+29-04-26, PercInte2 - C1 - 14:00 às 16:00 - Simulação: Saúde Mental - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+29-04-26, PercInte2 - C1 - 16:00 às 18:00 - World Café: Saúde da Criança - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+30-04-26, SF5 - C1 - 14:00 às 15:45 - transtorno pelo uso de álcool - [ Natália Barreto e Sousa ] , Saúde da Família V
+30-04-26, SF5 - C1 - 16:15 às 18:00 - transtorno pelo uso de álcool - [ Natália Barreto e Sousa ] , Saúde da Família V
+04-05-26, PAPM5 - C1 - 08:30 às 10:00 - - [ ] , Programa de Aproximação à Prática Médica V
+04-05-26, S.Mental - C1 - 13:30 às 15:00 - Sessão clínica - [ Marcos Antônio Mendonça ] , Saude mental
+04-05-26, S.Mental - C1 - 15:00 às 16:30 - Sessão clínica - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+05-05-26, FarmacoAplic - C1 - 09:00 às 10:30 - Antifúngicos Parte 1 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+05-05-26, FarmacoAplic - C1 - 10:30 às 12:00 - Antifúngicos Parte 2 - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+05-05-26, Neuro - C1 - 15:00 às 16:00 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+05-05-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 4 – Limitações e Desafios da Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+07-05-26, Neuro - C1 - 14:00 às 15:30 - - [ ] , Neurologia
+08-05-26, Diag.Imag. - C1 - 14:00 às 17:00 - Abdome agudo I - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+08-05-26, FDM - C1 - 09:00 às 13:00 - exame fisico abdome - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+11-05-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+11-05-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+11-05-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+11-05-26, PAPM5 - C1 - 16:00 às 17:30 - Semiologia Respiratória - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+11-05-26, S.Mental - C1 - 08:30 às 10:00 - Transtornos neurocognitivos - [ Marcos Antônio Mendonça ] , Saude mental
+11-05-26, S.Mental - C1 - 10:00 às 11:30 - Transtornos alimentares - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+12-05-26, FarmacoAplic - C1 - 14:00 às 15:30 - Antiparasitários Parte 1 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+12-05-26, FarmacoAplic - C1 - 15:30 às 17:00 - Antiparasitários Parte 2 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+12-05-26, Neuro - C1 - 09:00 às 10:30 - COMA /TCE/ MORTE ENCEFÁLICA - [ Chan Tiel Yuen ] , Neurologia
+12-05-26, Neuro - C1 - 10:45 às 12:15 - DOENÇAS NEUROMUSCULARES - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+12-05-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 4 – Limitações e Desafios da Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+13-05-26, TP - C1 - - - [ ] , TESTE DE PROGRESSO
+15-05-26, Diag.Imag. - C1 - 09:00 às 12:00 - Abdome agudo II - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+15-05-26, FDM - C1 - 14:00 às 18:00 - tac abdome - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+18-05-26, PAPM5 - C1 - 08:30 às 10:00 - Ambulatório - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+18-05-26, PAPM5 - C1 - 10:30 às 12:00 - Consulta do adolescente - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+18-05-26, S.Mental - C1 - 13:30 às 15:00 - Transtornos neurocognitivos - [ Marcos Antônio Mendonça ] , Saude mental
+18-05-26, S.Mental - C1 - 15:00 às 16:30 - Transtornos alimentares - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+19-05-26, FarmacoAplic - C1 - 09:00 às 10:30 - Anticoagulantes parenterais - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+19-05-26, FarmacoAplic - C1 - 10:30 às 12:00 - Anticoagulantes orais - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+19-05-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+19-05-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+19-05-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+19-05-26, PercInov2 - C1 - 18:00 às 19:00 - 2º Encontro Presencial - Prática - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+20-05-26, PercInte2 - C1 - 14:00 às 18:00 - Caso Clínico: AVC - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+21-05-26, SF5 - C1 - 14:00 às 15:45 - Uso de maconha e cocaína - [ Natália Barreto e Sousa ] , Saúde da Família V
+21-05-26, SF5 - C1 - 16:15 às 18:00 - Uso de maconha e cocaína - [ Natália Barreto e Sousa ] , Saúde da Família V
+22-05-26, Diag.Imag. - C1 - 14:00 às 17:00 - Avaliação Radiológica do Fígado e das Vias Biliares; Avaliação Radiológica dos Rins e das Vias Urinárias - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+22-05-26, FDM - C1 - 09:00 às 13:00 - exame fisico respiratorio - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+25-05-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Melinda Soares Mendes Pinto ] , Programa de Aproximação à Prática Médica V
+25-05-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+25-05-26, PAPM5 - C1 - 16:00 às 17:30 - Semiologia Geniturinario - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+25-05-26, S.Mental - C1 - 08:30 às 10:00 - Suicídio - [ Marcos Antônio Mendonça ] , Saude mental
+25-05-26, S.Mental - C1 - 10:00 às 11:30 - Transtornos da personalidade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+26-05-26, FarmacoAplic - C1 - 14:00 às 15:30 - Bloqueadores de Canais de Cálcio - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+26-05-26, FarmacoAplic - C1 - 15:30 às 17:00 - Digitálicos - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+26-05-26, Neuro - C1 - 09:00 às 10:30 - NEUROPATIAS PERIFÉRICAS – CRANIANAS - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+26-05-26, Neuro - C1 - 10:45 às 12:15 - NEUROPATIAS PERIFÉRICAS – ESPINHAIS - [ Ivana Rocha Raslan ] , Neurologia
+26-05-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 4 – Limitações e Desafios da Realidade Virtual - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+27-05-26, PercInte2 - C1 - 16:00 às 18:00 - - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+27-05-26, PratExt5 - C1 - 14:00 às 15:30 - P2 PRÁTICA EXTENSIONISTA V - [ Alice Rangel Pradel ] , Prática Extensionista V
+29-05-26, Diag.Imag. - C1 - 09:00 às 12:00 - Avaliação Radiológica do Aparelho Reprodutor Feminino; Avaliação Radiológica do Aparelho Reprodutor Masculino - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+29-05-26, FDM - C1 - 14:00 às 18:00 - tac aparelho respiratóro - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+01-06-26, PAPM5 - C1 - 08:30 às 10:00 - Ambulatório - [ Thaís Rocha Salim ] , Programa de Aproximação à Prática Médica V
+01-06-26, PAPM5 - C1 - 10:30 às 12:00 - Semiologia Locomotor - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+01-06-26, S.Mental - C1 - 13:30 às 15:00 - Suicídio - [ Marcos Antônio Mendonça ] , Saude mental
+01-06-26, S.Mental - C1 - 15:00 às 16:30 - Transtornos da personalidade - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+02-06-26, FarmacoAplic - C1 - 09:00 às 10:30 - Benzodiazepinicos - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+02-06-26, FarmacoAplic - C1 - 10:30 às 12:00 - Barbitúricos - [ Fabiana dos Reis Oliveira ] , Farmacologia Aplicada
+02-06-26, Neuro - C1 - 14:00 às 15:30 - SIMULAÇÃO - [ Chan Tiel Yuen ] , Neurologia
+02-06-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 5 – Ética e Humanização no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+03-06-26, PratExt5 - C1 - 14:00 às 17:00 - OFICINA TERAPÊUTICA CAPS - [ Alice Rangel Pradel ] , Prática Extensionista V
+05-06-26, Diag.Imag. - C1 - 14:00 às 17:00 - Anatomia Neurorrádiológica; Imagem no AVE - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+05-06-26, FDM - C1 - 09:00 às 13:00 - exame fisico cardiovascular e pulso venoso - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+08-06-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+08-06-26, PAPM5 - C1 - 14:00 às 15:30 - Ambulatório - [ Paula Faria Souza Mussi de Andrade ] , Programa de Aproximação à Prática Médica V
+08-06-26, PAPM5 - C1 - 16:00 às 17:30 - Semiologia Neurologica - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+08-06-26, S.Mental - C1 - 08:30 às 10:00 - Espectro da esquizofrenia e outros transtornos psicóticos 2 - [ Marcos Antônio Mendonça ] , Saude mental
+08-06-26, S.Mental - C1 - 10:00 às 11:30 - Espectro da esquizofrenia e outros transtornos psicóticos 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+09-06-26, FarmacoAplic - C1 - 08:30 às 10:00 - - [ ] , Farmacologia Aplicada
+09-06-26, FarmacoAplic - C1 - 14:00 às 15:30 - Antiarritmicos Parte 1 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+09-06-26, FarmacoAplic - C1 - 15:30 às 17:00 - Antiarritmicos Parte 2 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+09-06-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 5 – Ética e Humanização no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+10-06-26, PercInte2 - C1 - 14:00 às 15:30 - OSCE - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+11-06-26, SF5 - C1 - 14:00 às 15:45 - Suicídio - [ Natália Barreto e Sousa ] , Saúde da Família V
+11-06-26, SF5 - C1 - 16:15 às 18:00 - Suicídio - [ Natália Barreto e Sousa ] , Saúde da Família V
+12-06-26, Diag.Imag. - C1 - 09:00 às 12:00 - Imagem no TCE; Exercícios de Revisão para a Prova Prática - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+12-06-26, FDM - C1 - 14:00 às 18:00 - TAC aparelho cardiovascular e Pulso venoso - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+15-06-26, PAPM5 - C1 - 08:30 às 10:00 - Ambulatório - [ Natália Kopke Soares Nascimento ] , Programa de Aproximação à Prática Médica V
+15-06-26, PAPM5 - C1 - 10:30 às 12:00 - TBL - [ Juliana Coelho Braga ] , Programa de Aproximação à Prática Médica V
+15-06-26, S.Mental - C1 - 13:30 às 15:00 - Espectro da esquizofrenia e outros transtornos psicóticos 2 - [ Marcos Antônio Mendonça ] , Saude mental
+15-06-26, S.Mental - C1 - 15:00 às 16:30 - Espectro da esquizofrenia e outros transtornos psicóticos 1 - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+16-06-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ana Beatriz Calmon Nogueira da Gama Pereira ] , Neurologia
+16-06-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Ivana Rocha Raslan ] , Neurologia
+16-06-26, Neuro - C1 - 15:00 às 16:00 - AMBULATÓRIO DOCENTE - [ Vanessa Conceição Saar Maltone Lima ] , Neurologia
+16-06-26, PercInov2 - C1 - 18:00 às 19:00 - Estudos orientados (AVA) – Módulo 5 – Ética e Humanização no Metaverso - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+16-06-26, S.Mental - C1 - 08:30 às 10:00 - - [ ] , Saude mental
+17-06-26, PercInte2 - C1 - 16:00 às 18:00 - - [ Bruna Ferreira Di Palma Queiroz ] , Percurso Integrador II
+17-06-26, PratExt5 - C1 - 14:00 às 15:30 - PRODUTOS EXTENSIONISTAS - [ Alice Rangel Pradel ] , Prática Extensionista V
+18-06-26, Diag.Imag. - C1 - 08:30 às 10:00 - - [ ] , Diagnóstico por imagem
+19-06-26, Diag.Imag. - C1 - 14:00 às 17:00 - Avaliação Radiológica dos Seios da Face e Mastoide; Revisão de Prova - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+19-06-26, FDM - C1 - 09:00 às 13:00 - OSCE P2 - [ Filipe de Oliveira Lopes Rêgo ] , Fundamentos do Diagnóstico Médico
+22-06-26, PAPM5 - C1 - 14:00 às 15:30 - - [ ] , Programa de Aproximação à Prática Médica V
+22-06-26, S.Mental - C1 - 08:30 às 10:00 - Sessão clínica - [ Marcos Antônio Mendonça ] , Saude mental
+22-06-26, S.Mental - C1 - 10:00 às 11:30 - Sessão clínica - [ Jaime Augusto Nunes Rodrigues ] , Saude mental
+23-06-26, FarmacoAplic - C1 - 14:00 às 15:30 - Opioides Parte 1 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+23-06-26, FarmacoAplic - C1 - 15:30 às 17:00 - Opioides Parte 2 - [ Gabriel Porto Soares ] , Farmacologia Aplicada
+23-06-26, Neuro - C1 - 09:00 às 10:00 - PROVA PRÁTICA - [ Chan Tiel Yuen ] , Neurologia
+23-06-26, PercInov2 - C1 - 18:00 às 19:00 - Atividade Final de Encerramento / Checklist de Conclusão - [ Anrafel Fernandes Pereira ] , Percurso Inovador II
+24-06-26, SF5 - C1 - 14:00 às 15:30 - - [ ] , Saúde da Família V
+25-06-26, SF5 - C1 - 14:00 às 15:45 - Revisão - [ Natália Barreto e Sousa ] , Saúde da Família V
+25-06-26, SF5 - C1 - 16:15 às 18:00 - Revisão - [ Natália Barreto e Sousa ] , Saúde da Família V
+26-06-26, Diag.Imag. - C1 - 14:00 às 17:00 - Revisão prova final - [ Amanda de Almeida Jannuzzi Mendes ] , Diagnóstico por imagem
+26-06-26, Neuro - C1 - 08:30 às 10:00 - - [ ] , Neurologia

@@ -30,6 +30,23 @@ export async function validateAcesso(userId, materiaId, isVIP) {
     return {status: "vip", grupo: data?.grupo || 1, trial_expires_at: null};
   }
 
+  // Module expiration check (non-VIP users lose access after module end date)
+  if (new Date() > MODULE_END_DATE) return null;
+
+  // Check active subscription (gives access to ALL materias)
+  const {data: sub} = await supabase.from("subscriptions")
+    .select("status,current_period_end")
+    .eq("user_id", userId)
+    .in("status", ["authorized", "paused"])
+    .maybeSingle();
+
+  if (sub && sub.current_period_end && new Date(sub.current_period_end) > new Date()) {
+    const {data: acesso} = await supabase.from("acessos").select("grupo")
+      .eq("user_id", userId).eq("materia", materiaId).maybeSingle();
+    return {status: "subscriber", grupo: acesso?.grupo || 1, trial_expires_at: null};
+  }
+
+  // Check per-materia access (avulso or trial)
   const {data, error} = await supabase.from("acessos").select("status,grupo,trial_expires_at")
     .eq("user_id",userId).eq("materia",materiaId).single();
   if (error && error.code !== "PGRST116") console.error("validateAcesso:", error.message);
@@ -41,9 +58,6 @@ export async function validateAcesso(userId, materiaId, isVIP) {
   const trialActive = data.status === 'trial' &&
                       data.trial_expires_at &&
                       new Date(data.trial_expires_at) > now;
-
-  // Module expiration check (non-VIP users lose access after module end date)
-  if (new Date() > MODULE_END_DATE) return null;
 
   // Access granted if: paid OR trial is active
   const hasAccess = data.status === 'aprovado' || trialActive;

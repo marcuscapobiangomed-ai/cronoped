@@ -1,5 +1,6 @@
 // Supabase Edge Function: mp-webhook
 // Recebe notificações do Mercado Pago (IPN v1 query params + IPN v2 body JSON)
+// Suporta: pagamentos avulsos (topic=payment) + assinaturas (topic=preapproval)
 // Deploy: supabase functions deploy mp-webhook
 // Config: verify_jwt = false (chamada externa pelo MP)
 //
@@ -55,212 +56,337 @@ async function verifySignature(req: Request, dataId: string): Promise<boolean> {
   return computed === v1;
 }
 
+// ─── Handler de assinatura (preapproval) ─────────────────────────
+async function handlePreapproval(preapprovalId: string) {
+  // Buscar status da assinatura no MP
+  const mpResp = await fetch(`https://api.mercadopago.com/preapproval/${preapprovalId}`, {
+    headers: { "Authorization": `Bearer ${MP_TOKEN}` },
+  });
+
+  if (!mpResp.ok) {
+    console.error(`Erro ao consultar preapproval MP: status=${mpResp.status}`);
+    return new Response("mp error", { status: 502 });
+  }
+
+  const preapproval = await mpResp.json();
+  const extRef = preapproval.external_reference || "";
+
+  // Validar formato: sub|userId
+  if (!extRef.startsWith("sub|")) {
+    console.log(`preapproval sem external_reference sub|: ${extRef}`);
+    return new Response("ok", { status: 200 });
+  }
+
+  const userId = extRef.split("|")[1];
+  if (!userId) {
+    console.warn(`preapproval userId vazio: ${extRef}`);
+    return new Response("ok", { status: 200 });
+  }
+
+  const mpStatus = preapproval.status; // authorized, pending, paused, cancelled
+
+  if (mpStatus === "authorized") {
+    // Assinatura ativa — calcular fim do período (+30 dias)
+    const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+
+    await supabase.from("subscriptions").update({
+      status: "authorized",
+      current_period_end: periodEnd,
+      cancelled_at: null,
+      updated_at: new Date().toISOString(),
+    }).eq("user_id", userId);
+
+    await supabase.from("eventos").insert({
+      user_id: userId,
+      type: "subscription_authorized",
+      meta: { mp_preapproval_id: preapprovalId },
+    });
+
+    console.log(`Assinatura autorizada: user=${userId} period_end=${periodEnd}`);
+
+  } else if (mpStatus === "paused") {
+    await supabase.from("subscriptions").update({
+      status: "paused",
+      updated_at: new Date().toISOString(),
+    }).eq("user_id", userId);
+
+    await supabase.from("eventos").insert({
+      user_id: userId,
+      type: "subscription_paused",
+      meta: { mp_preapproval_id: preapprovalId },
+    });
+
+    console.log(`Assinatura pausada: user=${userId}`);
+
+  } else if (mpStatus === "cancelled") {
+    await supabase.from("subscriptions").update({
+      status: "cancelled",
+      cancelled_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }).eq("user_id", userId);
+
+    await supabase.from("eventos").insert({
+      user_id: userId,
+      type: "subscription_cancelled",
+      meta: { mp_preapproval_id: preapprovalId },
+    });
+
+    console.log(`Assinatura cancelada: user=${userId}`);
+  }
+
+  return new Response("ok", { status: 200 });
+}
+
+// ─── Handler de pagamento (avulso ou recorrente) ─────────────────
+async function handlePayment(paymentId: string) {
+  // Busca detalhes do pagamento no MP (fonte de verdade)
+  const mpResp = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+    headers: { "Authorization": `Bearer ${MP_TOKEN}` }
+  });
+
+  if (!mpResp.ok) {
+    console.error(`Erro ao consultar MP: status=${mpResp.status}`);
+    return new Response("mp error", { status: 502 });
+  }
+
+  const payment = await mpResp.json();
+
+  if (!payment.external_reference) {
+    console.log(`webhook sem external_reference: payment=${paymentId} status=${payment.status}`);
+    return new Response("ok", { status: 200 });
+  }
+
+  const extRef = payment.external_reference;
+
+  // ─── Pagamento de assinatura recorrente ───
+  if (extRef.startsWith("sub|")) {
+    const userId = extRef.split("|")[1];
+
+    if (payment.status === "approved") {
+      // Renovar período: +30 dias a partir de agora
+      const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+
+      await supabase.from("subscriptions").update({
+        status: "authorized",
+        current_period_end: periodEnd,
+        updated_at: new Date().toISOString(),
+      }).eq("user_id", userId);
+
+      await supabase.from("eventos").insert({
+        user_id: userId,
+        type: "subscription_payment",
+        meta: { mp_payment_id: String(payment.id), valor: payment.transaction_amount },
+      });
+
+      console.log(`Pagamento recorrente aprovado: user=${userId} period_end=${periodEnd}`);
+    } else if (payment.status === "rejected") {
+      await supabase.from("eventos").insert({
+        user_id: userId,
+        type: "subscription_payment_failed",
+        meta: { mp_payment_id: String(payment.id), status_detail: payment.status_detail },
+      });
+      console.log(`Pagamento recorrente rejeitado: user=${userId}`);
+    }
+
+    return new Response("ok", { status: 200 });
+  }
+
+  // ─── Pagamento avulso (formato userId|materia|grupo) ───
+  const refParts = extRef.split("|");
+  if (refParts.length !== 3) {
+    console.warn(`external_reference formato invalido: ${extRef}`);
+    return new Response("invalid ref", { status: 400 });
+  }
+
+  const [userId, materia, grupo] = refParts;
+  if (!userId || !materia || !grupo) {
+    console.warn(`external_reference com campos vazios: ${extRef}`);
+    return new Response("invalid ref", { status: 400 });
+  }
+
+  const grupoNum = parseInt(grupo);
+  if (isNaN(grupoNum) || grupoNum < 1) {
+    console.warn(`grupo invalido: ${grupo}`);
+    return new Response("invalid ref", { status: 400 });
+  }
+
+  if (payment.status === "approved") {
+    // Idempotencia: so atualizar se ainda nao esta aprovado
+    const { data: existing, error: selErr } = await supabase
+      .from("acessos")
+      .select("status")
+      .eq("user_id", userId)
+      .eq("materia", materia)
+      .maybeSingle();
+
+    if (selErr) {
+      console.error(`Erro ao consultar acesso: ${selErr.message}`);
+      return new Response("db error", { status: 500 });
+    }
+
+    if (existing?.status === "aprovado") {
+      console.log(`Acesso ja aprovado (duplicado): user=${userId} materia=${materia}`);
+      return new Response("ok", { status: 200 });
+    }
+
+    const valorPago = payment.transaction_amount || null;
+
+    if (!existing) {
+      const { error } = await supabase.from("acessos").insert({
+        user_id: userId, materia, grupo: grupoNum,
+        status: "aprovado", mp_payment_id: String(payment.id),
+        valor_pago: valorPago,
+      });
+      if (error) {
+        console.error(`Erro ao inserir acesso: ${error.message}`);
+        return new Response("db error", { status: 500 });
+      }
+    } else {
+      const { error } = await supabase.from("acessos").update({
+        status: "aprovado",
+        grupo: grupoNum,
+        mp_payment_id: String(payment.id),
+        valor_pago: valorPago,
+      }).eq("user_id", userId).eq("materia", materia);
+
+      if (error) {
+        console.error(`Erro ao atualizar acesso: ${error.message}`);
+        return new Response("db error", { status: 500 });
+      }
+    }
+
+    // Log payment_success event
+    await supabase.from("eventos").insert({
+      user_id: userId,
+      type: "payment_success",
+      meta: { materia, grupo: grupoNum, mp_payment_id: String(payment.id), valor_pago: valorPago },
+    });
+
+    // Creditar comissão ao afiliado (se usuário foi indicado)
+    if (valorPago && valorPago > 0) {
+      try {
+        const { data: referralData } = await supabase
+          .from("profiles")
+          .select("referred_by")
+          .eq("id", userId)
+          .single();
+
+        if (referralData?.referred_by) {
+          const { data: affiliate } = await supabase
+            .from("profiles")
+            .select("id")
+            .eq("referral_code", referralData.referred_by)
+            .single();
+
+          if (affiliate) {
+            const { data: existingComm } = await supabase
+              .from("affiliate_commissions")
+              .select("id")
+              .eq("referred_user_id", userId)
+              .eq("materia", materia)
+              .maybeSingle();
+
+            if (existingComm) {
+              console.log(`Comissão já existe (idempotente): referred=${userId} materia=${materia}`);
+            } else {
+              const { data: paidRefs } = await supabase
+                .from("affiliate_commissions")
+                .select("referred_user_id")
+                .eq("affiliate_user_id", affiliate.id);
+              const existingUsers = new Set((paidRefs || []).map((r: { referred_user_id: string }) => r.referred_user_id));
+              const isNewUser = !existingUsers.has(userId);
+              const totalDistinct = existingUsers.size + (isNewUser ? 1 : 0);
+              const comissaoPct = totalDistinct <= 5 ? 10.00 : totalDistinct <= 20 ? 20.00 : totalDistinct <= 40 ? 30.00 : 40.00;
+              const comissaoValor = Math.round(valorPago * comissaoPct) / 100;
+
+              await supabase.from("affiliate_commissions").insert({
+                affiliate_user_id: affiliate.id,
+                referred_user_id: userId,
+                materia,
+                valor_venda: valorPago,
+                comissao_pct: comissaoPct,
+                comissao_valor: comissaoValor,
+              });
+
+              await supabase.from("eventos").insert({
+                user_id: affiliate.id,
+                type: "affiliate_commission",
+                meta: { referred_user_id: userId, materia, valor_venda: valorPago, comissao: comissaoValor },
+              });
+
+              console.log(`Comissão criada: afiliado=${affiliate.id} valor=R$${comissaoValor} ref=${referralData.referred_by}`);
+            }
+          }
+        }
+      } catch (affErr) {
+        console.error("Erro ao processar comissão de afiliado:", affErr);
+      }
+    }
+
+    console.log(`Acesso liberado: user=${userId} materia=${materia} grupo=${grupo}`);
+
+  } else if (payment.status === "rejected" || payment.status === "cancelled") {
+    await supabase.from("eventos").insert({
+      user_id: userId,
+      type: "payment_failed",
+      meta: {
+        materia, grupo: grupoNum,
+        mp_payment_id: String(payment.id),
+        mp_status: payment.status,
+        mp_status_detail: payment.status_detail || "",
+      },
+    });
+    console.log(`Pagamento ${payment.status}: user=${userId} materia=${materia} detail=${payment.status_detail}`);
+  }
+
+  return new Response("ok", { status: 200 });
+}
+
+// ─── Entry point ─────────────────────────────────────────────────
 Deno.serve(async (req) => {
   try {
     // Extrair topic + id — suporta AMBOS os formatos do MP
     const url = new URL(req.url);
     let topic = url.searchParams.get("topic") || url.searchParams.get("type");
-    let paymentId = url.searchParams.get("id") || url.searchParams.get("data.id");
+    let dataId = url.searchParams.get("id") || url.searchParams.get("data.id");
 
     // Fallback: IPN V2 body JSON ({"type":"payment","data":{"id":"123"}})
-    let bodyText: string | null = null;
-    if (!paymentId && req.method === "POST") {
+    if (!dataId && req.method === "POST") {
       try {
-        bodyText = await req.text();
+        const bodyText = await req.text();
         const body = JSON.parse(bodyText);
         if (!topic) topic = body.type || body.topic;
-        if (!paymentId) paymentId = body.data?.id?.toString() || body.id?.toString();
+        if (!dataId) dataId = body.data?.id?.toString() || body.id?.toString();
       } catch { /* body não é JSON, ignorar */ }
     }
 
-    if (topic !== "payment" || !paymentId) {
+    if (!dataId) {
       return new Response("ok", { status: 200 });
     }
 
-    // Validar que id é numérico
-    if (!/^\d+$/.test(paymentId)) {
-      console.warn(`webhook id invalido: ${paymentId}`);
-      return new Response("invalid id", { status: 400 });
-    }
-
     // Validar assinatura X-Signature do Mercado Pago
-    const sigValid = await verifySignature(req, paymentId);
+    const sigValid = await verifySignature(req, dataId);
     if (!sigValid) {
       console.warn("webhook signature invalida");
       return new Response("invalid signature", { status: 401 });
     }
 
-    // Busca detalhes do pagamento no MP (fonte de verdade)
-    const mpResp = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-      headers: { "Authorization": `Bearer ${MP_TOKEN}` }
-    });
-
-    if (!mpResp.ok) {
-      console.error(`Erro ao consultar MP: status=${mpResp.status}`);
-      return new Response("mp error", { status: 502 });
+    // Rotear por topic
+    if (topic === "preapproval") {
+      return await handlePreapproval(dataId);
     }
 
-    const payment = await mpResp.json();
-
-    if (!payment.external_reference) {
-      console.log(`webhook sem external_reference: payment=${paymentId} status=${payment.status}`);
-      return new Response("ok", { status: 200 });
-    }
-
-    const refParts = payment.external_reference.split("|");
-    if (refParts.length !== 3) {
-      console.warn(`external_reference formato invalido: ${payment.external_reference}`);
-      return new Response("invalid ref", { status: 400 });
-    }
-
-    const [userId, materia, grupo] = refParts;
-    if (!userId || !materia || !grupo) {
-      console.warn(`external_reference com campos vazios: ${payment.external_reference}`);
-      return new Response("invalid ref", { status: 400 });
-    }
-
-    const grupoNum = parseInt(grupo);
-    if (isNaN(grupoNum) || grupoNum < 1) {
-      console.warn(`grupo invalido: ${grupo}`);
-      return new Response("invalid ref", { status: 400 });
-    }
-
-    if (payment.status === "approved") {
-      // Idempotencia: so atualizar se ainda nao esta aprovado
-      const { data: existing, error: selErr } = await supabase
-        .from("acessos")
-        .select("status")
-        .eq("user_id", userId)
-        .eq("materia", materia)
-        .maybeSingle();
-
-      if (selErr) {
-        console.error(`Erro ao consultar acesso: ${selErr.message}`);
-        return new Response("db error", { status: 500 });
+    if (topic === "payment") {
+      if (!/^\d+$/.test(dataId)) {
+        console.warn(`webhook payment id invalido: ${dataId}`);
+        return new Response("invalid id", { status: 400 });
       }
-
-      if (existing?.status === "aprovado") {
-        console.log(`Acesso ja aprovado (duplicado): user=${userId} materia=${materia}`);
-        return new Response("ok", { status: 200 });
-      }
-
-      const valorPago = payment.transaction_amount || null;
-
-      if (!existing) {
-        // Registro pending nao existe (usuario cancelou?) — criar direto
-        const { error } = await supabase.from("acessos").insert({
-          user_id: userId, materia, grupo: grupoNum,
-          status: "aprovado", mp_payment_id: String(payment.id),
-          valor_pago: valorPago,
-        });
-        if (error) {
-          console.error(`Erro ao inserir acesso: ${error.message}`);
-          return new Response("db error", { status: 500 });
-        }
-      } else {
-        const { error } = await supabase.from("acessos").update({
-          status: "aprovado",
-          grupo: grupoNum,
-          mp_payment_id: String(payment.id),
-          valor_pago: valorPago,
-        }).eq("user_id", userId).eq("materia", materia);
-
-        if (error) {
-          console.error(`Erro ao atualizar acesso: ${error.message}`);
-          return new Response("db error", { status: 500 });
-        }
-      }
-
-      // Log payment_success event
-      await supabase.from("eventos").insert({
-        user_id: userId,
-        type: "payment_success",
-        meta: { materia, grupo: grupoNum, mp_payment_id: String(payment.id), valor_pago: valorPago },
-      });
-
-      // Creditar comissão ao afiliado (se usuário foi indicado)
-      if (valorPago && valorPago > 0) {
-        try {
-          const { data: referralData } = await supabase
-            .from("profiles")
-            .select("referred_by")
-            .eq("id", userId)
-            .single();
-
-          if (referralData?.referred_by) {
-            const { data: affiliate } = await supabase
-              .from("profiles")
-              .select("id")
-              .eq("referral_code", referralData.referred_by)
-              .single();
-
-            if (affiliate) {
-              // Idempotência: verificar se comissão já existe para este (referred_user_id, materia)
-              const { data: existingComm } = await supabase
-                .from("affiliate_commissions")
-                .select("id")
-                .eq("referred_user_id", userId)
-                .eq("materia", materia)
-                .maybeSingle();
-
-              if (existingComm) {
-                console.log(`Comissão já existe (idempotente): referred=${userId} materia=${materia}`);
-              } else {
-                // Comissão progressiva: baseada no total de PAGANTES DISTINTOS que o afiliado já trouxe
-                // 1-5: 10%, 6-20: 20%, 21-40: 30%, 41+: 40%
-                const { data: paidRefs } = await supabase
-                  .from("affiliate_commissions")
-                  .select("referred_user_id")
-                  .eq("affiliate_user_id", affiliate.id);
-                const existingUsers = new Set((paidRefs || []).map((r: { referred_user_id: string }) => r.referred_user_id));
-                const isNewUser = !existingUsers.has(userId);
-                const totalDistinct = existingUsers.size + (isNewUser ? 1 : 0);
-                const comissaoPct = totalDistinct <= 5 ? 10.00 : totalDistinct <= 20 ? 20.00 : totalDistinct <= 40 ? 30.00 : 40.00;
-                const comissaoValor = Math.round(valorPago * comissaoPct) / 100;
-
-                await supabase.from("affiliate_commissions").insert({
-                  affiliate_user_id: affiliate.id,
-                  referred_user_id: userId,
-                  materia,
-                  valor_venda: valorPago,
-                  comissao_pct: comissaoPct,
-                  comissao_valor: comissaoValor,
-                });
-
-                await supabase.from("eventos").insert({
-                  user_id: affiliate.id,
-                  type: "affiliate_commission",
-                  meta: { referred_user_id: userId, materia, valor_venda: valorPago, comissao: comissaoValor },
-                });
-
-                console.log(`Comissão criada: afiliado=${affiliate.id} valor=R$${comissaoValor} ref=${referralData.referred_by}`);
-              }
-            }
-          }
-        } catch (affErr) {
-          console.error("Erro ao processar comissão de afiliado:", affErr);
-          // Não falhar o webhook por causa de erro na comissão
-        }
-      }
-
-      console.log(`Acesso liberado: user=${userId} materia=${materia} grupo=${grupo}`);
-
-    } else if (payment.status === "rejected" || payment.status === "cancelled") {
-      // Logar pagamento rejeitado/cancelado para visibilidade no admin
-      await supabase.from("eventos").insert({
-        user_id: userId,
-        type: "payment_failed",
-        meta: {
-          materia, grupo: grupoNum,
-          mp_payment_id: String(payment.id),
-          mp_status: payment.status,
-          mp_status_detail: payment.status_detail || "",
-        },
-      });
-      console.log(`Pagamento ${payment.status}: user=${userId} materia=${materia} detail=${payment.status_detail}`);
+      return await handlePayment(dataId);
     }
 
+    // Topic desconhecido — aceitar silenciosamente
     return new Response("ok", { status: 200 });
+
   } catch (err) {
     console.error("Webhook error:", err);
     return new Response("internal error", { status: 500 });

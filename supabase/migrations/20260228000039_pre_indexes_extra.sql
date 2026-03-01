@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_pre_affiliate_commissions_affiliate ON pre_affiliate_commissions(affiliate_user_id);

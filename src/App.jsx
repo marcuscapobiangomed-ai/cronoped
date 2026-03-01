@@ -88,6 +88,19 @@ export default function App() {
             }
           }
         }
+
+        // After subscription return: poll until authorized, then go to dashboard
+        const subStatus = params.get("subscription");
+        if (subStatus === "pending") {
+          window.history.replaceState({}, document.title, window.location.pathname);
+          for (let i = 0; i < 20; i++) {
+            const {data: sub} = await supabase.from("subscriptions").select("status")
+              .eq("user_id", session.user.id).maybeSingle();
+            if (sub?.status === "authorized") break;
+            await new Promise(r => setTimeout(r, 1500));
+          }
+        }
+
         setView("dashboard");
       } else {
         setView("auth");
@@ -135,6 +148,7 @@ export default function App() {
   }
 
   async function handleLogout() {
+    logEvent("logout");
     await endSession();
     await supabase.auth.signOut();
   }

@@ -25,3 +25,12 @@ npm-debug.log*
 
 # MCP config (contains API keys)
 .mcp.json
+
+# Claude Code local config
+.claude/
+
+# Python cache
+__pycache__/
+
+# TestSprite local tests
+testsprite_tests/

@@ -26,10 +26,16 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
   const [affCopied,       setAffCopied]       = useState(false);
   const [showTutorial,    setShowTutorial]    = useState(false);
   const [tutorialStep,    setTutorialStep]    = useState(0);
+  const [subscription,    setSubscription]    = useState(null); // {status, current_period_end}
+  const [subscribing,     setSubscribing]     = useState(false);
 
   const now = new Date();
   const isVIP = !!profile?.is_vip;
   const moduleExpired = !isVIP && now > MODULE_END_DATE;
+  const isSubscriber = subscription &&
+    ['authorized', 'paused'].includes(subscription.status) &&
+    subscription.current_period_end &&
+    new Date(subscription.current_period_end) > now;
 
   // Derived: does user have ANY active trial?
   const hasActiveTrial = Object.values(acessos).some(
@@ -37,8 +43,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
   );
   // Derived: has user ever used a trial? (has any trial record, active or expired)
   const hasUsedTrial = Object.values(acessos).some(a => a.status === "trial");
-  // Derived: does user have any active access at all? (trial, paid, or VIP)
-  const hasAnyAccess = isVIP || Object.values(acessos).some(a => {
+  // Derived: does user have any active access at all? (trial, paid, VIP, or subscriber)
+  const hasAnyAccess = isVIP || isSubscriber || Object.values(acessos).some(a => {
     if (a.status === "aprovado") return true;
     if (a.status === "trial" && a.trial_expires_at && new Date(a.trial_expires_at) > now) return true;
     return false;
@@ -70,11 +76,20 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       });
   },[user.id]);
 
+  useEffect(() => {
+    supabase.from("subscriptions").select("status,current_period_end")
+      .eq("user_id", user.id).maybeSingle()
+      .then(({data}) => { if (data) setSubscription(data); });
+  }, [user.id]);
+
   async function reloadAcessos() {
     const {data} = await supabase.from("acessos").select("materia,grupo,status,trial_expires_at").eq("user_id",user.id);
     const map = {};
     (data||[]).forEach(a=>{ map[a.materia] = {grupo:a.grupo, status:a.status, trial_expires_at:a.trial_expires_at}; });
     setAcessos(map);
+    const {data: sub} = await supabase.from("subscriptions").select("status,current_period_end")
+      .eq("user_id", user.id).maybeSingle();
+    if (sub) setSubscription(sub);
   }
 
   function toggleCardExpand(materiaId) {
@@ -232,6 +247,51 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       console.error("cancelarPendente:", err.message);
     }
     setCancelingId(null);
+  }
+
+  async function handleSubscribe() {
+    setSubscribing(true);
+    try {
+      const { data: { session: sess } } = await supabase.auth.getSession();
+      let token = sess?.access_token;
+      if (!token) {
+        alert("Sessão expirada. Faça login novamente.");
+        setSubscribing(false);
+        return;
+      }
+      let resp = await fetch(`${SUPABASE_URL}/functions/v1/create-subscription`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+          "apikey": SUPABASE_ANON_KEY,
+        },
+      });
+      if (resp.status === 401) {
+        const { data: refreshData } = await supabase.auth.refreshSession();
+        token = refreshData?.session?.access_token;
+        if (!token) { alert("Sessão expirada. Faça login novamente."); setSubscribing(false); return; }
+        resp = await fetch(`${SUPABASE_URL}/functions/v1/create-subscription`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`, "apikey": SUPABASE_ANON_KEY },
+        });
+      }
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        alert(err.error || "Erro ao criar assinatura.");
+        setSubscribing(false);
+        return;
+      }
+      const data = await resp.json();
+      if (data.init_point) {
+        logEvent("subscription_attempt", {});
+        window.location.href = data.init_point;
+      }
+    } catch (err) {
+      console.error("handleSubscribe:", err);
+      alert("Erro de conexão. Tente novamente.");
+      setSubscribing(false);
+    }
   }
 
   // Affiliate functions
@@ -404,7 +464,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       )}
 
       {/* === ONBOARDING MODAL === */}
-      {showOnboarding && (
+      {showOnboarding && !isSubscriber && (
         <div style={overlayStyle} onClick={() => setShowOnboarding(false)}>
           <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"#fff",borderRadius:20,padding:"32px 28px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
             <div style={{textAlign:"center",marginBottom:20}}>
@@ -425,12 +485,18 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   Cada matéria é vendida separadamente. O acesso vale até <strong>08/05/2026</strong>.
                 </div>
               </div>
-              <div style={{background:"#F0FDF4",borderRadius:10,padding:"14px 16px"}}>
+              <div style={{background:"#F0FDF4",borderRadius:10,padding:"14px 16px",marginBottom:12}}>
                 <div style={{fontSize:13,fontWeight:700,color:"#059669",marginBottom:6}}>PIX a partir de R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
                 <div style={{fontSize:12,color:"#475569"}}>
                   {profile?.referred_by
                     ? "Desconto de afiliado aplicado! Economize R$ 4,00 via PIX."
                     : "Pague via PIX e economize R$ 1,00 em cada matéria!"}
+                </div>
+              </div>
+              <div style={{background:"#EEF2FF",borderRadius:10,padding:"14px 16px"}}>
+                <div style={{fontSize:13,fontWeight:700,color:"#6366F1",marginBottom:6}}>Ou assine por R$ 9,90/mês</div>
+                <div style={{fontSize:12,color:"#475569"}}>
+                  Acesso a <strong>todas as matérias</strong> por mês. Cancele quando quiser.
                 </div>
               </div>
             </div>
@@ -466,8 +532,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                 Grupo {trialConfirm.materia.grupoLabels?.[trialConfirm.grupo] ?? trialConfirm.grupo}
               </div>
             </div>
-            <div style={{fontSize:12,color:"#92400E",background:"#FEF3C7",borderRadius:8,padding:"10px 12px",marginBottom:16,textAlign:"center"}}>
-              Você só pode testar <strong>1 matéria</strong> durante o trial. Escolha com atenção!
+            <div style={{fontSize:12,color:"#92400E",background:"#FEF3C7",borderRadius:8,padding:"10px 12px",marginBottom:16,lineHeight:1.5}}>
+              <strong>Atenção:</strong> Você tem direito a <strong>apenas 1 trial gratuito</strong> de 3 dias em todo o sistema. Após expirar, não será possível ativar outro trial em nenhuma matéria. Escolha com atenção!
             </div>
             <div style={{display:"flex",gap:10}}>
               <button
@@ -523,24 +589,84 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       </div>
 
       <div style={{maxWidth:1100,margin:"0 auto",padding:"16px 20px"}}>
-        {/* Banner Promoção PIX */}
-        <div style={{background:"linear-gradient(135deg,#059669 0%,#10B981 100%)",borderRadius:14,padding:"12px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
-          <div>
-            <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
-              Promoção PIX: R$ 16,90 <span style={{fontSize:12,fontWeight:600,opacity:0.9}}>(economia de R$ 4,00!)</span>
-            </div>
-            <div style={{fontSize:12,color:"#D1FAE5"}}>
-              Acesso por módulo · Válido até 08/05/2026
-            </div>
-          </div>
-          <div style={{background:"#fff",borderRadius:8,padding:"6px 14px",display:"flex",alignItems:"center",gap:6}}>
-            <span style={{fontSize:18}}>💰</span>
+        {/* Banner Promoção PIX — só para quem tem link de afiliado */}
+        {profile?.referred_by ? (
+          <div style={{background:"linear-gradient(135deg,#059669 0%,#10B981 100%)",borderRadius:14,padding:"12px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
             <div>
-              <div style={{fontSize:11,color:"#64748B",lineHeight:1}}>no PIX</div>
-              <div style={{fontSize:16,fontWeight:800,color:"#059669"}}>R$ 16,90</div>
+              <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
+                Promoção PIX: R$ 16,90 <span style={{fontSize:12,fontWeight:600,opacity:0.9}}>(economia de R$ 4,00!)</span>
+              </div>
+              <div style={{fontSize:12,color:"#D1FAE5"}}>
+                Desconto de afiliado aplicado · Válido até 08/05/2026
+              </div>
+            </div>
+            <div style={{background:"#fff",borderRadius:8,padding:"6px 14px",display:"flex",alignItems:"center",gap:6}}>
+              <span style={{fontSize:18}}>💰</span>
+              <div>
+                <div style={{fontSize:11,color:"#64748B",lineHeight:1}}>no PIX</div>
+                <div style={{fontSize:16,fontWeight:800,color:"#059669"}}>R$ 16,90</div>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div style={{background:"linear-gradient(135deg,#0F172A 0%,#1E293B 100%)",borderRadius:14,padding:"12px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
+            <div>
+              <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
+                PIX: R$ 19,90 por matéria
+              </div>
+              <div style={{fontSize:12,color:"#94A3B8"}}>
+                Acesso por módulo · Válido até 08/05/2026
+              </div>
+            </div>
+            <div style={{background:"#fff",borderRadius:8,padding:"6px 14px",display:"flex",alignItems:"center",gap:6}}>
+              <span style={{fontSize:18}}>💰</span>
+              <div>
+                <div style={{fontSize:11,color:"#64748B",lineHeight:1}}>no PIX</div>
+                <div style={{fontSize:16,fontWeight:800,color:"#0F172A"}}>R$ 19,90</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Banner Assinatura Mensal */}
+        {!isVIP && !isSubscriber && (
+          <div style={{background:"linear-gradient(135deg,#6366F1 0%,#8B5CF6 100%)",borderRadius:14,padding:"14px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
+            <div>
+              <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
+                Assinatura Mensal: R$ 9,90/mês
+              </div>
+              <div style={{fontSize:12,color:"#E0E7FF"}}>
+                Acesso a TODAS as matérias · Cancele quando quiser
+              </div>
+            </div>
+            <button
+              onClick={handleSubscribe}
+              disabled={subscribing}
+              style={{background:"#fff",border:"none",borderRadius:10,padding:"10px 20px",cursor:"pointer",fontWeight:800,color:"#6366F1",fontSize:14,transition:"all 0.2s"}}
+            >
+              {subscribing ? "Redirecionando…" : "Assinar"}
+            </button>
+          </div>
+        )}
+        {isSubscriber && (
+          <div style={{background:"linear-gradient(135deg,#059669 0%,#10B981 100%)",borderRadius:14,padding:"14px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
+            <div>
+              <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
+                Assinatura ativa
+              </div>
+              <div style={{fontSize:12,color:"#D1FAE5"}}>
+                Acesso completo a todas as matérias · Válido até {new Date(subscription.current_period_end).toLocaleDateString("pt-BR")}
+              </div>
+            </div>
+            <div style={{background:"#fff",borderRadius:8,padding:"6px 14px",display:"flex",alignItems:"center",gap:6}}>
+              <span style={{fontSize:18}}>✓</span>
+              <div>
+                <div style={{fontSize:11,color:"#64748B",lineHeight:1}}>mensal</div>
+                <div style={{fontSize:16,fontWeight:800,color:"#059669"}}>R$ 9,90</div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Banner módulo expirado */}
         {moduleExpired && (
@@ -556,9 +682,11 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
 
         <h2 style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:4}}>Escolha sua matéria</h2>
         <p style={{fontSize:13,color:"#64748B",marginBottom:12}}>
-          {!hasActiveTrial && !hasUsedTrial && !isVIP
-            ? "3 dias grátis para 1 matéria · Depois, a partir de R$ 16,90 no PIX · Válido até 08/05/2026"
-            : "A partir de R$ 16,90 no PIX · Acesso por módulo · Válido até 08/05/2026"
+          {isSubscriber
+            ? "Assinante ativo · Selecione seu grupo em cada matéria para abrir o cronograma"
+            : !hasActiveTrial && !hasUsedTrial && !isVIP
+              ? `3 dias grátis para 1 matéria · Depois, a partir de R$ ${profile?.referred_by ? "16,90" : "19,90"} no PIX ou R$ 9,90/mês`
+              : `A partir de R$ ${profile?.referred_by ? "16,90" : "19,90"} no PIX · Ou R$ 9,90/mês para todas`
           }
         </p>
 
@@ -572,10 +700,11 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               const acesso    = acessos[m.id];
               const testPayment = new URLSearchParams(window.location.search).get("test_payment") === "true";
               const effectiveVIP = !testPayment && isVIP;
+              const hasFullAccess = effectiveVIP || isSubscriber; // VIP or subscriber: grupo selector flow
               const trialAtivo = acesso?.status === 'trial' && acesso?.trial_expires_at && new Date(acesso.trial_expires_at) > now;
               const diasRestantes = trialAtivo ? Math.ceil((new Date(acesso.trial_expires_at) - now) / (1000 * 60 * 60 * 24)) : 0;
               const isPaid    = acesso?.status === "aprovado" && !testPayment;
-              const hasAccess = m.hasData && (isPaid || trialAtivo || effectiveVIP) && !moduleExpired;
+              const hasAccess = m.hasData && (isPaid || trialAtivo || hasFullAccess) && !moduleExpired;
               const isPending = acesso?.status === "pending";
               const isLocked  = !m.hasData;
               const isLockedGrupo = false; // paid users can now switch groups inside ScheduleView
@@ -583,8 +712,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               const grupoSelecionado = cardStates[m.id]?.grupoSelecionado;
 
               // Can this user activate trial on this card?
-              // Only if: no active trial anywhere, not paid, not VIP, not pending, has data
-              const canActivateTrial = !hasActiveTrial && !hasUsedTrial && !isPaid && !effectiveVIP && !isPending && m.hasData;
+              // Only if: no active trial anywhere, not paid, not VIP/subscriber, not pending, has data
+              const canActivateTrial = !hasActiveTrial && !hasUsedTrial && !isPaid && !hasFullAccess && !isPending && m.hasData;
 
               return (
                 <div key={m.id}
@@ -602,10 +731,12 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:8}}>
                     <span style={{fontSize:22}}>{m.icon}</span>
                     {hasAccess ? (
-                      trialAtivo && !effectiveVIP ? (
+                      trialAtivo && !hasFullAccess ? (
                         <span style={badge("#FEF3C7","#92400E")}>🎁 Trial: {diasRestantes}d</span>
                       ) : effectiveVIP ? (
                         <span style={badge("#DCFCE7","#16A34A")}>✓ Acesso livre</span>
+                      ) : isSubscriber ? (
+                        <span style={badge("#EEF2FF","#6366F1")}>✓ Assinante</span>
                       ) : (
                         <span style={badge("#DCFCE7","#16A34A")}>✓ Acesso ativo</span>
                       )
@@ -616,7 +747,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     ) : canActivateTrial ? (
                       <span style={badge("#DCFCE7","#059669")}>3 dias grátis</span>
                     ) : (
-                      <span style={badge(m.color,"#fff")}>R$ 16,90</span>
+                      <span style={badge(m.color,"#fff")}>R$ {profile?.referred_by ? "16,90" : "19,90"}</span>
                     )}
                   </div>
 
@@ -624,7 +755,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   <div style={{fontSize:14,fontWeight:700,color:"#0F172A",marginBottom:8}}>{m.label}</div>
 
                   {/* Paid or trial active: show grupo + open button */}
-                  {(isPaid || trialAtivo) && !effectiveVIP && (
+                  {(isPaid || trialAtivo) && !hasFullAccess && (
                     <>
                       <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
                         Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
@@ -642,8 +773,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     </>
                   )}
 
-                  {/* VIP: show grupo info + expand for selection */}
-                  {effectiveVIP && !expandido && acesso?.grupo && (
+                  {/* VIP/Subscriber: show grupo info + expand for selection */}
+                  {hasFullAccess && !expandido && acesso?.grupo && (
                     <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
                       Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
                     </div>
@@ -733,8 +864,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                                       background: method==="pix" ? "#F0FDF4" : "#fff",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
                                     <div style={{fontSize:16,marginBottom:2}}>💰</div>
                                     <div style={{fontSize:13,fontWeight:700,color: method==="pix" ? "#059669" : "#475569"}}>PIX</div>
-                                    <div style={{fontSize:15,fontWeight:800,color: method==="pix" ? "#059669" : "#0F172A"}}>R$ 16,90</div>
-                                    <div style={{fontSize:10,fontWeight:700,color:"#fff",background:"#059669",borderRadius:99,padding:"2px 8px",display:"inline-block",marginTop:4}}>PROMO</div>
+                                    <div style={{fontSize:15,fontWeight:800,color: method==="pix" ? "#059669" : "#0F172A"}}>R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
+                                    {profile?.referred_by && <div style={{fontSize:10,fontWeight:700,color:"#fff",background:"#059669",borderRadius:99,padding:"2px 8px",display:"inline-block",marginTop:4}}>AFILIADO</div>}
                                   </button>
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"card"}))}
                                     style={{flex:1,padding:"10px 8px",borderRadius:10,border: method==="card" ? "2px solid #6366F1" : "2px solid #E2E8F0",
@@ -844,8 +975,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                         </div>
                       )}
 
-                      {/* Expand/Collapse button (non-VIP only) */}
-                      {!effectiveVIP && (
+                      {/* Expand/Collapse button (non-VIP/subscriber only) */}
+                      {!hasFullAccess && (
                         <button
                           onClick={() => toggleCardExpand(m.id)}
                           style={{
@@ -867,8 +998,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     </>
                   )}
 
-                  {/* VIP: Abrir Cronograma (quando tem grupo) */}
-                  {effectiveVIP && !isLocked && !expandido && acesso?.grupo && (
+                  {/* VIP/Subscriber: Abrir Cronograma (quando tem grupo) */}
+                  {hasFullAccess && !isLocked && !expandido && acesso?.grupo && (
                     <button
                       onClick={() => handleAbrirCronograma(m, acesso.grupo)}
                       style={{
@@ -880,8 +1011,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                       ▶ Abrir Cronograma
                     </button>
                   )}
-                  {/* VIP expand/collapse */}
-                  {effectiveVIP && !isLocked && (
+                  {/* VIP/Subscriber expand/collapse */}
+                  {hasFullAccess && !isLocked && (
                     <button
                       onClick={() => toggleCardExpand(m.id)}
                       style={{

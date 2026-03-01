@@ -1,0 +1,10 @@
+CM G1: 10 weeks, 101 activities
+CM G2: 10 weeks, 95 activities
+CM G3: 10 weeks, 98 activities
+CM G4: 10 weeks, 97 activities
+CM G5: 10 weeks, 95 activities
+CM G6: 7 weeks, 66 activities
+CM G7: 8 weeks, 73 activities
+CM G8: 8 weeks, 78 activities
+CM G9: 8 weeks, 80 activities
+CM G10: 0 weeks, 0 activities
