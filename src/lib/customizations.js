@@ -43,6 +43,9 @@ export function applyCustomizations(weeks, cust) {
           time: e.time ?? a.time,
           loc: e.loc !== undefined ? e.loc : a.loc,
           sub: e.sub !== undefined ? e.sub : a.sub,
+          type: e.type ?? a.type,
+          effectiveType: e.type ?? a.effectiveType,
+          customColor: e.customColor !== undefined ? e.customColor : a.customColor,
           _edited: true,
         };
       }
@@ -65,6 +68,7 @@ export function applyCustomizations(weeks, cust) {
         type: add.type || "normal",
         loc: add.loc || "",
         effectiveType: add.type || "normal",
+        customColor: add.customColor || null,
         _custom: true,
       });
     });

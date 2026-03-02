@@ -190,11 +190,26 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
   const handleAddActivity = useCallback((weekNum, day, turno, data) => {
     setCustomizations(prev => {
       const next = {...prev};
-      next.adds = [...(next.adds || []), {id:generateCustomId(), weekNum, day, turno, ...data}];
+      const { recurrence, ...actData } = data;
+      if (recurrence === "all") {
+        const newAdds = mergedWeeks.map(w => ({
+          id: generateCustomId(), weekNum: w.num, day, turno, ...actData,
+        }));
+        next.adds = [...(next.adds || []), ...newAdds];
+      } else if (recurrence === "from_here") {
+        const newAdds = mergedWeeks
+          .filter(w => w.num >= weekNum)
+          .map(w => ({
+            id: generateCustomId(), weekNum: w.num, day, turno, ...actData,
+          }));
+        next.adds = [...(next.adds || []), ...newAdds];
+      } else {
+        next.adds = [...(next.adds || []), {id: generateCustomId(), weekNum, day, turno, ...actData}];
+      }
       return next;
     });
     markDirty();
-  }, []);
+  }, [mergedWeeks]);
 
   const handleResetCustomizations = useCallback(() => {
     setDeleteConfirm({ id: null, label: "todas as edições", isReset: true });

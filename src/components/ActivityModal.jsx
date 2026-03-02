@@ -1,17 +1,5 @@
 import { useState } from "react";
-import { TYPE_ICON } from "../constants";
-
-const ACTIVITY_TYPES = [
-  {value:"normal",       label:"Normal",          icon:TYPE_ICON.normal},
-  {value:"ambulatorio",  label:"Ambulatório",     icon:TYPE_ICON.ambulatorio},
-  {value:"enfermaria",   label:"Enfermaria",      icon:TYPE_ICON.enfermaria},
-  {value:"alojamento",   label:"Alojamento",      icon:TYPE_ICON.alojamento},
-  {value:"saude_mental", label:"Saúde Mental",    icon:TYPE_ICON.saude_mental},
-  {value:"simulacao",    label:"Simulação",       icon:TYPE_ICON.simulacao},
-  {value:"plantao",      label:"Plantão",         icon:TYPE_ICON.plantao},
-  {value:"casa",         label:"Estudo em Casa",  icon:TYPE_ICON.casa},
-  {value:"horario_verde",label:"Horário Verde",   icon:TYPE_ICON.horario_verde},
-];
+import ColorPalette from "./ColorPalette";
 
 // Aceita vários formatos e normaliza para HH:MM–HH:MM
 // Exemplos aceitos: 0800-1200, 8-12, 8:00-12:00, 08:00–12:00, 8h-12h
@@ -55,18 +43,26 @@ function parseTimeRange(raw) {
 }
 
 const overlay = {position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:16};
-const card    = {background:"var(--bg-card)",borderRadius:16,padding:24,width:"100%",maxWidth:400,boxShadow:"0 20px 60px rgba(0,0,0,0.3)"};
+const card    = {background:"var(--bg-card)",borderRadius:16,padding:24,width:"100%",maxWidth:400,boxShadow:"0 20px 60px rgba(0,0,0,0.3)",maxHeight:"90vh",overflowY:"auto"};
 const lbl     = {fontSize:12,fontWeight:600,color:"var(--text-secondary)",display:"block",marginBottom:4,marginTop:14};
 const inp     = {width:"100%",padding:"10px 12px",borderRadius:10,border:"1px solid var(--border-light)",fontSize:14,outline:"none",boxSizing:"border-box",transition:"border 0.15s",background:"var(--bg-input)",color:"var(--text-primary)"};
 const btnBase = {flex:1,padding:"10px 0",borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",border:"none",transition:"all 0.12s"};
 
+const RECURRENCE_OPTIONS = [
+  { v: "single",    l: "Só esta" },
+  { v: "all",       l: "Todas" },
+  { v: "from_here", l: "Desta em diante" },
+];
+
 export default function ActivityModal({mode, activity, weekNum, day, turno, onSave, onClose, onDelete}) {
-  const [title, setTitle] = useState(activity?.title || "");
-  const [time,  setTime]  = useState(activity?.time  || "");
-  const [loc,   setLoc]   = useState(activity?.loc   || "");
-  const [sub,   setSub]   = useState(activity?.sub   || "");
-  const [type,  setType]  = useState(activity?.type  || "normal");
-  const [timeErr, setTimeErr] = useState("");
+  const [title, setTitle]           = useState(activity?.title || "");
+  const [time,  setTime]            = useState(activity?.time  || "");
+  const [loc,   setLoc]             = useState(activity?.loc   || "");
+  const [sub,   setSub]             = useState(activity?.sub   || "");
+  const [type,  setType]            = useState(activity?.effectiveType || activity?.type || "normal");
+  const [customColor, setCustomColor] = useState(activity?.customColor || null);
+  const [recurrence, setRecurrence] = useState("single");
+  const [timeErr, setTimeErr]       = useState("");
 
   // Auto-normaliza ao sair do campo
   function handleTimeBlur() {
@@ -86,7 +82,11 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
       return;
     }
     setTimeErr("");
-    onSave({title:title.trim(), time:parsed.value, loc:loc.trim(), sub:sub.trim(), type});
+    onSave({
+      title: title.trim(), time: parsed.value, loc: loc.trim(), sub: sub.trim(),
+      type, customColor,
+      ...(isAdd ? { recurrence } : {}),
+    });
   }
 
   const isAdd = mode === "add";
@@ -125,15 +125,29 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
         <input value={sub} onChange={e=>setSub(e.target.value)}
           style={inp} placeholder="Ex: Dra. Ana Carolina" />
 
+        <label style={lbl}>Tipo / Cor</label>
+        <ColorPalette
+          selected={{ type, customColor }}
+          onChange={({ type: t, customColor: cc }) => { setType(t); setCustomColor(cc); }}
+        />
+
         {isAdd && (
           <>
-            <label style={lbl}>Tipo</label>
-            <select value={type} onChange={e=>setType(e.target.value)}
-              style={{...inp,cursor:"pointer",appearance:"auto"}}>
-              {ACTIVITY_TYPES.map(t=>(
-                <option key={t.value} value={t.value}>{t.icon} {t.label}</option>
+            <label style={lbl}>Recorrência</label>
+            <div style={{display:"flex",gap:6}}>
+              {RECURRENCE_OPTIONS.map(o => (
+                <button key={o.v} type="button" onClick={() => setRecurrence(o.v)}
+                  style={{
+                    flex:1,padding:"8px 0",borderRadius:8,fontSize:12,fontWeight:700,
+                    cursor:"pointer",transition:"all 0.12s",
+                    border: recurrence===o.v ? "2px solid var(--bg-header)" : "1px solid var(--border-light)",
+                    background: recurrence===o.v ? "var(--bg-header)" : "var(--bg-card)",
+                    color: recurrence===o.v ? "#fff" : "var(--text-secondary)",
+                  }}>
+                  {o.l}
+                </button>
               ))}
-            </select>
+            </div>
           </>
         )}
 

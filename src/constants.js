@@ -44,6 +44,25 @@ export const SUB_STATUS = {
   CANCELLED: "cancelled",
 };
 
+export const CUSTOM_COLORS = [
+  { id: "c_rose",    label: "Rosa",      bg: "#FFF1F2", border: "#FECDD3", accent: "#BE123C", pill: "#FFE4E6", pillText: "#9F1239" },
+  { id: "c_pink",    label: "Pink",      bg: "#FDF2F8", border: "#FBCFE8", accent: "#BE185D", pill: "#FCE7F3", pillText: "#9D174D" },
+  { id: "c_cyan",    label: "Ciano",     bg: "#ECFEFF", border: "#A5F3FC", accent: "#0E7490", pill: "#CFFAFE", pillText: "#155E75" },
+  { id: "c_lime",    label: "Lima",      bg: "#F7FEE7", border: "#BEF264", accent: "#4D7C0F", pill: "#ECFCCB", pillText: "#3F6212" },
+  { id: "c_amber",   label: "Âmbar",     bg: "#FFFBEB", border: "#FCD34D", accent: "#B45309", pill: "#FEF3C7", pillText: "#92400E" },
+  { id: "c_violet",  label: "Violeta",   bg: "#F5F3FF", border: "#C4B5FD", accent: "#6D28D9", pill: "#EDE9FE", pillText: "#5B21B6" },
+  { id: "c_emerald", label: "Esmeralda", bg: "#ECFDF5", border: "#6EE7B7", accent: "#047857", pill: "#D1FAE5", pillText: "#065F46" },
+  { id: "c_slate",   label: "Cinza",     bg: "#F8FAFC", border: "#CBD5E1", accent: "#475569", pill: "#E2E8F0", pillText: "#334155" },
+];
+
+export function resolveStyle(effectiveType, customColor) {
+  if (customColor) {
+    const cc = CUSTOM_COLORS.find(c => c.id === customColor);
+    if (cc) return { bg: cc.bg, border: cc.border, accent: cc.accent, pill: cc.pill, pillText: cc.pillText, dark: false };
+  }
+  return TYPE_STYLE[effectiveType] || TYPE_STYLE.normal;
+}
+
 export function badge(bg, color) {
   return {fontSize:11, fontWeight:700, color, background:bg, padding:"3px 10px", borderRadius:99, display:"inline-block"};
 }
