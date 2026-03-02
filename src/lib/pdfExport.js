@@ -1,6 +1,23 @@
 import { DAYS_ORDER, DAY_LABELS, resolveStyle } from "../constants";
 
 /**
+ * Sanitiza texto para compatibilidade com fontes padrão do jsPDF (Helvetica).
+ * Remove/substitui caracteres problemáticos: ª, –, ·, etc.
+ */
+function sanitize(str) {
+  if (!str) return "";
+  return str
+    .replace(/[–—]/g, "-")   // en/em dash → hyphen
+    .replace(/·/g, "-")       // middle dot → hyphen
+    .replace(/ª/g, "a")       // feminine ordinal
+    .replace(/º/g, "o")       // masculine ordinal
+    .replace(/[""]/g, '"')    // smart quotes
+    .replace(/['']/g, "'")    // smart apostrophes
+    .replace(/…/g, "...")     // ellipsis
+    .replace(/[^\x00-\xFF]/g, ""); // remove any non-Latin1 chars
+}
+
+/**
  * Converte hex #RRGGBB para [r, g, b]
  */
 function hexToRgb(hex) {
@@ -14,10 +31,10 @@ function hexToRgb(hex) {
 function formatCell(activities) {
   if (!activities.length) return "";
   return activities.map(a => {
-    const parts = [a.title];
-    if (a.time) parts.push(a.time);
-    if (a.loc) parts.push(a.loc);
-    if (a.sub) parts.push(a.sub);
+    const parts = [sanitize(a.title)];
+    if (a.time) parts.push(sanitize(a.time));
+    if (a.loc) parts.push(sanitize(a.loc));
+    if (a.sub) parts.push(sanitize(a.sub));
     return parts.join("\n");
   }).join("\n---\n");
 }
@@ -57,11 +74,11 @@ function renderWeek(doc, autoTable, week, materiaLabel, grupo, isFirst) {
 
   doc.setFontSize(16);
   doc.setTextColor(15, 23, 42);
-  doc.text(`${materiaLabel} — Grupo ${grupo}`, 14, 18);
+  doc.text(sanitize(`${materiaLabel} - Grupo ${grupo}`), 14, 18);
 
   doc.setFontSize(12);
   doc.setTextColor(100, 116, 139);
-  doc.text(`Semana ${week.num}  ·  ${week.dates}`, 14, 26);
+  doc.text(sanitize(`Semana ${week.num}  -  ${week.dates}`), 14, 26);
 
   const activeDays = DAYS_ORDER.filter(d =>
     week.dayMap[d]["Manhã"].length > 0 || week.dayMap[d].Tarde.length > 0
@@ -72,9 +89,9 @@ function renderWeek(doc, autoTable, week, materiaLabel, grupo, isFirst) {
     return;
   }
 
-  const headers = [["", ...activeDays.map(d => `${d}\n${DAY_LABELS[d]}`)]];
+  const headers = [["", ...activeDays.map(d => sanitize(`${d}\n${DAY_LABELS[d]}`))]];
 
-  const manhaRow = ["Manhã"];
+  const manhaRow = ["Manha"];
   const manhaCells = [];
   activeDays.forEach(d => {
     const acts = week.dayMap[d]["Manhã"];
@@ -133,7 +150,7 @@ function renderWeek(doc, autoTable, week, materiaLabel, grupo, isFirst) {
   const finalY = doc.lastAutoTable.finalY || 100;
   doc.setFontSize(8);
   doc.setTextColor(148, 163, 184);
-  doc.text("CronoPed — Cronograma Internato", 14, finalY + 10);
+  doc.text("CronoPed - Cronograma Internato", 14, finalY + 10);
 }
 
 /**
