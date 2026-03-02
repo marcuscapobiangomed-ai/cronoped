@@ -34,7 +34,7 @@ function formatTimestamp(dateStr) {
 
 export default function EventFeed({ events }) {
   if (!events || events.length === 0) {
-    return <div style={{ color: "#94A3B8", fontSize: 13, padding: 16 }}>Nenhum evento registrado ainda.</div>;
+    return <div style={{ color: "var(--text-muted)", fontSize: 13, padding: 16 }}>Nenhum evento registrado ainda.</div>;
   }
 
   return (
@@ -44,12 +44,12 @@ export default function EventFeed({ events }) {
         return (
           <div key={ev.id} style={{
             display: "flex", alignItems: "flex-start", gap: 10,
-            padding: "10px 14px", borderBottom: "1px solid #F1F5F9",
+            padding: "10px 14px", borderBottom: "1px solid var(--bg-subtle)",
           }}>
             <span style={{ fontSize: 14, flexShrink: 0 }}>{style.icon}</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: "#0F172A" }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: "var(--text-primary)" }}>
                   {ev.user_name || "Sistema"}
                 </span>
                 <span style={{
@@ -59,14 +59,14 @@ export default function EventFeed({ events }) {
                 {(() => {
                   const { dateLabel, rel } = formatTimestamp(ev.created_at);
                   return (
-                    <span style={{ fontSize: 10, color: "#94A3B8" }} title={rel}>
+                    <span style={{ fontSize: 10, color: "var(--text-muted)" }} title={rel}>
                       {dateLabel}
                     </span>
                   );
                 })()}
               </div>
               {ev.meta && Object.keys(ev.meta).length > 0 && (
-                <div style={{ fontSize: 10, color: "#64748B", marginTop: 2, fontFamily: "'JetBrains Mono',monospace" }}>
+                <div style={{ fontSize: 10, color: "var(--text-faint)", marginTop: 2, fontFamily: "'JetBrains Mono',monospace" }}>
                   {JSON.stringify(ev.meta)}
                 </div>
               )}

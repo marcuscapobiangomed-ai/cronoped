@@ -29,6 +29,20 @@ export const TYPE_ICON = {
 
 export const labelStyle = {fontSize:13, fontWeight:600, color:"#475569", display:"block", marginBottom:6};
 
+// Status constants — evita magic strings espalhadas pelo código
+export const STATUS = {
+  TRIAL: "trial",
+  PENDING: "pending",
+  APPROVED: "aprovado",
+  EXPIRED: "expirado",
+};
+
+export const SUB_STATUS = {
+  PENDING: "pending",
+  AUTHORIZED: "authorized",
+  PAUSED: "paused",
+  CANCELLED: "cancelled",
+};
 
 export function badge(bg, color) {
   return {fontSize:11, fontWeight:700, color, background:bg, padding:"3px 10px", borderRadius:99, display:"inline-block"};

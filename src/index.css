@@ -1,5 +1,42 @@
+/* ─── Theme Variables ─── */
+:root {
+  --bg-page: #F8FAFC;
+  --bg-card: #fff;
+  --bg-header: #0F172A;
+  --bg-input: #fff;
+  --bg-hover: #FAFAF9;
+  --bg-subtle: #F1F5F9;
+  --bg-skeleton-from: #F1F5F9;
+  --bg-skeleton-to: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --text-faint: #64748B;
+  --border-light: #E2E8F0;
+  --border-medium: #CBD5E1;
+  --border-focus: #0EA5E9;
+}
+
+[data-theme="dark"] {
+  --bg-page: #0F172A;
+  --bg-card: #1E293B;
+  --bg-header: #020617;
+  --bg-input: #1E293B;
+  --bg-hover: #334155;
+  --bg-subtle: #334155;
+  --bg-skeleton-from: #1E293B;
+  --bg-skeleton-to: #334155;
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --text-muted: #64748B;
+  --text-faint: #94A3B8;
+  --border-light: #334155;
+  --border-medium: #475569;
+  --border-focus: #38BDF8;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Outfit', system-ui, sans-serif; background: #F8FAFC; }
+body { font-family: 'Outfit', system-ui, sans-serif; background: var(--bg-page); color: var(--text-primary); }
 input, textarea, select { font-family: 'Outfit', system-ui, sans-serif; }
 
 /* ─── Progress bar ─── */
@@ -10,31 +47,31 @@ input, textarea, select { font-family: 'Outfit', system-ui, sans-serif; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-dark { background: #0F172A; color: #fff; padding: 13px 24px; font-size: 15px; }
 .btn-dark:hover:not(:disabled) { background: #1E293B; }
-.btn-outline { background: transparent; border: 2px solid #E2E8F0; color: #475569; padding: 11px 20px; font-size: 14px; }
-.btn-outline:hover:not(:disabled) { border-color: #CBD5E1; background: #F8FAFC; }
+.btn-outline { background: transparent; border: 2px solid var(--border-light); color: var(--text-secondary); padding: 11px 20px; font-size: 14px; }
+.btn-outline:hover:not(:disabled) { border-color: var(--border-medium); background: var(--bg-page); }
 
 /* ─── Form fields ─── */
-.input-field { width: 100%; padding: 12px 16px; border-radius: 10px; font-size: 16px; border: 2px solid #E2E8F0; outline: none; transition: border 0.15s; color: #0F172A; background: #fff; }
-.input-field:focus { border-color: #0EA5E9; }
+.input-field { width: 100%; padding: 12px 16px; border-radius: 10px; font-size: 16px; border: 2px solid var(--border-light); outline: none; transition: border 0.15s; color: var(--text-primary); background: var(--bg-input); }
+.input-field:focus { border-color: var(--border-focus); }
 .input-field.error { border-color: #EF4444; }
 
 /* ─── Tabs ─── */
-.tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: #94A3B8; transition: all 0.12s; }
-.tab.active { background: #0F172A; color: #fff; }
+.tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: var(--text-muted); transition: all 0.12s; }
+.tab.active { background: var(--bg-header); color: #fff; }
 
 /* ─── Matéria card ─── */
-.materia-card { border-radius: 14px; border: 2px solid #E2E8F0; padding: 18px; cursor: pointer; transition: all 0.15s; background: #fff; text-align: left; }
-.materia-card:hover:not(.locked) { border-color: #CBD5E1; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.materia-card { border-radius: 14px; border: 2px solid var(--border-light); padding: 18px; cursor: pointer; transition: all 0.15s; background: var(--bg-card); text-align: left; }
+.materia-card:hover:not(.locked) { border-color: var(--border-medium); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
 .materia-card.selected { border-color: var(--mc); box-shadow: 0 0 0 1px var(--mc); }
 .materia-card.locked { opacity: 0.55; cursor: default; }
 
 /* ─── Skeleton loader ─── */
-.skeleton { border-radius: 8px; background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+.skeleton { border-radius: 8px; background: linear-gradient(90deg, var(--bg-skeleton-from) 25%, var(--bg-skeleton-to) 50%, var(--bg-skeleton-from) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* ─── Week ─── */
-.week-head { display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer; user-select: none; background: #fff; transition: background 0.1s; }
-.week-head:hover { background: #FAFAF9; }
+.week-head { display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer; user-select: none; background: var(--bg-card); transition: background 0.1s; }
+.week-head:hover { background: var(--bg-hover); }
 .today-week { border: 2px solid #F59E0B !important; }
 
 /* ─── Activity card ─── */

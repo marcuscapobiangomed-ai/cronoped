@@ -46,7 +46,7 @@ export default function MiniBarChart({ rawGrowth, color = "#3B82F6", label }) {
   const numDays = days.length || 1;
 
   if (!rawGrowth || rawGrowth.length === 0) {
-    return <div style={{ color: "#94A3B8", fontSize: 12 }}>Sem dados de signups</div>;
+    return <div style={{ color: "var(--text-muted)", fontSize: 12 }}>Sem dados de signups</div>;
   }
 
   const chartH = 110;
@@ -57,29 +57,29 @@ export default function MiniBarChart({ rawGrowth, color = "#3B82F6", label }) {
 
   return (
     <div>
-      {label && <div style={{ fontSize: 12, fontWeight: 700, color: "#475569", marginBottom: 6 }}>{label}</div>}
+      {label && <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 6 }}>{label}</div>}
 
       {/* Summary stats */}
       <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
         <div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: "#0F172A", lineHeight: 1 }}>{total}</div>
-          <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 2 }}>Total ({numDays}d)</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>{total}</div>
+          <div style={{ fontSize: 10, color: "var(--text-muted)", marginTop: 2 }}>Total ({numDays}d)</div>
         </div>
         <div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: todaySignups > 0 ? "#16A34A" : "#94A3B8", lineHeight: 1 }}>{todaySignups}</div>
-          <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 2 }}>Hoje</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: todaySignups > 0 ? "#16A34A" : "var(--text-muted)", lineHeight: 1 }}>{todaySignups}</div>
+          <div style={{ fontSize: 10, color: "var(--text-muted)", marginTop: 2 }}>Hoje</div>
         </div>
         <div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: "#64748B", lineHeight: 1 }}>{(total / numDays).toFixed(1)}</div>
-          <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 2 }}>Média/dia</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: "var(--text-faint)", lineHeight: 1 }}>{(total / numDays).toFixed(1)}</div>
+          <div style={{ fontSize: 10, color: "var(--text-muted)", marginTop: 2 }}>Média/dia</div>
         </div>
       </div>
 
       {/* Tooltip */}
       {hovered !== null && (
         <div style={{
-          fontSize: 11, fontWeight: 600, color: "#0F172A", marginBottom: 6,
-          background: "#F1F5F9", borderRadius: 6, padding: "4px 10px", display: "inline-block",
+          fontSize: 11, fontWeight: 600, color: "var(--text-primary)", marginBottom: 6,
+          background: "var(--bg-subtle)", borderRadius: 6, padding: "4px 10px", display: "inline-block",
         }}>
           {days[hovered].dayLabel} {days[hovered].label}: <strong style={{ color }}>{days[hovered].value} signup{days[hovered].value !== 1 ? "s" : ""}</strong>
         </div>
@@ -91,7 +91,7 @@ export default function MiniBarChart({ rawGrowth, color = "#3B82F6", label }) {
           {/* Horizontal grid lines */}
           {[0.25, 0.5, 0.75, 1].map(pct => (
             <line key={pct} x1={0} x2={totalW} y1={chartH - chartH * pct} y2={chartH - chartH * pct}
-              stroke="#F1F5F9" strokeWidth={1} />
+              stroke="var(--bg-subtle)" strokeWidth={1} />
           ))}
 
           {/* Bars */}
@@ -107,7 +107,7 @@ export default function MiniBarChart({ rawGrowth, color = "#3B82F6", label }) {
                 style={{ cursor: "pointer" }}
               >
                 {/* Hover background */}
-                <rect x={x - 1} y={0} width={barW + 2} height={chartH} fill={isHover ? "#F8FAFC" : "transparent"} rx={3} />
+                <rect x={x - 1} y={0} width={barW + 2} height={chartH} fill={isHover ? "var(--bg-page)" : "transparent"} rx={3} />
 
                 {/* Bar */}
                 <rect
@@ -132,7 +132,7 @@ export default function MiniBarChart({ rawGrowth, color = "#3B82F6", label }) {
                 {(i % labelEvery === 0 || d.isToday) && (
                   <text x={x + barW / 2} y={chartH + 12} textAnchor="middle"
                     fontSize="8" fontWeight={d.isToday ? "700" : "400"}
-                    fill={d.isToday ? "#F59E0B" : "#94A3B8"}>
+                    fill={d.isToday ? "#F59E0B" : "var(--text-muted)"}>
                     {d.label}
                   </text>
                 )}
@@ -146,7 +146,7 @@ export default function MiniBarChart({ rawGrowth, color = "#3B82F6", label }) {
           })}
 
           {/* Max value label */}
-          <text x={totalW - 2} y={10} textAnchor="end" fontSize="9" fill="#CBD5E1">
+          <text x={totalW - 2} y={10} textAnchor="end" fontSize="9" fill="var(--border-medium)">
             max: {maxVal}
           </text>
         </svg>

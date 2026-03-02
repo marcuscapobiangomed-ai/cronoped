@@ -12,8 +12,8 @@ const STATUS_COLORS  = {
 };
 const PAGE_SIZE = 10;
 
-const lbl      = {fontSize:11,fontWeight:600,color:"#64748B",display:"block",marginBottom:3};
-const inpStyle = {width:"100%",padding:"6px 8px",borderRadius:6,border:"1px solid #E2E8F0",fontSize:12,boxSizing:"border-box"};
+const lbl      = {fontSize:11,fontWeight:600,color:"var(--text-faint)",display:"block",marginBottom:3};
+const inpStyle = {width:"100%",padding:"6px 8px",borderRadius:6,border:"1px solid var(--border-light)",fontSize:12,boxSizing:"border-box",background:"var(--bg-input)",color:"var(--text-primary)"};
 const smallBtn = {fontSize:10,fontWeight:700,border:"none",borderRadius:4,padding:"3px 8px",cursor:"pointer",transition:"all 0.12s"};
 
 export default function UserManager({ users: initialUsers, onRefresh, initialSearch = "" }) {
@@ -198,12 +198,12 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
           value={search}
           onChange={e => handleSearch(e.target.value)}
           autoComplete="off"
-          style={{flex:1,padding:"8px 12px",borderRadius:8,border:"1px solid #E2E8F0",fontSize:12,boxSizing:"border-box"}}
+          style={{flex:1,padding:"8px 12px",borderRadius:8,border:"1px solid var(--border-light)",fontSize:12,boxSizing:"border-box",background:"var(--bg-input)",color:"var(--text-primary)"}}
         />
         <select
           value={sortBy}
           onChange={e => setSortBy(e.target.value)}
-          style={{padding:"6px 10px",borderRadius:8,border:"1px solid #E2E8F0",fontSize:11,fontWeight:600,color:"#475569",cursor:"pointer",background:"#fff"}}
+          style={{padding:"6px 10px",borderRadius:8,border:"1px solid var(--border-light)",fontSize:11,fontWeight:600,color:"var(--text-secondary)",cursor:"pointer",background:"var(--bg-card)"}}
         >
           <option value="data">↓ Mais recentes</option>
           <option value="nome">A–Z Nome</option>
@@ -226,14 +226,14 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
             <button key={f.key} onClick={() => handleFilterChange(f.key)} style={{
               fontSize:10, fontWeight:700, border:"none", borderRadius:99, padding:"4px 10px",
               cursor:"pointer", transition:"all 0.12s",
-              background: active ? "#0F172A" : "#F1F5F9",
-              color: active ? "#fff" : "#64748B",
+              background: active ? "var(--bg-header)" : "var(--bg-subtle)",
+              color: active ? "#fff" : "var(--text-faint)",
             }}>
               {f.label} <span style={{opacity:0.7}}>({cnt})</span>
             </button>
           );
         })}
-        <span style={{fontSize:11,color:"#94A3B8",marginLeft:"auto",alignSelf:"center"}}>
+        <span style={{fontSize:11,color:"var(--text-muted)",marginLeft:"auto",alignSelf:"center"}}>
           {allFiltered.length} usuário{allFiltered.length !== 1 ? "s" : ""}
         </span>
       </div>
@@ -249,35 +249,35 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
         const daysSince  = Math.floor((Date.now() - new Date(user.created_at)) / 86400000);
 
         return (
-          <div key={user.id} style={{background:"#fff",borderRadius:10,border:"1px solid #E2E8F0",marginBottom:6,overflow:"hidden"}}>
+          <div key={user.id} style={{background:"var(--bg-card)",borderRadius:10,border:"1px solid var(--border-light)",marginBottom:6,overflow:"hidden"}}>
             {/* Row */}
             <div
               onClick={() => { setExpandedId(expanded ? null : user.id); setEditProfile(null); setPwUserId(null); }}
               style={{padding:"9px 14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,transition:"background 0.1s"}}
-              onMouseEnter={e => e.currentTarget.style.background="#F8FAFC"}
-              onMouseLeave={e => e.currentTarget.style.background="#fff"}
+              onMouseEnter={e => e.currentTarget.style.background="var(--bg-hover)"}
+              onMouseLeave={e => e.currentTarget.style.background="var(--bg-card)"}
             >
               {/* Avatar initial */}
               <div style={{
                 width:30,height:30,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",
-                background: user.is_vip ? "#F3E8FF" : "#F1F5F9",
-                fontSize:12,fontWeight:800,color: user.is_vip ? "#7C3AED" : "#475569",
+                background: user.is_vip ? "#F3E8FF" : "var(--bg-subtle)",
+                fontSize:12,fontWeight:800,color: user.is_vip ? "#7C3AED" : "var(--text-secondary)",
               }}>
                 {(user.nome||user.email||"?")[0].toUpperCase()}
               </div>
 
               {/* Name + email */}
               <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:12,fontWeight:700,color:"#0F172A",display:"flex",alignItems:"center",gap:5,flexWrap:"wrap"}}>
-                  {user.nome || <span style={{color:"#94A3B8",fontStyle:"italic"}}>Sem nome</span>}
+                <div style={{fontSize:12,fontWeight:700,color:"var(--text-primary)",display:"flex",alignItems:"center",gap:5,flexWrap:"wrap"}}>
+                  {user.nome || <span style={{color:"var(--text-muted)",fontStyle:"italic"}}>Sem nome</span>}
                   {user.is_vip && <span style={{fontSize:9,fontWeight:700,color:"#7C3AED",background:"#F3E8FF",padding:"1px 6px",borderRadius:99}}>VIP</span>}
                   {user.referred_by && <span style={{fontSize:9,fontWeight:700,color:"#059669",background:"#F0FDF4",padding:"1px 6px",borderRadius:99}} title={`via ${user.referred_by}`}>ref</span>}
                 </div>
-                <div style={{fontSize:10,color:"#94A3B8",display:"flex",alignItems:"center",gap:6}}>
+                <div style={{fontSize:10,color:"var(--text-muted)",display:"flex",alignItems:"center",gap:6}}>
                   <span>{user.email}</span>
                   <button
                     onClick={e => { e.stopPropagation(); copyEmail(user.email); }}
-                    style={{background:"none",border:"none",cursor:"pointer",color:"#CBD5E1",fontSize:10,padding:0}}
+                    style={{background:"none",border:"none",cursor:"pointer",color:"var(--border-medium)",fontSize:10,padding:0}}
                     title="Copiar email"
                   >
                     {copiedId === user.email ? "✓" : "⎘"}
@@ -304,30 +304,30 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
               <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
                 <span style={{
                   fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:99,
-                  background: user.is_vip ? "#F3E8FF" : paidCount>0 ? "#DCFCE7" : trialCount>0 ? "#FEF3C7" : "#F1F5F9",
-                  color: user.is_vip ? "#7C3AED" : paidCount>0 ? "#16A34A" : trialCount>0 ? "#92400E" : "#94A3B8",
+                  background: user.is_vip ? "#F3E8FF" : paidCount>0 ? "#DCFCE7" : trialCount>0 ? "#FEF3C7" : "var(--bg-subtle)",
+                  color: user.is_vip ? "#7C3AED" : paidCount>0 ? "#16A34A" : trialCount>0 ? "#92400E" : "var(--text-muted)",
                 }}>
                   {user.is_vip ? "VIP" : paidCount>0 ? `${paidCount} pago` : trialCount>0 ? `${trialCount} trial` : "free"}
                 </span>
-                <span style={{fontSize:9,color:"#CBD5E1",whiteSpace:"nowrap"}}>
+                <span style={{fontSize:9,color:"var(--border-medium)",whiteSpace:"nowrap"}}>
                   {daysSince === 0 ? "hoje" : daysSince === 1 ? "1d" : `${daysSince}d`}
                 </span>
-                <span style={{fontSize:12,color:"#CBD5E1"}}>{expanded ? "▼" : "▶"}</span>
+                <span style={{fontSize:12,color:"var(--border-medium)"}}>{expanded ? "▼" : "▶"}</span>
               </div>
             </div>
 
             {/* Expanded */}
             {expanded && (
-              <div onClick={e => e.stopPropagation()} style={{padding:"0 14px 14px",borderTop:"1px solid #F1F5F9"}}>
+              <div onClick={e => e.stopPropagation()} style={{padding:"0 14px 14px",borderTop:"1px solid var(--bg-subtle)"}}>
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1.6fr",gap:12,marginTop:12}}>
 
                   {/* ── LEFT: Profile + Actions ── */}
                   <div style={{display:"flex",flexDirection:"column",gap:8}}>
 
                     {/* Profile */}
-                    <div style={{background:"#F8FAFC",borderRadius:8,padding:10}}>
+                    <div style={{background:"var(--bg-page)",borderRadius:8,padding:10}}>
                       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
-                        <span style={{fontSize:11,fontWeight:700,color:"#0F172A"}}>👤 Dados</span>
+                        <span style={{fontSize:11,fontWeight:700,color:"var(--text-primary)"}}>👤 Dados</span>
                         {!isEditing ? (
                           <button onClick={() => setEditProfile({userId:user.id,nome:user.nome||"",email:user.email||"",cpf:user.cpf||""})}
                             style={{...smallBtn,background:"#3B82F6",color:"#fff"}}>✏️ Editar</button>
@@ -338,7 +338,7 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                               {saving===`profile-${user.id}` ? "…" : "Salvar"}
                             </button>
                             <button onClick={() => setEditProfile(null)}
-                              style={{...smallBtn,background:"#E2E8F0",color:"#475569"}}>✕</button>
+                              style={{...smallBtn,background:"var(--border-light)",color:"var(--text-secondary)"}}>✕</button>
                           </div>
                         )}
                       </div>
@@ -351,12 +351,12 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                         </div>
                       ) : (
                         <div style={{fontSize:11,display:"grid",gap:4}}>
-                          <div style={{display:"flex",gap:4}}><span style={{color:"#94A3B8",width:44,flexShrink:0}}>Nome</span><span style={{fontWeight:600,color:"#0F172A"}}>{user.nome||"—"}</span></div>
-                          <div style={{display:"flex",gap:4}}><span style={{color:"#94A3B8",width:44,flexShrink:0}}>Email</span><span style={{color:"#0F172A",wordBreak:"break-all",fontSize:10}}>{user.email||"—"}</span></div>
-                          <div style={{display:"flex",gap:4}}><span style={{color:"#94A3B8",width:44,flexShrink:0}}>CPF</span><span style={{fontFamily:"monospace",color:"#0F172A",fontSize:10}}>{user.cpf ? user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,"$1.$2.$3-$4") : "—"}</span></div>
-                          <div style={{display:"flex",gap:4}}><span style={{color:"#94A3B8",width:44,flexShrink:0}}>Desde</span><span style={{color:"#0F172A"}}>{new Date(user.created_at).toLocaleDateString("pt-BR")}</span></div>
-                          {user.referred_by && <div style={{display:"flex",gap:4}}><span style={{color:"#94A3B8",width:44,flexShrink:0}}>Afil.</span><span style={{color:"#059669",fontWeight:700}}>{user.referred_by}</span></div>}
-                          <div style={{display:"flex",gap:4}}><span style={{color:"#94A3B8",width:44,flexShrink:0}}>ID</span><span style={{color:"#CBD5E1",fontFamily:"monospace",fontSize:9,wordBreak:"break-all"}}>{user.id}</span></div>
+                          <div style={{display:"flex",gap:4}}><span style={{color:"var(--text-muted)",width:44,flexShrink:0}}>Nome</span><span style={{fontWeight:600,color:"var(--text-primary)"}}>{user.nome||"—"}</span></div>
+                          <div style={{display:"flex",gap:4}}><span style={{color:"var(--text-muted)",width:44,flexShrink:0}}>Email</span><span style={{color:"var(--text-primary)",wordBreak:"break-all",fontSize:10}}>{user.email||"—"}</span></div>
+                          <div style={{display:"flex",gap:4}}><span style={{color:"var(--text-muted)",width:44,flexShrink:0}}>CPF</span><span style={{fontFamily:"monospace",color:"var(--text-primary)",fontSize:10}}>{user.cpf ? user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,"$1.$2.$3-$4") : "—"}</span></div>
+                          <div style={{display:"flex",gap:4}}><span style={{color:"var(--text-muted)",width:44,flexShrink:0}}>Desde</span><span style={{color:"var(--text-primary)"}}>{new Date(user.created_at).toLocaleDateString("pt-BR")}</span></div>
+                          {user.referred_by && <div style={{display:"flex",gap:4}}><span style={{color:"var(--text-muted)",width:44,flexShrink:0}}>Afil.</span><span style={{color:"#059669",fontWeight:700}}>{user.referred_by}</span></div>}
+                          <div style={{display:"flex",gap:4}}><span style={{color:"var(--text-muted)",width:44,flexShrink:0}}>ID</span><span style={{color:"var(--border-medium)",fontFamily:"monospace",fontSize:9,wordBreak:"break-all"}}>{user.id}</span></div>
                         </div>
                       )}
                     </div>
@@ -364,13 +364,13 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                     {/* Password */}
                     <div style={{background:"#FFF7ED",borderRadius:8,padding:10}}>
                       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom: isPwOpen?8:0}}>
-                        <span style={{fontSize:11,fontWeight:700,color:"#0F172A"}}>🔑 Senha</span>
+                        <span style={{fontSize:11,fontWeight:700,color:"var(--text-primary)"}}>🔑 Senha</span>
                         {!isPwOpen ? (
                           <button onClick={() => { setPwUserId(user.id); setNewPassword(""); setPwMsg(null); }}
                             style={{...smallBtn,background:"#F59E0B",color:"#fff"}}>Gerenciar</button>
                         ) : (
                           <button onClick={() => { setPwUserId(null); setPwMsg(null); }}
-                            style={{...smallBtn,background:"#E2E8F0",color:"#475569"}}>✕</button>
+                            style={{...smallBtn,background:"var(--border-light)",color:"var(--text-secondary)"}}>✕</button>
                         )}
                       </div>
                       {isPwOpen && (
@@ -380,12 +380,12 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                               <input type={showPw?"text":"password"} value={newPassword} onChange={e=>setNewPassword(e.target.value)}
                                 placeholder="Nova senha (min 6)" autoComplete="new-password" style={{...inpStyle,paddingRight:30}} />
                               <button type="button" onClick={()=>setShowPw(s=>!s)}
-                                style={{position:"absolute",right:5,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:12,color:"#94A3B8",padding:0}}>
+                                style={{position:"absolute",right:5,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:12,color:"var(--text-muted)",padding:0}}>
                                 {showPw?"🙈":"👁️"}
                               </button>
                             </div>
                             <button type="button" onClick={() => handleSetPassword(user.id)} disabled={pwSaving||newPassword.length<6}
-                              style={{...smallBtn,background:newPassword.length>=6?"#DC2626":"#E2E8F0",color:newPassword.length>=6?"#fff":"#94A3B8",padding:"3px 10px"}}>
+                              style={{...smallBtn,background:newPassword.length>=6?"#DC2626":"var(--border-light)",color:newPassword.length>=6?"#fff":"var(--text-muted)",padding:"3px 10px"}}>
                               {pwSaving?"…":"Definir"}
                             </button>
                           </div>
@@ -406,7 +406,7 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                     {/* VIP + Delete */}
                     <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
                       <button onClick={() => handleSetVip(user.id)} disabled={vipSaving===user.id}
-                        style={{...smallBtn,background:user.is_vip?"#E2E8F0":"#7C3AED",color:user.is_vip?"#475569":"#fff",padding:"4px 10px"}}>
+                        style={{...smallBtn,background:user.is_vip?"var(--border-light)":"#7C3AED",color:user.is_vip?"var(--text-secondary)":"#fff",padding:"4px 10px"}}>
                         {vipSaving===user.id ? "…" : user.is_vip ? "✓ VIP" : "⭐ Dar VIP"}
                       </button>
                       <div style={{marginLeft:"auto"}}>
@@ -418,7 +418,7 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                               {deleting?"…":"Excluir"}
                             </button>
                             <button onClick={() => {setDeleteConfirm(null);setDeleteMsg(null);}}
-                              style={{...smallBtn,background:"#E2E8F0",color:"#475569"}}>✕</button>
+                              style={{...smallBtn,background:"var(--border-light)",color:"var(--text-secondary)"}}>✕</button>
                           </div>
                         ) : (
                           <button onClick={() => setDeleteConfirm(user.id)}
@@ -436,7 +436,7 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
 
                   {/* ── RIGHT: Matérias grid ── */}
                   <div>
-                    <div style={{fontSize:11,fontWeight:700,color:"#0F172A",marginBottom:8}}>📚 Matérias e acessos</div>
+                    <div style={{fontSize:11,fontWeight:700,color:"var(--text-primary)",marginBottom:8}}>📚 Matérias e acessos</div>
                     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6}}>
                       {MATERIAS_LIST.map(m => {
                         const ac      = getAcesso(user, m);
@@ -447,10 +447,10 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                         const stColor = STATUS_COLORS[st];
 
                         return (
-                          <div key={m} style={{background:"#F8FAFC",borderRadius:7,padding:"8px 10px",border:"1px solid #E2E8F0"}}>
+                          <div key={m} style={{background:"var(--bg-page)",borderRadius:7,padding:"8px 10px",border:"1px solid var(--border-light)"}}>
                             {/* Header */}
                             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:5}}>
-                              <span style={{fontSize:11,fontWeight:700,color:"#0F172A"}}>
+                              <span style={{fontSize:11,fontWeight:700,color:"var(--text-primary)"}}>
                                 {MATERIA_ICONS[m]} {MATERIA_SHORT[m]}
                               </span>
                               <span style={{
@@ -465,14 +465,14 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
                             {/* Grupo + trial date */}
                             {ac && (
                               <div style={{display:"flex",alignItems:"center",gap:4,marginBottom:5}}>
-                                <span style={{fontSize:9,color:"#94A3B8"}}>G:</span>
+                                <span style={{fontSize:9,color:"var(--text-muted)"}}>G:</span>
                                 <select value={ac.grupo||1} onChange={e=>handleGrupoChange(user.id,m,parseInt(e.target.value),ac.status)}
                                   disabled={isSaving}
-                                  style={{fontSize:10,padding:"1px 3px",borderRadius:4,border:"1px solid #D1D5DB",cursor:"pointer",background:"#fff"}}>
+                                  style={{fontSize:10,padding:"1px 3px",borderRadius:4,border:"1px solid var(--border-medium)",cursor:"pointer",background:"var(--bg-input)"}}>
                                   {Array.from({length:10},(_,i)=>i+1).map(g=><option key={g} value={g}>{g}</option>)}
                                 </select>
                                 {ac.trial_expires_at && ac.status==="trial" && (
-                                  <span style={{fontSize:9,color:expired?"#DC2626":"#64748B",marginLeft:2}}>
+                                  <span style={{fontSize:9,color:expired?"#DC2626":"var(--text-faint)",marginLeft:2}}>
                                     {expired?"exp.": `até ${new Date(ac.trial_expires_at).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})}`}
                                   </span>
                                 )}
@@ -518,7 +518,7 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
       })}
 
       {filtered.length === 0 && (
-        <div style={{textAlign:"center",padding:28,color:"#94A3B8",fontSize:12}}>
+        <div style={{textAlign:"center",padding:28,color:"var(--text-muted)",fontSize:12}}>
           Nenhum usuário encontrado
         </div>
       )}
@@ -527,18 +527,18 @@ export default function UserManager({ users: initialUsers, onRefresh, initialSea
       {totalPages > 1 && (
         <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,marginTop:10}}>
           <button onClick={()=>setPage(p=>Math.max(1,p-1))} disabled={page===1}
-            style={{...smallBtn,background:page===1?"#F1F5F9":"#0F172A",color:page===1?"#94A3B8":"#fff",padding:"4px 10px"}}>
+            style={{...smallBtn,background:page===1?"var(--bg-subtle)":"var(--bg-header)",color:page===1?"var(--text-muted)":"#fff",padding:"4px 10px"}}>
             ← Ant.
           </button>
           {Array.from({length:totalPages},(_,i)=>i+1).map(p=>(
             <button key={p} onClick={()=>setPage(p)}
-              style={{...smallBtn,background:page===p?"#0F172A":"#F1F5F9",color:page===p?"#fff":"#64748B",padding:"4px 8px",
+              style={{...smallBtn,background:page===p?"var(--bg-header)":"var(--bg-subtle)",color:page===p?"#fff":"var(--text-faint)",padding:"4px 8px",
                 fontWeight:page===p?800:600,minWidth:28}}>
               {p}
             </button>
           ))}
           <button onClick={()=>setPage(p=>Math.min(totalPages,p+1))} disabled={page===totalPages}
-            style={{...smallBtn,background:page===totalPages?"#F1F5F9":"#0F172A",color:page===totalPages?"#94A3B8":"#fff",padding:"4px 10px"}}>
+            style={{...smallBtn,background:page===totalPages?"var(--bg-subtle)":"var(--bg-header)",color:page===totalPages?"var(--text-muted)":"#fff",padding:"4px 10px"}}>
             Próx. →
           </button>
         </div>

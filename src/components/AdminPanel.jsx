@@ -31,9 +31,11 @@ export default function AdminPanel({ onBack }) {
   const [commLoading, setCommLoading] = useState(false);
   const [markingPaid, setMarkingPaid] = useState(null);
   const [realtimeStatus, setRealtimeStatus] = useState("connecting"); // "connecting" | "live" | "error"
+  const [refreshing, setRefreshing] = useState(false);
   const debounceRef = useRef(null);
 
   const loadData = useCallback(async () => {
+    setRefreshing(true);
     try {
       const d = await fetchAdminData();
       setData(d);
@@ -45,6 +47,7 @@ export default function AdminPanel({ onBack }) {
       setError(err.message);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   }, []);
 
@@ -56,8 +59,18 @@ export default function AdminPanel({ onBack }) {
 
   useEffect(() => {
     loadData();
-    // Fallback polling a cada 30s caso realtime caia
-    const interval = setInterval(loadData, 30000);
+    // Fallback polling a cada 30s caso realtime caia — pausa quando aba não visível
+    let interval = setInterval(loadData, 30000);
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        clearInterval(interval);
+      } else {
+        loadData();
+        interval = setInterval(loadData, 30000);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
 
     // Realtime: escuta mudanças em acessos, profiles e eventos
     const channel = supabase
@@ -75,6 +88,7 @@ export default function AdminPanel({ onBack }) {
     return () => {
       clearInterval(interval);
       clearTimeout(debounceRef.current);
+      document.removeEventListener("visibilitychange", handleVisibility);
       supabase.removeChannel(channel);
     };
   }, [loadData, debouncedLoad]);
@@ -122,16 +136,16 @@ export default function AdminPanel({ onBack }) {
   }
 
   if (loading) return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", color: "#64748B", fontSize: 15 }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", color: "var(--text-faint)", fontSize: 15, background: "var(--bg-page)" }}>
       Carregando painel admin…
     </div>
   );
 
   if (error) return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", gap: 16, color: "#64748B", padding: 24 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", gap: 16, color: "var(--text-faint)", padding: 24, background: "var(--bg-page)" }}>
       <span style={{ fontSize: 48 }}>⚠️</span>
       <div style={{ fontSize: 16, fontWeight: 700, color: "#DC2626" }}>Erro: {error}</div>
-      <button onClick={onBack} style={{ background: "#0F172A", color: "#fff", border: "none", padding: "10px 24px", borderRadius: 8, cursor: "pointer", fontWeight: 700 }}>← Voltar</button>
+      <button onClick={onBack} style={{ background: "var(--bg-header)", color: "#fff", border: "none", padding: "10px 24px", borderRadius: 8, cursor: "pointer", fontWeight: 700 }}>← Voltar</button>
     </div>
   );
 
@@ -140,9 +154,9 @@ export default function AdminPanel({ onBack }) {
   const totalDeviceSessions = devices.reduce((s, d) => s + d.sessions, 0) || 1;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#F8FAFC" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg-page)", color: "var(--text-primary)" }}>
       {/* Header */}
-      <div style={{ background: "#0F172A", padding: "14px 20px", position: "sticky", top: 0, zIndex: 100 }}>
+      <div style={{ background: "var(--bg-header)", padding: "14px 20px", position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <button onClick={onBack} style={{ background: "#1E293B", border: "none", color: "#94A3B8", width: 32, height: 32, borderRadius: 8, cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>←</button>
@@ -162,7 +176,7 @@ export default function AdminPanel({ onBack }) {
               </span>
             </div>
             <span style={{ fontSize: 11, color: "#475569" }}>⟳ {timeSinceRefresh()}</span>
-            <button onClick={loadData} style={{ background: "#1E293B", border: "none", color: "#94A3B8", padding: "6px 12px", borderRadius: 6, cursor: "pointer", fontSize: 11, fontWeight: 600 }}>Atualizar</button>
+            <button onClick={loadData} disabled={refreshing} style={{ background: "#1E293B", border: "none", color: refreshing ? "#475569" : "#94A3B8", padding: "6px 12px", borderRadius: 6, cursor: refreshing ? "not-allowed" : "pointer", fontSize: 11, fontWeight: 600, opacity: refreshing ? 0.7 : 1 }}>{refreshing ? "⟳ Atualizando…" : "Atualizar"}</button>
           </div>
         </div>
       </div>
@@ -170,7 +184,7 @@ export default function AdminPanel({ onBack }) {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "10px 16px 8px" }}>
         {/* Stats row */}
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
-          <StatCard icon="👥" label="Total Usuários" value={data?.total_users || 0} color="#0F172A" />
+          <StatCard icon="👥" label="Total Usuários" value={data?.total_users || 0} color="var(--text-primary)" />
           <StatCard icon="🟢" label="Online agora" value={sessions.active_now || 0} color="#16A34A" sub={`${sessions.active_1h || 0} na última hora`} onClick={() => setShowOnline(true)} />
           <StatCard icon="💰" label="Receita total" value={`R$ ${Number(data?.total_revenue || 0).toFixed(2)}`} color="#16A34A" />
           <StatCard icon="📈" label="Pagantes" value={data?.total_paid || 0} color="#2563EB" sub={data?.total_users ? `${Math.round((data.total_paid / data.total_users) * 100)}% conversão` : ""} />
@@ -181,13 +195,13 @@ export default function AdminPanel({ onBack }) {
         </div>
 
         {/* Tabs */}
-        <div style={{ display: "flex", gap: 4, marginBottom: 8, background: "#E2E8F0", borderRadius: 8, padding: 3 }}>
+        <div style={{ display: "flex", gap: 4, marginBottom: 8, background: "var(--border-light)", borderRadius: 8, padding: 3 }}>
           {TABS.map(t => (
             <button key={t.key} onClick={() => setTab(t.key)} style={{
               flex: 1, padding: "8px 14px", borderRadius: 6, border: "none", cursor: "pointer",
               fontSize: 12, fontWeight: 700, transition: "all 0.15s",
-              background: tab === t.key ? "#fff" : "transparent",
-              color: tab === t.key ? "#0F172A" : "#64748B",
+              background: tab === t.key ? "var(--bg-card)" : "transparent",
+              color: tab === t.key ? "var(--text-primary)" : "var(--text-faint)",
               boxShadow: tab === t.key ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
             }}>{t.label}</button>
           ))}
@@ -197,65 +211,65 @@ export default function AdminPanel({ onBack }) {
         {tab === "overview" && (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1.4fr", gap: 8 }}>
             {/* Signups chart — col 1, row 1 */}
-            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
+            <div style={{ background: "var(--bg-card)", borderRadius: 10, padding: 12, border: "1px solid var(--border-light)" }}>
               <MiniBarChart rawGrowth={data?.user_growth} color="#3B82F6" label="📊 Novos cadastros (desde 24/02)" />
             </div>
 
             {/* Devices — col 2, row 1 */}
-            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>📱 Dispositivos</div>
+            <div style={{ background: "var(--bg-card)", borderRadius: 10, padding: 12, border: "1px solid var(--border-light)" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 8 }}>📱 Dispositivos</div>
               {devices.map(d => (
                 <div key={d.device} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                  <div style={{ width: 60, fontSize: 11, fontWeight: 600, color: "#475569" }}>{d.device}</div>
-                  <div style={{ flex: 1, height: 6, background: "#F1F5F9", borderRadius: 99, overflow: "hidden" }}>
+                  <div style={{ width: 60, fontSize: 11, fontWeight: 600, color: "var(--text-secondary)" }}>{d.device}</div>
+                  <div style={{ flex: 1, height: 6, background: "var(--bg-subtle)", borderRadius: 99, overflow: "hidden" }}>
                     <div style={{ width: `${Math.round((d.sessions / totalDeviceSessions) * 100)}%`, height: "100%", background: "#3B82F6", borderRadius: 99 }} />
                   </div>
-                  <div style={{ fontSize: 10, color: "#94A3B8", width: 32, textAlign: "right" }}>{Math.round((d.sessions / totalDeviceSessions) * 100)}%</div>
+                  <div style={{ fontSize: 10, color: "var(--text-muted)", width: 32, textAlign: "right" }}>{Math.round((d.sessions / totalDeviceSessions) * 100)}%</div>
                 </div>
               ))}
-              {devices.length === 0 && <div style={{ fontSize: 11, color: "#94A3B8" }}>Sem sessões ativas</div>}
+              {devices.length === 0 && <div style={{ fontSize: 11, color: "var(--text-muted)" }}>Sem sessões ativas</div>}
             </div>
 
             {/* Conversion — col 3, spans both rows */}
-            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0", gridRow: "1 / 3" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>📊 Conversão por matéria</div>
+            <div style={{ background: "var(--bg-card)", borderRadius: 10, padding: 12, border: "1px solid var(--border-light)", gridRow: "1 / 3" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 8 }}>📊 Conversão por matéria</div>
               <ConversionTable funnel={data?.conversion_funnel} revenue={data?.revenue} />
             </div>
 
             {/* Engagement — col 1, row 2 */}
-            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>📚 Engajamento</div>
+            <div style={{ background: "var(--bg-card)", borderRadius: 10, padding: 12, border: "1px solid var(--border-light)" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 8 }}>📚 Engajamento</div>
               {(data?.engagement || []).map(e => (
-                <div key={e.materia} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", borderBottom: "1px solid #F1F5F9", fontSize: 11 }}>
-                  <span style={{ fontWeight: 600, color: "#0F172A" }}>{e.materia}</span>
-                  <span style={{ color: "#64748B" }}>{e.users_with_progress} users · {e.avg_completed} avg</span>
+                <div key={e.materia} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", borderBottom: "1px solid var(--bg-subtle)", fontSize: 11 }}>
+                  <span style={{ fontWeight: 600, color: "var(--text-primary)" }}>{e.materia}</span>
+                  <span style={{ color: "var(--text-faint)" }}>{e.users_with_progress} users · {e.avg_completed} avg</span>
                 </div>
               ))}
-              {(!data?.engagement || data.engagement.length === 0) && <div style={{ fontSize: 11, color: "#94A3B8" }}>Sem dados</div>}
+              {(!data?.engagement || data.engagement.length === 0) && <div style={{ fontSize: 11, color: "var(--text-muted)" }}>Sem dados</div>}
             </div>
 
             {/* Expiring trials — col 2, row 2 */}
-            <div style={{ background: "#fff", borderRadius: 10, padding: 12, border: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>⏳ Trials ativos & expirados</div>
+            <div style={{ background: "var(--bg-card)", borderRadius: 10, padding: 12, border: "1px solid var(--border-light)" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 8 }}>⏳ Trials ativos & expirados</div>
               <TrialExpirations trials={data?.expiring_trials} />
             </div>
           </div>
         )}
 
         {tab === "eventos" && (
-          <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #E2E8F0", overflow: "hidden" }}>
-            <div style={{ padding: "14px 18px", borderBottom: "1px solid #E2E8F0" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#0F172A" }}>📋 Eventos recentes (últimos 50)</div>
+          <div style={{ background: "var(--bg-card)", borderRadius: 12, border: "1px solid var(--border-light)", overflow: "hidden" }}>
+            <div style={{ padding: "14px 18px", borderBottom: "1px solid var(--border-light)" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }}>📋 Eventos recentes (últimos 50)</div>
             </div>
             <EventFeed events={data?.recent_events} />
           </div>
         )}
 
         {tab === "suporte" && (
-          <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #E2E8F0", overflow: "hidden" }}>
-            <div style={{ padding: "14px 18px", borderBottom: "1px solid #E2E8F0", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#0F172A" }}>💬 Tickets de suporte</div>
-              <span style={{ fontSize: 11, color: "#64748B" }}>{(data?.support_tickets || []).filter(t => t.status === "aberto").length} abertos</span>
+          <div style={{ background: "var(--bg-card)", borderRadius: 12, border: "1px solid var(--border-light)", overflow: "hidden" }}>
+            <div style={{ padding: "14px 18px", borderBottom: "1px solid var(--border-light)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }}>💬 Tickets de suporte</div>
+              <span style={{ fontSize: 11, color: "var(--text-faint)" }}>{(data?.support_tickets || []).filter(t => t.status === "aberto").length} abertos</span>
             </div>
             <SupportTickets tickets={data?.support_tickets} onRefresh={loadData} />
           </div>
@@ -282,34 +296,34 @@ export default function AdminPanel({ onBack }) {
               </div>
 
               {/* Lista de afiliados */}
-              <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #E2E8F0", overflow: "hidden" }}>
-                <div style={{ padding: "14px 18px", borderBottom: "1px solid #E2E8F0" }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: "#0F172A" }}>🔗 Afiliados</div>
+              <div style={{ background: "var(--bg-card)", borderRadius: 12, border: "1px solid var(--border-light)", overflow: "hidden" }}>
+                <div style={{ padding: "14px 18px", borderBottom: "1px solid var(--border-light)" }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }}>🔗 Afiliados</div>
                 </div>
                 {affiliates.length === 0 ? (
-                  <div style={{ padding: 24, textAlign: "center", color: "#94A3B8", fontSize: 13 }}>
+                  <div style={{ padding: 24, textAlign: "center", color: "var(--text-muted)", fontSize: 13 }}>
                     Nenhum afiliado cadastrado ainda.
                   </div>
                 ) : (
                   <div style={{ overflow: "auto" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
                       <thead>
-                        <tr style={{ background: "#F8FAFC" }}>
-                          <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: 700, color: "#475569" }}>Afiliado</th>
-                          <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: 700, color: "#475569" }}>Código</th>
-                          <th style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "#475569" }}>Indicados</th>
-                          <th style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "#475569" }}>Pagantes</th>
-                          <th style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "#475569" }}>Comissão</th>
-                          <th style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "#475569" }}>Pendente</th>
-                          <th style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "#475569" }}>Ações</th>
+                        <tr style={{ background: "var(--bg-page)" }}>
+                          <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: 700, color: "var(--text-secondary)" }}>Afiliado</th>
+                          <th style={{ textAlign: "left", padding: "10px 14px", fontWeight: 700, color: "var(--text-secondary)" }}>Código</th>
+                          <th style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "var(--text-secondary)" }}>Indicados</th>
+                          <th style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "var(--text-secondary)" }}>Pagantes</th>
+                          <th style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "var(--text-secondary)" }}>Comissão</th>
+                          <th style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "var(--text-secondary)" }}>Pendente</th>
+                          <th style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "var(--text-secondary)" }}>Ações</th>
                         </tr>
                       </thead>
                       <tbody>
                         {affiliates.map((a, i) => (
                           <React.Fragment key={a.user_id || i}>
-                            <tr style={{ borderBottom: "1px solid #F1F5F9", cursor: "pointer" }} onClick={() => loadCommissions(a.user_id)}>
+                            <tr style={{ borderBottom: "1px solid var(--bg-subtle)", cursor: "pointer" }} onClick={() => loadCommissions(a.user_id)}>
                               <td style={{ padding: "10px 14px" }}>
-                                <div style={{ fontWeight: 600, color: "#0F172A" }}>
+                                <div style={{ fontWeight: 600, color: "var(--text-primary)" }}>
                                   {a.nome || "Sem nome"}
                                   {(() => {
                                     const tp = a.total_paid || 0;
@@ -317,63 +331,63 @@ export default function AdminPanel({ onBack }) {
                                     return <span style={{ fontSize: 9, fontWeight: 700, color: "#059669", background: "#F0FDF4", padding: "1px 6px", borderRadius: 99, marginLeft: 6 }}>{pct}%</span>;
                                   })()}
                                 </div>
-                                <div style={{ fontSize: 10, color: "#94A3B8" }}>{a.email}</div>
+                                <div style={{ fontSize: 10, color: "var(--text-muted)" }}>{a.email}</div>
                               </td>
                               <td style={{ padding: "10px 14px" }}>
                                 <span style={{ background: "#F0FDF4", color: "#059669", padding: "3px 8px", borderRadius: 6, fontWeight: 700, fontSize: 11 }}>
                                   {a.code}
                                 </span>
                               </td>
-                              <td style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "#0F172A" }}>{a.total_referred || 0}</td>
+                              <td style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "var(--text-primary)" }}>{a.total_referred || 0}</td>
                               <td style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "#059669" }}>{a.total_paid || 0}</td>
-                              <td style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "#0F172A" }}>R$ {Number(a.comissao_total || 0).toFixed(2)}</td>
+                              <td style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "var(--text-primary)" }}>R$ {Number(a.comissao_total || 0).toFixed(2)}</td>
                               <td style={{ textAlign: "right", padding: "10px 14px" }}>
                                 {Number(a.comissao_pendente || 0) > 0 ? (
                                   <span style={{ color: "#F59E0B", fontWeight: 700 }}>R$ {Number(a.comissao_pendente).toFixed(2)}</span>
                                 ) : (
-                                  <span style={{ color: "#94A3B8" }}>R$ 0.00</span>
+                                  <span style={{ color: "var(--text-muted)" }}>R$ 0.00</span>
                                 )}
                               </td>
                               <td style={{ textAlign: "center", padding: "10px 14px" }}>
-                                <span style={{ fontSize: 12, color: "#94A3B8" }}>{expandedAffiliate === a.user_id ? "▼" : "▶"}</span>
+                                <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{expandedAffiliate === a.user_id ? "▼" : "▶"}</span>
                               </td>
                             </tr>
                             {/* Expanded: commission details */}
                             {expandedAffiliate === a.user_id && (
                               <tr>
                                 <td colSpan={7} style={{ padding: 0 }}>
-                                  <div style={{ background: "#F8FAFC", padding: "12px 14px", borderBottom: "2px solid #E2E8F0" }}>
-                                    <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", marginBottom: 8 }}>
+                                  <div style={{ background: "var(--bg-page)", padding: "12px 14px", borderBottom: "2px solid var(--border-light)" }}>
+                                    <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 8 }}>
                                       Comissões de {a.nome || a.code}
-                                      <span style={{ marginLeft: 8, fontSize: 10, color: "#94A3B8", fontWeight: 400 }}>
+                                      <span style={{ marginLeft: 8, fontSize: 10, color: "var(--text-muted)", fontWeight: 400 }}>
                                         Faixa atual: {(a.total_paid || 0) <= 5 ? "10%" : (a.total_paid || 0) <= 20 ? "20%" : (a.total_paid || 0) <= 40 ? "30%" : "40%"} (1-5: 10%, 6-20: 20%, 21-40: 30%, 41+: 40%)
                                       </span>
                                     </div>
                                     {commLoading ? (
-                                      <div style={{ fontSize: 11, color: "#94A3B8", padding: 8 }}>Carregando...</div>
+                                      <div style={{ fontSize: 11, color: "var(--text-muted)", padding: 8 }}>Carregando...</div>
                                     ) : commissions.length === 0 ? (
-                                      <div style={{ fontSize: 11, color: "#94A3B8", padding: 8 }}>Nenhuma comissão registrada.</div>
+                                      <div style={{ fontSize: 11, color: "var(--text-muted)", padding: 8 }}>Nenhuma comissão registrada.</div>
                                     ) : (
                                       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 11 }}>
                                         <thead>
-                                          <tr style={{ background: "#E2E8F0" }}>
-                                            <th style={{ textAlign: "left", padding: "6px 10px", fontWeight: 600, color: "#475569" }}>Indicado</th>
-                                            <th style={{ textAlign: "center", padding: "6px 10px", fontWeight: 600, color: "#475569" }}>Matéria</th>
-                                            <th style={{ textAlign: "right", padding: "6px 10px", fontWeight: 600, color: "#475569" }}>Venda</th>
-                                            <th style={{ textAlign: "right", padding: "6px 10px", fontWeight: 600, color: "#475569" }}>Comissão</th>
-                                            <th style={{ textAlign: "center", padding: "6px 10px", fontWeight: 600, color: "#475569" }}>Status</th>
-                                            <th style={{ textAlign: "center", padding: "6px 10px", fontWeight: 600, color: "#475569" }}>Ação</th>
+                                          <tr style={{ background: "var(--border-light)" }}>
+                                            <th style={{ textAlign: "left", padding: "6px 10px", fontWeight: 600, color: "var(--text-secondary)" }}>Indicado</th>
+                                            <th style={{ textAlign: "center", padding: "6px 10px", fontWeight: 600, color: "var(--text-secondary)" }}>Matéria</th>
+                                            <th style={{ textAlign: "right", padding: "6px 10px", fontWeight: 600, color: "var(--text-secondary)" }}>Venda</th>
+                                            <th style={{ textAlign: "right", padding: "6px 10px", fontWeight: 600, color: "var(--text-secondary)" }}>Comissão</th>
+                                            <th style={{ textAlign: "center", padding: "6px 10px", fontWeight: 600, color: "var(--text-secondary)" }}>Status</th>
+                                            <th style={{ textAlign: "center", padding: "6px 10px", fontWeight: 600, color: "var(--text-secondary)" }}>Ação</th>
                                           </tr>
                                         </thead>
                                         <tbody>
                                           {commissions.map(c => (
-                                            <tr key={c.id} style={{ borderBottom: "1px solid #E2E8F0" }}>
+                                            <tr key={c.id} style={{ borderBottom: "1px solid var(--border-light)" }}>
                                               <td style={{ padding: "8px 10px" }}>
-                                                <div style={{ fontWeight: 600, color: "#0F172A" }}>{c.referred_nome || "—"}</div>
-                                                <div style={{ fontSize: 9, color: "#94A3B8" }}>{c.referred_email}</div>
+                                                <div style={{ fontWeight: 600, color: "var(--text-primary)" }}>{c.referred_nome || "—"}</div>
+                                                <div style={{ fontSize: 9, color: "var(--text-muted)" }}>{c.referred_email}</div>
                                               </td>
-                                              <td style={{ textAlign: "center", padding: "8px 10px", fontWeight: 600, color: "#0F172A", textTransform: "uppercase" }}>{c.materia}</td>
-                                              <td style={{ textAlign: "right", padding: "8px 10px", color: "#475569" }}>R$ {Number(c.valor_venda || 0).toFixed(2)}</td>
+                                              <td style={{ textAlign: "center", padding: "8px 10px", fontWeight: 600, color: "var(--text-primary)", textTransform: "uppercase" }}>{c.materia}</td>
+                                              <td style={{ textAlign: "right", padding: "8px 10px", color: "var(--text-secondary)" }}>R$ {Number(c.valor_venda || 0).toFixed(2)}</td>
                                               <td style={{ textAlign: "right", padding: "8px 10px", fontWeight: 700, color: "#059669" }}>R$ {Number(c.comissao_valor || 0).toFixed(2)}</td>
                                               <td style={{ textAlign: "center", padding: "8px 10px" }}>
                                                 {c.status === "pago" ? (
@@ -395,7 +409,7 @@ export default function AdminPanel({ onBack }) {
                                                     {markingPaid === c.id ? "..." : "Marcar pago"}
                                                   </button>
                                                 ) : (
-                                                  <span style={{ fontSize: 10, color: "#94A3B8" }}>--</span>
+                                                  <span style={{ fontSize: 10, color: "var(--text-muted)" }}>--</span>
                                                 )}
                                               </td>
                                             </tr>
@@ -452,20 +466,20 @@ export default function AdminPanel({ onBack }) {
             zIndex: 9999, padding: 24,
           }}>
             <div onClick={e => e.stopPropagation()} style={{
-              background: "#fff", borderRadius: 16, padding: "24px", maxWidth: 480, width: "100%",
+              background: "var(--bg-card)", borderRadius: 16, padding: "24px", maxWidth: 480, width: "100%",
               maxHeight: "70vh", overflow: "auto", boxShadow: "0 25px 50px rgba(0,0,0,0.3)",
             }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-                <div style={{ fontSize: 15, fontWeight: 800, color: "#0F172A" }}>
+                <div style={{ fontSize: 15, fontWeight: 800, color: "var(--text-primary)" }}>
                   🟢 Online agora ({onlineUsers.length})
                 </div>
                 <button onClick={() => setShowOnline(false)} style={{
-                  background: "#F1F5F9", border: "none", borderRadius: 8, width: 28, height: 28,
-                  cursor: "pointer", fontSize: 14, color: "#64748B", display: "flex", alignItems: "center", justifyContent: "center",
+                  background: "var(--bg-subtle)", border: "none", borderRadius: 8, width: 28, height: 28,
+                  cursor: "pointer", fontSize: 14, color: "var(--text-faint)", display: "flex", alignItems: "center", justifyContent: "center",
                 }}>✕</button>
               </div>
               {onlineUsers.length === 0 ? (
-                <div style={{ textAlign: "center", color: "#94A3B8", fontSize: 13, padding: 20 }}>
+                <div style={{ textAlign: "center", color: "var(--text-muted)", fontSize: 13, padding: 20 }}>
                   Nenhum usuário online no momento
                 </div>
               ) : (
@@ -478,19 +492,19 @@ export default function AdminPanel({ onBack }) {
                   return (
                     <div key={i} style={{
                       display: "flex", alignItems: "center", gap: 10,
-                      padding: "12px 0", borderBottom: i < onlineUsers.length - 1 ? "1px solid #F1F5F9" : "none",
+                      padding: "12px 0", borderBottom: i < onlineUsers.length - 1 ? "1px solid var(--bg-subtle)" : "none",
                     }}>
                       <div style={{ fontSize: 20 }}>{device.icon}</div>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A" }}>{u.nome || "Sem nome"}</div>
-                        <div style={{ fontSize: 11, color: "#64748B" }}>{u.email}</div>
-                        <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 2 }}>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{u.nome || "Sem nome"}</div>
+                        <div style={{ fontSize: 11, color: "var(--text-faint)" }}>{u.email}</div>
+                        <div style={{ fontSize: 10, color: "var(--text-muted)", marginTop: 2 }}>
                           {device.os}{browser ? ` · ${browser}` : ""} · <span style={{ color: "#16A34A", fontWeight: 600 }}>{timeAgo}</span>
                         </div>
                       </div>
                       <button
                         onClick={() => { setShowOnline(false); setUserSearch(u.email); setTab("usuarios"); }}
-                        style={{ background: "#F1F5F9", border: "none", borderRadius: 6, padding: "5px 10px", fontSize: 10, fontWeight: 700, color: "#475569", cursor: "pointer", whiteSpace: "nowrap" }}
+                        style={{ background: "var(--bg-subtle)", border: "none", borderRadius: 6, padding: "5px 10px", fontSize: 10, fontWeight: 700, color: "var(--text-secondary)", cursor: "pointer", whiteSpace: "nowrap" }}
                       >
                         Editar
                       </button>

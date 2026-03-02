@@ -55,9 +55,9 @@ function parseTimeRange(raw) {
 }
 
 const overlay = {position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:16};
-const card    = {background:"#fff",borderRadius:16,padding:24,width:"100%",maxWidth:400,boxShadow:"0 20px 60px rgba(0,0,0,0.3)"};
-const lbl     = {fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:4,marginTop:14};
-const inp     = {width:"100%",padding:"10px 12px",borderRadius:10,border:"1px solid #E2E8F0",fontSize:14,outline:"none",boxSizing:"border-box",transition:"border 0.15s"};
+const card    = {background:"var(--bg-card)",borderRadius:16,padding:24,width:"100%",maxWidth:400,boxShadow:"0 20px 60px rgba(0,0,0,0.3)"};
+const lbl     = {fontSize:12,fontWeight:600,color:"var(--text-secondary)",display:"block",marginBottom:4,marginTop:14};
+const inp     = {width:"100%",padding:"10px 12px",borderRadius:10,border:"1px solid var(--border-light)",fontSize:14,outline:"none",boxSizing:"border-box",transition:"border 0.15s",background:"var(--bg-input)",color:"var(--text-primary)"};
 const btnBase = {flex:1,padding:"10px 0",borderRadius:10,fontSize:14,fontWeight:700,cursor:"pointer",border:"none",transition:"all 0.12s"};
 
 export default function ActivityModal({mode, activity, weekNum, day, turno, onSave, onClose, onDelete}) {
@@ -96,8 +96,8 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
   return (
     <div style={overlay} onClick={onClose}>
       <form onClick={e=>e.stopPropagation()} onSubmit={handleSubmit} className="modal-form" style={card}>
-        <div style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:2}}>{heading}</div>
-        <div style={{fontSize:12,color:"#94A3B8",marginBottom:8}}>{context}</div>
+        <div style={{fontSize:18,fontWeight:800,color:"var(--text-primary)",marginBottom:2}}>{heading}</div>
+        <div style={{fontSize:12,color:"var(--text-muted)",marginBottom:8}}>{context}</div>
 
         <label style={{...lbl,marginTop:0}}>Título *</label>
         <input value={title} onChange={e=>setTitle(e.target.value)} required
@@ -114,7 +114,7 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
         />
         {timeErr
           ? <div style={{fontSize:11,color:"#EF4444",marginTop:3}}>{timeErr}</div>
-          : <div style={{fontSize:10,color:"#94A3B8",marginTop:3}}>Aceita: 0800-1200 · 8-12 · 08:00-12:00 · 8h-12h</div>
+          : <div style={{fontSize:10,color:"var(--text-muted)",marginTop:3}}>Aceita: 0800-1200 · 8-12 · 08:00-12:00 · 8h-12h</div>
         }
 
         <label style={lbl}>Local (opcional)</label>
@@ -139,11 +139,11 @@ export default function ActivityModal({mode, activity, weekNum, day, turno, onSa
 
         <div style={{display:"flex",gap:10,marginTop:22}}>
           <button type="button" onClick={onClose}
-            style={{...btnBase,background:"#F1F5F9",color:"#475569"}}>
+            style={{...btnBase,background:"var(--bg-subtle)",color:"var(--text-secondary)"}}>
             Cancelar
           </button>
           <button type="submit"
-            style={{...btnBase,background:"#0F172A",color:"#fff"}}>
+            style={{...btnBase,background:"var(--bg-header)",color:"#fff"}}>
             {isAdd ? "Adicionar" : "Salvar"}
           </button>
         </div>

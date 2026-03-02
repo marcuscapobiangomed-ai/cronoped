@@ -3,8 +3,9 @@ import { DAYS_ORDER, DAY_LABELS, MODULE_END_DATE } from "../constants";
 import { GRUPOS, loadMateriaData } from "../scheduleData";
 import { supabase } from "../supabase";
 import { dbLoadProgress, dbSaveProgress, validateAcesso } from "../lib/db";
-import { getTodayInfo, getUpcomingAlerts, launchConfetti } from "../lib/helpers";
+import { getTodayInfo, getUpcomingAlerts, launchConfetti, formatTimeRemaining } from "../lib/helpers";
 import { applyCustomizations, generateCustomId } from "../lib/customizations";
+import { generateWeekICS, downloadICS } from "../lib/calendarExport";
 import AlertBanner from "./AlertBanner";
 import ActivityCard from "./ActivityCard";
 import ActivityModal from "./ActivityModal";
@@ -39,15 +40,15 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
   }
 
   const [open, setOpen] = useState({});
-
-  // Auto-open current week when data loads
-  useEffect(() => {
+  const [prevWeeks, setPrevWeeks] = useState(WEEKS);
+  if (WEEKS !== prevWeeks) {
+    setPrevWeeks(WEEKS);
     if (WEEKS.length > 0) {
       const o = {};
       WEEKS.forEach(w => { o[w.num] = w.num === (todayWeek ?? 1); });
       setOpen(o);
     }
-  }, [WEEKS, todayWeek]);
+  }
 
   const [completed,      setCompleted]      = useState({});
   const [notes,          setNotes]          = useState({});
@@ -85,7 +86,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
 
   const prevDoneWeeks = useRef(new Set());
   const saveTimer     = useRef(null);
-  const latestData    = useRef({completed:{}, notes:{}, customizations:{}});
+  const [dirty,        setDirty]        = useState(false);
 
   useEffect(()=>{
     let cancelled = false;
@@ -104,7 +105,6 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
       }
       setWeeksByGroup(wbg);
       setCompleted(c); setNotes(n); setCustomizations(cust || {});
-      latestData.current = {completed:c, notes:n, customizations:cust||{}};
       setLoading(false);
     }).catch(() => {
       if (!cancelled) { setAccessDenied(true); setLoading(false); }
@@ -113,41 +113,44 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
       cancelled = true;
       clearTimeout(saveTimer.current);
     };
-  },[user.id, materia.id]);
+  },[user.id, materia.id, isVIP, profile?.is_vip]);
 
-  const scheduleSave = useCallback((c, n, cust) => {
-    latestData.current = {completed:c, notes:n, customizations:cust ?? latestData.current.customizations};
-    setSyncStatus("syncing");
+  // Debounced auto-save: saves when dirty flag is set
+  useEffect(() => {
+    if (!dirty) return;
     clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(async () => {
       try {
-        const {completed:lc, notes:ln, customizations:lcust} = latestData.current;
-        await dbSaveProgress(user.id, materia.id, lc, ln, lcust);
+        await dbSaveProgress(user.id, materia.id, completed, notes, customizations);
         setSyncStatus("saved");
         setTimeout(() => setSyncStatus("idle"), 2000);
       } catch {
         setSyncStatus("offline");
       }
+      setDirty(false);
     }, 1200);
-  }, [user.id, materia.id]);
+    return () => clearTimeout(saveTimer.current);
+  }, [dirty, completed, notes, customizations, user.id, materia.id]);
+
+  function markDirty() { setDirty(true); setSyncStatus("syncing"); }
 
   const toggle = useCallback((id) => {
     setCompleted(prev => {
       const next = {...prev, [id]:!prev[id]};
       if (!next[id]) delete next[id];
-      scheduleSave(next, latestData.current.notes);
       return next;
     });
-  }, [scheduleSave]);
+    markDirty();
+  }, []);
 
   const saveNote = useCallback((id, text) => {
     setNotes(prev => {
       const next = {...prev, [id]:text};
       if (!text) delete next[id];
-      scheduleSave(latestData.current.completed, next);
       return next;
     });
-  }, [scheduleSave]);
+    markDirty();
+  }, []);
 
   const handleEditActivity = useCallback((id, changes) => {
     setCustomizations(prev => {
@@ -155,13 +158,12 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
       const idx = next.edits.findIndex(e => e.id === id);
       if (idx >= 0) next.edits[idx] = {...next.edits[idx], ...changes, id};
       else next.edits.push({id, ...changes});
-      scheduleSave(latestData.current.completed, latestData.current.notes, next);
       return next;
     });
-  }, [scheduleSave]);
+    markDirty();
+  }, []);
 
   const handleDeleteActivity = useCallback((id) => {
-    // Find activity label for the confirm modal
     const activity = mergedWeeks.flatMap(w => w.activities).find(a => a.id === id);
     setDeleteConfirm({ id, label: activity?.title || "esta atividade", isReset: false });
   }, [mergedWeeks]);
@@ -177,33 +179,65 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
         next.deletes = [...new Set([...(next.deletes || []), id])];
       }
       next.edits = (next.edits || []).filter(e => e.id !== id);
-      scheduleSave(latestData.current.completed, latestData.current.notes, next);
       return next;
     });
     setCompleted(prev => { const n = {...prev}; delete n[id]; return n; });
     setNotes(prev => { const n = {...prev}; delete n[id]; return n; });
     setDeleteConfirm(null);
-  }, [deleteConfirm, scheduleSave]);
+    markDirty();
+  }, [deleteConfirm]);
 
   const handleAddActivity = useCallback((weekNum, day, turno, data) => {
     setCustomizations(prev => {
       const next = {...prev};
       next.adds = [...(next.adds || []), {id:generateCustomId(), weekNum, day, turno, ...data}];
-      scheduleSave(latestData.current.completed, latestData.current.notes, next);
       return next;
     });
-  }, [scheduleSave]);
+    markDirty();
+  }, []);
 
   const handleResetCustomizations = useCallback(() => {
     setDeleteConfirm({ id: null, label: "todas as edições", isReset: true });
   }, []);
 
   const confirmReset = useCallback(() => {
-    const empty = {};
-    setCustomizations(empty);
-    scheduleSave(latestData.current.completed, latestData.current.notes, empty);
+    setCustomizations({});
     setDeleteConfirm(null);
-  }, [scheduleSave]);
+    markDirty();
+  }, []);
+
+  function exportWeekToCalendar(week) {
+    const grupoLabel = materia.grupoLabels?.[grupo] ?? grupo;
+    const ics = generateWeekICS(week, weekDates, `${materia.label} G${grupoLabel}`, grupoLabel);
+    downloadICS(ics, `${materia.id}-semana${week.num}-G${grupoLabel}.ics`);
+  }
+
+  function exportAllToCalendar() {
+    const grupoLabel = materia.grupoLabels?.[grupo] ?? grupo;
+    // Merge all weeks into one ICS
+    const allActivities = mergedWeeks.flatMap(w =>
+      w.activities.filter(a => a.type !== "feriado").map(a => ({ ...a, _weekNum: w.num }))
+    );
+    const fakeWeek = { num: 0, activities: mergedWeeks.flatMap(w => w.activities) };
+    // Build full ICS manually with all weeks
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//CronoPed//Cronograma Internato//PT",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      `X-WR-CALNAME:${materia.label} - Grupo ${grupoLabel}`,
+      "X-WR-TIMEZONE:America/Sao_Paulo",
+    ];
+    for (const week of mergedWeeks) {
+      const weekIcs = generateWeekICS(week, weekDates, `${materia.label} G${grupoLabel}`, grupoLabel);
+      // Extract VEVENT blocks from each week's ICS
+      const events = weekIcs.match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) || [];
+      for (const ev of events) lines.push(ev);
+    }
+    lines.push("END:VCALENDAR");
+    downloadICS(lines.join("\r\n"), `${materia.id}-completo-G${grupoLabel}.ics`);
+  }
 
   useEffect(()=>{
     mergedWeeks.forEach(week => {
@@ -220,35 +254,35 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
   const pct       = allItems.length ? Math.round((totalDone / allItems.length) * 100) : 0;
 
   if (loading) return (
-    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",color:"#64748B",fontSize:15,gap:10}}>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",color:"var(--text-faint)",fontSize:15,gap:10,background:"var(--bg-page)"}}>
       <span style={{fontSize:28}}>{materia.icon}</span> Carregando cronograma…
     </div>
   );
 
   if (moduleExpired) return (
-    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"100vh",gap:16,color:"#64748B",textAlign:"center",padding:24}}>
+    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"100vh",gap:16,color:"var(--text-faint)",textAlign:"center",padding:24,background:"var(--bg-page)"}}>
       <span style={{fontSize:48}}>📅</span>
       <div style={{fontSize:18,fontWeight:700,color:"#DC2626"}}>Módulo 1 encerrado</div>
       <div style={{fontSize:14}}>O acesso ao Módulo 1 expirou em 08/05/2026.</div>
-      <div style={{fontSize:13,color:"#94A3B8"}}>Aguarde informações sobre o próximo módulo.</div>
+      <div style={{fontSize:13,color:"var(--text-muted)"}}>Aguarde informações sobre o próximo módulo.</div>
       <button className="btn btn-dark" onClick={onBack}>← Voltar ao painel</button>
     </div>
   );
 
   if (accessDenied) return (
-    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"100vh",gap:16,color:"#64748B",textAlign:"center",padding:24}}>
+    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"100vh",gap:16,color:"var(--text-faint)",textAlign:"center",padding:24,background:"var(--bg-page)"}}>
       <span style={{fontSize:48}}>🔒</span>
-      <div style={{fontSize:18,fontWeight:700,color:"#0F172A"}}>Acesso não autorizado</div>
+      <div style={{fontSize:18,fontWeight:700,color:"var(--text-primary)"}}>Acesso não autorizado</div>
       <div style={{fontSize:14}}>Seu acesso a esta matéria não está ativo.</div>
       <button className="btn btn-dark" onClick={onBack}>← Voltar ao painel</button>
     </div>
   );
 
   return (
-    <div style={{minHeight:"100vh",background:"#F8FAFC",color:"#0F172A"}}>
+    <div style={{minHeight:"100vh",background:"var(--bg-page)",color:"var(--text-primary)"}}>
       {!alertDismissed && <AlertBanner alerts={alerts} onDismiss={dismissAlert}/>}
 
-      <div className="schedule-header" style={{background:"#0F172A",borderBottom:"1px solid #1E293B",padding:"14px 20px",position:"sticky",top:0,zIndex:100}}>
+      <div className="schedule-header" style={{background:"var(--bg-header)",borderBottom:"1px solid #1E293B",padding:"14px 20px",position:"sticky",top:0,zIndex:100}}>
         <div style={{maxWidth:1200,margin:"0 auto"}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
             <div style={{display:"flex",alignItems:"center",gap:12}}>
@@ -264,6 +298,9 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                   Restaurar original
                 </button>
               )}
+              <button className="restore-btn" onClick={exportAllToCalendar} style={{fontSize:10,fontWeight:600,color:"#60A5FA",background:"rgba(96,165,250,0.15)",border:"1px solid rgba(96,165,250,0.3)",borderRadius:7,padding:"3px 10px",cursor:"pointer",whiteSpace:"nowrap"}} title="Exportar todas as semanas para o calendário">
+                Exportar .ics
+              </button>
               {syncStatus==="syncing" && <span style={{fontSize:11,color:"#F59E0B"}}>⟳ Salvando…</span>}
               {syncStatus==="saved"   && <span style={{fontSize:11,color:"#22C55E"}}>✓ Salvo</span>}
               {syncStatus==="offline" && <span style={{fontSize:11,color:"#EF4444"}}>⚠ Offline</span>}
@@ -312,8 +349,8 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
         {/* Trial banner */}
         {accessStatus === "trial" && trialExpiresAt && (() => {
           const horasRestantes = Math.max(0, (trialExpiresAt - new Date()) / (1000 * 60 * 60));
-          const diasRestantes = Math.ceil(horasRestantes / 24);
           const urgente = horasRestantes < 24;
+          const trialLabel = formatTimeRemaining(trialExpiresAt);
           return (
             <div style={{
               background: urgente ? "#FEF2F2" : "#FEF3C7",
@@ -323,7 +360,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
             }}>
               <div>
                 <span style={{ fontSize: 13, fontWeight: 700, color: urgente ? "#DC2626" : "#92400E" }}>
-                  {urgente ? "⚠️ Último dia de trial!" : `🎁 Trial gratuito: ${diasRestantes} dia${diasRestantes !== 1 ? "s" : ""} restante${diasRestantes !== 1 ? "s" : ""}`}
+                  {urgente ? `⚠️ Trial expirando: ${trialLabel}` : `🎁 Trial gratuito: ${trialLabel}`}
                 </span>
                 <span style={{ fontSize: 12, color: urgente ? "#991B1B" : "#78350F", marginLeft: 8 }}>
                   Expira em {trialExpiresAt.toLocaleDateString("pt-BR")} às {trialExpiresAt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}
@@ -346,42 +383,45 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
 
           return (
             <div key={week.num} className={isCurrent?"today-week":""}
-              style={{background:"#fff",border:"1px solid #E2E8F0",borderRadius:14,marginBottom:12,overflow:"hidden",boxShadow:"0 1px 4px rgba(0,0,0,0.04)"}}>
+              style={{background:"var(--bg-card)",border:"1px solid var(--border-light)",borderRadius:14,marginBottom:12,overflow:"hidden",boxShadow:"0 1px 4px rgba(0,0,0,0.04)"}}>
 
               <div className="week-head" onClick={()=>setOpen(o=>({...o,[week.num]:!o[week.num]}))}>
                 <div className="week-num" style={{width:36,height:36,borderRadius:9,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,fontWeight:800,
-                  color:isCurrent&&!allDoneW?"#0F172A":"#fff",
-                  background:allDoneW?"#22C55E":isCurrent?materia.color:"#0F172A"}}>
+                  color:isCurrent&&!allDoneW?"var(--text-primary)":"#fff",
+                  background:allDoneW?"#22C55E":isCurrent?materia.color:"var(--bg-header)"}}>
                   {week.num}
                 </div>
                 <div style={{flex:1}}>
                   <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
                     <span className="week-title" style={{fontSize:14,fontWeight:700}}>Semana {week.num}</span>
-                    <span className="week-dates" style={{fontSize:13,color:"#94A3B8",fontWeight:400}}>{week.dates}</span>
+                    <span className="week-dates" style={{fontSize:13,color:"var(--text-muted)",fontWeight:400}}>{week.dates}</span>
                     {isCurrent&&!allDoneW && <span style={{fontSize:10,fontWeight:700,color:"#92400E",background:"#FEF3C7",padding:"2px 8px",borderRadius:99}}>📍 SEMANA ATUAL</span>}
                     {allDoneW            && <span style={{fontSize:10,fontWeight:700,color:"#16A34A",background:"#DCFCE7",padding:"2px 8px",borderRadius:99}}>✓ CONCLUÍDA</span>}
                   </div>
                   <div style={{display:"flex",alignItems:"center",gap:8,marginTop:6}}>
-                    <div style={{flex:1,maxWidth:220,height:4,background:"#F1F5F9",borderRadius:99,overflow:"hidden"}}>
+                    <div style={{flex:1,maxWidth:220,height:4,background:"var(--bg-subtle)",borderRadius:99,overflow:"hidden"}}>
                       <div className="pfill" style={{width:`${wpct}%`,background:allDoneW?"#22C55E":materia.color}}/>
                     </div>
-                    <span style={{fontSize:11,color:"#94A3B8"}}>{wDone}/{competable.length}</span>
+                    <span style={{fontSize:11,color:"var(--text-muted)"}}>{wDone}/{competable.length}</span>
                   </div>
                 </div>
                 <div className="day-pills-row" style={{display:"flex",gap:4,flexWrap:"wrap",justifyContent:"flex-end"}}>
                   {activeDays.map(d=>(
                     <span key={d} style={{fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:5,
-                      color:isCurrent&&d===todayDay?"#92400E":"#64748B",
-                      background:isCurrent&&d===todayDay?"#FEF3C7":"#F1F5F9"}}>
+                      color:isCurrent&&d===todayDay?"#92400E":"var(--text-faint)",
+                      background:isCurrent&&d===todayDay?"#FEF3C7":"var(--bg-subtle)"}}>
                       {d}
                     </span>
                   ))}
                 </div>
-                <span style={{color:"#CBD5E1",fontSize:11,marginLeft:4}}>{isOpen?"▲":"▼"}</span>
+                <button onClick={(e) => { e.stopPropagation(); exportWeekToCalendar(week); }} title={`Exportar Semana ${week.num} para calendário`} style={{background:"transparent",border:"none",cursor:"pointer",fontSize:13,padding:4,marginLeft:2,opacity:0.5,flexShrink:0}} aria-label="Exportar semana">
+                  📅
+                </button>
+                <span style={{color:"var(--border-medium)",fontSize:11,marginLeft:4}}>{isOpen?"▲":"▼"}</span>
               </div>
 
               {isOpen && (
-                <div style={{borderTop:"1px solid #F1F5F9"}}>
+                <div style={{borderTop:"1px solid var(--bg-subtle)"}}>
                   <div className="scroll-x">
                     <div className="day-grid" style={{display:"flex",gap:10,paddingTop:14,minWidth:activeDays.length*170}}>
                       {activeDays.map(dayKey=>{
@@ -390,7 +430,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                         const tItems  = week.dayMap[dayKey].Tarde;
                         return (
                           <div key={dayKey} className="day-col" style={{flex:1,minWidth:160,display:"flex",flexDirection:"column",gap:6}}>
-                            <div style={{textAlign:"center",padding:"8px 10px 7px",background:isToday?materia.color:"#0F172A",borderRadius:8,marginBottom:2}}>
+                            <div style={{textAlign:"center",padding:"8px 10px 7px",background:isToday?materia.color:"var(--bg-header)",borderRadius:8,marginBottom:2}}>
                               <div style={{fontSize:18,fontWeight:800,color:"#fff",lineHeight:1}}>{dayKey}</div>
                               <div style={{fontSize:10,color:isToday?"rgba(255,255,255,0.8)":"#64748B",marginTop:2,fontWeight:500}}>{DAY_LABELS[dayKey]}</div>
                               <div style={{fontSize:9,color:isToday?"rgba(255,255,255,0.6)":"#475569",marginTop:1,fontWeight:500}}>{getWeekDayDate(week.dates, dayKey)}</div>
@@ -399,20 +439,20 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                               <div className="turno-section">
                                 <div className="turno-divider">🌅 Manhã</div>
                                 {mItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})}/>)}
-                                {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Manhã"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
+                                {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Manhã"})} style={{width:"100%",padding:"6px 0",border:"1px dashed var(--border-medium)",borderRadius:8,background:"transparent",color:"var(--text-muted)",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
                               </div>
                             )}
                             {tItems.length>0 && (
                               <div className="turno-section">
                                 <div className="turno-divider">🌆 Tarde</div>
                                 {tItems.map(a=><ActivityCard key={a.id} a={a} isDone={!!completed[a.id]} onToggle={toggle} note={notes[a.id]} onNoteChange={saveNote} isToday={isToday} canEdit={canEdit} onEdit={()=>setEditModal({mode:"edit",activity:a})}/>)}
-                                {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Tarde"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
+                                {canEdit && <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Tarde"})} style={{width:"100%",padding:"6px 0",border:"1px dashed var(--border-medium)",borderRadius:8,background:"transparent",color:"var(--text-muted)",fontSize:11,fontWeight:600,cursor:"pointer",marginTop:4,transition:"all 0.12s"}}>＋ Adicionar</button>}
                               </div>
                             )}
                             {canEdit && mItems.length===0 && tItems.length===0 && (
                               <div style={{display:"flex",flexDirection:"column",gap:4,padding:"4px 0"}}>
-                                <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Manhã"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer"}}>＋ Manhã</button>
-                                <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Tarde"})} style={{width:"100%",padding:"6px 0",border:"1px dashed #CBD5E1",borderRadius:8,background:"transparent",color:"#94A3B8",fontSize:11,fontWeight:600,cursor:"pointer"}}>＋ Tarde</button>
+                                <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Manhã"})} style={{width:"100%",padding:"6px 0",border:"1px dashed var(--border-medium)",borderRadius:8,background:"transparent",color:"var(--text-muted)",fontSize:11,fontWeight:600,cursor:"pointer"}}>＋ Manhã</button>
+                                <button onClick={()=>setEditModal({mode:"add",weekNum:week.num,day:dayKey,turno:"Tarde"})} style={{width:"100%",padding:"6px 0",border:"1px dashed var(--border-medium)",borderRadius:8,background:"transparent",color:"var(--text-muted)",fontSize:11,fontWeight:600,cursor:"pointer"}}>＋ Tarde</button>
                               </div>
                             )}
                           </div>
@@ -425,7 +465,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
             </div>
           );
         })}
-        <div style={{padding:"14px 18px",borderRadius:10,background:"#fff",border:"1px solid #E2E8F0",marginTop:4,fontSize:11,color:"#94A3B8"}}>
+        <div style={{padding:"14px 18px",borderRadius:10,background:"var(--bg-card)",border:"1px solid var(--border-light)",marginTop:4,fontSize:11,color:"var(--text-muted)"}}>
           {profile?.nome} · Grupo {materia.grupoLabels?.[grupo] ?? grupo} · ☁️ Sincronizado em todos os dispositivos
         </div>
       </div>
@@ -436,11 +476,11 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
           <div onClick={closeScheduleTutorial} style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.65)",zIndex:99}}/>
           <div style={{position:"fixed",top:0,left:0,right:0,zIndex:101,display:"flex",justifyContent:"center",pointerEvents:"none"}}>
             <div style={{width:"100%",maxWidth:380,padding:"0 16px",marginTop:148,pointerEvents:"auto"}}>
-              <div style={{width:0,height:0,borderLeft:"12px solid transparent",borderRight:"12px solid transparent",borderBottom:"12px solid #fff",margin:"0 auto"}}/>
-              <div style={{background:"#fff",borderRadius:16,padding:"24px 20px",boxShadow:"0 20px 40px rgba(0,0,0,0.3)",textAlign:"center"}}>
+              <div style={{width:0,height:0,borderLeft:"12px solid transparent",borderRight:"12px solid transparent",borderBottom:"12px solid var(--bg-card)",margin:"0 auto"}}/>
+              <div style={{background:"var(--bg-card)",borderRadius:16,padding:"24px 20px",boxShadow:"0 20px 40px rgba(0,0,0,0.3)",textAlign:"center"}}>
                 <div style={{fontSize:40,marginBottom:10}}>👥</div>
-                <h3 style={{fontSize:18,fontWeight:800,color:"#0F172A",margin:"0 0 8px"}}>Troque de grupo aqui!</h3>
-                <p style={{fontSize:14,color:"#475569",lineHeight:1.6,margin:"0 0 16px"}}>
+                <h3 style={{fontSize:18,fontWeight:800,color:"var(--text-primary)",margin:"0 0 8px"}}>Troque de grupo aqui!</h3>
+                <p style={{fontSize:14,color:"var(--text-secondary)",lineHeight:1.6,margin:"0 0 16px"}}>
                   Use os <strong>botões numéricos</strong> destacados acima para visualizar o cronograma de outros grupos.
                 </p>
                 <div style={{background:"#F0FDF4",border:"1px solid #BBF7D0",borderRadius:10,padding:"10px 14px",marginBottom:20}}>
@@ -448,7 +488,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                     Toque no número do grupo desejado para trocar instantaneamente!
                   </div>
                 </div>
-                <button onClick={closeScheduleTutorial} style={{width:"100%",padding:"12px",borderRadius:10,border:"none",background:"#0F172A",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer"}}>
+                <button onClick={closeScheduleTutorial} style={{width:"100%",padding:"12px",borderRadius:10,border:"none",background:"var(--bg-header)",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer"}}>
                   Entendi!
                 </button>
               </div>
@@ -461,13 +501,13 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
       {deleteConfirm && (
         <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.6)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:9999,padding:24}}
           onClick={() => setDeleteConfirm(null)}>
-          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"#fff",borderRadius:20,padding:"28px 24px",maxWidth:360,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
+          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"var(--bg-card)",borderRadius:20,padding:"28px 24px",maxWidth:360,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
             <div style={{textAlign:"center",marginBottom:16}}>
               <div style={{fontSize:40,marginBottom:8}}>{deleteConfirm.isReset ? "🔄" : "🗑️"}</div>
-              <h3 style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:6}}>
+              <h3 style={{fontSize:18,fontWeight:800,color:"var(--text-primary)",marginBottom:6}}>
                 {deleteConfirm.isReset ? "Restaurar cronograma?" : "Excluir atividade?"}
               </h3>
-              <p style={{fontSize:13,color:"#64748B",lineHeight:1.5}}>
+              <p style={{fontSize:13,color:"var(--text-faint)",lineHeight:1.5}}>
                 {deleteConfirm.isReset
                   ? "Todas as suas edições, exclusões e atividades adicionadas serão removidas."
                   : <>Tem certeza que deseja excluir <strong>{deleteConfirm.label}</strong> do seu cronograma?</>
@@ -476,7 +516,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
             </div>
             <div style={{display:"flex",gap:10}}>
               <button onClick={() => setDeleteConfirm(null)}
-                style={{flex:1,padding:"10px",borderRadius:8,border:"1px solid #E2E8F0",background:"#fff",color:"#475569",fontSize:13,fontWeight:600,cursor:"pointer"}}>
+                style={{flex:1,padding:"10px",borderRadius:8,border:"1px solid var(--border-light)",background:"var(--bg-card)",color:"var(--text-secondary)",fontSize:13,fontWeight:600,cursor:"pointer"}}>
                 Cancelar
               </button>
               <button onClick={deleteConfirm.isReset ? confirmReset : confirmDelete}

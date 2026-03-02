@@ -60,6 +60,7 @@ export function launchConfetti() {
     tilt:0, tiltAngle:0, tiltSpeed:0.05+Math.random()*0.1,
   }));
   let frame = 0;
+  let animId;
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     parts.forEach(p => {
@@ -70,7 +71,20 @@ export function launchConfetti() {
       ctx.stroke();
       p.y += p.d+(frame*0.02); p.tiltAngle += p.tiltSpeed; p.tilt = Math.sin(p.tiltAngle)*12;
     });
-    frame++; if (frame < 180) requestAnimationFrame(draw); else canvas.remove();
+    frame++;
+    if (frame < 180) { animId = requestAnimationFrame(draw); }
+    else { if (canvas.parentNode) canvas.remove(); }
   }
-  draw();
+  animId = requestAnimationFrame(draw);
+  // Safety cleanup: remove canvas after max duration
+  setTimeout(() => { cancelAnimationFrame(animId); if (canvas.parentNode) canvas.remove(); }, 5000);
+}
+
+export function formatTimeRemaining(expiresAt) {
+  const ms = new Date(expiresAt) - new Date();
+  if (ms <= 0) return "Expirado";
+  const hours = Math.floor(ms / (1000 * 60 * 60));
+  if (hours < 24) return `${hours}h restante${hours !== 1 ? "s" : ""}`;
+  const days = Math.ceil(ms / (1000 * 60 * 60 * 24));
+  return `${days} dia${days > 1 ? "s" : ""} restante${days > 1 ? "s" : ""}`;
 }

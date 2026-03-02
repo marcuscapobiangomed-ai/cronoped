@@ -90,7 +90,7 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify({
         items: [{
-          title: `Cronograma – ${materiaLabel} Grupo ${grupo} (Cupom PIX)`,
+          title: `Meu Planner 2026.1 – ${materiaLabel} Grupo ${grupo} (Cupom PIX)`,
           quantity: 1,
           currency_id: "BRL",
           unit_price: COUPON_PRICE,

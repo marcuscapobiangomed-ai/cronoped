@@ -1,7 +1,8 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+const APP_URL = Deno.env.get("APP_URL") || "https://plannerinternato.modulo1.workers.dev";
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": APP_URL,
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
@@ -19,7 +20,13 @@ Deno.serve(async (req) => {
       });
     }
 
-    const token = authHeader.replace("Bearer ", "");
+    const bearerMatch = authHeader.match(/^Bearer\s+(.+)$/);
+    if (!bearerMatch) {
+      return new Response(JSON.stringify({ error: "Formato de auth inválido" }), {
+        status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const token = bearerMatch[1];
 
     const adminClient = createClient(
       Deno.env.get("SUPABASE_URL")!,

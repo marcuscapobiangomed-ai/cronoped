@@ -9,7 +9,7 @@ export default function TrialExpirations({ trials }) {
   const [couponMsg, setCouponMsg] = useState(null);
 
   if (!trials || trials.length === 0) {
-    return <div style={{ color: "#94A3B8", fontSize: 12, padding: 12 }}>Nenhum trial ativo ou expirado.</div>;
+    return <div style={{ color: "var(--text-muted)", fontSize: 12, padding: 12 }}>Nenhum trial ativo ou expirado.</div>;
   }
 
   const ativos = trials.filter(t => t.trial_status === "ativo");
@@ -80,7 +80,7 @@ export default function TrialExpirations({ trials }) {
     return (
       <div key={key + i} style={{
         display: "flex", alignItems: "center", gap: 8,
-        padding: "10px 14px", borderBottom: "1px solid #F1F5F9",
+        padding: "10px 14px", borderBottom: "1px solid var(--bg-subtle)",
       }}>
         {/* Time badge */}
         <span style={{
@@ -94,12 +94,12 @@ export default function TrialExpirations({ trials }) {
 
         {/* User info */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: "#0F172A" }}>{t.nome}</div>
-          <div style={{ fontSize: 10, color: "#64748B" }}>{t.email}</div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-primary)" }}>{t.nome}</div>
+          <div style={{ fontSize: 10, color: "var(--text-faint)" }}>{t.email}</div>
         </div>
 
         {/* Materia */}
-        <div style={{ fontSize: 11, color: "#475569", fontWeight: 600, flexShrink: 0 }}>
+        <div style={{ fontSize: 11, color: "var(--text-secondary)", fontWeight: 600, flexShrink: 0 }}>
           {mat?.icon} {mat?.label || t.materia}
         </div>
 

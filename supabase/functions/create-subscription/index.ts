@@ -31,9 +31,9 @@ Deno.serve(async (req) => {
     if (!authHeader) return json({ error: "Não autenticado" }, 401);
 
     const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
-    const { data: { user }, error: authErr } = await supabase.auth.getUser(
-      authHeader.replace("Bearer ", "")
-    );
+    const bearerMatch = authHeader.match(/^Bearer\s+(.+)$/);
+    if (!bearerMatch) return json({ error: "Formato de auth inválido" }, 401);
+    const { data: { user }, error: authErr } = await supabase.auth.getUser(bearerMatch[1]);
     if (authErr || !user) return json({ error: "Token inválido" }, 401);
 
     // 2. Verificar se já tem assinatura ativa

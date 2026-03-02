@@ -1,96 +1,66 @@
-import { useState, useEffect } from "react";
-import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from "../supabase";
+import { useState, useEffect, useRef } from "react";
 import { MATERIAS, GRUPOS } from "../scheduleData";
 import { badge, MODULE_END_DATE } from "../constants";
 import ErroBox from "./ErroBox";
-import { cleanCPF } from "../lib/helpers";
+import { cleanCPF, formatTimeRemaining } from "../lib/helpers";
 import { logEvent } from "../lib/logEvent";
 import { activateTrial } from "../lib/db";
+import { useToast } from "../hooks/useToast";
+import { useTheme } from "../hooks/useTheme";
+import { useAcessos } from "../hooks/useAcessos";
+import { usePayment } from "../hooks/usePayment";
+import { useAffiliate } from "../hooks/useAffiliate";
 
-export default function Dashboard({ user, profile, session, onSelect, onLogout, onAdmin }) {
-  const [acessos,         setAcessos]         = useState({});
-  const [loadingAcessos,  setLoadingAcessos]  = useState(true);
-  const [cardStates,      setCardStates]      = useState({}); // {[materiaId]: {expandido, grupoSelecionado}}
-  const [payingCard,      setPayingCard]      = useState(null); // materiaId being paid
-  const [cardErrors,      setCardErrors]      = useState({}); // {[materiaId]: errorMsg}
-  const [cancelingId,     setCancelingId]     = useState(null);
-  const [payMethod,       setPayMethod]       = useState({}); // {[materiaId]: "pix"|"card"}
+export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }) {
+  const toast = useToast();
+  const { theme, toggleTheme } = useTheme();
+  const isVIP = !!profile?.is_vip;
+  const moduleExpired = !isVIP && new Date() > MODULE_END_DATE;
+
+  // Extracted hooks
+  const {
+    acessos, loadingAcessos, subscription,
+    isSubscriber, hasActiveTrial, hasUsedTrial,
+    reloadAcessos,
+  } = useAcessos(user.id, isVIP);
+
+  const {
+    payingCard, cardErrors, payMethod, setPayMethod, cancelingId, subscribing,
+    clearCardError, setCardError, handlePagarCard, handleCancelarPendente, handleSubscribe,
+  } = usePayment(user.id, toast, reloadAcessos);
+
+  const {
+    showAffiliate, setShowAffiliate,
+    affCode, setAffCode,
+    affStats, affLoading, affError, setAffError, affCopied,
+    handleSetReferralCode, copyAffiliateLink, openAffiliate,
+  } = useAffiliate();
+
+  // Local UI state
+  const [cardStates,      setCardStates]      = useState({});
   const [showOnboarding,  setShowOnboarding]  = useState(false);
-  const [trialConfirm,    setTrialConfirm]    = useState(null); // {materia, grupo} or null
-  const [activatingTrial,setActivatingTrial]  = useState(false);
-  const [showAffiliate,   setShowAffiliate]   = useState(false);
-  const [affCode,         setAffCode]         = useState("");
-  const [affStats,        setAffStats]        = useState(null);
-  const [affLoading,      setAffLoading]      = useState(false);
-  const [affError,        setAffError]        = useState("");
-  const [affCopied,       setAffCopied]       = useState(false);
+  const [trialConfirm,    setTrialConfirm]    = useState(null);
+  const [activatingTrial, setActivatingTrial] = useState(false);
   const [showTutorial,    setShowTutorial]    = useState(false);
   const [tutorialStep,    setTutorialStep]    = useState(0);
-  const [subscription,    setSubscription]    = useState(null); // {status, current_period_end}
-  const [subscribing,     setSubscribing]     = useState(false);
 
-  const now = new Date();
-  const isVIP = !!profile?.is_vip;
-  const moduleExpired = !isVIP && now > MODULE_END_DATE;
-  const isSubscriber = subscription &&
-    ['authorized', 'paused'].includes(subscription.status) &&
-    subscription.current_period_end &&
-    new Date(subscription.current_period_end) > now;
-
-  // Derived: does user have ANY active trial?
-  const hasActiveTrial = Object.values(acessos).some(
-    a => a.status === "trial" && a.trial_expires_at && new Date(a.trial_expires_at) > now
-  );
-  // Derived: has user ever used a trial? (has any trial record, active or expired)
-  const hasUsedTrial = Object.values(acessos).some(a => a.status === "trial");
-  // Derived: does user have any active access at all? (trial, paid, VIP, or subscriber)
-  const hasAnyAccess = isVIP || isSubscriber || Object.values(acessos).some(a => {
-    if (a.status === "aprovado") return true;
-    if (a.status === "trial" && a.trial_expires_at && new Date(a.trial_expires_at) > now) return true;
-    return false;
-  });
-
-  useEffect(()=>{
-    supabase.from("acessos").select("materia,grupo,status,trial_expires_at").eq("user_id",user.id)
-      .then(({data, error})=>{
-        if (error) { console.error("loadAcessos:", error.message); }
-        const map = {};
-        (data||[]).forEach(a=>{ map[a.materia] = {grupo:a.grupo, status:a.status, trial_expires_at:a.trial_expires_at}; });
-        setAcessos(map);
-        setLoadingAcessos(false);
-
-        // Show onboarding if user has no active access and isn't VIP
-        const anyActive = (data||[]).some(a => {
-          if (a.status === "aprovado") return true;
-          if (a.status === "trial" && a.trial_expires_at && new Date(a.trial_expires_at) > new Date()) return true;
-          return false;
-        });
-        if (!anyActive && !profile?.is_vip) {
-          setShowOnboarding(true);
-        }
-        // Show tutorial for returning users who haven't seen it (and don't need onboarding)
-        const needsOnboarding = !anyActive && !profile?.is_vip;
-        if (!localStorage.getItem("tutorial_seen") && !needsOnboarding) {
-          setTimeout(() => { setShowTutorial(true); setTutorialStep(0); }, 500);
-        }
-      });
-  },[user.id]);
-
+  // Onboarding + tutorial check (runs once after first data load)
+  const onboardingChecked = useRef(false);
   useEffect(() => {
-    supabase.from("subscriptions").select("status,current_period_end")
-      .eq("user_id", user.id).maybeSingle()
-      .then(({data}) => { if (data) setSubscription(data); });
-  }, [user.id]);
-
-  async function reloadAcessos() {
-    const {data} = await supabase.from("acessos").select("materia,grupo,status,trial_expires_at").eq("user_id",user.id);
-    const map = {};
-    (data||[]).forEach(a=>{ map[a.materia] = {grupo:a.grupo, status:a.status, trial_expires_at:a.trial_expires_at}; });
-    setAcessos(map);
-    const {data: sub} = await supabase.from("subscriptions").select("status,current_period_end")
-      .eq("user_id", user.id).maybeSingle();
-    if (sub) setSubscription(sub);
-  }
+    if (loadingAcessos || onboardingChecked.current) return;
+    onboardingChecked.current = true;
+    const anyActive = Object.values(acessos).some(a => {
+      if (a.status === "aprovado") return true;
+      if (a.status === "trial" && a.trial_expires_at && new Date(a.trial_expires_at) > new Date()) return true;
+      return false;
+    });
+    if (!anyActive && !profile?.is_vip) setShowOnboarding(true);
+    const needsOnboarding = !anyActive && !profile?.is_vip;
+    if (!localStorage.getItem("tutorial_seen") && !needsOnboarding) {
+      const timer = setTimeout(() => { setShowTutorial(true); setTutorialStep(0); }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [loadingAcessos, acessos, profile?.is_vip]);
 
   function toggleCardExpand(materiaId) {
     setCardStates(prev => ({
@@ -101,7 +71,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
         grupoSelecionado: !prev[materiaId]?.expandido ? null : prev[materiaId]?.grupoSelecionado
       }
     }));
-    setCardErrors(prev => ({ ...prev, [materiaId]: null }));
+    clearCardError(materiaId);
   }
 
   function handleGrupoChange(materiaId, grupo) {
@@ -128,205 +98,10 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       setActivatingTrial(false);
       onSelect(mat, grp);
     } catch (err) {
-      setCardErrors(prev => ({ ...prev, [trialConfirm.materia.id]: err.message || "Erro ao ativar trial." }));
+      setCardError(trialConfirm.materia.id, err.message || "Erro ao ativar trial.");
       setTrialConfirm(null);
       setActivatingTrial(false);
     }
-  }
-
-  async function callCreatePreference(token, materia, grupo, method) {
-    return fetch(`${SUPABASE_URL}/functions/v1/create-preference`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-        "apikey": SUPABASE_ANON_KEY,
-      },
-      body: JSON.stringify({
-        materiaId: materia.id,
-        materiaLabel: materia.label,
-        grupo,
-        paymentMethod: method,
-      }),
-    });
-  }
-
-  async function handlePagarCard(materia, grupo) {
-    if (!grupo) return;
-    const method = payMethod[materia.id] || "pix";
-    setPayingCard(materia.id);
-    setCardErrors(prev => ({ ...prev, [materia.id]: null }));
-    logEvent("payment_attempt", { materia: materia.id, grupo, method });
-    try {
-      // 1. Use cached token first (instant, no network call)
-      const { data: { session: sess } } = await supabase.auth.getSession();
-      let token = sess?.access_token;
-      if (!token) {
-        setCardErrors(prev => ({ ...prev, [materia.id]: "Sessão expirada. Faça login novamente." }));
-        setPayingCard(null);
-        return;
-      }
-
-      // 2. Call edge function (--no-verify-jwt: relay won't block)
-      let resp = await callCreatePreference(token, materia, grupo, method);
-
-      // 3. If 401 (expired token), refresh and retry once
-      if (resp.status === 401) {
-        const { data: refreshData } = await supabase.auth.refreshSession();
-        token = refreshData?.session?.access_token;
-        if (!token) {
-          setCardErrors(prev => ({ ...prev, [materia.id]: "Sessão expirada. Faça login novamente." }));
-          setPayingCard(null);
-          return;
-        }
-        resp = await callCreatePreference(token, materia, grupo, method);
-      }
-
-      // 4. Handle non-OK responses
-      if (!resp.ok) {
-        let errMsg = `Erro ${resp.status}`;
-        try {
-          const errData = await resp.json();
-          errMsg = errData.error || errData.msg || errMsg;
-        } catch (_) {}
-        logEvent("payment_failure", { materia: materia.id, grupo, error: errMsg, status: resp.status });
-        setCardErrors(prev => ({ ...prev, [materia.id]: errMsg }));
-        setPayingCard(null);
-        return;
-      }
-
-      const data = await resp.json();
-      if (data.error) {
-        logEvent("payment_failure", { materia: materia.id, grupo, error: data.error });
-        setCardErrors(prev => ({ ...prev, [materia.id]: data.error }));
-        setPayingCard(null);
-        return;
-      }
-      if (!data.init_point) {
-        logEvent("payment_failure", { materia: materia.id, grupo, error: "no_init_point" });
-        setCardErrors(prev => ({ ...prev, [materia.id]: "Erro ao criar link de pagamento. Tente novamente." }));
-        setPayingCard(null);
-        return;
-      }
-      window.location.href = data.init_point;
-    } catch (err) {
-      console.error("handlePagarCard error:", err);
-      logEvent("payment_failure", { materia: materia.id, grupo, error: err.message });
-      setCardErrors(prev => ({ ...prev, [materia.id]: "Erro de conexão. Tente novamente." }));
-      setPayingCard(null);
-    }
-  }
-
-  async function handleCancelarPendente(materiaId) {
-    setCancelingId(materiaId);
-    try {
-      const { data: row } = await supabase.from("acessos")
-        .select("trial_expires_at")
-        .eq("user_id", user.id)
-        .eq("materia", materiaId)
-        .single();
-
-      const trialAindaValido = row?.trial_expires_at && new Date(row.trial_expires_at) > new Date();
-
-      if (trialAindaValido) {
-        await supabase.from("acessos")
-          .update({ status: "trial" })
-          .eq("user_id", user.id)
-          .eq("materia", materiaId)
-          .eq("status", "pending");
-      } else {
-        await supabase.from("acessos")
-          .delete()
-          .eq("user_id", user.id)
-          .eq("materia", materiaId)
-          .eq("status", "pending");
-      }
-
-      await reloadAcessos();
-    } catch (err) {
-      console.error("cancelarPendente:", err.message);
-    }
-    setCancelingId(null);
-  }
-
-  async function handleSubscribe() {
-    setSubscribing(true);
-    try {
-      const { data: { session: sess } } = await supabase.auth.getSession();
-      let token = sess?.access_token;
-      if (!token) {
-        alert("Sessão expirada. Faça login novamente.");
-        setSubscribing(false);
-        return;
-      }
-      let resp = await fetch(`${SUPABASE_URL}/functions/v1/create-subscription`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-          "apikey": SUPABASE_ANON_KEY,
-        },
-      });
-      if (resp.status === 401) {
-        const { data: refreshData } = await supabase.auth.refreshSession();
-        token = refreshData?.session?.access_token;
-        if (!token) { alert("Sessão expirada. Faça login novamente."); setSubscribing(false); return; }
-        resp = await fetch(`${SUPABASE_URL}/functions/v1/create-subscription`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`, "apikey": SUPABASE_ANON_KEY },
-        });
-      }
-      if (!resp.ok) {
-        const err = await resp.json().catch(() => ({}));
-        alert(err.error || "Erro ao criar assinatura.");
-        setSubscribing(false);
-        return;
-      }
-      const data = await resp.json();
-      if (data.init_point) {
-        logEvent("subscription_attempt", {});
-        window.location.href = data.init_point;
-      }
-    } catch (err) {
-      console.error("handleSubscribe:", err);
-      alert("Erro de conexão. Tente novamente.");
-      setSubscribing(false);
-    }
-  }
-
-  // Affiliate functions
-  async function loadAffiliateStats() {
-    setAffLoading(true); setAffError("");
-    try {
-      const { data, error } = await supabase.rpc("get_referral_stats");
-      if (error) throw error;
-      setAffStats(data);
-      if (data?.code) setAffCode(data.code);
-    } catch (err) {
-      setAffError(err.message || "Erro ao carregar dados.");
-    }
-    setAffLoading(false);
-  }
-
-  async function handleSetReferralCode() {
-    if (!affCode.trim()) return setAffError("Digite um código.");
-    setAffLoading(true); setAffError("");
-    try {
-      const { error } = await supabase.rpc("set_referral_code", { p_code: affCode.trim() });
-      if (error) throw error;
-      await loadAffiliateStats();
-    } catch (err) {
-      setAffError(err.message || "Erro ao salvar código.");
-      setAffLoading(false);
-    }
-  }
-
-  function copyAffiliateLink() {
-    const link = `https://plannerinternato.modulo1.workers.dev?ref=${affStats?.code}`;
-    navigator.clipboard.writeText(link).then(() => {
-      setAffCopied(true);
-      setTimeout(() => setAffCopied(false), 2000);
-    });
   }
 
   // Overlay modal style
@@ -377,11 +152,11 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
   ];
 
   return (
-    <div style={{minHeight:"100vh",background:"#F8FAFC"}}>
+    <div style={{minHeight:"100vh",background:"var(--bg-page)",color:"var(--text-primary)"}}>
       {/* === TUTORIAL PASSO A PASSO === */}
       {showTutorial && (
         <div style={overlayStyle} onClick={closeTutorial}>
-          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"#fff",borderRadius:20,padding:"32px 28px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
+          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"var(--bg-card)",borderRadius:20,padding:"32px 28px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
             {(() => {
               const step = TUTORIAL_STEPS[tutorialStep];
               return (
@@ -391,7 +166,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     {TUTORIAL_STEPS.map((_, i) => (
                       <div key={i} style={{
                         width: i === tutorialStep ? 24 : 8, height:8, borderRadius:4,
-                        background: i === tutorialStep ? (step.isWarning ? "#DC2626" : "#059669") : i < tutorialStep ? "#BBF7D0" : "#E2E8F0",
+                        background: i === tutorialStep ? (step.isWarning ? "#DC2626" : "#059669") : i < tutorialStep ? "#BBF7D0" : "var(--border-light)",
                         transition:"all 0.3s",
                       }}/>
                     ))}
@@ -400,11 +175,11 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   {/* Icon */}
                   <div style={{textAlign:"center",marginBottom:16}}>
                     <div style={{fontSize:52,marginBottom:8}}>{step.icon}</div>
-                    <h2 style={{fontSize:20,fontWeight:800,color: step.isWarning ? "#DC2626" : "#0F172A",marginBottom:0,lineHeight:1.3}}>{step.title}</h2>
+                    <h2 style={{fontSize:20,fontWeight:800,color: step.isWarning ? "#DC2626" : "var(--text-primary)",marginBottom:0,lineHeight:1.3}}>{step.title}</h2>
                   </div>
 
                   {/* Content */}
-                  <div style={{fontSize:14,color:"#475569",lineHeight:1.7,marginBottom:16,textAlign:"center"}}>
+                  <div style={{fontSize:14,color:"var(--text-secondary)",lineHeight:1.7,marginBottom:16,textAlign:"center"}}>
                     {step.text}
                   </div>
 
@@ -424,7 +199,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     {tutorialStep > 0 && (
                       <button
                         onClick={() => setTutorialStep(s => s - 1)}
-                        style={{flex:1,padding:"12px",borderRadius:10,border:"1px solid #E2E8F0",background:"#fff",color:"#475569",fontSize:14,fontWeight:600,cursor:"pointer"}}
+                        style={{flex:1,padding:"12px",borderRadius:10,border:"1px solid var(--border-light)",background:"var(--bg-card)",color:"var(--text-secondary)",fontSize:14,fontWeight:600,cursor:"pointer"}}
                       >
                         Voltar
                       </button>
@@ -432,7 +207,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     {tutorialStep === 0 && (
                       <button
                         onClick={closeTutorial}
-                        style={{padding:"12px 16px",borderRadius:10,border:"1px solid #E2E8F0",background:"#fff",color:"#94A3B8",fontSize:13,cursor:"pointer"}}
+                        style={{padding:"12px 16px",borderRadius:10,border:"1px solid var(--border-light)",background:"var(--bg-card)",color:"var(--text-muted)",fontSize:13,cursor:"pointer"}}
                       >
                         Pular
                       </button>
@@ -447,7 +222,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                       }}
                       style={{
                         flex:1, padding:"12px", borderRadius:10, border:"none",
-                        background: step.isWarning ? "#DC2626" : "#0F172A",
+                        background: step.isWarning ? "#DC2626" : "var(--bg-header)",
                         color:"#fff", fontSize:14, fontWeight:700, cursor:"pointer",
                       }}
                     >
@@ -466,28 +241,28 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       {/* === ONBOARDING MODAL === */}
       {showOnboarding && !isSubscriber && (
         <div style={overlayStyle} onClick={() => setShowOnboarding(false)}>
-          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"#fff",borderRadius:20,padding:"32px 28px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
+          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"var(--bg-card)",borderRadius:20,padding:"32px 28px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
             <div style={{textAlign:"center",marginBottom:20}}>
               <div style={{fontSize:48,marginBottom:8}}>🎁</div>
-              <h2 style={{fontSize:22,fontWeight:800,color:"#0F172A",marginBottom:8}}>Bem-vindo ao Cronograma Internato!</h2>
+              <h2 style={{fontSize:22,fontWeight:800,color:"var(--text-primary)",marginBottom:8}}>Bem-vindo ao Cronograma Internato!</h2>
             </div>
-            <div style={{fontSize:14,color:"#475569",lineHeight:1.6,marginBottom:20}}>
+            <div style={{fontSize:14,color:"var(--text-secondary)",lineHeight:1.6,marginBottom:20}}>
               <p style={{marginBottom:12}}>Veja como funciona:</p>
               <div style={{background:"#F0FDF4",borderRadius:10,padding:"14px 16px",marginBottom:12}}>
                 <div style={{fontSize:13,fontWeight:700,color:"#059669",marginBottom:6}}>3 dias grátis para experimentar</div>
-                <div style={{fontSize:12,color:"#475569"}}>
+                <div style={{fontSize:12,color:"var(--text-secondary)"}}>
                   Escolha <strong>1 matéria</strong> e <strong>1 grupo</strong> para testar gratuitamente por 3 dias.
                 </div>
               </div>
-              <div style={{background:"#F8FAFC",borderRadius:10,padding:"14px 16px",marginBottom:12}}>
-                <div style={{fontSize:13,fontWeight:700,color:"#0F172A",marginBottom:6}}>Acesso por módulo</div>
-                <div style={{fontSize:12,color:"#475569"}}>
+              <div style={{background:"var(--bg-page)",borderRadius:10,padding:"14px 16px",marginBottom:12}}>
+                <div style={{fontSize:13,fontWeight:700,color:"var(--text-primary)",marginBottom:6}}>Acesso por módulo</div>
+                <div style={{fontSize:12,color:"var(--text-secondary)"}}>
                   Cada matéria é vendida separadamente. O acesso vale até <strong>08/05/2026</strong>.
                 </div>
               </div>
               <div style={{background:"#F0FDF4",borderRadius:10,padding:"14px 16px",marginBottom:12}}>
                 <div style={{fontSize:13,fontWeight:700,color:"#059669",marginBottom:6}}>PIX a partir de R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
-                <div style={{fontSize:12,color:"#475569"}}>
+                <div style={{fontSize:12,color:"var(--text-secondary)"}}>
                   {profile?.referred_by
                     ? "Desconto de afiliado aplicado! Economize R$ 4,00 via PIX."
                     : "Pague via PIX e economize R$ 1,00 em cada matéria!"}
@@ -495,7 +270,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               </div>
               <div style={{background:"#EEF2FF",borderRadius:10,padding:"14px 16px"}}>
                 <div style={{fontSize:13,fontWeight:700,color:"#6366F1",marginBottom:6}}>Ou assine por R$ 9,90/mês</div>
-                <div style={{fontSize:12,color:"#475569"}}>
+                <div style={{fontSize:12,color:"var(--text-secondary)"}}>
                   Acesso a <strong>todas as matérias</strong> por mês. Cancele quando quiser.
                 </div>
               </div>
@@ -507,7 +282,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   setTimeout(() => { setShowTutorial(true); setTutorialStep(0); }, 300);
                 }
               }}
-              style={{width:"100%",padding:"12px 14px",borderRadius:10,border:"none",background:"#0F172A",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer"}}
+              style={{width:"100%",padding:"12px 14px",borderRadius:10,border:"none",background:"var(--bg-header)",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer"}}
             >
               Entendi!
             </button>
@@ -518,14 +293,14 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       {/* === TRIAL CONFIRMATION MODAL === */}
       {trialConfirm && (
         <div style={overlayStyle} onClick={() => !activatingTrial && setTrialConfirm(null)}>
-          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"#fff",borderRadius:20,padding:"28px 24px",maxWidth:380,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
+          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"var(--bg-card)",borderRadius:20,padding:"28px 24px",maxWidth:380,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
             <div style={{textAlign:"center",marginBottom:16}}>
               <div style={{fontSize:40,marginBottom:8}}>🎁</div>
-              <h3 style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:4}}>Ativar trial gratuito?</h3>
-              <p style={{fontSize:13,color:"#64748B"}}>3 dias grátis para experimentar</p>
+              <h3 style={{fontSize:18,fontWeight:800,color:"var(--text-primary)",marginBottom:4}}>Ativar trial gratuito?</h3>
+              <p style={{fontSize:13,color:"var(--text-faint)"}}>3 dias grátis para experimentar</p>
             </div>
             <div style={{background:"#F0FDF4",borderRadius:10,padding:"14px 16px",marginBottom:16,textAlign:"center"}}>
-              <div style={{fontSize:15,fontWeight:700,color:"#0F172A"}}>
+              <div style={{fontSize:15,fontWeight:700,color:"var(--text-primary)"}}>
                 {trialConfirm.materia.icon} {trialConfirm.materia.label}
               </div>
               <div style={{fontSize:13,color:"#059669",fontWeight:600}}>
@@ -539,7 +314,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               <button
                 onClick={() => setTrialConfirm(null)}
                 disabled={activatingTrial}
-                style={{flex:1,padding:"10px",borderRadius:8,border:"1px solid #E2E8F0",background:"#fff",color:"#475569",fontSize:13,fontWeight:600,cursor:"pointer"}}
+                style={{flex:1,padding:"10px",borderRadius:8,border:"1px solid var(--border-light)",background:"var(--bg-card)",color:"var(--text-secondary)",fontSize:13,fontWeight:600,cursor:"pointer"}}
               >
                 Cancelar
               </button>
@@ -556,7 +331,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       )}
 
       {/* === HEADER === */}
-      <div className="dash-header" style={{background:"#0F172A",padding:"16px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <div className="dash-header" style={{background:"var(--bg-header)",padding:"16px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           <span style={{fontSize:22}}>🩺</span>
           <div>
@@ -571,10 +346,13 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               {cleanCPF(profile?.cpf||"").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}
             </div>
           </div>
+          <button onClick={toggleTheme} style={{background:"#334155",border:"none",color:"#fff",fontSize:14,borderRadius:8,width:28,height:28,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}} title={theme === "dark" ? "Modo claro" : "Modo escuro"}>
+            {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
+          </button>
           <button onClick={() => { setShowTutorial(true); setTutorialStep(0); }} style={{background:"#334155",border:"none",color:"#fff",fontSize:12,borderRadius:8,width:28,height:28,cursor:"pointer",fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center"}} title="Como escolher matéria e grupo">
             ?
           </button>
-          <button onClick={() => { setShowAffiliate(true); loadAffiliateStats(); }} style={{background:"#059669",border:"none",color:"#fff",fontSize:11,borderRadius:8,padding:"6px 10px",cursor:"pointer",fontWeight:700}}>
+          <button onClick={openAffiliate} style={{background:"#059669",border:"none",color:"#fff",fontSize:11,borderRadius:8,padding:"6px 10px",cursor:"pointer",fontWeight:700}}>
             🔗 Afiliado
           </button>
           {profile?.is_admin && (
@@ -680,8 +458,8 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
           </div>
         )}
 
-        <h2 style={{fontSize:18,fontWeight:800,color:"#0F172A",marginBottom:4}}>Escolha sua matéria</h2>
-        <p style={{fontSize:13,color:"#64748B",marginBottom:12}}>
+        <h2 style={{fontSize:18,fontWeight:800,color:"var(--text-primary)",marginBottom:4}}>Escolha sua matéria</h2>
+        <p style={{fontSize:13,color:"var(--text-faint)",marginBottom:12}}>
           {isSubscriber
             ? "Assinante ativo · Selecione seu grupo em cada matéria para abrir o cronograma"
             : !hasActiveTrial && !hasUsedTrial && !isVIP
@@ -701,13 +479,13 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               const testPayment = new URLSearchParams(window.location.search).get("test_payment") === "true";
               const effectiveVIP = !testPayment && isVIP;
               const hasFullAccess = effectiveVIP || isSubscriber; // VIP or subscriber: grupo selector flow
+              const now = new Date();
               const trialAtivo = acesso?.status === 'trial' && acesso?.trial_expires_at && new Date(acesso.trial_expires_at) > now;
-              const diasRestantes = trialAtivo ? Math.ceil((new Date(acesso.trial_expires_at) - now) / (1000 * 60 * 60 * 24)) : 0;
+              const trialTimeLabel = trialAtivo ? formatTimeRemaining(acesso.trial_expires_at) : "";
               const isPaid    = acesso?.status === "aprovado" && !testPayment;
               const hasAccess = m.hasData && (isPaid || trialAtivo || hasFullAccess) && !moduleExpired;
               const isPending = acesso?.status === "pending";
               const isLocked  = !m.hasData;
-              const isLockedGrupo = false; // paid users can now switch groups inside ScheduleView
               const expandido = cardStates[m.id]?.expandido || false;
               const grupoSelecionado = cardStates[m.id]?.grupoSelecionado;
 
@@ -718,7 +496,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               return (
                 <div key={m.id}
                   style={{
-                    background:"#fff",
+                    background:"var(--bg-card)",
                     borderRadius:14,
                     border:`2px solid ${m.color}20`,
                     boxShadow:"0 2px 8px rgba(0,0,0,0.06)",
@@ -732,7 +510,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     <span style={{fontSize:22}}>{m.icon}</span>
                     {hasAccess ? (
                       trialAtivo && !hasFullAccess ? (
-                        <span style={badge("#FEF3C7","#92400E")}>🎁 Trial: {diasRestantes}d</span>
+                        <span style={badge("#FEF3C7","#92400E")}>🎁 Trial: {trialTimeLabel}</span>
                       ) : effectiveVIP ? (
                         <span style={badge("#DCFCE7","#16A34A")}>✓ Acesso livre</span>
                       ) : isSubscriber ? (
@@ -752,12 +530,12 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                   </div>
 
                   {/* Title */}
-                  <div style={{fontSize:14,fontWeight:700,color:"#0F172A",marginBottom:8}}>{m.label}</div>
+                  <div style={{fontSize:14,fontWeight:700,color:"var(--text-primary)",marginBottom:8}}>{m.label}</div>
 
                   {/* Paid or trial active: show grupo + open button */}
                   {(isPaid || trialAtivo) && !hasFullAccess && (
                     <>
-                      <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>
+                      <div style={{fontSize:12,color:"var(--text-faint)",marginBottom:8}}>
                         Grupo {m.grupoLabels?.[acesso.grupo] ?? acesso.grupo}
                       </div>
                       <button
@@ -787,7 +565,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                         <div style={{marginBottom:14}}>
                           {/* Grupo Selector */}
                           <div style={{marginBottom:14}}>
-                            <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Seu grupo:</label>
+                            <label style={{fontSize:12,fontWeight:600,color:"var(--text-secondary)",display:"block",marginBottom:6}}>Seu grupo:</label>
                             <div style={{background:"#FEF3C7",borderRadius:8,padding:"8px 10px",marginBottom:8,display:"flex",alignItems:"center",gap:6}}>
                               <span style={{fontSize:14}}>⚠️</span>
                               <span style={{fontSize:11,color:"#92400E",lineHeight:1.4}}>
@@ -801,12 +579,12 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                                 width:"100%",
                                 padding:"10px 12px",
                                 borderRadius:8,
-                                border:"2px solid #E2E8F0",
+                                border:"2px solid var(--border-light)",
                                 fontSize:14,
-                                color: grupoSelecionado ? "#0F172A" : "#94A3B8",
+                                color: grupoSelecionado ? "var(--text-primary)" : "var(--text-muted)",
                                 fontWeight: grupoSelecionado ? 700 : 400,
                                 cursor:"pointer",
-                                backgroundColor:"#fff",
+                                backgroundColor:"var(--bg-input)",
                               }}
                             >
                               <option value="">— Selecione seu grupo com cuidado —</option>
@@ -823,7 +601,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                             <>
                               <div style={{background:"#F0FDF4",borderRadius:10,padding:"12px 14px",marginBottom:14,border:"1px solid #BBF7D0"}}>
                                 <div style={{fontSize:12,color:"#059669",fontWeight:600,marginBottom:3}}>Trial gratuito</div>
-                                <div style={{fontSize:14,fontWeight:700,color:"#0F172A"}}>
+                                <div style={{fontSize:14,fontWeight:700,color:"var(--text-primary)"}}>
                                   {m.label} · Grupo {m.grupoLabels?.[grupoSelecionado] ?? grupoSelecionado}
                                 </div>
                                 <div style={{fontSize:12,color:"#059669",marginTop:4}}>
@@ -846,7 +624,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                                 🎁 Ativar Trial Gratuito (3 dias)
                               </button>
 
-                              <div style={{fontSize:11,color:"#64748B",textAlign:"center"}}>
+                              <div style={{fontSize:11,color:"var(--text-faint)",textAlign:"center"}}>
                                 ou pague agora:
                               </div>
                             </>
@@ -857,22 +635,22 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                             const method = payMethod[m.id] || "pix";
                             return (
                               <div style={{marginBottom:14}}>
-                                <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:8}}>Forma de pagamento:</label>
+                                <label style={{fontSize:12,fontWeight:600,color:"var(--text-secondary)",display:"block",marginBottom:8}}>Forma de pagamento:</label>
                                 <div style={{display:"flex",gap:8}}>
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"pix"}))}
-                                    style={{flex:1,padding:"10px 8px",borderRadius:10,border: method==="pix" ? "2px solid #059669" : "2px solid #E2E8F0",
-                                      background: method==="pix" ? "#F0FDF4" : "#fff",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
+                                    style={{flex:1,padding:"10px 8px",borderRadius:10,border: method==="pix" ? "2px solid #059669" : "2px solid var(--border-light)",
+                                      background: method==="pix" ? "#F0FDF4" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
                                     <div style={{fontSize:16,marginBottom:2}}>💰</div>
-                                    <div style={{fontSize:13,fontWeight:700,color: method==="pix" ? "#059669" : "#475569"}}>PIX</div>
-                                    <div style={{fontSize:15,fontWeight:800,color: method==="pix" ? "#059669" : "#0F172A"}}>R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
+                                    <div style={{fontSize:13,fontWeight:700,color: method==="pix" ? "#059669" : "var(--text-secondary)"}}>PIX</div>
+                                    <div style={{fontSize:15,fontWeight:800,color: method==="pix" ? "#059669" : "var(--text-primary)"}}>R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
                                     {profile?.referred_by && <div style={{fontSize:10,fontWeight:700,color:"#fff",background:"#059669",borderRadius:99,padding:"2px 8px",display:"inline-block",marginTop:4}}>AFILIADO</div>}
                                   </button>
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"card"}))}
-                                    style={{flex:1,padding:"10px 8px",borderRadius:10,border: method==="card" ? "2px solid #6366F1" : "2px solid #E2E8F0",
-                                      background: method==="card" ? "#EEF2FF" : "#fff",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
+                                    style={{flex:1,padding:"10px 8px",borderRadius:10,border: method==="card" ? "2px solid #6366F1" : "2px solid var(--border-light)",
+                                      background: method==="card" ? "#EEF2FF" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
                                     <div style={{fontSize:16,marginBottom:2}}>💳</div>
-                                    <div style={{fontSize:13,fontWeight:700,color: method==="card" ? "#6366F1" : "#475569"}}>Cartão</div>
-                                    <div style={{fontSize:15,fontWeight:800,color: method==="card" ? "#6366F1" : "#0F172A"}}>R$ 20,90</div>
+                                    <div style={{fontSize:13,fontWeight:700,color: method==="card" ? "#6366F1" : "var(--text-secondary)"}}>Cartão</div>
+                                    <div style={{fontSize:15,fontWeight:800,color: method==="card" ? "#6366F1" : "var(--text-primary)"}}>R$ 20,90</div>
                                   </button>
                                 </div>
                               </div>
@@ -886,15 +664,15 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                               <div style={{marginTop:10,marginBottom:14}}>
                                 <div style={{display:"flex",gap:8}}>
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"pix"}))}
-                                    style={{flex:1,padding:"8px 6px",borderRadius:8,border: method==="pix" ? "2px solid #059669" : "2px solid #E2E8F0",
-                                      background: method==="pix" ? "#F0FDF4" : "#fff",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
-                                    <div style={{fontSize:12,fontWeight:700,color: method==="pix" ? "#059669" : "#475569"}}>💰 PIX R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
+                                    style={{flex:1,padding:"8px 6px",borderRadius:8,border: method==="pix" ? "2px solid #059669" : "2px solid var(--border-light)",
+                                      background: method==="pix" ? "#F0FDF4" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
+                                    <div style={{fontSize:12,fontWeight:700,color: method==="pix" ? "#059669" : "var(--text-secondary)"}}>💰 PIX R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
                                     {profile?.referred_by && <div style={{fontSize:9,color:"#059669",fontWeight:600,marginTop:2}}>Desconto afiliado -R$3</div>}
                                   </button>
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"card"}))}
-                                    style={{flex:1,padding:"8px 6px",borderRadius:8,border: method==="card" ? "2px solid #6366F1" : "2px solid #E2E8F0",
-                                      background: method==="card" ? "#EEF2FF" : "#fff",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
-                                    <div style={{fontSize:12,fontWeight:700,color: method==="card" ? "#6366F1" : "#475569"}}>💳 Cartão R$ 20,90</div>
+                                    style={{flex:1,padding:"8px 6px",borderRadius:8,border: method==="card" ? "2px solid #6366F1" : "2px solid var(--border-light)",
+                                      background: method==="card" ? "#EEF2FF" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
+                                    <div style={{fontSize:12,fontWeight:700,color: method==="card" ? "#6366F1" : "var(--text-secondary)"}}>💳 Cartão R$ 20,90</div>
                                   </button>
                                 </div>
                               </div>
@@ -910,15 +688,15 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                               <>
                                 {!canActivateTrial && (
                                   <div style={{background:"#FFF7ED",borderRadius:10,padding:"12px 14px",marginBottom:14,border:"1px solid #FED7AA"}}>
-                                    <div style={{fontSize:12,color:"#64748B",marginBottom:3}}>Você está comprando</div>
-                                    <div style={{fontSize:14,fontWeight:700,color:"#0F172A"}}>
+                                    <div style={{fontSize:12,color:"var(--text-faint)",marginBottom:3}}>Você está comprando</div>
+                                    <div style={{fontSize:14,fontWeight:700,color:"var(--text-primary)"}}>
                                       {m.label} · Grupo {m.grupoLabels?.[grupoSelecionado] ?? grupoSelecionado}
                                     </div>
                                     <div style={{fontSize:12,color:"#92400E",marginTop:4}}>
                                       Acesso ao cronograma · R$ {price}
                                       {method === "pix" && <span style={{marginLeft:6,fontSize:10,fontWeight:700,color:"#059669"}}>PIX</span>}
                                     </div>
-                                    <div style={{fontSize:11,color:"#64748B",marginTop:4}}>
+                                    <div style={{fontSize:11,color:"var(--text-faint)",marginTop:4}}>
                                       Acesso por módulo · Válido até 08/05/2026
                                     </div>
                                   </div>
@@ -954,9 +732,9 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                           {/* VIP: summary + open button */}
                           {grupoSelecionado && hasAccess && (
                             <>
-                              <div style={{background:"#F8FAFC",borderRadius:10,padding:"12px 14px",marginBottom:14}}>
-                                <div style={{fontSize:12,color:"#64748B",marginBottom:3}}>Resumo</div>
-                                <div style={{fontSize:14,fontWeight:700,color:"#0F172A"}}>
+                              <div style={{background:"var(--bg-page)",borderRadius:10,padding:"12px 14px",marginBottom:14}}>
+                                <div style={{fontSize:12,color:"var(--text-faint)",marginBottom:3}}>Resumo</div>
+                                <div style={{fontSize:14,fontWeight:700,color:"var(--text-primary)"}}>
                                   {m.label} · Grupo {m.grupoLabels?.[grupoSelecionado] ?? grupoSelecionado}
                                 </div>
                               </div>
@@ -984,7 +762,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                             padding:"10px 14px",
                             borderRadius:8,
                             border:`1px solid ${m.color}40`,
-                            background:expandido ? `${m.color}10` : "#F8FAFC",
+                            background:expandido ? `${m.color}10` : "var(--bg-page)",
                             color:m.color,
                             fontSize:13,
                             fontWeight:600,
@@ -1018,7 +796,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                       style={{
                         width:"100%",padding:"8px 12px",borderRadius:8,
                         border:`1px solid ${m.color}40`,
-                        background:expandido ? `${m.color}10` : "#F8FAFC",
+                        background:expandido ? `${m.color}10` : "var(--bg-page)",
                         color:m.color,fontSize:13,fontWeight:600,cursor:"pointer",
                         transition:"all 0.2s",
                       }}
@@ -1043,7 +821,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
 
                   {/* Locked coming soon */}
                   {isLocked && m.disponivelEm && (
-                    <div style={{fontSize:12,color:"#94A3B8"}}>Previsão: {m.disponivelEm}</div>
+                    <div style={{fontSize:12,color:"var(--text-muted)"}}>Previsão: {m.disponivelEm}</div>
                   )}
                 </div>
               );
@@ -1055,20 +833,20 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
       {/* === AFFILIATE MODAL === */}
       {showAffiliate && (
         <div style={overlayStyle} onClick={() => setShowAffiliate(false)}>
-          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"#fff",borderRadius:20,padding:"28px 24px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)",maxHeight:"80vh",overflow:"auto"}}>
+          <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"var(--bg-card)",borderRadius:20,padding:"28px 24px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)",maxHeight:"80vh",overflow:"auto"}}>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20}}>
-              <div style={{fontSize:18,fontWeight:800,color:"#0F172A"}}>🔗 Programa de Afiliados</div>
-              <button onClick={() => setShowAffiliate(false)} style={{background:"#F1F5F9",border:"none",borderRadius:8,width:28,height:28,cursor:"pointer",fontSize:14,color:"#64748B",display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
+              <div style={{fontSize:18,fontWeight:800,color:"var(--text-primary)"}}>🔗 Programa de Afiliados</div>
+              <button onClick={() => setShowAffiliate(false)} style={{background:"var(--bg-subtle)",border:"none",borderRadius:8,width:28,height:28,cursor:"pointer",fontSize:14,color:"var(--text-faint)",display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
             </div>
 
             {affLoading && !affStats ? (
-              <div style={{textAlign:"center",padding:20,color:"#64748B",fontSize:13}}>Carregando...</div>
+              <div style={{textAlign:"center",padding:20,color:"var(--text-faint)",fontSize:13}}>Carregando...</div>
             ) : !affStats?.code ? (
               /* Criar código de afiliado */
               <>
                 <div style={{background:"#F0FDF4",borderRadius:12,padding:"16px",marginBottom:16}}>
                   <div style={{fontSize:13,fontWeight:700,color:"#059669",marginBottom:6}}>Como funciona</div>
-                  <div style={{fontSize:12,color:"#475569",lineHeight:1.6}}>
+                  <div style={{fontSize:12,color:"var(--text-secondary)",lineHeight:1.6}}>
                     1. Crie seu código personalizado<br/>
                     2. Compartilhe seu link com amigos<br/>
                     3. Ganhe <strong>comissão progressiva</strong> em cada venda (10% a 40%)<br/>
@@ -1076,19 +854,19 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                 </div>
 
                 <div style={{marginBottom:16}}>
-                  <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Escolha seu código:</label>
+                  <label style={{fontSize:12,fontWeight:600,color:"var(--text-secondary)",display:"block",marginBottom:6}}>Escolha seu código:</label>
                   <input
                     value={affCode}
                     onChange={e => { setAffCode(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "")); setAffError(""); }}
                     placeholder="ex: marcos, medunb, turma42"
                     maxLength={20}
-                    style={{width:"100%",padding:"10px 14px",borderRadius:8,border:"1px solid #E2E8F0",fontSize:14,color:"#0F172A",boxSizing:"border-box"}}
+                    style={{width:"100%",padding:"10px 14px",borderRadius:8,border:"1px solid var(--border-light)",fontSize:14,color:"var(--text-primary)",boxSizing:"border-box",background:"var(--bg-input)"}}
                   />
-                  <div style={{fontSize:11,color:"#94A3B8",marginTop:4}}>3-20 caracteres: letras, números e hífen</div>
+                  <div style={{fontSize:11,color:"var(--text-muted)",marginTop:4}}>3-20 caracteres: letras, números e hífen</div>
                 </div>
 
                 {affCode.length >= 3 && (
-                  <div style={{background:"#F8FAFC",borderRadius:8,padding:"10px 14px",marginBottom:16,fontSize:12,color:"#475569"}}>
+                  <div style={{background:"var(--bg-page)",borderRadius:8,padding:"10px 14px",marginBottom:16,fontSize:12,color:"var(--text-secondary)"}}>
                     Seu link: <strong style={{color:"#059669"}}>plannerinternato.modulo1.workers.dev?ref={affCode}</strong>
                   </div>
                 )}
@@ -1110,33 +888,33 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
               <>
                 <div style={{background:"#F0FDF4",borderRadius:12,padding:"16px",marginBottom:16}}>
                   <div style={{fontSize:11,color:"#059669",fontWeight:600,marginBottom:4}}>Seu link de afiliado</div>
-                  <div style={{fontSize:13,fontWeight:700,color:"#0F172A",wordBreak:"break-all",marginBottom:10}}>
+                  <div style={{fontSize:13,fontWeight:700,color:"var(--text-primary)",wordBreak:"break-all",marginBottom:10}}>
                     plannerinternato.modulo1.workers.dev?ref={affStats.code}
                   </div>
                   <button
                     onClick={copyAffiliateLink}
-                    style={{width:"100%",padding:"8px",borderRadius:8,border:"1px solid #BBF7D0",background:affCopied ? "#059669" : "#fff",color:affCopied ? "#fff" : "#059669",fontSize:12,fontWeight:700,cursor:"pointer",transition:"all 0.2s"}}
+                    style={{width:"100%",padding:"8px",borderRadius:8,border:"1px solid #BBF7D0",background:affCopied ? "#059669" : "var(--bg-card)",color:affCopied ? "#fff" : "#059669",fontSize:12,fontWeight:700,cursor:"pointer",transition:"all 0.2s"}}
                   >
                     {affCopied ? "✓ Copiado!" : "📋 Copiar link"}
                   </button>
                 </div>
 
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:16}}>
-                  <div style={{background:"#F8FAFC",borderRadius:10,padding:"14px",textAlign:"center"}}>
-                    <div style={{fontSize:24,fontWeight:800,color:"#0F172A"}}>{affStats.total_indicados || 0}</div>
-                    <div style={{fontSize:11,color:"#64748B",fontWeight:600}}>Indicados</div>
+                  <div style={{background:"var(--bg-page)",borderRadius:10,padding:"14px",textAlign:"center"}}>
+                    <div style={{fontSize:24,fontWeight:800,color:"var(--text-primary)"}}>{affStats.total_indicados || 0}</div>
+                    <div style={{fontSize:11,color:"var(--text-faint)",fontWeight:600}}>Indicados</div>
                   </div>
-                  <div style={{background:"#F8FAFC",borderRadius:10,padding:"14px",textAlign:"center"}}>
+                  <div style={{background:"var(--bg-page)",borderRadius:10,padding:"14px",textAlign:"center"}}>
                     <div style={{fontSize:24,fontWeight:800,color:"#059669"}}>{affStats.total_pagantes || 0}</div>
-                    <div style={{fontSize:11,color:"#64748B",fontWeight:600}}>Pagantes</div>
+                    <div style={{fontSize:11,color:"var(--text-faint)",fontWeight:600}}>Pagantes</div>
                   </div>
-                  <div style={{background:"#F8FAFC",borderRadius:10,padding:"14px",textAlign:"center"}}>
-                    <div style={{fontSize:24,fontWeight:800,color:"#0F172A"}}>R$ {Number(affStats.comissao_total || 0).toFixed(2)}</div>
-                    <div style={{fontSize:11,color:"#64748B",fontWeight:600}}>Comissão total</div>
+                  <div style={{background:"var(--bg-page)",borderRadius:10,padding:"14px",textAlign:"center"}}>
+                    <div style={{fontSize:24,fontWeight:800,color:"var(--text-primary)"}}>R$ {Number(affStats.comissao_total || 0).toFixed(2)}</div>
+                    <div style={{fontSize:11,color:"var(--text-faint)",fontWeight:600}}>Comissão total</div>
                   </div>
                   <div style={{background:"#FEF3C7",borderRadius:10,padding:"14px",textAlign:"center"}}>
                     <div style={{fontSize:24,fontWeight:800,color:"#92400E"}}>R$ {Number(affStats.comissao_pendente || 0).toFixed(2)}</div>
-                    <div style={{fontSize:11,color:"#64748B",fontWeight:600}}>Pendente</div>
+                    <div style={{fontSize:11,color:"var(--text-faint)",fontWeight:600}}>Pendente</div>
                   </div>
                 </div>
 
@@ -1155,15 +933,15 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                         {[{pct:10,label:"1-5"},{pct:20,label:"6-20"},{pct:30,label:"21-40"},{pct:40,label:"41+"}].map(tier => (
                           <div key={tier.pct} style={{
                             flex:1,padding:"4px 0",borderRadius:4,textAlign:"center",fontSize:10,fontWeight:700,
-                            background: tier.pct === currentPct ? "#059669" : tier.pct < currentPct ? "#BBF7D0" : "#E2E8F0",
-                            color: tier.pct === currentPct ? "#fff" : tier.pct < currentPct ? "#059669" : "#94A3B8",
+                            background: tier.pct === currentPct ? "#059669" : tier.pct < currentPct ? "#BBF7D0" : "var(--border-light)",
+                            color: tier.pct === currentPct ? "#fff" : tier.pct < currentPct ? "#059669" : "var(--text-muted)",
                           }}>
                             {tier.pct}%
                           </div>
                         ))}
                       </div>
                       {nextPct && faltam > 0 && (
-                        <div style={{fontSize:10,color:"#64748B",textAlign:"center"}}>
+                        <div style={{fontSize:10,color:"var(--text-faint)",textAlign:"center"}}>
                           Faltam <strong>{faltam}</strong> pagante{faltam !== 1 ? "s" : ""} para {nextPct}%
                         </div>
                       )}
@@ -1175,7 +953,7 @@ export default function Dashboard({ user, profile, session, onSelect, onLogout, 
                     </div>
                   );
                 })()}
-                <div style={{fontSize:11,color:"#64748B",textAlign:"center",lineHeight:1.5}}>
+                <div style={{fontSize:11,color:"var(--text-faint)",textAlign:"center",lineHeight:1.5}}>
                   Compartilhe seu link e ganhe comissão progressiva em cada venda.
                 </div>
               </>

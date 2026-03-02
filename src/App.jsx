@@ -4,6 +4,8 @@ import { MATERIAS } from "./scheduleData";
 import { heartbeat, endSession, getSessionToken, registerSession } from "./lib/sessionGuard";
 import { logEvent } from "./lib/logEvent";
 import SupportButton from "./components/SupportButton";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { ToastProvider } from "./components/Toast";
 
 const AuthScreen   = lazy(() => import("./components/AuthScreen"));
 const Dashboard    = lazy(() => import("./components/Dashboard"));
@@ -120,6 +122,13 @@ export default function App() {
     return () => subscription.unsubscribe();
   },[]);
 
+  async function handleKicked() {
+    clearInterval(heartbeatRef.current);
+    logEvent("session_kicked");
+    setKicked(true);
+    await supabase.auth.signOut();
+  }
+
   // Heartbeat: verifica a cada 30s se a sessão ainda é válida
   useEffect(()=>{
     if (view === "auth" || view === "loading" || !session) {
@@ -139,13 +148,6 @@ export default function App() {
 
     return () => clearInterval(heartbeatRef.current);
   },[view, session]);
-
-  async function handleKicked() {
-    clearInterval(heartbeatRef.current);
-    logEvent("session_kicked");
-    setKicked(true);
-    await supabase.auth.signOut();
-  }
 
   async function handleLogout() {
     logEvent("logout");
@@ -241,38 +243,46 @@ export default function App() {
   );
 
   return (
-    <>
+    <ToastProvider>
+    <ErrorBoundary>
       <Suspense fallback={<LoadingScreen/>}>
         {view==="auth" && (
           <AuthScreen onAuth={(fullSession, prof) => { setSession(fullSession); setProfile(prof); setView("dashboard"); }}/>
         )}
         {view==="dashboard" && (
-          <Dashboard
-            user={session.user}
-            profile={profile}
-            session={session}
-            onSelect={(mat,grp) => { setSelMateria(mat); setSelGrupo(grp); setView("schedule"); }}
-            onLogout={handleLogout}
-            onAdmin={() => setView("admin")}
-          />
+          <ErrorBoundary>
+            <Dashboard
+              user={session.user}
+              profile={profile}
+              session={session}
+              onSelect={(mat,grp) => { setSelMateria(mat); setSelGrupo(grp); setView("schedule"); }}
+              onLogout={handleLogout}
+              onAdmin={() => setView("admin")}
+            />
+          </ErrorBoundary>
         )}
         {view==="admin" && (
-          <AdminPanel onBack={() => setView("dashboard")} />
+          <ErrorBoundary>
+            <AdminPanel onBack={() => setView("dashboard")} />
+          </ErrorBoundary>
         )}
         {view==="schedule" && selMateria && (
-          <ScheduleView
-            user={session.user}
-            profile={profile}
-            materia={selMateria}
-            grupo={selGrupo}
-            onBack={() => setView("dashboard")}
-            onChangeGrupo={(g) => setSelGrupo(g)}
-          />
+          <ErrorBoundary>
+            <ScheduleView
+              user={session.user}
+              profile={profile}
+              materia={selMateria}
+              grupo={selGrupo}
+              onBack={() => setView("dashboard")}
+              onChangeGrupo={(g) => setSelGrupo(g)}
+            />
+          </ErrorBoundary>
         )}
       </Suspense>
       {session && !kicked && view !== "auth" && (
         <SupportButton user={session.user} profile={profile} />
       )}
-    </>
+    </ErrorBoundary>
+    </ToastProvider>
   );
 }

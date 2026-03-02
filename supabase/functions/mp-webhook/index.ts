@@ -24,7 +24,10 @@ const MP_WEBHOOK_SECRET = Deno.env.get("MP_WEBHOOK_SECRET") || "";
  * Template assinado:  "id:<data.id>;request-id:<x-request-id>;ts:<ts>;"
  */
 async function verifySignature(req: Request, dataId: string): Promise<boolean> {
-  if (!MP_WEBHOOK_SECRET) return true; // skip se secret não configurado (dev)
+  if (!MP_WEBHOOK_SECRET) {
+    console.error("CRITICAL: MP_WEBHOOK_SECRET not configured — rejecting webhook");
+    return false;
+  }
 
   const xSignature = req.headers.get("x-signature");
   const xRequestId = req.headers.get("x-request-id");
@@ -86,8 +89,16 @@ async function handlePreapproval(preapprovalId: string) {
   const mpStatus = preapproval.status; // authorized, pending, paused, cancelled
 
   if (mpStatus === "authorized") {
-    // Assinatura ativa — calcular fim do período (+30 dias)
-    const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+    // Assinatura ativa — calcular fim do período (+30 dias a partir do fim atual ou agora)
+    const { data: currentSub } = await supabase
+      .from("subscriptions")
+      .select("current_period_end")
+      .eq("user_id", userId)
+      .maybeSingle();
+    const baseDate = currentSub?.current_period_end
+      ? Math.max(Date.now(), new Date(currentSub.current_period_end).getTime())
+      : Date.now();
+    const periodEnd = new Date(baseDate + 30 * 24 * 60 * 60 * 1000).toISOString();
 
     await supabase.from("subscriptions").update({
       status: "authorized",
@@ -163,8 +174,16 @@ async function handlePayment(paymentId: string) {
     const userId = extRef.split("|")[1];
 
     if (payment.status === "approved") {
-      // Renovar período: +30 dias a partir de agora
-      const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+      // Renovar período: +30 dias a partir do fim atual ou agora (o que for maior)
+      const { data: currentSub } = await supabase
+        .from("subscriptions")
+        .select("current_period_end")
+        .eq("user_id", userId)
+        .maybeSingle();
+      const baseDate = currentSub?.current_period_end
+        ? Math.max(Date.now(), new Date(currentSub.current_period_end).getTime())
+        : Date.now();
+      const periodEnd = new Date(baseDate + 30 * 24 * 60 * 60 * 1000).toISOString();
 
       await supabase.from("subscriptions").update({
         status: "authorized",
@@ -230,6 +249,17 @@ async function handlePayment(paymentId: string) {
     }
 
     const valorPago = payment.transaction_amount || null;
+
+    // Validar valor mínimo do pagamento (menor preço: R$16,90 PIX c/ referral)
+    const MIN_PRICE = 16.00; // margem para centavos de variação do MP
+    if (!valorPago || valorPago < MIN_PRICE) {
+      console.warn(`Valor suspeito: R$${valorPago} para user=${userId} materia=${materia}`);
+      await supabase.from("eventos").insert({
+        user_id: userId, type: "payment_suspicious",
+        meta: { materia, valor: valorPago, mp_payment_id: String(payment.id) },
+      });
+      return new Response("suspicious amount", { status: 400 });
+    }
 
     if (!existing) {
       const { error } = await supabase.from("acessos").insert({

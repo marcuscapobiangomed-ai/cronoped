@@ -22,7 +22,7 @@ export default function SupportTickets({ tickets, onRefresh }) {
   const [filter, setFilter] = useState("todos"); // "todos" | "aberto" | "resolvido"
 
   if (!tickets || tickets.length === 0) {
-    return <div style={{ padding: 20, textAlign: "center", color: "#94A3B8", fontSize: 13 }}>Nenhum ticket de suporte</div>;
+    return <div style={{ padding: 20, textAlign: "center", color: "var(--text-muted)", fontSize: 13 }}>Nenhum ticket de suporte</div>;
   }
 
   async function handleToggleStatus(ticketId, currentStatus) {
@@ -65,7 +65,7 @@ export default function SupportTickets({ tickets, onRefresh }) {
   return (
     <div>
       {/* Filter tabs */}
-      <div style={{ padding: "10px 18px", borderBottom: "1px solid #F1F5F9", display: "flex", gap: 6 }}>
+      <div style={{ padding: "10px 18px", borderBottom: "1px solid var(--bg-subtle)", display: "flex", gap: 6 }}>
         {[
           { key: "todos", label: "Todos", count: tickets.length },
           { key: "aberto", label: "Abertos", count: tickets.filter(t => t.status === "aberto").length },
@@ -74,8 +74,8 @@ export default function SupportTickets({ tickets, onRefresh }) {
           <button key={f.key} onClick={() => setFilter(f.key)}
             style={{
               fontSize: 11, fontWeight: 600, padding: "4px 12px", borderRadius: 6, border: "none", cursor: "pointer",
-              background: filter === f.key ? "#0F172A" : "#F1F5F9",
-              color: filter === f.key ? "#fff" : "#64748B",
+              background: filter === f.key ? "var(--bg-header)" : "var(--bg-subtle)",
+              color: filter === f.key ? "#fff" : "var(--text-faint)",
               transition: "all 0.15s",
             }}>
             {f.label} ({f.count})
@@ -84,7 +84,7 @@ export default function SupportTickets({ tickets, onRefresh }) {
       </div>
 
       {filtered.length === 0 && (
-        <div style={{ padding: 20, textAlign: "center", color: "#94A3B8", fontSize: 13 }}>
+        <div style={{ padding: 20, textAlign: "center", color: "var(--text-muted)", fontSize: 13 }}>
           Nenhum ticket {filter === "aberto" ? "aberto" : filter === "resolvido" ? "resolvido" : ""}
         </div>
       )}
@@ -97,7 +97,7 @@ export default function SupportTickets({ tickets, onRefresh }) {
         const isDeleting = deleteConfirm === t.id;
 
         return (
-          <div key={t.id} style={{ padding: "14px 18px", borderBottom: "1px solid #F1F5F9" }}>
+          <div key={t.id} style={{ padding: "14px 18px", borderBottom: "1px solid var(--bg-subtle)" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: assuntoColor, background: `${assuntoColor}15`, padding: "2px 8px", borderRadius: 4 }}>
@@ -107,12 +107,12 @@ export default function SupportTickets({ tickets, onRefresh }) {
                   {badge.label}
                 </span>
               </div>
-              <span style={{ fontSize: 10, color: "#94A3B8" }}>#{t.id} · {timeStr}</span>
+              <span style={{ fontSize: 10, color: "var(--text-muted)" }}>#{t.id} · {timeStr}</span>
             </div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: "#0F172A", marginBottom: 2 }}>
-              {t.nome || "Sem nome"} <span style={{ fontWeight: 400, color: "#64748B" }}>({t.email || "?"})</span>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text-primary)", marginBottom: 2 }}>
+              {t.nome || "Sem nome"} <span style={{ fontWeight: 400, color: "var(--text-faint)" }}>({t.email || "?"})</span>
             </div>
-            <div style={{ fontSize: 12, color: "#475569", lineHeight: 1.5, whiteSpace: "pre-wrap", marginBottom: 10 }}>
+            <div style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5, whiteSpace: "pre-wrap", marginBottom: 10 }}>
               {t.mensagem}
             </div>
 
@@ -125,7 +125,7 @@ export default function SupportTickets({ tickets, onRefresh }) {
                   {actionLoading === `delete-${t.id}` ? "..." : "Confirmar"}
                 </button>
                 <button onClick={() => setDeleteConfirm(null)}
-                  style={{ ...smallBtn, background: "#E2E8F0", color: "#475569" }}>
+                  style={{ ...smallBtn, background: "var(--border-light)", color: "var(--text-secondary)" }}>
                   Cancelar
                 </button>
               </div>

@@ -22,7 +22,7 @@ function clearSessionToken() {
  * - Salva token no localStorage
  * - Tolerante a falhas: não bloqueia o login se o RPC falhar
  */
-export async function registerSession(userId) {
+export async function registerSession() {
   try {
     const token = crypto.randomUUID();
     const deviceInfo = navigator.userAgent.substring(0, 200);
@@ -53,7 +53,7 @@ export async function heartbeat(userId) {
   const token = getSessionToken();
   if (!token) {
     // Sem token = sessão nunca foi registrada. Tentar registrar agora.
-    try { await registerSession(userId); } catch (_) {}
+    try { await registerSession(); } catch { /* tolerate registration failure */ }
     return { valid: true }; // Não kickar por falta de token
   }
 

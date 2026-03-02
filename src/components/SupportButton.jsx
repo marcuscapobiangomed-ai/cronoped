@@ -3,7 +3,7 @@ import { supabase } from "../supabase";
 
 const ASSUNTOS = ["Bug / Erro", "Dúvida", "Sugestão", "Pagamento", "Outro"];
 
-export default function SupportButton({ user, profile }) {
+export default function SupportButton({ profile }) {
   const [open, setOpen] = useState(false);
   const [assunto, setAssunto] = useState("");
   const [mensagem, setMensagem] = useState("");
@@ -51,21 +51,21 @@ export default function SupportButton({ user, profile }) {
       {showBalloon && (
         <div style={{position:"fixed",bottom:84,right:20,zIndex:1000}}>
           <div style={{
-            background:"#fff",
+            background:"var(--bg-card)",
             borderRadius:12,
             padding:"10px 14px 10px 12px",
             boxShadow:"0 4px 24px rgba(0,0,0,0.14)",
-            border:"1px solid #E2E8F0",
+            border:"1px solid var(--border-light)",
             display:"flex",alignItems:"center",gap:8,
             whiteSpace:"nowrap",
           }}>
             <span style={{fontSize:15}}>👋</span>
-            <span style={{fontSize:12,fontWeight:600,color:"#0F172A"}}>
+            <span style={{fontSize:12,fontWeight:600,color:"var(--text-primary)"}}>
               Algum problema? Fala aqui!
             </span>
             <button
               onClick={() => setShowBalloon(false)}
-              style={{background:"none",border:"none",color:"#94A3B8",
+              style={{background:"none",border:"none",color:"var(--text-muted)",
                 cursor:"pointer",fontSize:12,padding:0,lineHeight:1,marginLeft:2}}
             >✕</button>
           </div>
@@ -75,14 +75,14 @@ export default function SupportButton({ user, profile }) {
             width:0,height:0,
             borderLeft:"7px solid transparent",
             borderRight:"7px solid transparent",
-            borderTop:"7px solid #E2E8F0",
+            borderTop:"7px solid var(--border-light)",
           }}/>
           <div style={{
             position:"absolute",bottom:-6,right:20,
             width:0,height:0,
             borderLeft:"7px solid transparent",
             borderRight:"7px solid transparent",
-            borderTop:"7px solid #fff",
+            borderTop:"7px solid var(--bg-card)",
           }}/>
         </div>
       )}
@@ -109,7 +109,7 @@ export default function SupportButton({ user, profile }) {
     <div style={{
       position:"fixed",bottom:20,right:20,zIndex:999,
       width:320,maxWidth:"calc(100vw - 40px)",
-      background:"#fff",borderRadius:16,
+      background:"var(--bg-card)",borderRadius:16,
       boxShadow:"0 8px 40px rgba(0,0,0,0.18)",
       overflow:"hidden",
     }}>
@@ -127,15 +127,15 @@ export default function SupportButton({ user, profile }) {
       {/* Form */}
       <form onSubmit={handleSubmit} style={{padding:18,display:"flex",flexDirection:"column",gap:14}}>
         <div>
-          <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Assunto</label>
+          <label style={{fontSize:12,fontWeight:600,color:"var(--text-secondary)",display:"block",marginBottom:6}}>Assunto</label>
           <select
             value={assunto}
             onChange={e => setAssunto(e.target.value)}
             required
             style={{
               width:"100%",padding:"8px 12px",borderRadius:8,
-              border:"1px solid #E2E8F0",fontSize:13,color:"#475569",
-              backgroundColor:"#fff",cursor:"pointer",
+              border:"1px solid var(--border-light)",fontSize:13,color:"var(--text-secondary)",
+              backgroundColor:"var(--bg-input)",cursor:"pointer",
             }}
           >
             <option value="">— Selecione —</option>
@@ -144,7 +144,7 @@ export default function SupportButton({ user, profile }) {
         </div>
 
         <div>
-          <label style={{fontSize:12,fontWeight:600,color:"#475569",display:"block",marginBottom:6}}>Mensagem</label>
+          <label style={{fontSize:12,fontWeight:600,color:"var(--text-secondary)",display:"block",marginBottom:6}}>Mensagem</label>
           <textarea
             value={mensagem}
             onChange={e => setMensagem(e.target.value)}
@@ -153,9 +153,9 @@ export default function SupportButton({ user, profile }) {
             placeholder="Descreva o problema ou sugestão..."
             style={{
               width:"100%",padding:"8px 12px",borderRadius:8,
-              border:"1px solid #E2E8F0",fontSize:13,color:"#0F172A",
+              border:"1px solid var(--border-light)",fontSize:13,color:"var(--text-primary)",
               resize:"vertical",fontFamily:"inherit",
-              boxSizing:"border-box",
+              boxSizing:"border-box",background:"var(--bg-input)",
             }}
           />
         </div>
@@ -165,7 +165,7 @@ export default function SupportButton({ user, profile }) {
           disabled={sending || !assunto || !mensagem.trim()}
           style={{
             width:"100%",padding:"10px",borderRadius:8,border:"none",
-            background:assunto && mensagem.trim() ? "#0F172A" : "#CBD5E1",
+            background:assunto && mensagem.trim() ? "var(--bg-header)" : "var(--border-medium)",
             color:"#fff",fontSize:13,fontWeight:700,
             cursor:assunto && mensagem.trim() ? "pointer" : "not-allowed",
             transition:"all 0.2s",
@@ -174,7 +174,7 @@ export default function SupportButton({ user, profile }) {
           {sending ? "Enviando..." : "Enviar"}
         </button>
 
-        <div style={{fontSize:11,color:"#94A3B8",textAlign:"center"}}>
+        <div style={{fontSize:11,color:"var(--text-muted)",textAlign:"center"}}>
           {profile?.nome?.split(" ")[0]} · {profile?.email}
         </div>
       </form>

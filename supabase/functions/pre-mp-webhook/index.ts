@@ -11,9 +11,15 @@ const supabase = createClient(
 
 const MP_TOKEN          = Deno.env.get("MP_ACCESS_TOKEN")!;
 const MP_WEBHOOK_SECRET = Deno.env.get("MP_WEBHOOK_SECRET") || "";
+const RESEND_KEY        = Deno.env.get("RESEND_API_KEY") || "";
+const FROM_EMAIL        = Deno.env.get("FROM_EMAIL") || "Meu Planner <onboarding@resend.dev>";
+const APP_URL           = Deno.env.get("PRE_APP_URL") || "https://cronopre.modulo1.workers.dev";
 
 async function verifySignature(req: Request, dataId: string): Promise<boolean> {
-  if (!MP_WEBHOOK_SECRET) return true;
+  if (!MP_WEBHOOK_SECRET) {
+    console.error("CRITICAL: MP_WEBHOOK_SECRET not configured — rejecting webhook");
+    return false;
+  }
 
   const xSignature = req.headers.get("x-signature");
   const xRequestId = req.headers.get("x-request-id");
@@ -128,6 +134,17 @@ Deno.serve(async (req) => {
 
       const valorPago = payment.transaction_amount || null;
 
+      // Validar valor mínimo do pagamento (menor preço: R$16,90 PIX c/ referral)
+      const MIN_PRICE = 16.00;
+      if (!valorPago || valorPago < MIN_PRICE) {
+        console.warn(`Valor suspeito: R$${valorPago} para user=${userId} materia=${materia}`);
+        await supabase.from("pre_eventos").insert({
+          user_id: userId, type: "payment_suspicious",
+          meta: { materia, valor: valorPago, mp_payment_id: String(payment.id) },
+        });
+        return new Response("suspicious amount", { status: 400 });
+      }
+
       if (!existing) {
         const { error } = await supabase.from("pre_acessos").insert({
           user_id: userId, materia, grupo: grupoNum,
@@ -222,6 +239,24 @@ Deno.serve(async (req) => {
 
       console.log(`Acesso liberado: user=${userId} materia=${materia} grupo=${grupo}`);
 
+      // Enviar e-mail de confirmação ao usuário
+      try {
+        const { data: userProfile } = await supabase
+          .from("pre_profiles")
+          .select("nome, email")
+          .eq("id", userId)
+          .single();
+
+        if (userProfile?.email && RESEND_KEY) {
+          const nome = userProfile.nome?.split(" ")[0] || "Aluno";
+          const periodoNum = materia.replace(/\D/g, "");
+          const materiaLabel = periodoNum ? `${periodoNum}º Período` : materia;
+          await sendConfirmationEmail(userProfile.email, nome, materiaLabel, grupoNum, valorPago);
+        }
+      } catch (emailErr) {
+        console.error("Erro ao enviar e-mail de confirmação:", emailErr);
+      }
+
     } else if (payment.status === "rejected" || payment.status === "cancelled") {
       await supabase.from("pre_eventos").insert({
         user_id: userId,
@@ -242,3 +277,85 @@ Deno.serve(async (req) => {
     return new Response("internal error", { status: 500 });
   }
 });
+
+async function sendConfirmationEmail(
+  to: string,
+  nome: string,
+  materiaLabel: string,
+  grupo: number,
+  valor: number,
+) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${RESEND_KEY}`,
+    },
+    body: JSON.stringify({
+      from: FROM_EMAIL,
+      to: [to],
+      subject: `Pagamento confirmado – ${materiaLabel}`,
+      html: `
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/></head>
+<body style="margin:0;padding:24px;background:#F1F5F9;font-family:system-ui,-apple-system,sans-serif">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:520px;margin:0 auto">
+  <tr><td style="background:#0F172A;padding:20px 24px;border-radius:12px 12px 0 0">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+      <td style="font-size:20px;line-height:1">✅</td>
+      <td style="padding-left:12px">
+        <div style="font-size:16px;font-weight:800;color:#fff">Pagamento Confirmado</div>
+        <div style="font-size:11px;color:#64748B;margin-top:2px">Meu Planner 2026.1</div>
+      </td>
+    </tr></table>
+  </td></tr>
+  <tr><td style="height:3px;background:#16A34A"></td></tr>
+  <tr><td style="background:#fff;padding:24px;border:1px solid #E2E8F0;border-top:none">
+    <p style="margin:0 0 16px;font-size:15px;color:#0F172A">Olá, <strong>${nome}</strong>!</p>
+    <p style="margin:0 0 20px;font-size:14px;color:#475569;line-height:1.6">
+      Seu pagamento foi confirmado e seu acesso já está liberado.
+    </p>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#F0FDF4;border-radius:10px;border:1px solid #BBF7D0">
+      <tr><td style="padding:16px">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tr>
+            <td style="font-size:13px;color:#475569;padding:4px 0">Período:</td>
+            <td style="font-size:13px;color:#0F172A;font-weight:700;text-align:right;padding:4px 0">${materiaLabel}</td>
+          </tr>
+          <tr>
+            <td style="font-size:13px;color:#475569;padding:4px 0">Grupo:</td>
+            <td style="font-size:13px;color:#0F172A;font-weight:700;text-align:right;padding:4px 0">${grupo}</td>
+          </tr>
+          <tr>
+            <td style="font-size:13px;color:#475569;padding:4px 0">Valor:</td>
+            <td style="font-size:13px;color:#16A34A;font-weight:700;text-align:right;padding:4px 0">R$ ${valor.toFixed(2)}</td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:20px">
+      <tr><td align="center">
+        <a href="${APP_URL}" style="display:inline-block;background:#0F172A;color:#fff;text-decoration:none;padding:12px 32px;border-radius:8px;font-size:14px;font-weight:700">
+          Acessar meu cronograma →
+        </a>
+      </td></tr>
+    </table>
+  </td></tr>
+  <tr><td style="background:#F8FAFC;padding:14px 24px;border:1px solid #E2E8F0;border-top:none;border-radius:0 0 12px 12px">
+    <p style="margin:0;font-size:11px;color:#94A3B8;text-align:center">
+      Meu Planner 2026.1 · Acesso por semestre
+    </p>
+  </td></tr>
+</table>
+</body></html>
+      `.trim(),
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    console.error("Resend error:", err);
+  } else {
+    console.log(`E-mail de confirmação enviado para ${to}`);
+  }
+}

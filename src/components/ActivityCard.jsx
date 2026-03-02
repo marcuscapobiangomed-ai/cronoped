@@ -3,7 +3,7 @@ import { TYPE_STYLE, TYPE_ICON } from "../constants";
 
 const editBtn = {width:22,height:22,borderRadius:6,border:"none",background:"rgba(0,0,0,0.06)",cursor:"pointer",fontSize:11,display:"flex",alignItems:"center",justifyContent:"center",padding:0,flexShrink:0,transition:"background 0.12s"};
 
-const ActivityCard = memo(function ActivityCard({a, isDone, onToggle, note, onNoteChange, isToday, canEdit, onEdit, onDelete}) {
+const ActivityCard = memo(function ActivityCard({a, isDone, onToggle, note, onNoteChange, isToday, canEdit, onEdit}) {
   const [noteOpen, setNoteOpen] = useState(false);
   const et       = a.effectiveType;
   const s        = TYPE_STYLE[et] || TYPE_STYLE.normal;
