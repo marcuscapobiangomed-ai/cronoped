@@ -172,6 +172,7 @@ export async function loadMateriaData(id) {
     case "cc":  raw = (await import("./data/cc")).CC_BY_GROUP; break;
     case "sim": raw = (await import("./data/sim")).SIM_BY_GROUP; break;
     case "emg": raw = (await import("./data/emg")).EMG_BY_GROUP; break;
+    case "ubs": raw = (await import("./data/ubs")).UBS_BY_GROUP; break;
     default: return null;
   }
   dataCache[id] = buildWeeksByGroup(raw);
@@ -222,7 +223,17 @@ export const MATERIAS = [
     grupos: [1,2,3,4,5,6],
     grupoLabels: {1:"A1",2:"A2",3:"A3",4:"B1",5:"B2",6:"B3"},
   },
-  { id:"ubs", label:"Atenção Básica UBS",       icon:"🏥", color:"#8B5CF6", hasData:false, disponivelEm:"Agosto 2026" },
+  {
+    id:"ubs", label:"Atenção Básica UBS", icon:"🏥", color:"#8B5CF6",
+    hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,
+    grupos: [1,2,3,4,5,6,7,8,9,11,12],
+    grupoLabels: {
+      1:"Madruga", 2:"Centro", 3:"Carvalheira",
+      4:"Melo Afonso", 5:"Santa Amália", 6:"Residência",
+      7:"Mancusi", 8:"Pocinhos", 9:"Conj. Habitacional",
+      11:"Itakamosi", 12:"Ipiranga",
+    },
+  },
   {
     id:"sim", label:"APS Simulação",            icon:"🎯", color:"#EF4444",
     hasData: true, keyEvents: KEY_EVENTS, weekDates: WEEK_DATES,

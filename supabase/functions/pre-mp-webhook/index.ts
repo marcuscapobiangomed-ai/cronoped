@@ -356,6 +356,7 @@ async function sendConfirmationEmail(
     const err = await res.text();
     console.error("Resend error:", err);
   } else {
-    console.log(`E-mail de confirmação enviado para ${to}`);
+    const masked = to.replace(/^(.{2})(.*)(@.*)$/, "$1***$3");
+    console.log(`E-mail de confirmação enviado para ${masked}`);
   }
 }

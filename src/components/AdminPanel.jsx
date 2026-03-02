@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { supabase } from "../supabase";
 import { fetchAdminData } from "../lib/adminApi";
 import StatCard from "./admin/StatCard";
@@ -17,6 +17,18 @@ const TABS = [
   { key: "afiliados",  label: "Afiliados" },
 ];
 
+// Faixas de comissão centralizadas (evita duplicação)
+const COMMISSION_TIERS = [
+  { max: 5,        pct: 10 },
+  { max: 20,       pct: 20 },
+  { max: 40,       pct: 30 },
+  { max: Infinity,  pct: 40 },
+];
+function getCommissionRate(totalPaid) {
+  return COMMISSION_TIERS.find(t => (totalPaid || 0) <= t.max)?.pct || 40;
+}
+const TIER_LABEL = "1-5: 10%, 6-20: 20%, 21-40: 30%, 41+: 40%";
+
 export default function AdminPanel({ onBack }) {
   const [data, setData]       = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,30 +46,41 @@ export default function AdminPanel({ onBack }) {
   const [refreshing, setRefreshing] = useState(false);
   const debounceRef = useRef(null);
 
+  const mountedRef = useRef(true);
+
   const loadData = useCallback(async () => {
+    if (!mountedRef.current) return;
     setRefreshing(true);
     try {
       const d = await fetchAdminData();
+      if (!mountedRef.current) return;
       setData(d);
       setError(null);
       setLastRefresh(new Date());
       const { data: usersData } = await supabase.rpc("admin_list_users");
+      if (!mountedRef.current) return;
       if (usersData) setUsers(usersData);
     } catch (err) {
+      if (!mountedRef.current) return;
       setError(err.message);
     } finally {
-      setLoading(false);
-      setRefreshing(false);
+      if (mountedRef.current) {
+        setLoading(false);
+        setRefreshing(false);
+      }
     }
   }, []);
 
   // Debounced reload — agrupa rajadas de eventos em 1 chamada
   const debouncedLoad = useCallback(() => {
     clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => loadData(), 1500);
+    debounceRef.current = setTimeout(() => {
+      if (mountedRef.current) loadData();
+    }, 1500);
   }, [loadData]);
 
   useEffect(() => {
+    mountedRef.current = true;
     loadData();
     // Fallback polling a cada 30s caso realtime caia — pausa quando aba não visível
     let interval = setInterval(loadData, 30000);
@@ -80,18 +103,26 @@ export default function AdminPanel({ onBack }) {
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "eventos" }, debouncedLoad)
       .on("postgres_changes", { event: "*", schema: "public", table: "affiliate_commissions" }, debouncedLoad)
       .subscribe((status) => {
+        if (!mountedRef.current) return;
         if (status === "SUBSCRIBED")   setRealtimeStatus("live");
         else if (status === "CLOSED" || status === "CHANNEL_ERROR") setRealtimeStatus("error");
         else setRealtimeStatus("connecting");
       });
 
     return () => {
+      mountedRef.current = false;
       clearInterval(interval);
       clearTimeout(debounceRef.current);
       document.removeEventListener("visibilitychange", handleVisibility);
       supabase.removeChannel(channel);
     };
   }, [loadData, debouncedLoad]);
+
+  // Resetar estado de expansão ao trocar de aba
+  useEffect(() => {
+    setExpandedAffiliate(null);
+    setCommissions([]);
+  }, [tab]);
 
   function timeSinceRefresh() {
     if (!lastRefresh) return "";
@@ -186,9 +217,9 @@ export default function AdminPanel({ onBack }) {
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
           <StatCard icon="👥" label="Total Usuários" value={data?.total_users || 0} color="var(--text-primary)" />
           <StatCard icon="🟢" label="Online agora" value={sessions.active_now || 0} color="#16A34A" sub={`${sessions.active_1h || 0} na última hora`} onClick={() => setShowOnline(true)} />
-          <StatCard icon="💰" label="Receita total" value={`R$ ${Number(data?.total_revenue || 0).toFixed(2)}`} color="#16A34A" />
-          <StatCard icon="📈" label="Pagantes" value={data?.total_paid || 0} color="#2563EB" sub={data?.total_users ? `${Math.round((data.total_paid / data.total_users) * 100)}% conversão` : ""} />
-          <StatCard icon="🔄" label="Assinantes" value={data?.total_subscribers || 0} color="#6366F1" sub={`MRR R$ ${Number(data?.subscription_mrr || 0).toFixed(2)}`} />
+          <StatCard icon="💰" label="Receita total" value={`R$ ${Number(data?.total_revenue || 0).toFixed(2).replace('.', ',')}`} color="#16A34A" />
+          <StatCard icon="📈" label="Pagantes" value={data?.total_paid || 0} color="#2563EB" sub={data?.total_users > 0 && data?.total_paid != null ? `${Math.round(((data.total_paid || 0) / data.total_users) * 100)}% conversão` : ""} />
+          <StatCard icon="🔄" label="Assinantes" value={data?.total_subscribers || 0} color="#6366F1" sub={`MRR R$ ${Number(data?.subscription_mrr || 0).toFixed(2).replace('.', ',')}`} />
           {(data?.support_tickets || []).filter(t => t.status === "aberto").length > 0 && (
             <StatCard icon="💬" label="Tickets abertos" value={(data?.support_tickets || []).filter(t => t.status === "aberto").length} color="#F59E0B" />
           )}
@@ -281,8 +312,9 @@ export default function AdminPanel({ onBack }) {
 
         {tab === "afiliados" && (() => {
           const affiliates = data?.affiliates || [];
-          const totalComissao = affiliates.reduce((s, a) => s + Number(a.comissao_total || 0), 0);
-          const totalPendente = affiliates.reduce((s, a) => s + Number(a.comissao_pendente || 0), 0);
+          const safeNum = v => { const n = Number(v || 0); return isNaN(n) ? 0 : n; };
+          const totalComissao = affiliates.reduce((s, a) => s + safeNum(a.comissao_total), 0);
+          const totalPendente = affiliates.reduce((s, a) => s + safeNum(a.comissao_pendente), 0);
           const totalReferred = affiliates.reduce((s, a) => s + (a.total_referred || 0), 0);
 
           return (
@@ -291,8 +323,8 @@ export default function AdminPanel({ onBack }) {
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 <StatCard icon="🔗" label="Afiliados ativos" value={affiliates.length} color="#059669" />
                 <StatCard icon="👥" label="Total indicados" value={totalReferred} color="#2563EB" />
-                <StatCard icon="💰" label="Comissão total" value={`R$ ${totalComissao.toFixed(2)}`} color="#059669" />
-                <StatCard icon="⏳" label="Pendente" value={`R$ ${totalPendente.toFixed(2)}`} color="#F59E0B" />
+                <StatCard icon="💰" label="Comissão total" value={`R$ ${totalComissao.toFixed(2).replace('.', ',')}`} color="#059669" />
+                <StatCard icon="⏳" label="Pendente" value={`R$ ${totalPendente.toFixed(2).replace('.', ',')}`} color="#F59E0B" />
               </div>
 
               {/* Lista de afiliados */}
@@ -325,11 +357,7 @@ export default function AdminPanel({ onBack }) {
                               <td style={{ padding: "10px 14px" }}>
                                 <div style={{ fontWeight: 600, color: "var(--text-primary)" }}>
                                   {a.nome || "Sem nome"}
-                                  {(() => {
-                                    const tp = a.total_paid || 0;
-                                    const pct = tp <= 5 ? 10 : tp <= 20 ? 20 : tp <= 40 ? 30 : 40;
-                                    return <span style={{ fontSize: 9, fontWeight: 700, color: "#059669", background: "#F0FDF4", padding: "1px 6px", borderRadius: 99, marginLeft: 6 }}>{pct}%</span>;
-                                  })()}
+                                  <span style={{ fontSize: 9, fontWeight: 700, color: "#059669", background: "#F0FDF4", padding: "1px 6px", borderRadius: 99, marginLeft: 6 }}>{getCommissionRate(a.total_paid)}%</span>
                                 </div>
                                 <div style={{ fontSize: 10, color: "var(--text-muted)" }}>{a.email}</div>
                               </td>
@@ -340,12 +368,12 @@ export default function AdminPanel({ onBack }) {
                               </td>
                               <td style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "var(--text-primary)" }}>{a.total_referred || 0}</td>
                               <td style={{ textAlign: "center", padding: "10px 14px", fontWeight: 700, color: "#059669" }}>{a.total_paid || 0}</td>
-                              <td style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "var(--text-primary)" }}>R$ {Number(a.comissao_total || 0).toFixed(2)}</td>
+                              <td style={{ textAlign: "right", padding: "10px 14px", fontWeight: 700, color: "var(--text-primary)" }}>R$ {Number(a.comissao_total || 0).toFixed(2).replace('.', ',')}</td>
                               <td style={{ textAlign: "right", padding: "10px 14px" }}>
                                 {Number(a.comissao_pendente || 0) > 0 ? (
-                                  <span style={{ color: "#F59E0B", fontWeight: 700 }}>R$ {Number(a.comissao_pendente).toFixed(2)}</span>
+                                  <span style={{ color: "#F59E0B", fontWeight: 700 }}>R$ {Number(a.comissao_pendente).toFixed(2).replace('.', ',')}</span>
                                 ) : (
-                                  <span style={{ color: "var(--text-muted)" }}>R$ 0.00</span>
+                                  <span style={{ color: "var(--text-muted)" }}>R$ 0,00</span>
                                 )}
                               </td>
                               <td style={{ textAlign: "center", padding: "10px 14px" }}>
@@ -360,7 +388,7 @@ export default function AdminPanel({ onBack }) {
                                     <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 8 }}>
                                       Comissões de {a.nome || a.code}
                                       <span style={{ marginLeft: 8, fontSize: 10, color: "var(--text-muted)", fontWeight: 400 }}>
-                                        Faixa atual: {(a.total_paid || 0) <= 5 ? "10%" : (a.total_paid || 0) <= 20 ? "20%" : (a.total_paid || 0) <= 40 ? "30%" : "40%"} (1-5: 10%, 6-20: 20%, 21-40: 30%, 41+: 40%)
+                                        Faixa atual: {getCommissionRate(a.total_paid)}% ({TIER_LABEL})
                                       </span>
                                     </div>
                                     {commLoading ? (
@@ -387,8 +415,8 @@ export default function AdminPanel({ onBack }) {
                                                 <div style={{ fontSize: 9, color: "var(--text-muted)" }}>{c.referred_email}</div>
                                               </td>
                                               <td style={{ textAlign: "center", padding: "8px 10px", fontWeight: 600, color: "var(--text-primary)", textTransform: "uppercase" }}>{c.materia}</td>
-                                              <td style={{ textAlign: "right", padding: "8px 10px", color: "var(--text-secondary)" }}>R$ {Number(c.valor_venda || 0).toFixed(2)}</td>
-                                              <td style={{ textAlign: "right", padding: "8px 10px", fontWeight: 700, color: "#059669" }}>R$ {Number(c.comissao_valor || 0).toFixed(2)}</td>
+                                              <td style={{ textAlign: "right", padding: "8px 10px", color: "var(--text-secondary)" }}>R$ {Number(c.valor_venda || 0).toFixed(2).replace('.', ',')}</td>
+                                              <td style={{ textAlign: "right", padding: "8px 10px", fontWeight: 700, color: "#059669" }}>R$ {Number(c.comissao_valor || 0).toFixed(2).replace('.', ',')}</td>
                                               <td style={{ textAlign: "center", padding: "8px 10px" }}>
                                                 {c.status === "pago" ? (
                                                   <span style={{ background: "#DCFCE7", color: "#16A34A", padding: "2px 8px", borderRadius: 99, fontWeight: 700, fontSize: 10 }}>Pago</span>
@@ -485,8 +513,8 @@ export default function AdminPanel({ onBack }) {
               ) : (
                 onlineUsers.map((u, i) => {
                   const lastSeen = new Date(u.last_seen);
-                  const secsAgo = Math.floor((Date.now() - lastSeen.getTime()) / 1000);
-                  const timeAgo = secsAgo < 60 ? `${secsAgo}s atrás` : `${Math.floor(secsAgo / 60)}m atrás`;
+                  const secsAgo = Math.max(0, Math.floor((Date.now() - lastSeen.getTime()) / 1000));
+                  const timeAgo = secsAgo < 5 ? "agora" : secsAgo < 60 ? `${secsAgo}s atrás` : `${Math.floor(secsAgo / 60)}m atrás`;
                   const device = parseDevice(u.device_info);
                   const browser = parseBrowser(u.device_info);
                   return (

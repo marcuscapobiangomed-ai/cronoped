@@ -7,9 +7,9 @@
 // Config: verify_jwt = false (chamada interna)
 
 const RESEND_KEY  = Deno.env.get("RESEND_API_KEY");
-const ADMIN_EMAIL = "marcuscapobiangomed@gmail.com";
-const FROM_EMAIL  = "CronoPed <onboarding@resend.dev>"; // Resend sandbox
-const APP_URL     = "https://plannerinternato.modulo1.workers.dev";
+const ADMIN_EMAIL = Deno.env.get("ADMIN_EMAIL") || "marcuscapobiangomed@gmail.com";
+const FROM_EMAIL  = Deno.env.get("FROM_EMAIL") || "CronoPed <onboarding@resend.dev>";
+const APP_URL     = Deno.env.get("APP_URL") || "https://plannerinternato.modulo1.workers.dev";
 
 Deno.serve(async (req) => {
   try {

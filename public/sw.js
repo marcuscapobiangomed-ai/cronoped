@@ -1,5 +1,5 @@
 // CronoPed Service Worker — Cache First para assets, Network First para API
-const CACHE_NAME = "cronoped-v1";
+const CACHE_NAME = "cronoped-v2";
 const STATIC_ASSETS = ["/", "/icon.svg", "/manifest.json"];
 
 // Install: pre-cache shell assets

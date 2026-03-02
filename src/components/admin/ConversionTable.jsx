@@ -1,8 +1,12 @@
+import { useMemo } from "react";
 import { MATERIAS } from "../../scheduleData";
 
 export default function ConversionTable({ funnel, revenue }) {
-  const revenueMap = {};
-  (revenue || []).forEach(r => { revenueMap[r.materia] = r; });
+  const revenueMap = useMemo(() => {
+    const map = {};
+    (revenue || []).forEach(r => { map[r.materia] = r; });
+    return map;
+  }, [revenue]);
 
   return (
     <div style={{ overflowX: "auto" }}>
@@ -32,7 +36,7 @@ export default function ConversionTable({ funnel, revenue }) {
                   <span style={{ fontSize: 10, color: "var(--text-muted)", marginLeft: 4 }}>({convPct}%)</span>
                 </td>
                 <td style={{ padding: "5px 8px", fontWeight: 700, color: "var(--text-primary)" }}>
-                  R$ {rev ? Number(rev.revenue_brl).toFixed(2) : "0,00"}
+                  R$ {rev ? Number(rev.revenue_brl).toFixed(2).replace('.', ',') : "0,00"}
                 </td>
               </tr>
             );
