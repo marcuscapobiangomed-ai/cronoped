@@ -5,7 +5,7 @@ import { supabase } from "../supabase";
 import { dbLoadProgress, dbSaveProgress, validateAcesso } from "../lib/db";
 import { getTodayInfo, getUpcomingAlerts, launchConfetti, formatTimeRemaining } from "../lib/helpers";
 import { applyCustomizations, generateCustomId } from "../lib/customizations";
-import { generateWeekICS, downloadICS } from "../lib/calendarExport";
+import { exportWeekPDF, exportAllWeeksPDF } from "../lib/pdfExport";
 import AlertBanner from "./AlertBanner";
 import ActivityCard from "./ActivityCard";
 import ActivityModal from "./ActivityModal";
@@ -221,37 +221,14 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
     markDirty();
   }, []);
 
-  function exportWeekToCalendar(week) {
+  function exportWeek(week) {
     const grupoLabel = materia.grupoLabels?.[grupo] ?? grupo;
-    const ics = generateWeekICS(week, weekDates, `${materia.label} G${grupoLabel}`, grupoLabel);
-    downloadICS(ics, `${materia.id}-semana${week.num}-G${grupoLabel}.ics`);
+    exportWeekPDF(week, weekDates, materia.label, grupoLabel);
   }
 
-  function exportAllToCalendar() {
+  function exportAll() {
     const grupoLabel = materia.grupoLabels?.[grupo] ?? grupo;
-    // Merge all weeks into one ICS
-    const allActivities = mergedWeeks.flatMap(w =>
-      w.activities.filter(a => a.type !== "feriado").map(a => ({ ...a, _weekNum: w.num }))
-    );
-    const fakeWeek = { num: 0, activities: mergedWeeks.flatMap(w => w.activities) };
-    // Build full ICS manually with all weeks
-    const lines = [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//CronoPed//Cronograma Internato//PT",
-      "CALSCALE:GREGORIAN",
-      "METHOD:PUBLISH",
-      `X-WR-CALNAME:${materia.label} - Grupo ${grupoLabel}`,
-      "X-WR-TIMEZONE:America/Sao_Paulo",
-    ];
-    for (const week of mergedWeeks) {
-      const weekIcs = generateWeekICS(week, weekDates, `${materia.label} G${grupoLabel}`, grupoLabel);
-      // Extract VEVENT blocks from each week's ICS
-      const events = weekIcs.match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) || [];
-      for (const ev of events) lines.push(ev);
-    }
-    lines.push("END:VCALENDAR");
-    downloadICS(lines.join("\r\n"), `${materia.id}-completo-G${grupoLabel}.ics`);
+    exportAllWeeksPDF(mergedWeeks, weekDates, materia.label, grupoLabel);
   }
 
   useEffect(()=>{
@@ -313,8 +290,8 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                   Restaurar original
                 </button>
               )}
-              <button className="restore-btn" onClick={exportAllToCalendar} style={{fontSize:10,fontWeight:600,color:"#60A5FA",background:"rgba(96,165,250,0.15)",border:"1px solid rgba(96,165,250,0.3)",borderRadius:7,padding:"3px 10px",cursor:"pointer",whiteSpace:"nowrap"}} title="Exportar todas as semanas para o calendário">
-                Exportar .ics
+              <button className="restore-btn" onClick={exportAll} style={{fontSize:10,fontWeight:600,color:"#60A5FA",background:"rgba(96,165,250,0.15)",border:"1px solid rgba(96,165,250,0.3)",borderRadius:7,padding:"3px 10px",cursor:"pointer",whiteSpace:"nowrap"}} title="Exportar cronograma completo em PDF">
+                Exportar PDF
               </button>
               {syncStatus==="syncing" && <span style={{fontSize:11,color:"#F59E0B"}}>⟳ Salvando…</span>}
               {syncStatus==="saved"   && <span style={{fontSize:11,color:"#22C55E"}}>✓ Salvo</span>}
@@ -429,7 +406,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                     </span>
                   ))}
                 </div>
-                <button onClick={(e) => { e.stopPropagation(); exportWeekToCalendar(week); }} title={`Exportar Semana ${week.num} para calendário`} style={{background:"transparent",border:"none",cursor:"pointer",fontSize:13,padding:4,marginLeft:2,opacity:0.5,flexShrink:0}} aria-label="Exportar semana">
+                <button onClick={(e) => { e.stopPropagation(); exportWeek(week); }} title={`Exportar Semana ${week.num} em PDF`} style={{background:"transparent",border:"none",cursor:"pointer",fontSize:13,padding:4,marginLeft:2,opacity:0.5,flexShrink:0}} aria-label="Exportar semana">
                   📅
                 </button>
                 <span style={{color:"var(--border-medium)",fontSize:11,marginLeft:4}}>{isOpen?"▲":"▼"}</span>

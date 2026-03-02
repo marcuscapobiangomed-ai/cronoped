@@ -65,9 +65,22 @@ export function useAcessos(userId, isVIP) {
     if (sub) setSubscription(sub);
   }
 
+  // Optimistic update: immediately mark trial as used in local state
+  // Prevents user from clicking another trial button before reloadAcessos finishes
+  function markTrialUsed(materiaId, grupo) {
+    setAcessos(prev => ({
+      ...prev,
+      [materiaId]: {
+        grupo,
+        status: "trial",
+        trial_expires_at: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+    }));
+  }
+
   return {
     acessos, loadingAcessos, subscription,
     isSubscriber, hasActiveTrial, hasUsedTrial, hasAnyAccess,
-    reloadAcessos,
+    reloadAcessos, markTrialUsed,
   };
 }

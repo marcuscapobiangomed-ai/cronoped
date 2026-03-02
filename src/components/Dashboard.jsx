@@ -21,7 +21,7 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
   const {
     acessos, loadingAcessos, subscription,
     isSubscriber, hasActiveTrial, hasUsedTrial,
-    reloadAcessos,
+    reloadAcessos, markTrialUsed,
   } = useAcessos(user.id, isVIP);
 
   const {
@@ -90,6 +90,7 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
     setActivatingTrial(true);
     try {
       await activateTrial(trialConfirm.materia.id, trialConfirm.grupo);
+      markTrialUsed(trialConfirm.materia.id, trialConfirm.grupo);
       logEvent("trial_activated", { materia: trialConfirm.materia.id, grupo: trialConfirm.grupo });
       await reloadAcessos();
       const mat = trialConfirm.materia;
