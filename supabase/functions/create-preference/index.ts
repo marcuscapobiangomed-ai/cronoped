@@ -69,10 +69,10 @@ Deno.serve(async (req) => {
     const hasReferral = !!profileData?.referred_by;
 
     // 6. Criar preferência no Mercado Pago
-    // PIX com afiliado: R$16,90 | PIX sem afiliado: R$19,90 | Cartão: R$20,90
+    // Promoção de lançamento: PIX R$9,90 | Cartão R$10,90
     const isSandbox = MP_TOKEN.startsWith("TEST-");
     const externalRef = `${user.id}|${materiaId}|${grupo}`;
-    const unitPrice = isPix ? (hasReferral ? 16.90 : 19.90) : 20.90;
+    const unitPrice = isPix ? 9.90 : 10.90;
 
     // PIX em produção: excluir tudo exceto bank_transfer (PIX)
     // PIX em sandbox: sandbox não suporta PIX, manter todos os métodos para teste
