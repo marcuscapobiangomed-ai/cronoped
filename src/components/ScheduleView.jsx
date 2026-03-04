@@ -5,7 +5,7 @@ import { supabase } from "../supabase";
 import { dbLoadProgress, dbSaveProgress, validateAcesso } from "../lib/db";
 import { getTodayInfo, getUpcomingAlerts, launchConfetti, formatTimeRemaining } from "../lib/helpers";
 import { applyCustomizations, generateCustomId } from "../lib/customizations";
-import { exportWeekPDF, exportAllWeeksPDF } from "../lib/pdfExport";
+
 import AlertBanner from "./AlertBanner";
 import ActivityCard from "./ActivityCard";
 import ActivityModal from "./ActivityModal";
@@ -221,17 +221,7 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
     markDirty();
   }, []);
 
-  function exportWeek(week) {
-    const grupoLabel = materia.grupoLabels?.[grupo] ?? grupo;
-    exportWeekPDF(week, weekDates, materia.label, grupoLabel);
-  }
-
-  function exportAll() {
-    const grupoLabel = materia.grupoLabels?.[grupo] ?? grupo;
-    exportAllWeeksPDF(mergedWeeks, weekDates, materia.label, grupoLabel);
-  }
-
-  useEffect(()=>{
+useEffect(()=>{
     mergedWeeks.forEach(week => {
       const competable = week.activities.filter(a => a.type !== "feriado");
       const allDone    = competable.length > 0 && competable.every(a => completed[a.id]);
@@ -290,9 +280,6 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                   Restaurar original
                 </button>
               )}
-              <button className="restore-btn" onClick={exportAll} style={{fontSize:10,fontWeight:600,color:"#60A5FA",background:"rgba(96,165,250,0.15)",border:"1px solid rgba(96,165,250,0.3)",borderRadius:7,padding:"3px 10px",cursor:"pointer",whiteSpace:"nowrap"}} title="Exportar cronograma completo em PDF">
-                Exportar PDF
-              </button>
               {syncStatus==="syncing" && <span style={{fontSize:11,color:"#F59E0B"}}>⟳ Salvando…</span>}
               {syncStatus==="saved"   && <span style={{fontSize:11,color:"#22C55E"}}>✓ Salvo</span>}
               {syncStatus==="offline" && <span style={{fontSize:11,color:"#EF4444"}}>⚠ Offline</span>}
@@ -406,9 +393,6 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
                     </span>
                   ))}
                 </div>
-                <button onClick={(e) => { e.stopPropagation(); exportWeek(week); }} title={`Exportar Semana ${week.num} em PDF`} style={{background:"transparent",border:"none",cursor:"pointer",fontSize:13,padding:4,marginLeft:2,opacity:0.5,flexShrink:0}} aria-label="Exportar semana">
-                  📅
-                </button>
                 <span style={{color:"var(--border-medium)",fontSize:11,marginLeft:4}}>{isOpen?"▲":"▼"}</span>
               </div>
 

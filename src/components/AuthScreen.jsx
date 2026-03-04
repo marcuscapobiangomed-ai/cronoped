@@ -6,7 +6,7 @@ import { validaCPF, formatCPF, cleanCPF } from "../lib/helpers";
 import { registerSession } from "../lib/sessionGuard";
 import { logEvent } from "../lib/logEvent";
 
-export default function AuthScreen({ onAuth }) {
+export default function AuthScreen({ onAuth, onBack }) {
   const [tab,      setTab]      = useState("login");
   const [subTab,   setSubTab]   = useState("form");
   const [nome,     setNome]     = useState("");
@@ -199,6 +199,11 @@ export default function AuthScreen({ onAuth }) {
         <p style={{textAlign:"center",fontSize:12,color:"#475569",marginTop:20}}>
           🔒 Seus dados são protegidos. CPF usado apenas para identificação.
         </p>
+        {onBack && (
+          <button onClick={onBack} style={{display:"block",margin:"12px auto 0",background:"none",border:"none",fontSize:13,color:"#64748B",cursor:"pointer",textDecoration:"underline",fontFamily:"'Outfit',sans-serif"}}>
+            ← Voltar para a página inicial
+          </button>
+        )}
       </div>
     </div>
   );

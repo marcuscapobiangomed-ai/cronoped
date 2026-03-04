@@ -7,6 +7,7 @@ import SupportButton from "./components/SupportButton";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ToastProvider } from "./components/Toast";
 
+const LandingPage  = lazy(() => import("./components/LandingPage"));
 const AuthScreen   = lazy(() => import("./components/AuthScreen"));
 const Dashboard    = lazy(() => import("./components/Dashboard"));
 const ScheduleView = lazy(() => import("./components/ScheduleView"));
@@ -105,7 +106,7 @@ export default function App() {
 
         setView("dashboard");
       } else {
-        setView("auth");
+        setView("landing");
       }
     });
 
@@ -116,7 +117,7 @@ export default function App() {
         window.history.replaceState({}, document.title, window.location.pathname);
         return;
       }
-      if (!sess) { setSession(null); setProfile(null); setView("auth"); }
+      if (!sess) { setSession(null); setProfile(null); setView("landing"); }
       else if (event === "TOKEN_REFRESHED") { setSession(sess); }
     });
     return () => subscription.unsubscribe();
@@ -131,7 +132,7 @@ export default function App() {
 
   // Heartbeat: verifica a cada 30s se a sessão ainda é válida
   useEffect(()=>{
-    if (view === "auth" || view === "loading" || !session) {
+    if (view === "landing" || view === "auth" || view === "loading" || !session) {
       clearInterval(heartbeatRef.current);
       return;
     }
@@ -246,8 +247,11 @@ export default function App() {
     <ToastProvider>
     <ErrorBoundary>
       <Suspense fallback={<LoadingScreen/>}>
+        {view==="landing" && (
+          <LandingPage onNavigateAuth={() => setView("auth")} />
+        )}
         {view==="auth" && (
-          <AuthScreen onAuth={(fullSession, prof) => { setSession(fullSession); setProfile(prof); setView("dashboard"); }}/>
+          <AuthScreen onAuth={(fullSession, prof) => { setSession(fullSession); setProfile(prof); setView("dashboard"); }} onBack={() => setView("landing")} />
         )}
         {view==="dashboard" && (
           <ErrorBoundary>
