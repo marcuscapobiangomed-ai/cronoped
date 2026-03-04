@@ -84,7 +84,8 @@ export default function ScheduleView({ user, profile, materia, grupo, onBack, on
   const mergedWeeks = useMemo(() => applyCustomizations(WEEKS, customizations), [WEEKS, customizations]);
   const hasCustomizations = !!(customizations.edits?.length || customizations.deletes?.length || customizations.adds?.length);
 
-  const prevDoneWeeks = useRef(new Set());
+  const confettiKey = `confetti_${materia.id}`;
+  const prevDoneWeeks = useRef(new Set(JSON.parse(localStorage.getItem(confettiKey) || "[]")));
   const saveTimer     = useRef(null);
   const [dirty,        setDirty]        = useState(false);
 
@@ -226,8 +227,13 @@ useEffect(()=>{
       const competable = week.activities.filter(a => a.type !== "feriado");
       const allDone    = competable.length > 0 && competable.every(a => completed[a.id]);
       if (allDone && !prevDoneWeeks.current.has(week.num)) {
-        prevDoneWeeks.current.add(week.num); launchConfetti();
-      } else if (!allDone) prevDoneWeeks.current.delete(week.num);
+        prevDoneWeeks.current.add(week.num);
+        localStorage.setItem(confettiKey, JSON.stringify([...prevDoneWeeks.current]));
+        launchConfetti();
+      } else if (!allDone) {
+        prevDoneWeeks.current.delete(week.num);
+        localStorage.setItem(confettiKey, JSON.stringify([...prevDoneWeeks.current]));
+      }
     });
   },[completed, mergedWeeks]);
 
@@ -268,7 +274,7 @@ useEffect(()=>{
         <div style={{maxWidth:1200,margin:"0 auto"}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
             <div style={{display:"flex",alignItems:"center",gap:12}}>
-              <button onClick={onBack} style={{background:"#1E293B",border:"none",color:"#94A3B8",width:32,height:32,borderRadius:8,cursor:"pointer",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+              <button onClick={onBack} style={{background:"#1E293B",border:"none",color:"#94A3B8",width:40,height:40,borderRadius:8,cursor:"pointer",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
               <div>
                 <div style={{fontSize:15,fontWeight:700,color:"#fff"}}>{materia.icon} {materia.label}</div>
                 <div style={{fontSize:12,color:"#64748B"}}>Grupo {materia.grupoLabels?.[grupo] ?? grupo} · {profile?.nome?.split(" ")[0]}</div>
@@ -346,7 +352,7 @@ useEffect(()=>{
                 </span>
               </div>
               <div style={{ fontSize: 11, color: urgente ? "#DC2626" : "#92400E", fontWeight: 600 }}>
-                Após o trial: R$ 16,90 no PIX
+                Após o trial: R$ 9,90 no PIX
               </div>
             </div>
           );

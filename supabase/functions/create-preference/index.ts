@@ -48,35 +48,18 @@ Deno.serve(async (req) => {
       .select("status")
       .eq("user_id", user.id)
       .eq("materia", materiaId)
-      .single();
+      .maybeSingle();
 
     if (existing?.status === "aprovado") {
       return json({ error: "Acesso já ativo para esta matéria" }, 409);
     }
 
-    // 4. Criar/atualizar registro pending
-    await supabase.from("acessos").upsert(
-      { user_id: user.id, materia: materiaId, grupo, status: "pending" },
-      { onConflict: "user_id,materia" }
-    );
-
-    // 5. Verificar se usuário foi indicado por afiliado (desconto PIX)
-    const { data: profileData } = await supabase
-      .from("profiles")
-      .select("referred_by")
-      .eq("id", user.id)
-      .single();
-    const hasReferral = !!profileData?.referred_by;
-
-    // 6. Criar preferência no Mercado Pago
-    // Promoção de lançamento: PIX R$9,90 | Cartão R$10,90
+    // 4. Criar preferência no Mercado Pago ANTES de registrar no banco
+    // (evita registros "pending" órfãos se a API do MP falhar)
     const isSandbox = MP_TOKEN.startsWith("TEST-");
     const externalRef = `${user.id}|${materiaId}|${grupo}`;
     const unitPrice = isPix ? 9.90 : 10.90;
 
-    // PIX em produção: excluir tudo exceto bank_transfer (PIX)
-    // PIX em sandbox: sandbox não suporta PIX, manter todos os métodos para teste
-    // Cartão: excluir ticket e bank_transfer (PIX) para não mostrar PIX a preço cheio
     let excludedTypes: { id: string }[];
     if (isPix && !isSandbox) {
       excludedTypes = [
@@ -84,10 +67,8 @@ Deno.serve(async (req) => {
         { id: "atm" }, { id: "prepaid_card" },
       ];
     } else if (isPix && isSandbox) {
-      // Sandbox: não excluir cartões (PIX não funciona em sandbox)
       excludedTypes = [{ id: "ticket" }];
     } else {
-      // Cartão: excluir boleto e PIX para não mostrar PIX a R$ 20,90
       excludedTypes = [{ id: "ticket" }, { id: "bank_transfer" }];
     }
 
@@ -122,7 +103,13 @@ Deno.serve(async (req) => {
       return json({ error: "Erro ao criar preferência no Mercado Pago" }, 500);
     }
 
-    // Sandbox: usar sandbox_init_point; Produção: usar init_point
+    // 5. MP respondeu OK — agora sim criar/atualizar registro pending
+    await supabase.from("acessos").upsert(
+      { user_id: user.id, materia: materiaId, grupo, status: "pending" },
+      { onConflict: "user_id,materia" }
+    );
+
+    // 6. Sandbox: usar sandbox_init_point; Produção: usar init_point
     const checkoutUrl = isSandbox
       ? (pref.sandbox_init_point || pref.init_point)
       : pref.init_point;

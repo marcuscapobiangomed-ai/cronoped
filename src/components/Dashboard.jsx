@@ -43,6 +43,8 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
   const [activatingTrial, setActivatingTrial] = useState(false);
   const [showTutorial,    setShowTutorial]    = useState(false);
   const [tutorialStep,    setTutorialStep]    = useState(0);
+  const [showMenu,        setShowMenu]        = useState(false);
+  const [showPromoInfo,   setShowPromoInfo]   = useState(false);
 
   // Onboarding + tutorial check (runs once after first data load)
   const onboardingChecked = useRef(false);
@@ -112,43 +114,36 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
     zIndex:9999,padding:24,
   };
 
+  const [showMenuHint, setShowMenuHint] = useState(false);
+
   function closeTutorial() {
     setShowTutorial(false);
     setTutorialStep(0);
     localStorage.setItem("tutorial_seen", "1");
+    // Mostrar seta apontando para o menu ☰
+    setShowMenuHint(true);
+    setTimeout(() => setShowMenuHint(false), 4000);
   }
 
   const TUTORIAL_STEPS = [
     {
-      icon: "📋",
-      title: "Vamos configurar seu cronograma!",
-      text: "Este guia rápido vai te ajudar a escolher corretamente sua matéria e seu grupo para visualizar o cronograma certo.",
-      highlight: "Leva menos de 1 minuto!",
-    },
-    {
-      icon: "📚",
-      title: "Passo 1: Escolha sua matéria",
-      text: "A matéria corresponde à disciplina que você está cursando AGORA no internato. Exemplo: se você está no rodízio de Pediatria, escolha Pediatria.",
-      highlight: "Cada matéria tem seu próprio cronograma com atividades, locais e professores diferentes.",
+      icon: "👋",
+      title: "Bem-vindo ao CronoPed!",
+      text: "Aqui você acompanha o cronograma completo do seu internato — atividades, horários, locais e professores, tudo organizado por semana.",
+      highlight: "Promoção: R$ 9,90 por matéria no PIX!",
     },
     {
       icon: "👥",
-      title: "Passo 2: Escolha seu grupo CORRETO",
-      text: "O grupo é a turma/divisão que a faculdade atribuiu a você. Esse número define em quais dias e horários você tem cada atividade.",
-      highlight: "Confira seu grupo na secretaria, no e-mail da coordenação ou com colegas da sua turma. Se não souber, NÃO chute!",
-    },
-    {
-      icon: "⚠️",
-      title: "ATENÇÃO: Grupo errado = Cronograma errado!",
-      text: "Se você escolher o grupo errado, vai ver horários, locais e professores que NÃO são os seus. Isso pode causar faltas e confusão.",
-      highlight: "Após o pagamento, o grupo fica fixo. Escolha com certeza antes de pagar!",
+      title: "Escolha seu grupo com cuidado",
+      text: "O grupo define em quais dias e horários você tem cada atividade. Grupo errado = cronograma errado!",
+      highlight: "Confira seu grupo na secretaria ou com colegas antes de selecionar.",
       isWarning: true,
     },
     {
       icon: "✅",
-      title: "Pronto! Agora é com você",
-      text: "Clique em \"Selecionar grupo\" na matéria desejada, escolha seu grupo com cuidado e aproveite seu cronograma personalizado.",
-      highlight: "Você pode rever este tutorial a qualquer momento clicando no botão \"?\" no topo da página.",
+      title: "Comece agora!",
+      text: "Toque em \"Selecionar grupo\" na matéria que você está cursando, escolha seu grupo e acesse o cronograma.",
+      highlight: "Use o menu ☰ no canto superior para tema escuro, tutorial e mais opções.",
     },
   ];
 
@@ -262,11 +257,9 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
                 </div>
               </div>
               <div style={{background:"#F0FDF4",borderRadius:10,padding:"14px 16px",marginBottom:12}}>
-                <div style={{fontSize:13,fontWeight:700,color:"#059669",marginBottom:6}}>PIX a partir de R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
+                <div style={{fontSize:13,fontWeight:700,color:"#059669",marginBottom:6}}>Promoção: PIX R$ 9,90 por matéria</div>
                 <div style={{fontSize:12,color:"var(--text-secondary)"}}>
-                  {profile?.referred_by
-                    ? "Desconto de afiliado aplicado! Economize R$ 4,00 via PIX."
-                    : "Pague via PIX e economize R$ 1,00 em cada matéria!"}
+                  Promoção de lançamento! Aproveite o melhor preço.
                 </div>
               </div>
               <div style={{background:"#EEF2FF",borderRadius:10,padding:"14px 16px"}}>
@@ -332,80 +325,79 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
       )}
 
       {/* === HEADER === */}
-      <div className="dash-header" style={{background:"var(--bg-header)",padding:"16px 24px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-        <div style={{display:"flex",alignItems:"center",gap:12}}>
-          <span style={{fontSize:22}}>🩺</span>
+      <div className="dash-header" style={{background:"var(--bg-header)",padding:"14px 20px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <span style={{fontSize:20}}>🩺</span>
           <div>
-            <div className="dash-title" style={{fontSize:15,fontWeight:700,color:"#fff"}}>Cronograma Internato Módulo 1</div>
-            <div className="dash-subtitle" style={{fontSize:12,color:"#64748B"}}>Internato Médico · 2026</div>
+            <div className="dash-title" style={{fontSize:15,fontWeight:700,color:"#fff"}}>Olá, {profile?.nome?.split(" ")[0]}</div>
+            <div className="dash-subtitle" style={{fontSize:11,color:"#64748B"}}>Internato Módulo 1 · 2026</div>
           </div>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:10}}>
-          <div style={{textAlign:"right"}}>
-            <div style={{fontSize:13,fontWeight:600,color:"#fff"}}>{profile?.nome?.split(" ")[0]}</div>
-            <div className="user-cpf" style={{fontSize:11,color:"#64748B",fontFamily:"'JetBrains Mono',monospace"}}>
-              {cleanCPF(profile?.cpf||"").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}
-            </div>
-          </div>
-          <button onClick={toggleTheme} style={{background:"#334155",border:"none",color:"#fff",fontSize:14,borderRadius:8,width:28,height:28,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}} title={theme === "dark" ? "Modo claro" : "Modo escuro"}>
-            {theme === "dark" ? "\u2600\uFE0F" : "\uD83C\uDF19"}
-          </button>
-          <button onClick={() => { setShowTutorial(true); setTutorialStep(0); }} style={{background:"#334155",border:"none",color:"#fff",fontSize:12,borderRadius:8,width:28,height:28,cursor:"pointer",fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center"}} title="Como escolher matéria e grupo">
-            ?
-          </button>
-          <button onClick={openAffiliate} style={{background:"#059669",border:"none",color:"#fff",fontSize:11,borderRadius:8,padding:"6px 10px",cursor:"pointer",fontWeight:700}}>
-            🔗 Afiliado
-          </button>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
           {profile?.is_admin && (
-            <button onClick={onAdmin} style={{background:"#7C3AED",border:"none",color:"#fff",fontSize:11,borderRadius:8,padding:"6px 10px",cursor:"pointer",fontWeight:700}}>
-              🔧 Admin
+            <button onClick={onAdmin} style={{background:"#7C3AED",border:"none",color:"#fff",fontSize:11,borderRadius:8,padding:"7px 12px",cursor:"pointer",fontWeight:700}}>
+              Admin
             </button>
           )}
-          <button onClick={onLogout} style={{background:"#1E293B",border:"none",color:"#94A3B8",fontSize:12,borderRadius:8,padding:"6px 12px",cursor:"pointer"}}>
-            Sair
-          </button>
+          <div style={{position:"relative"}}>
+            <button onClick={()=>setShowMenu(m=>!m)} style={{background:"#334155",border:"none",color:"#fff",fontSize:16,borderRadius:8,width:38,height:38,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>
+              ☰
+            </button>
+            {showMenu && (
+              <>
+                <div onClick={()=>setShowMenu(false)} style={{position:"fixed",top:0,left:0,right:0,bottom:0,zIndex:998}}/>
+                <div style={{position:"absolute",right:0,top:44,background:"var(--bg-card)",borderRadius:12,boxShadow:"0 8px 32px rgba(0,0,0,0.25)",border:"1px solid var(--border-light)",minWidth:200,zIndex:999,overflow:"hidden"}}>
+                  <button onClick={()=>{toggleTheme();setShowMenu(false);}} style={{width:"100%",padding:"12px 16px",border:"none",background:"transparent",color:"var(--text-primary)",fontSize:13,fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
+                    {theme === "dark" ? "☀️" : "🌙"} {theme === "dark" ? "Modo claro" : "Modo escuro"}
+                  </button>
+                  <button onClick={()=>{setShowTutorial(true);setTutorialStep(0);setShowMenu(false);}} style={{width:"100%",padding:"12px 16px",border:"none",background:"transparent",color:"var(--text-primary)",fontSize:13,fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
+                    ❓ Tutorial
+                  </button>
+                  <button onClick={()=>{openAffiliate();setShowMenu(false);}} style={{width:"100%",padding:"12px 16px",border:"none",background:"transparent",color:"var(--text-primary)",fontSize:13,fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
+                    🔗 Programa de afiliados
+                  </button>
+                  <div style={{height:1,background:"var(--border-light)"}}/>
+                  <button onClick={()=>{setShowMenu(false);onLogout();}} style={{width:"100%",padding:"12px 16px",border:"none",background:"transparent",color:"#EF4444",fontSize:13,fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
+                    🚪 Sair
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
+      {/* Seta apontando para o menu ☰ após tutorial */}
+      {showMenuHint && (
+        <div style={{position:"fixed",top:58,right:16,zIndex:9998,animation:"pulse 1.5s ease-in-out infinite"}} onClick={()=>setShowMenuHint(false)}>
+          <div style={{background:"#059669",color:"#fff",padding:"8px 14px",borderRadius:10,fontSize:12,fontWeight:700,boxShadow:"0 4px 16px rgba(0,0,0,0.2)",whiteSpace:"nowrap"}}>
+            Menu aqui ↗
+          </div>
+          <div style={{width:0,height:0,borderLeft:"8px solid transparent",borderRight:"8px solid transparent",borderBottom:"8px solid #059669",position:"absolute",top:-8,right:12,transform:"rotate(180deg)"}}/>
+        </div>
+      )}
+
       <div style={{maxWidth:1100,margin:"0 auto",padding:"16px 20px"}}>
-        {/* Banner Promoção PIX — só para quem tem link de afiliado */}
-        {profile?.referred_by ? (
-          <div style={{background:"linear-gradient(135deg,#059669 0%,#10B981 100%)",borderRadius:14,padding:"12px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
-            <div>
-              <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
-                Promoção PIX: R$ 16,90 <span style={{fontSize:12,fontWeight:600,opacity:0.9}}>(economia de R$ 4,00!)</span>
-              </div>
-              <div style={{fontSize:12,color:"#D1FAE5"}}>
-                Desconto de afiliado aplicado · Válido até 08/05/2026
-              </div>
+        {/* Banner Promoção de Lançamento — clicável */}
+        <div onClick={()=>setShowPromoInfo(true)} style={{background:"linear-gradient(135deg,#059669 0%,#10B981 100%)",borderRadius:14,padding:"12px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8,cursor:"pointer",transition:"transform 0.15s, box-shadow 0.15s"}}
+          onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-1px)";e.currentTarget.style.boxShadow="0 6px 20px rgba(5,150,105,0.35)";}}
+          onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="";}}>
+          <div>
+            <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
+              Promoção de lançamento: R$ 9,90 no PIX
             </div>
-            <div style={{background:"#fff",borderRadius:8,padding:"6px 14px",display:"flex",alignItems:"center",gap:6}}>
-              <span style={{fontSize:18}}>💰</span>
-              <div>
-                <div style={{fontSize:11,color:"#64748B",lineHeight:1}}>no PIX</div>
-                <div style={{fontSize:16,fontWeight:800,color:"#059669"}}>R$ 16,90</div>
-              </div>
+            <div style={{fontSize:12,color:"#D1FAE5"}}>
+              Toque para saber como aproveitar →
             </div>
           </div>
-        ) : (
-          <div style={{background:"linear-gradient(135deg,#0F172A 0%,#1E293B 100%)",borderRadius:14,padding:"12px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
+          <div style={{background:"#fff",borderRadius:8,padding:"6px 14px",display:"flex",alignItems:"center",gap:6}}>
+            <span style={{fontSize:18}}>💰</span>
             <div>
-              <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>
-                PIX: R$ 19,90 por matéria
-              </div>
-              <div style={{fontSize:12,color:"#94A3B8"}}>
-                Acesso por módulo · Válido até 08/05/2026
-              </div>
-            </div>
-            <div style={{background:"#fff",borderRadius:8,padding:"6px 14px",display:"flex",alignItems:"center",gap:6}}>
-              <span style={{fontSize:18}}>💰</span>
-              <div>
-                <div style={{fontSize:11,color:"#64748B",lineHeight:1}}>no PIX</div>
-                <div style={{fontSize:16,fontWeight:800,color:"#0F172A"}}>R$ 19,90</div>
-              </div>
+              <div style={{fontSize:11,color:"#64748B",lineHeight:1}}>no PIX</div>
+              <div style={{fontSize:16,fontWeight:800,color:"#059669"}}>R$ 9,90</div>
             </div>
           </div>
-        )}
+        </div>
 
         {/* Banner Assinatura Mensal */}
         {!isVIP && !isSubscriber && (
@@ -464,8 +456,8 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
           {isSubscriber
             ? "Assinante ativo · Selecione seu grupo em cada matéria para abrir o cronograma"
             : !hasActiveTrial && !hasUsedTrial && !isVIP
-              ? `3 dias grátis para 1 matéria · Depois, a partir de R$ ${profile?.referred_by ? "16,90" : "19,90"} no PIX ou R$ 9,90/mês`
-              : `A partir de R$ ${profile?.referred_by ? "16,90" : "19,90"} no PIX · Ou R$ 9,90/mês para todas`
+              ? `3 dias grátis para 1 matéria · Depois, a partir de R$ 9,90 no PIX ou R$ 9,90/mês`
+              : `A partir de R$ 9,90 no PIX · Ou R$ 9,90/mês para todas`
           }
         </p>
 
@@ -477,13 +469,11 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
           ) : (
             MATERIAS.map(m=>{
               const acesso    = acessos[m.id];
-              const testPayment = new URLSearchParams(window.location.search).get("test_payment") === "true";
-              const effectiveVIP = !testPayment && isVIP;
-              const hasFullAccess = effectiveVIP || isSubscriber; // VIP or subscriber: grupo selector flow
+              const hasFullAccess = isVIP || isSubscriber;
               const now = new Date();
               const trialAtivo = acesso?.status === 'trial' && acesso?.trial_expires_at && new Date(acesso.trial_expires_at) > now;
               const trialTimeLabel = trialAtivo ? formatTimeRemaining(acesso.trial_expires_at) : "";
-              const isPaid    = acesso?.status === "aprovado" && !testPayment;
+              const isPaid    = acesso?.status === "aprovado";
               const hasAccess = m.hasData && (isPaid || trialAtivo || hasFullAccess) && !moduleExpired;
               const isPending = acesso?.status === "pending";
               const isLocked  = !m.hasData;
@@ -526,7 +516,7 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
                     ) : canActivateTrial ? (
                       <span style={badge("#DCFCE7","#059669")}>3 dias grátis</span>
                     ) : (
-                      <span style={badge(m.color,"#fff")}>R$ {profile?.referred_by ? "16,90" : "19,90"}</span>
+                      <span style={badge(m.color,"#fff")}>R$ 9,90</span>
                     )}
                   </div>
 
@@ -643,15 +633,15 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
                                       background: method==="pix" ? "#F0FDF4" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
                                     <div style={{fontSize:16,marginBottom:2}}>💰</div>
                                     <div style={{fontSize:13,fontWeight:700,color: method==="pix" ? "#059669" : "var(--text-secondary)"}}>PIX</div>
-                                    <div style={{fontSize:15,fontWeight:800,color: method==="pix" ? "#059669" : "var(--text-primary)"}}>R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
-                                    {profile?.referred_by && <div style={{fontSize:10,fontWeight:700,color:"#fff",background:"#059669",borderRadius:99,padding:"2px 8px",display:"inline-block",marginTop:4}}>AFILIADO</div>}
+                                    <div style={{fontSize:15,fontWeight:800,color: method==="pix" ? "#059669" : "var(--text-primary)"}}>R$ 9,90</div>
+                                    <div style={{fontSize:10,fontWeight:700,color:"#fff",background:"#059669",borderRadius:99,padding:"2px 8px",display:"inline-block",marginTop:4}}>PROMO</div>
                                   </button>
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"card"}))}
                                     style={{flex:1,padding:"10px 8px",borderRadius:10,border: method==="card" ? "2px solid #6366F1" : "2px solid var(--border-light)",
                                       background: method==="card" ? "#EEF2FF" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
                                     <div style={{fontSize:16,marginBottom:2}}>💳</div>
                                     <div style={{fontSize:13,fontWeight:700,color: method==="card" ? "#6366F1" : "var(--text-secondary)"}}>Cartão</div>
-                                    <div style={{fontSize:15,fontWeight:800,color: method==="card" ? "#6366F1" : "var(--text-primary)"}}>R$ 20,90</div>
+                                    <div style={{fontSize:15,fontWeight:800,color: method==="card" ? "#6366F1" : "var(--text-primary)"}}>R$ 10,90</div>
                                   </button>
                                 </div>
                               </div>
@@ -667,13 +657,12 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"pix"}))}
                                     style={{flex:1,padding:"8px 6px",borderRadius:8,border: method==="pix" ? "2px solid #059669" : "2px solid var(--border-light)",
                                       background: method==="pix" ? "#F0FDF4" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
-                                    <div style={{fontSize:12,fontWeight:700,color: method==="pix" ? "#059669" : "var(--text-secondary)"}}>💰 PIX R$ {profile?.referred_by ? "16,90" : "19,90"}</div>
-                                    {profile?.referred_by && <div style={{fontSize:9,color:"#059669",fontWeight:600,marginTop:2}}>Desconto afiliado -R$3</div>}
+                                    <div style={{fontSize:12,fontWeight:700,color: method==="pix" ? "#059669" : "var(--text-secondary)"}}>💰 PIX R$ 9,90</div>
                                   </button>
                                   <button type="button" onClick={()=>setPayMethod(p=>({...p,[m.id]:"card"}))}
                                     style={{flex:1,padding:"8px 6px",borderRadius:8,border: method==="card" ? "2px solid #6366F1" : "2px solid var(--border-light)",
                                       background: method==="card" ? "#EEF2FF" : "var(--bg-card)",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}}>
-                                    <div style={{fontSize:12,fontWeight:700,color: method==="card" ? "#6366F1" : "var(--text-secondary)"}}>💳 Cartão R$ 20,90</div>
+                                    <div style={{fontSize:12,fontWeight:700,color: method==="card" ? "#6366F1" : "var(--text-secondary)"}}>💳 Cartão R$ 10,90</div>
                                   </button>
                                 </div>
                               </div>
@@ -683,7 +672,7 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
                           {/* Summary + Pay button (for payment flow) */}
                           {grupoSelecionado && !hasAccess && (() => {
                             const method = payMethod[m.id] || "pix";
-                            const price = method === "pix" ? (profile?.referred_by ? "16,90" : "19,90") : "20,90";
+                            const price = method === "pix" ? "9,90" : "10,90";
                             const methodLabel = method === "pix" ? "PIX" : "Cartão";
                             return (
                               <>
@@ -837,7 +826,7 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
           <div onClick={e => e.stopPropagation()} className="modal-body" style={{background:"var(--bg-card)",borderRadius:20,padding:"28px 24px",maxWidth:420,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)",maxHeight:"80vh",overflow:"auto"}}>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20}}>
               <div style={{fontSize:18,fontWeight:800,color:"var(--text-primary)"}}>🔗 Programa de Afiliados</div>
-              <button onClick={() => setShowAffiliate(false)} style={{background:"var(--bg-subtle)",border:"none",borderRadius:8,width:28,height:28,cursor:"pointer",fontSize:14,color:"var(--text-faint)",display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
+              <button onClick={() => setShowAffiliate(false)} style={{background:"var(--bg-subtle)",border:"none",borderRadius:8,width:36,height:36,cursor:"pointer",fontSize:14,color:"var(--text-faint)",display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
             </div>
 
             {affLoading && !affStats ? (
@@ -959,6 +948,45 @@ export default function Dashboard({ user, profile, onSelect, onLogout, onAdmin }
                 </div>
               </>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* === PROMO INFO MODAL === */}
+      {showPromoInfo && (
+        <div style={overlayStyle} onClick={()=>setShowPromoInfo(false)}>
+          <div onClick={e=>e.stopPropagation()} className="modal-body" style={{background:"var(--bg-card)",borderRadius:20,padding:"28px 24px",maxWidth:400,width:"100%",boxShadow:"0 25px 50px rgba(0,0,0,0.3)"}}>
+            <div style={{textAlign:"center",marginBottom:20}}>
+              <div style={{fontSize:48,marginBottom:8}}>💰</div>
+              <h3 style={{fontSize:20,fontWeight:800,color:"var(--text-primary)",marginBottom:4}}>Promoção de Lançamento</h3>
+              <div style={{display:"flex",alignItems:"baseline",justifyContent:"center",gap:4,marginTop:8}}>
+                <span style={{fontSize:14,color:"var(--text-muted)",textDecoration:"line-through"}}>R$ 19,90</span>
+                <span style={{fontSize:32,fontWeight:900,color:"#059669"}}>R$ 9,90</span>
+              </div>
+              <div style={{fontSize:12,color:"var(--text-faint)",marginTop:4}}>por matéria · pagamento único via PIX</div>
+            </div>
+
+            <div style={{fontSize:14,color:"var(--text-secondary)",lineHeight:1.7,marginBottom:20}}>
+              <div style={{background:"#F0FDF4",borderRadius:10,padding:"12px 14px",marginBottom:10,border:"1px solid #BBF7D0"}}>
+                <div style={{fontWeight:700,color:"#059669",marginBottom:4}}>Como comprar:</div>
+                <div style={{fontSize:13}}>
+                  1. Escolha a matéria abaixo<br/>
+                  2. Clique em <strong>"Selecionar grupo"</strong><br/>
+                  3. Escolha seu grupo com cuidado<br/>
+                  4. Clique em <strong>"Pagar R$ 9,90 (PIX)"</strong><br/>
+                  5. Pronto! Acesso liberado na hora
+                </div>
+              </div>
+              <div style={{background:"#FEF3C7",borderRadius:10,padding:"10px 14px",border:"1px solid #FDE68A"}}>
+                <div style={{fontSize:12,fontWeight:600,color:"#92400E"}}>
+                  Também aceitamos cartão por R$ 10,90
+                </div>
+              </div>
+            </div>
+
+            <button onClick={()=>setShowPromoInfo(false)} style={{width:"100%",padding:"12px",borderRadius:10,border:"none",background:"#059669",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer"}}>
+              Escolher matéria ↓
+            </button>
           </div>
         </div>
       )}

@@ -52,18 +52,11 @@ Deno.serve(async (req) => {
       { onConflict: "user_id,materia" }
     );
 
-    // Verificar referral para desconto PIX
-    const { data: profileData } = await supabase
-      .from("pre_profiles")
-      .select("referred_by")
-      .eq("id", user.id)
-      .single();
-    const hasReferral = !!profileData?.referred_by;
-
     // Criar preferência no Mercado Pago
     const isSandbox = MP_TOKEN.startsWith("TEST-");
     const externalRef = `${user.id}|${materiaId}|${grupo}`;
-    const unitPrice = isPix ? (hasReferral ? 16.90 : 19.90) : 20.90;
+    // Promo: PIX R$9,90 (era R$19,90) — cartão mantém R$20,90
+    const unitPrice = isPix ? 9.90 : 20.90;
 
     let excludedTypes: { id: string }[];
     if (isPix && !isSandbox) {

@@ -140,6 +140,8 @@ button { touch-action: manipulation; }
 
   /* Grupo selector: scroll horizontal, sem quebra */
   .grupo-selector { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap !important; padding-bottom: 4px; margin-top: 8px !important; scrollbar-width: none; }
+  /* Grupo buttons: touch-friendly */
+  .grupo-selector button { min-width: 36px !important; min-height: 36px !important; font-size: 13px !important; }
 
   /* Week head compacto */
   .week-num { width: 30px !important; height: 30px !important; font-size: 12px !important; }
@@ -167,14 +169,17 @@ button { touch-action: manipulation; }
   .header-right { flex-wrap: wrap !important; gap: 6px !important; justify-content: flex-end !important; }
   .restore-btn { font-size: 9px !important; padding: 2px 7px !important; }
 
-  /* Touch targets: edit/delete buttons */
-  .edit-actions button { min-width: 30px !important; min-height: 30px !important; font-size: 13px !important; }
+  /* Touch targets: all icon/small buttons */
+  .edit-actions button { min-width: 36px !important; min-height: 36px !important; font-size: 13px !important; }
 
-  /* Modals: compact padding */
-  .modal-body { padding: 22px 18px !important; }
+  /* Modals: compact padding + responsive width */
+  .modal-body { padding: 22px 18px !important; max-width: calc(100vw - 32px) !important; }
 
   /* Activity modal: prevent vertical overflow */
   .modal-form { max-height: calc(100vh - 32px) !important; max-height: calc(100dvh - 32px) !important; overflow-y: auto !important; }
+
+  /* Landing page: feature grid 1 column on mobile */
+  .landing-features-grid { grid-template-columns: 1fr !important; }
 }
 
 @keyframes pulse {

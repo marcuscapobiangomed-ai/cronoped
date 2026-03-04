@@ -134,8 +134,8 @@ Deno.serve(async (req) => {
 
       const valorPago = payment.transaction_amount || null;
 
-      // Validar valor mínimo do pagamento (menor preço: R$16,90 PIX c/ referral)
-      const MIN_PRICE = 16.00;
+      // Validar valor mínimo do pagamento (promo PIX: R$9,90)
+      const MIN_PRICE = 9.00;
       if (!valorPago || valorPago < MIN_PRICE) {
         console.warn(`Valor suspeito: R$${valorPago} para user=${userId} materia=${materia}`);
         await supabase.from("pre_eventos").insert({

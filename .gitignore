@@ -34,3 +34,9 @@ __pycache__/
 
 # TestSprite local tests
 testsprite_tests/
+
+# Debug artifacts
+debug_*.png
+horarios_*.json
+extract_powerbi.mjs
+parse_horarios.mjs

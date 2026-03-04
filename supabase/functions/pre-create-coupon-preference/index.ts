@@ -9,7 +9,7 @@ const SERVICE_KEY  = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const MP_TOKEN     = Deno.env.get("MP_ACCESS_TOKEN")!;
 const APP_URL      = Deno.env.get("PRE_APP_URL") || "https://cronopre.modulo1.workers.dev";
 
-const COUPON_PRICE = 16.90;
+const COUPON_PRICE = 9.90;
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin":  APP_URL,

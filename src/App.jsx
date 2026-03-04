@@ -151,8 +151,9 @@ export default function App() {
   },[view, session]);
 
   async function handleLogout() {
-    logEvent("logout");
-    await endSession();
+    clearInterval(heartbeatRef.current);
+    try { logEvent("logout"); } catch {}
+    try { await endSession(); } catch {}
     await supabase.auth.signOut();
   }
 

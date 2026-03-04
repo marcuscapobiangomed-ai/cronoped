@@ -5,22 +5,28 @@ const PROMO_END = new Date("2026-03-10T23:59:59-03:00");
 const PROMO_PRICE = "9,90";
 const ORIGINAL_PRICE = "19,90";
 
+// Ciclo curto de urgência quando a promo real expira (2h loop)
+const URGENCY_CYCLE_MS = 2 * 60 * 60 * 1000;
+
 function useCountdown(target) {
-  const [left, setLeft] = useState(() => Math.max(0, target - Date.now()));
+  function calcLeft() {
+    const real = target - Date.now();
+    if (real > 0) return real;
+    // Promo expirou → ciclo curto recorrente pra manter urgência
+    const elapsed = Date.now() - target;
+    return URGENCY_CYCLE_MS - (elapsed % URGENCY_CYCLE_MS);
+  }
+  const [left, setLeft] = useState(calcLeft);
   useEffect(() => {
-    if (left <= 0) return;
-    const id = setInterval(() => {
-      const remaining = Math.max(0, target - Date.now());
-      setLeft(remaining);
-      if (remaining <= 0) clearInterval(id);
-    }, 1000);
+    const id = setInterval(() => setLeft(calcLeft()), 1000);
     return () => clearInterval(id);
   }, [target]);
-  const d = Math.floor(left / 86400000);
-  const h = Math.floor((left % 86400000) / 3600000);
+  const realExpired = target - Date.now() <= 0;
+  const d = realExpired ? 0 : Math.floor(left / 86400000);
+  const h = realExpired ? Math.floor(left / 3600000) : Math.floor((left % 86400000) / 3600000);
   const m = Math.floor((left % 3600000) / 60000);
   const s = Math.floor((left % 60000) / 1000);
-  return { d, h, m, s, expired: left <= 0 };
+  return { d, h, m, s, urgent: realExpired };
 }
 
 function TimerBlock({ value, label }) {
@@ -184,9 +190,24 @@ export default function LandingPage({ onNavigateAuth }) {
   return (
     <div style={{ minHeight: "100vh", background: "#0F172A", color: "#fff", overflowX: "hidden" }}>
 
+      {/* ═══ NAV BAR ═══ */}
+      <nav style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "12px 20px", maxWidth: 900, margin: "0 auto",
+      }}>
+        <div style={{ fontSize: 15, fontWeight: 800 }}>🩺 CronoPed</div>
+        <button onClick={onNavigateAuth} style={{
+          background: "transparent", border: "1px solid #475569", borderRadius: 8,
+          color: "#CBD5E1", padding: "8px 18px", fontSize: 13, fontWeight: 600,
+          cursor: "pointer", fontFamily: "'Outfit', sans-serif",
+        }}>
+          Entrar
+        </button>
+      </nav>
+
       {/* ═══ HERO: FOCO NA PROMOÇÃO ═══ */}
       <section style={{
-        padding: "60px 24px 48px", textAlign: "center",
+        padding: "clamp(32px, 8vw, 60px) 20px clamp(32px, 6vw, 48px)", textAlign: "center",
         background: "linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #0F172A 100%)",
       }}>
         <div style={{ maxWidth: 520, margin: "0 auto" }}>
@@ -221,19 +242,17 @@ export default function LandingPage({ onNavigateAuth }) {
           </div>
 
           {/* Timer */}
-          {!countdown.expired && (
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ fontSize: 11, color: "#F59E0B", fontWeight: 700, marginBottom: 10, textTransform: "uppercase" }}>
-                Oferta expira em:
-              </div>
-              <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
-                <TimerBlock value={countdown.d} label="dias" />
-                <TimerBlock value={countdown.h} label="horas" />
-                <TimerBlock value={countdown.m} label="min" />
-                <TimerBlock value={countdown.s} label="seg" />
-              </div>
+          <div style={{ marginBottom: 24 }}>
+            <div style={{ fontSize: 11, color: countdown.urgent ? "#EF4444" : "#F59E0B", fontWeight: 700, marginBottom: 10, textTransform: "uppercase", animation: countdown.urgent ? "pulse 1.5s ease-in-out infinite" : "none" }}>
+              {countdown.urgent ? "⚡ Últimas horas com desconto!" : "Oferta expira em:"}
             </div>
-          )}
+            <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+              {!countdown.urgent && <TimerBlock value={countdown.d} label="dias" />}
+              <TimerBlock value={countdown.h} label="horas" />
+              <TimerBlock value={countdown.m} label="min" />
+              <TimerBlock value={countdown.s} label="seg" />
+            </div>
+          </div>
 
           <button onClick={onNavigateAuth} style={{
             background: "linear-gradient(135deg, #22C55E, #16A34A)", color: "#fff",
@@ -302,7 +321,7 @@ export default function LandingPage({ onNavigateAuth }) {
           <h2 style={{ fontSize: "clamp(20px, 5vw, 28px)", fontWeight: 900, textAlign: "center", marginBottom: 28 }}>
             O que voce ganha
           </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <div className="landing-features-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             {[
               { icon: "📋", text: "Cronograma completo de 10 semanas" },
               { icon: "👥", text: "Separado por grupo" },
@@ -377,14 +396,19 @@ export default function LandingPage({ onNavigateAuth }) {
           </div>
 
           {/* Timer mini */}
-          {!countdown.expired && (
-            <div style={{ display: "flex", gap: 8, justifyContent: "center", marginBottom: 24 }}>
-              <TimerBlock value={countdown.d} label="dias" />
+          <div style={{ marginBottom: 24 }}>
+            {countdown.urgent && (
+              <div style={{ fontSize: 11, color: "#EF4444", fontWeight: 700, marginBottom: 8, textTransform: "uppercase", animation: "pulse 1.5s ease-in-out infinite" }}>
+                ⚡ Últimas horas!
+              </div>
+            )}
+            <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+              {!countdown.urgent && <TimerBlock value={countdown.d} label="dias" />}
               <TimerBlock value={countdown.h} label="horas" />
               <TimerBlock value={countdown.m} label="min" />
               <TimerBlock value={countdown.s} label="seg" />
             </div>
-          )}
+          </div>
 
           {/* Checklist */}
           <div style={{ textAlign: "left", maxWidth: 280, margin: "0 auto 24px" }}>
